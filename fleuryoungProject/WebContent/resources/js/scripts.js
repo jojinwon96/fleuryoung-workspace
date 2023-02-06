@@ -388,6 +388,8 @@ $(function () {
             let count = $(this).next().html(num);
             result = parseInt(tmp) - parseInt(price);
             origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
+            $('.result-price strong').html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('.price-field').children().next().html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
         }
         
     })
@@ -407,6 +409,10 @@ $(function () {
         let result = (parseInt(price) * num);
         origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
 
+        ////////////////////////////////////////////
+        $('.result-price strong').html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('.price-field').children().next().html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
+
     })
 
     // 선택삭제 버튼 클릭시
@@ -424,6 +430,7 @@ $(function () {
         $(this).parent().remove();
     })
 
+    
 
 })
 
