@@ -274,6 +274,13 @@ button {
     margin-right: 25px;
 }
 
+.bookmark-btn{
+    width: 40px;
+    height: 40px;
+    /* background: url("/images/cart.png") 0px 0px no-repeat; */
+    cursor: pointer;
+}
+
 .cart-btn {
     width: 40px;
     height: 40px;
@@ -536,3 +543,7 @@ header{
     cursor: pointer;
 }
 /* 여기까지 헤더 */
+
+.my-menu{
+    color: antiquewhite;
+}
