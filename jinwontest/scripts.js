@@ -325,7 +325,6 @@ $(document).on("click", ".row-li", function () {
 
 // 장바구니
 $(function () {
-    
     // 전체
     $("#allCheck").click(function () {
 
@@ -467,6 +466,7 @@ $(function () {
     $('.cart-delete-button').click(function () {
         $(this).parent().remove();
     })
+
 
 
 })
