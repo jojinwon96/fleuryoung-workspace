@@ -1,19 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Fleuryoung</title>
-    <link rel="stylesheet" href="../../resources/css/header.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../../resources/css/header.css">
 </head>
-
-<body class style="padding-right: 0px;">
-
-    <div class="wrap">
-        <div>
+<body>
+	<div>
             <div class="header-top">
                 <div class="header-top-top">
                     <a class="join">회원가입</a>
@@ -155,18 +150,12 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 준석이형 여기서부터 하시면 되요~ -->
-        <div class="my">
-            sdfsdfsdf
-        </div>
-         
-    </div>
-
-    <script src="../../resources/js/jquery-3.1.1.min.js"></script>
+	
+	
+	<script src="../../resources/js/jquery-3.1.1.min.js"></script>
     <script src="../../resources/js/scripts.js"></script>
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	 
+	
+	
 </body>
-
 </html>
