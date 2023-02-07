@@ -5,270 +5,17 @@
     <title>Fleuryoung</title>
     <link rel="stylesheet" href="../../resources/css/header.css">
 
-    <!--  -->
-    
-    <!--  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+ <!-- Core theme CSS (includes Bootstrap)-->
+ <link href="../../resources/css/main-style-mini.css" rel="stylesheet" />
+
+
+
 </head>
-<style>
 
-
-.clearfix {
-  clear: both
-}
-
-.container {
-  margin: 15px auto;
-  overflow: hidden;
-  width: 460px;
-  /* background-color: #DDD; */
-  padding: 30px 10px 10px;
-}
-.global-cont {
-  width: 420px;
-  background-color: #ffffff;
-  margin: auto;
-  padding: 20px;
-}
-.inner-cont {
-  margin: auto;
-  overflow: hidden;
-  width: 400px;
-  background-color: #FFF;
-  text-align: center;
-  border: 1px solid #C2C7D0;
-}
-.inner-cont .sign {
-  overflow: hidden;
-}
-.inner-cont .sign span {
-  float: left;
-  width: 50%;
-  display: block;
-  padding: 8px 0;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #EEE;
-  color: #919191;
-}
-.inner-cont .sign span.active {
-  border-top: 2px solid #1f9a50;
-  background-color: #FFF;
-}
-.inner-cont .sign-in-up {
-  padding: 25px;
-  background-color: #FFF;
-}
-.inner-cont .sign-in-up form {
-  overflow: hidden;
-  display: none;
-}
-.inner-cont .sign-in-up form > span,
-.inner-cont .sign-in-up form > a {
-  float: left;
-  width: 50%;
-  font-size: 12px;
-}
-.inner-cont .sign-in-up form > span {
-  text-align: left;
-}
-.inner-cont .sign-in-up form > a {
-  text-align: right;
-  text-decoration: none;
-  color: #1f9a50;
-}
-.inner-cont .sign-in-up form > a:hover {
-  text-decoration: underline;
-}
-.inner-cont .sign-in-up form input:not([type="checkbox"]) {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid white;
-  border-radius: 5px;
-  /* box-sizing: border-box */
-}
-.inner-cont .sign-in-up form input[type="submit"]{
-  margin-top: 10px;
-  background-color: rgb(228, 112, 132);
-  color: #FFF;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .3s
-}
-.inner-cont .sign-in-up form.active {
-  display: block;
-}
-.inner-cont .divider {
-  position: relative;
-  margin-bottom: 15px;
-}
-.inner-cont .divider::after{
-  content: "";
-  height: 1px;
-  width: 100%;
-  background-color: #C2C7D0;
-  position: absolute;
-  top: 9px;
-  left: 0;
-}
-.inner-cont .divider span {
-  padding: 0 10px;
-  background-color: #FFF;
-  z-index: 2;
-  position: relative;
-}
-.inner-cont .social-login button {
-  float: left;
-  padding: 10px 0 10px 30px;
-  width: 150px;
-  margin-bottom: 15px;
-  display: block;
-  border: 1px solid #C2C7D0;
-  border-radius: 5px;
-  position: relative;
-  color: #FFF;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .3s
-}
-.inner-cont .social-login button.google ,
-.inner-cont .social-login button.linkedin {
-  margin-left: 50px;
-}
-.inner-cont .social-login button.facebook {
-  background-color: #3b5998;
-}
-.inner-cont .social-login button.facebook::before {
-  content: "\f09a";
-}
-.inner-cont .social-login button.google {
-  background-color: #dd4b39;
-}
-.inner-cont .social-login button.google::before {
-  content:"\f1a0";
-}
-.inner-cont .social-login button.github {
-  background-color: #333;
-}
-.inner-cont .social-login button.github::before {
-  content:"\f09b";
-  font-family: fontAwesome;
-}
-.inner-cont .social-login button.linkedin {
-  background-color: #0077b5;
-}
-.inner-cont .social-login button.linkedin::before {
-  content:"\f0e1";
-  font-family: fontAwesome;
-}
-.inner-cont .social-login button.facebook::before ,
-.inner-cont .social-login button.google::before ,
-.inner-cont .social-login button.github::before ,
-.inner-cont .social-login button.linkedin::before {
-  font-family: fontAwesome;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 22px;
-  border-right: 1px solid #C2C7D0;
-  padding: 0 5px;
-  width: 20px;
-  height: 100%;
-  line-height: 40px;
-}
-.inner-cont .social-login .why {
-  overflow: hidden;
-  margin: 0 0 10px;
-}
-.inner-cont .social-login .why a ,
-.inner-cont .social-login .policy a  {
-  font-size: 10px;
-  text-decoration: none;
-  color: #1f9a50
-}
-.inner-cont .social-login .why a:hover ,
-.inner-cont .social-login .policy a:hover {
-  text-decoration: underline;
-}
-.inner-cont .social-login .policy {
-  font-size: 10px;
-}
-.inner-cont .sign-in-up form input[type="submit"]:hover ,
-.inner-cont .social-login button:hover {
-  opacity: .7
-}
-
-
-
-
-.wrap{
-    margin: 0 0 100px;
-}
-
-
-
-button{
-    box-sizing: revert;
-}
-
-::before{
-    box-sizing: content-box;
-}
-
- #sellerSumbit{
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
-#userSubmit{
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
-
-#meori{
-    text-align: center;
-}
-
-#enrollLetter{
-    /* margin-left: 880px; */
-    text-decoration: underline;
-    text-decoration-style: solid;
-    text-decoration-color: gray ;
-    text-decoration-thickness: 2px;
-    text-underline-position: under;
-}
-
-#hogunakgi{
-    margin-top: 18px;
-    color: gray;
-}
-
-.social-login{
-    float: left;
-    box-sizing: content-box;
-    display: inline-block;
-}
-
-.social-login>a>img{
-    width: 100%;
-    height: auto;
-}
-
-#naverLogin{
-    margin-top: 20px;
-}
-
-
-
-
-
-
-
-</style>
 <body class style="padding-right: 0px;">
 
     <div class="wrap">
@@ -415,115 +162,304 @@ button{
             </div>
         </div>
         
-        <!-- 철현이형 여기서부터 하시면 되요~ -->
-
-
-
-
-
-
-
-        <div id="meori">
-            <h1  id="enrollLetter"><b> 회원가입 </b></h1>
-            <h6 id="hogunakgi">회원이 되셔서 할인쿠폰/적립금 등 다양한 혜택을 받으세요</h6>
-        </div>
-        
-
-
-
-
-
-
-        <div class="container">
-            <div class="global-cont">
-              <div class="inner-cont">
-                <div class="sign">
-                  <span class="active sign-in">개인회원</span>
-                  <span class="sign-up">판매자회원</span>
+        <!-- 배너 시작 -->
+        <div id="carouselExampleAutoplaying" class="carousel slide b" data-bs-ride="carousel" style="z-index: 1;">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../../resources/Image-mini/IMG_1219.PNG"
+                        class="d-block w-100" alt="...">
                 </div>
-                <div class="sign-in-up">
-                  <form class="sign-in-form active">
-                    
-                    
-                   
-                    <input type="submit" value="회원가입" id="userSubmit">
-                  </form>
-                  <form class="sign-up-form">
-                   
-                    <input type="submit" value="회원가입" id="sellerSumbit" >
-                  </form>
-                  <div class="divider">
-                    <span id="snsDozo">또는 SNS계정으로 간편하게 회원가입</span>
-                  </div>
-                  <div class="social-login">
-                    <!-- <button class="facebook">Facebook</button>
-                    <button class="google">Google</button>
-                    <button class="github">GitHub</button>
-                    <button class="linkedin">LinkedIn</button> -->
-                    <a href="#"><img src="../../../WebContent/resources/image/네이버로 가입.PNG" alt="" style="margin-bottom: 3px;" id="naverLogin"></a>
-                    <a href="#"><img src="../../../WebContent/resources/image/카카오로 가입.PNG" alt="" style="margin-bottom: 3px;"></a>
-                    <a href="#"><img src="../../../WebContent/resources/image/페이스북으로 가입.PNG" alt="" ></a>
-
-                    <div class="clearfix"></div>
-                    <div class="why"><a href="#"></a></div>
-                    <br>
-                    <div class="policy" style="margin-bottom: 10px;">회원가입시 <a href="#">고객약관</a> &amp; <a href="#">쿠키약관</a>에 동의하게 됩니다.</div>
-                  </div>
+                <div class="carousel-item">
+                    <img src="https://product-image.kurly.com/cdn-cgi/image/quality=85/banner/main/pc/img/dcb8ce26-b7a6-4d2c-a67f-81cc7cc2e938.jpg"
+                        class="d-block w-100" alt="...">
                 </div>
-              </div>
+                <div class="carousel-item">
+                    <img src="../../resources/Image-mini/배너1.png"
+                        class="d-block w-100" alt="...">
+                </div>
             </div>
-          </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- 배너 끝 -->
 
 
 
 
 
 
-        
-       
          
+        <!-- 혜민누나 여기서부터 하시면 되요~ -->
+
+
+
+
+
+         <!-- Section-->
+         <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/image-mini/양귀비.jpg" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">양귀비</h5>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <!-- 이건 별점!!!!! -->
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    30,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/image-mini/주황다발.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">히피스커스 꽃다발</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <!-- 이건 별점!!!!! -->
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">50,000원</span>
+                                    35,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/image-mini/선물용.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">꽃 선물박스</h5>
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <!-- 이건 별점!!!!! -->
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">60,000원</span>
+                                    48,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/image-mini/핑크꽃바구니.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">꽃바구니</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    80,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/Image-mini/미니다육.png" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">미니 선인장</h5>
+                                     <!-- Product reviews-->
+                                     <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">15,000원</span>
+                                    10,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/Image-mini/연핑크다발.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">Fancy 꽃다발</h5>
+                                       <!-- Product reviews-->
+                                       <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    45,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-orange text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/Image-mini/블랙다발.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">세련된 블랙꽃다발</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    <span class="text-muted text-decoration-line-through">30,000원</span>
+                                    20,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="../../resources/Image-mini/주황꽃다발.JPG" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">프로포즈용 꽃오브제</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <!-- Product price-->
+                                    70,000원
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
     </div>
 
-    
 
 
+
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+
+
+
+
+
+
+    <script src="../../resources/js/jquery-3.1.1.min.js"></script>
+    <script src="../../resources/js/scripts.js"></script>
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
-
-<script src="../../resources/js/jquery-3.1.1.min.js"></script>
-    <script src="../../resources/js/scripts.js"></script>
-    <script>
-        let spanOption = document.querySelectorAll(".sign span");
-
-spanOption.forEach(function (span) {
-    span.addEventListener("click", function (e) {
-        
-        //Remove class active
-        e.target.parentElement.querySelectorAll(".active").forEach(function (element) {
-            element.classList.remove("active");
-        });
-        //Add class active
-        e.target.classList.add("active");
-      
-       if (e.target.classList.contains("sign-in")) {
-         
-        document.querySelectorAll(".sign-in-up form").forEach(function (element) {
-            element.classList.remove("active");
-        });
-         
-        document.querySelector(".sign-in-form").classList.add("active");
-        
-       } else {
-         
-        document.querySelectorAll(".sign-in-up form").forEach(function (element) {
-            element.classList.remove("active");
-        });
-         
-        document.querySelector(".sign-up-form").classList.add("active");
-       }
-    })
-})
-    </script>
 
 </html>
