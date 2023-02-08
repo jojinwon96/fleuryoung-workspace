@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Fleuryoung</title>
+  <link rel="stylesheet" href="header.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      /* font-weight: 300; */
+      /* font-size: 15px; */
+      line-height: 1.7;
+      color: #c4c3ca;
+      /* background-color: #1f2029; */
+      overflow-x: hidden;
+    }
+
+    a {
+      cursor: pointer;
+      transition: all 200ms linear;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .link {
+      color: #c4c3ca;
+    }
+
+    .link:hover {
+      color: #ffeba7;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    h4 {
+      font-weight: 600;
+    }
+
+    h6 span {
+      padding: 0 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 35px;
+
+    }
+
+    .section {
+      position: relative;
+      width: 100%;
+      display: block;
+    }
+
+    .full-height {
+      min-height: 100vh;
+    }
+
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .checkbox:checked+label,
+    .checkbox:not(:checked)+label {
+      position: relative;
+      display: block;
+      text-align: center;
+      width: 60px;
+      height: 16px;
+      border-radius: 8px;
+      padding: 0;
+      margin: 10px auto;
+      cursor: pointer;
+      background-color: #ffeba7;
+    }
+
+    .checkbox:checked+label:before,
+    .checkbox:not(:checked)+label:before {
+      position: absolute;
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      color: #ffeba7;
+      background-color: #102770;
+      font-family: 'unicons';
+      content: '\eb4f';
+      z-index: 20;
+      top: -10px;
+      left: -10px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 24px;
+      transition: all 0.5s ease;
+    }
+
+    .checkbox:checked+label:before {
+      transform: translateX(44px) rotate(-270deg);
+    }
+
+
+    .card-3d-wrap {
+      position: relative;
+      width: 440px;
+      max-width: 100%;
+      height: 400px;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      perspective: 800px;
+      margin-top: 60px;
+    }
+
+    .card-3d-wrapper {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      transition: all 600ms ease-out;
+    }
+
+    .card-front,
+    .card-back {
+      width: 100%;
+      height: 100%;
+      background-color: #2a2b38;
+      background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: 300%;
+      position: absolute;
+      border-radius: 6px;
+      left: 0;
+      top: 0;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .checkbox:checked~.card-3d-wrap .card-3d-wrapper {
+      transform: rotateY(180deg);
+    }
+
+    .center-wrap {
+      position: absolute;
+      width: 100%;
+      padding: 0 35px;
+      top: 50%;
+      left: 0;
+      transform: translate3d(0, -50%, 35px) perspective(100px);
+      z-index: 20;
+      display: block;
+    }
+
+
+    .form-group {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-style {
+      padding: 13px 20px;
+      padding-left: 55px;
+      height: 48px;
+      width: 100%;
+      font-weight: 500;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.5px;
+      outline: none;
+      /* color: #c4c3ca; */
+      /* background-color: #1f2029; */
+      border: none;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+    }
+
+    .form-style:focus,
+    .form-style:active {
+      border: none;
+      outline: none;
+      box-shadow: 0 4px 8px 0 rgba(21, 21, 21, .2);
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 0;
+      left: 18px;
+      height: 48px;
+      font-size: 24px;
+      line-height: 48px;
+      text-align: left;
+      color: #ffeba7;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+    }
+
+    /*
+.form-group input:-ms-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-moz-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:-moz-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input::-webkit-input-placeholder  {
+  color: #c4c3ca;
+  opacity: 0.7;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-ms-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus:-moz-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.form-group input:focus::-webkit-input-placeholder  {
+  opacity: 0;
+  -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+*/
+
+    .btn {
+      border-radius: 4px;
+      height: 44px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      -webkit-transition: all 200ms linear;
+      transition: all 200ms linear;
+      padding: 0 30px;
+      letter-spacing: 1px;
+      display: -webkit-inline-flex;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      text-align: center;
+      border: none;
+      background-color: #ffeba7;
+      color: #102770;
+      box-shadow: 0 8px 24px 0 rgba(255, 235, 167, .2);
+    }
+
+    .btn:active,
+    .btn:focus {
+      background-color: #102770;
+      color: #ffeba7;
+      box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    }
+
+    .btn:hover {
+      background-color: #102770;
+      color: #ffeba7;
+      box-shadow: 0 8px 24px 0 rgba(16, 39, 112, .2);
+    }
+
+
+
+
+    .logo {
+      /* position: absolute; */
+      top: 30px;
+      right: 30px;
+      display: block;
+      z-index: 100;
+      transition: all 250ms linear;
+    }
+
+    .logo img {
+      height: 26px;
+      width: auto;
+      display: block;
+    }
+
+    .section {
+      margin-top: 70px;
+    }
+
+    .card-front {
+      background-color: rgb(249, 162, 175);
+    }
+
+    .card-back {
+      background-color: lightcoral;
+    }
+
+    .section span {
+      font-size: 30px;
+      font-weight: 200px;
+      color: black;
+    }
+
+
+    #logemail,
+    #logpass {
+      background-color: white;
+    }
+
+    .mb-4 .pb-3 {
+      color: white;
+      margin-bottom: 500px;
+    }
+
+    #loginLetter,
+    #searchOrder0317 {
+      color: white;
+    }
+
+    ::placeholder {
+      color: gray
+    }
+
+    .form-style {
+      color: black;
+
+    }
+
+    p {
+      display: inline-block;
+      color: white;
+    }
+
+    a {
+      display: inline-block;
+    }
+
+    .link {
+      color: white;
+    }
+  </style>
+</head>
+
+<body class style="padding-right: 0px;">
+
+  <div class="wrap">
+    <div>
+      <div class="header-top">
+        <div class="header-top-top">
+          <a class="join">회원가입</a>
+          <div class="bar"></div>
+          <a class="login">로그인</a>
+          <div class="bar"></div>
+          <a href="../board/notice.html" class="board">고객센터</a>
+        </div>
+        <div class="header-top-bottom">
+          <div class="header-top-bottom-left">
+            <a href="../main/mainPage.html"><img src="../../resources/image/Fleuryoung.png" class="logo"></a>
+          </div>
+
+          <div class="header-top-bottom-mid">
+            <div id="input-panel" class="default-input-panel">
+              <form id="todo-form" class="form">
+                <input type="text" id="main-search" placeholder="검색어를 입력해주세요" required class="main-input">
+              </form>
+              <button type="submit" class="main-input-btn" form="todo-form"></button>
+            </div>
+            <div class="real-time-panel" style="display: none;">
+              <div class="real-time-title">
+                <h3 class="rtTitle">최근 검색어</h3>
+                <div class="real-time-list">
+                  <ul>
+                    <!-- db에서  -->
+                    <!-- <li><img src="/images/smallSearch.png"><a href="#">꽃다발</a><button class="real-time-delete"></button></li>
+                                        <li><img src="/images/smallSearch.png"><a href="#">카네이션</a><button class="real-time-delete"></button></li>
+                                        <li><img src="/images/smallSearch.png"><a href="#">튤립</a><button class="real-time-delete"></button></li>
+                                        <li><img src="/images/smallSearch.png"><a href="#">안개꽃</a><button class="real-time-delete"></button></li>
+                                        <li><img src="/images/smallSearch.png"><a href="#">선물</a><button class="real-time-delete"></button></li> -->
+                  </ul>
+                  <div class="real-time-allDelete off">전체삭제</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="header-top-bottom-right">
+            <div class="cartMyPage-panel">
+              <div class="cart-panel">
+                <!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
+                <a href="../main/cartPage.html"><img src="../../resources/image/cart.png" class="cart-btn"></a>
+              </div>
+              <div class="myPage-panel">
+                <button class="mypage-btn"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <header>
+        <div class="header-nav-panel">
+          <ul class="header-nav-ul">
+            <li class="best-li">
+              <span class="best-span">베스트</span>
+            </li>
+            <li class="type-li">
+              <span class="type-span">종류별</span>
+            </li>
+            <li class="present-li">
+              <span class="present-span">선물</span>
+            </li>
+            <li class="delivery-li">
+              <span class="delivery-span">당일배송</span>
+            </li>
+            <li class="props-li">
+              <span class="props-span">소품</span>
+            </li>
+            <div class="rank-panel">
+              <ul class="rank-ul">
+                <!-- 자바에서 -->
+                <li><a href="#"><span>1</span>장미꽃</a></li>
+                <li><a href="#"><span>2</span>나팔꽃</a></li>
+                <li><a href="#"><span>3</span>무궁화</a></li>
+                <li><a href="#"><span>4</span>튤립</a></li>
+                <li><a href="#"><span>5</span>안개꽃</a></li>
+                <li><a href="#"><span>6</span>꽃다발</a></li>
+                <li><a href="#"><span>7</span>카네이션</a></li>
+                <li><a href="#"><span>8</span>들꽃</a></li>
+                <li><a href="#"><span>9</span>국화꽃</a></li>
+                <li><a href="#"><span>10</span>목화</a></li>
+              </ul>
+            </div>
+            <span class="downButton"><img src="../../resources/image/downButton.png" style="width: 15px;"></span>
+
+          </ul>
+        </div>
+        <div class="header-nav-hidden-panel" style="display: none;">
+          <div class="header-type-panel">
+            <ul>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>바구니</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>꽃다발</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>주문제작</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>축하화환</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>근조화환</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>동/서양란</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>수경식물</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>생화</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>반려식물</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>조화</span></a></li>
+
+              <!-- 꽃바구니 -->
+              <!-- 꽃다발 -->
+              <!-- 주문제작 -->
+              <!-- 축하화환 -->
+              <!-- 근조화환 -->
+              <!-- 동/서양란 -->
+              <!-- 수경식물 -->
+              <!-- 생화 -->
+              <!-- 반려식물 -->
+              <!-- 조화 -->
+            </ul>
+          </div>
+        </div>
+    </div>
+    </header>
+  </div>
+
+  <div class="rank-list-panel default-rank-list-panel" style="display: none;">
+    <div class="rank-list-title">
+      <h3 class="rank-title">실시간 인기 검색어</h3>
+      <div class="rank-list">
+        <ul>
+          <!-- 자바에서 -->
+          <li><a href="#"><span class="number">1</span><span>장미꽃</span></a></li>
+          <li><a href="#"><span class="number">2</span><span>나팔꽃</span></a></li>
+          <li><a href="#"><span class="number">3</span><span>무궁화</span></a></li>
+          <li><a href="#"><span class="number">4</span><span>튤립</span></a></li>
+          <li><a href="#"><span class="number">5</span><span>안개꽃</span></a></li>
+          <li><a href="#"><span class="number">6</span><span>꽃다발</span></a></li>
+          <li><a href="#"><span class="number">7</span><span>카네이션</span></a></li>
+          <li><a href="#"><span class="number">8</span><span>들꽃</span></a></li>
+          <li><a href="#"><span class="number">9</span><span>국화꽃</span></a></li>
+          <li><a href="#"><span class="number">10</span><span>목화</span></a></li>
+        </ul>
+      </div>
+      <div class="rank-close-panel">
+        <img src="../../resources/image/close.png" class="rank-close-btn">
+      </div>
+    </div>
+  </div>
+
+  <!-- 철현이형 여기서부터 하시면 되요~ -->
+
+
+
+
+  <div class="section pb-5 pt-5 pt-sm-2 text-center">
+    <h6 class="mb-0 pb-3"><span>회원로그인 </span> <span>비회원 주문조회</span></h6>
+    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+    <label for="reg-log"></label>
+    <div class="card-3d-wrap mx-auto">
+      <div class="card-3d-wrapper">
+        <div class="card-front">
+          <div class="center-wrap">
+            <div class="section text-center">
+              <h4 class="mb-4 pb-3" id="loginLetter">회원로그인</h4>
+              <div class="form-group">
+                <input type="email" name="logemail" class="form-style" placeholder="아이디를 입력하세요" id="logemail"
+                  autocomplete="off">
+                <i class="input-icon uil uil-at"></i>
+              </div>
+              <div class="form-group mt-2">
+                <input type="password" name="logpass" class="form-style" placeholder="비밀번호를 입력하세요" id="logpass"
+                  autocomplete="off">
+                <i class="input-icon uil uil-lock-alt"></i>
+              </div>
+              <a href="#" class="btn mt-4">로그인</a> <br>
+              <p class="mb-0 mt-4 text-center"><a href="#0" class="link">아이디찾기</a></p>
+              <p> | </p>
+              <p class="mb-0 mt-4 text-center"><a href="#0" class="link">비밀번호찾기</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="center-wrap">
+            <div class="section text-center">
+              <h4 class="mb-4 pb-3" id="searchOrder0317">비회원 주문조회</h4>
+              <div class="form-group">
+                <!-- <input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off"> -->
+                <i class="input-icon uil uil-user"></i>
+              </div>
+              <div class="form-group mt-2">
+                <input type="email" name="logemail" class="form-style" placeholder="주문번호를 입력해주세요" id="logemail"
+                  autocomplete="off">
+                <i class="input-icon uil uil-at"></i>
+              </div>
+              <div class="form-group mt-2">
+                <input type="password" name="logpass" class="form-style" placeholder="주문시 입력하신 이메일을 입력해주세요" id="logpass"
+                  autocomplete="off">
+                <i class="input-icon uil uil-lock-alt"></i>
+              </div>
+              <a href="#" class="btn mt-4">주문조회</a> <br>
+              <p class="mb-0 mt-4 text-center"><a href="#0" class="link">주문번호찾기</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <script src="jquery-3.1.1.min.js"></script>
+  <script src="scripts.js"></script>
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>
