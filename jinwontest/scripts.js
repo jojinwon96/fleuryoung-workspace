@@ -11,10 +11,11 @@ let $defaultHeader = $('header'),
 
 $(window).scroll(function () {
     console.log($(this).scrollTop())
-    if ($(this).scrollTop() > 130) {
+    if ($(this).scrollTop() > 120) {
         $defaultHeader.addClass('fixedheader');
         $defaultsearch.removeClass('default-input-panel');
         $defaultsearch.addClass('fixed-input-panel');
+        
     } else {
         $defaultHeader.removeClass('fixedheader');
         $defaultsearch.removeClass('fixed-input-panel');
@@ -23,12 +24,21 @@ $(window).scroll(function () {
     }
 
     // 실시간 검색어 픽스
-    if ($(this).scrollTop() > 130) {
+    if ($(this).scrollTop() > 120) {
         $defaultrank.removeClass('default-rank-list-panel');
         $defaultrank.addClass('fixed-rank-list-panel');
     } else {
         $defaultrank.addClass('default-rank-list-panel');
         $defaultrank.removeClass('fixed-rank-list-panel');
+    }
+
+    if($(this).scrollTop() > 170){
+        $(".cart-side-content").css("position","fixed");
+        $(".cart-side-content").css("top","20px");
+    } else {
+        $(".cart-side-content").css("position","absolute");
+        $(".cart-side-content").css("top","0px");
+
     }
 });
 
