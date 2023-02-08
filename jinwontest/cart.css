@@ -249,13 +249,14 @@
     position: relative;
     width: 300px;
     min-height: 942px;
+    padding-left: 10px;
 }
 
 .cart-side-content{
-    position: absolute;
+    position: fixed;
     width: 300px;
     border: 1px solid #f2f2f2;
-    margin-top: 140px;
+    margin-top: 40px;
 }
 
 .cart-title-panel{
