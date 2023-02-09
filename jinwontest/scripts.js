@@ -4,24 +4,24 @@
 * ---------------------------------------------------------------------------
 */
 
-$(function(){
+$(function () {
     $("")
 })
 
 // 주소찾기
-$(function(){
+$(function () {
     // 주소 찾기
-    $(".non-address-find-button").click(function() {
+    $(".non-address-find-button").click(function () {
         //카카오 지도 발생
-       new daum.Postcode({
-           oncomplete: function(data) { //선택시 입력값 세팅
-               $(".non-address-detail").html(data.address); // 주소 넣기
-               $(".non-address-input").val(data.zonecode); // 우편번호 넣기
-               $(".non-address-detail-input").focus(); //상세입력 포커싱
-               console.log(data.zonecode);
-           }
-       }).open();
-   })
+        new daum.Postcode({
+            oncomplete: function (data) { //선택시 입력값 세팅
+                $(".non-address-detail").html(data.address); // 주소 넣기
+                $(".non-address-input").val(data.zonecode); // 우편번호 넣기
+                $(".non-address-detail-input").focus(); //상세입력 포커싱
+                console.log(data.zonecode);
+            }
+        }).open();
+    })
 
 });
 
@@ -36,7 +36,7 @@ $(window).scroll(function () {
         $defaultHeader.addClass('fixedheader');
         $defaultsearch.removeClass('default-input-panel');
         $defaultsearch.addClass('fixed-input-panel');
-        
+
     } else {
         $defaultHeader.removeClass('fixedheader');
         $defaultsearch.removeClass('fixed-input-panel');
@@ -54,12 +54,12 @@ $(window).scroll(function () {
     }
 
     // 결제 정보 패널 픽스
-    if($(this).scrollTop() > 170){
-        $(".cart-side-content").css("position","fixed");
-        $(".cart-side-content").css("top","20px");
+    if ($(this).scrollTop() > 170) {
+        $(".cart-side-content").css("position", "fixed");
+        $(".cart-side-content").css("top", "20px");
     } else {
-        $(".cart-side-content").css("position","absolute");
-        $(".cart-side-content").css("top","0px");
+        $(".cart-side-content").css("position", "absolute");
+        $(".cart-side-content").css("top", "0px");
 
     }
 
@@ -357,29 +357,57 @@ $(document).on("click", ".row-li", function () {
     }
 })
 
+
 // 장바구니
 $(function () {
-    // 전체 선택 선택자
-    let allCheck = $("#allCheck");
-    
-    // 전체 선택 버튼 여부
-    let isAllCheck = allCheck.is(":checked");
-    
-    console.log(allCheck.is(":checked"));
-    
 
-    $(allCheck).click(function(){
-        console.log("클릭");
-        if (isAllCheck){
+    // 전체 선택
+    $("#check-img").click(function () {
+        let $allCheck = $("#allCheck");
+
+        if ($allCheck.attr("checked")) {
+            $(this).attr("src", "images/unchecked-checkbox.png");
+            $allCheck.attr('checked', false);
+
+        } else if (!$allCheck.attr("checked")) {
+            $(this).attr("src", "images/checked-checkbox.png");
+            $allCheck.attr('checked', true);
+
+        }
+
+    })
+
+    // 선택
+    // 상품 선택 할 떄만 배열에 넣기
+    let arr = [];
+    $('input[type="checkbox"][name^="subCheck"]').click(function () {
+        
+        if ($(this).attr("checked")) {
             $(this).next().attr("src", "images/unchecked-checkbox.png");
             $(this).attr("checked", false);
+
+            arr = [];
+
+            console.log(arr);
         } else {
+
             $(this).next().attr("src", "images/checked-checkbox.png");
             $(this).attr("checked", true);
+
+            $('.cart-price-panel>p').each(function (index, value) {
+                // 배열에 가격 number로 넣기
+                arr.push(Number($(this).html()));
+            })
+
+            console.log(arr);
         }
-    
     })
-   
+
+    // 장바구니 수량별 가격 계산
+
+    //console.log($(".cart-price-panel>p").html());
+
+
 })
 
 /*
