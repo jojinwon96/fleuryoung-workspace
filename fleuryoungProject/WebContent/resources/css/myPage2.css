@@ -1,3 +1,46 @@
-.wrap2{
-    border: 1px solid red;
+*{margin: 0; padding: 0; box-sizing: border-box;}
+li{list-style: none;}
+a{text-decoration: none;}
+
+.sideBar{
+    margin-top: 25px;
+    border: 1px solid lightgray;
+    width: 200px;;
+    height: 650px;
+    background-color: white;
+    padding: 20px 0;
+    float: left;
+    text-align: center; 
 }
+
+.main_1{
+    margin-top: 25px;
+    width: 800px;
+    height: 650px;
+    line-height: 650px;
+    text-align: center;
+    background-color: bisque;
+    border: 2px solid black;
+    float: left;
+    font-size: 2.0em;
+    margin-left: 50px;
+}
+
+#mainMenu{margin-top: 30px;}
+#mainMenu>li{position: relative;}
+#mainMenu>li>a, .subMenu a{
+    display: block;
+    padding: 10px 40px;
+    margin: 0 5px;
+    font-weight: bold;
+    color: black;
+}
+
+#mainMenu>li>a:hover, .subMenu a:hover{
+    background-color: rgb(241, 196, 15);
+}
+
+.subMenu>li:last-child a{
+    border-bottom: 0;
+}
+
