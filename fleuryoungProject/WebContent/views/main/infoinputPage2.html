@@ -9,120 +9,90 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <style>
-
-    /* https://food8-g.phpboots.com/join.php */
-    /* 카페 회원정보 부트스트랩 */
-
-    body {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #fff;
-}
-
-div{
-    display: block;
-}
-
-.input-group .form-control, .input-group-addon, .input-group-btn {
-    display: table-cell;
-}
-
-.form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-
-.input-group-addon, .input-group-btn {
-    width: 1%;
-    white-space: nowrap;
-    vertical-align: middle;
-    display: table-cell;
-}
 
 #infoInputMeori{
     /* text-align: center; */
     margin-top: 100px;
-    margin-left: 500px;
-    margin-bottom: 20px;
+    margin-left: 400px;
+    margin-bottom: 50px;
     color: lightcoral;
 }
 
-.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
-    padding: 8px;
+#daejang{
+    border: 1px solid lightgray;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1500px;
 }
 
-.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
-    display: table;
-    content: " ";
+#daejangHeader>#CreateAccount{
+    font-size: 15px;
+    line-height: 45px;
 }
 
-.col-sm-4{
-    padding: 0px;
-    margin-bottom: 0px;
+#daejangHeader{
+    border-bottom: 1px solid lightgray;
+    height: 45px;
+    background-color: rgb(226, 220, 220);
+}
+#CreateAccount{
+    margin-left: 10px;
+
+
+   
 }
 
-label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
+.form-group{
+    width: 100%;
+    height: 70px;
+    margin-left: 80px;
+   font-weight: bold;
+   color: rgb(97, 94, 94);
+   
+}
+small{
+    color: rgba(169, 33, 81, 0.682);
+}
+#idInput{
+    width: 40%;
 }
 
-.text-danger{
-    color: white;
+button{
+    border: 1px solid lightgrey;
 }
 
-.input-group .form-control, .input-group-addon, .input-group-btn {
-    display: table-cell;
+small{
+    color: red;
+}
+#idCaptain{
+    margin-top: 25px;
+    
+}
+h6{
+    text-align: center;
+}
+label{
+    width: 18%;
+    text-align: right;
+    margin-right: 5px;
 }
 
-.col-sm-offset-2{
-    width: 700px;
-    height: 100%;
-    margin-left: 550px;
-    margin-right: 500px;
+#pwdInput{
+    width: 54%;
 }
-
-.col-sm-6{
-    padding: 0px;
-    margin-top: 5px;
-}
-
-#id.form-control.valid{
-    width: 80%;
-}
-
-#idDogAngry{
-    width: px;
-}
-
-.input-group>#idDogAngry{
-    width: 70%;
-}
-
+/* #pwdArea,  #pwdArea2{
+    padding-bottom: 10px;
+} */
 
 
 
 
 
 </style>
+
 <body class style="padding-right: 0px;">
 
     <div class="wrap">
@@ -269,208 +239,78 @@ label {
             </div>
         </div>
         
-        <!-- 철현이형 여기서부터 하시면 되요~ -->
+        <!-- 철현이형 여기서부터 하시면 되요~   ------------------------------------------------------------------------------                                                      -->
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div id="infoInputMeori">
             <h3><b> 회원 정보 입력 </b></h3>
         </div>
 
+        <h6><small>*</small>항목은 필수 입력 항목입니다.</h6> <br>
 
 
-        <!-- -------------------------------------------------------------- -->
-        <div class="row">
+        <div id="daejang">  <!--가로 전체-->
 
-            
+            <div id="infoDaejang">
+            <div id="daejangHeader">
+                <div id="CreateAccount">Create Account </div>
+               </div>
 
+        <div id="infoBody">
 
-        <div class="col-sm-offset-2 col-sm-8">
-			<form class="form-horizontal" role="form" id="joinForm" method="post" action="" autocomplete="off" novalidate="novalidate">
-				<div class="panel panel-default">
-                    <!--
-					<div class="panel-heading">
-						Create Account
-					</div>  --> <!-- panel heading -->
-					
-					<div class="panel-body">
-						<div class="form-group joinForm-id">
-							<label for="id" class="col-sm-4 control-label"> 아이디 <br> <small class="text-danger">(필수입력)</small> </label>
-							<div class="col-sm-6">
-								<div class="input-group">
-									<input id="idDogAngry" name="id" type="text" class="form-control valid" placeholder="User ID" autofocus="" required>
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default id2_btn">중복확인</button>
-									</span>
-								</div>
-								<!--     <input id="id2" name="id2" type="text" class="hidden valid">     -->
-							</div>
-						</div>
-						<div class="form-group joinForm-pw">
-							<label for="pw" class="col-sm-4 control-label"> 비밀번호 <br> <small class="text-danger">(필수입력)</small> </label>
-							<div class="col-sm-6">
-								<input id="pw" name="pw" type="password" class="form-control" placeholder="Password">
-							</div>
-						</div>
-						<div class="form-group joinForm-pw2">
-							<label for="pw2" class="col-sm-4 control-label"> 비밀번호 확인 <br> <small class="text-danger">(필수입력)</small> </label>
-							<div class="col-sm-6">
-								<input id="pw2" name="pw2" type="password" class="form-control" placeholder="Password (Re-type)">
-							</div>
-						</div>
-						<div class="form-group joinForm-name">
-							<label for="name" class="col-sm-4 control-label"> 이름 <br> <small class="text-danger">(필수입력)</small> </label>
-							<div class="col-sm-6">
-								<input id="name" name="name" type="text" class="form-control" placeholder="User name" value="">
-							</div>
-						</div>
-						<div class="form-group joinForm-email">
-							<label for="email" class="col-sm-4 control-label"> 이메일  주소 <br> <small class="text-danger">(필수입력)</small> </label>
-							<div class="col-sm-6">
-								<input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="">
-							</div>
-						</div>
-					    						<div class="form-group joinForm-birthdate">
-							<label for="birthdate" class="col-sm-4 control-label"> 생년월일  </label>
-							<div class="col-sm-6">
-								<input id="birthdate" name="birthdate" type="text" class="form-control" placeholder="Click Here" readonly="" style="cursor:pointer;">
-							</div>
-						</div>
-					    						<div class="form-group joinForm-tel">
-							<label for="tel" class="col-sm-4 control-label"> 전화번호  </label>
-							<div class="col-sm-6">
-								<input id="tel" name="tel" type="text" class="form-control" placeholder="000-0000-0000">
-							</div>
-						</div>
-					    						<div class="form-group joinForm-zipcode">
-							<label for="zip" class="col-sm-4 control-label"> 우편번호  </label>
-							<div class="col-sm-6">
-								<input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="000-000">
-							</div>
-						</div>
-												<div class="form-group joinForm-addr">
-							<label for="addr" class="col-sm-4 control-label"> 주소  </label>
-							<div class="col-sm-6">
-								<input id="addr" name="addr" type="text" class="form-control" placeholder="">
-							</div>
-						</div>
-					    						<div class="form-group joinForm-receive-email">
-							<label for="receive_email" class="col-sm-4 control-label"> 이메일 수신 동의 </label>
-							<div class="col-sm-6 form-control-static">
-								<input id="receive_email" name="receive_email" type="checkbox" value="checked">
-							</div>
-						</div>
-                                                <input name="n_id" type="hidden" value="">
-					</div><!-- panel body -->
-					<div class="panel-footer">
-						<div class="form-group" style="padding-top: 10px">
-							<div class="col-sm-offset-3 col-sm-6">
-								<button class="btn btn-lg btn-primary btn-block submit-btn" type="submit">Create Account</button>
-								<input type="hidden" name="do" value="user_add">
-								<input type="hidden" name="join_priv_agree" value="1">
-								<input type="hidden" name="join_user_agree" value="1">
-							</div>
-						</div>						
-					</div>
-				</div>
-			<input type="hidden" name="csrf_token" value="2e0e83726e49708cfbd5887b00adc4510e3aa615a4adb9ab97ad89326891837e"></form>	
-		</div>
-    </div>
+            <div class="form-group id-area" id="idCaptain">
+                <!-- <label for="id" class="input-things" id="id-input"> 아이디 <br> <small>(필수입력)</small></label> -->
+                <label for="id"><small>*</small> 아이디</label>
 
-        <!-- -------------------------------------------------------------------- -->
-
-        <div class="modal" id="img_sum_modal" tabindex="-1" aria-hidden="true" style="display: none;">
-
-            <input type="hidden" class="now_img" value="1">
-    <div id="" class="modal-content_img_view" style="width: 100%; background-color: rgb(0, 0, 0); margin: 0px; height: 1041px;">
-        <center>
-            <input type="hidden" class="img_bbs_no">
-            <!-- Slide Image -->
-            <table class="images_sum_main_table" style="background-color: rgb(255, 255, 255); text-align: center; margin-top: -10px;">
-                <tbody><tr>
-                    <td>
-                        <img class="images_sum_main" src="" style="margin: 4px 10px; height: 1021px; max-height: 981px;" alt="main images">
-                        <br>
-                        <table width="100%"><tbody><tr><td width="50%"></td><td><a class="pre_img" href="#" style="color:#000000;"><span class="glyphicon glyphicon-chevron-left"></span></a></td>
-            <td><a class="" href="#" data-dismiss="modal" style="color:#000000;"><span class="glyphicon glyphicon-remove-sign btn-lg"></span></a></td>
-            <td><a class="next_img" href="#"><span class="glyphicon glyphicon-chevron-right" style="color:#000000;"></span></a></td><td width="50%"></td></tr></tbody></table>
-                    </td>
-                </tr>
-            </tbody></table>
-        </center>
-
-
-            <a class="carousel-control left pre_img" href="#"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="carousel-control right next_img" href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
-
-           
-</div>
-</div>
-
-<!-- -------------------------------------- -->
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- 
-                <div class="idGroup">
-                <label for="" class="idLabel">
-                    아이디
-                    <br>
-                    <small class="text-danger">(필수입력)</small>
-                </label>
+                <input type="text" id="idInput" required placeholder="아이디를 입력해주세요">
+                <button>중복확인</button>
             </div>
-             -->
-        
+
+
+            <div class="form-group pwd-area" id="pwdCaptain">
+                <label for="pwd"><small>*</small>비밀번호</label>
+
+                <input type="password" id="pwdInput" required placeholder="비밀번호를 입력해주세요">
+            </div>
+
+
+            <div class="form-group pwd-area2" id="pwdCaptain2">
+                <label for="pwd"><small>*</small>비밀번호 확인</label>
+
+                <input type="password" id="pwdInput" required placeholder="비밀번호를 다시 입력해주세요">
+            </div>
+
+
+            <div class="form-group email-area1" id="emailCaptain">
+                <label for="email">이메일</label>
+
+                <input type="email" id="pwdInput" required placeholder="이메일을 입력해주세요">
+            </div>
+
+
+
+
+
+            <div class="form-group address-area" id="addressCaptain">
+                <label for="pwd">주소</label>
+
+                <button id="address_kakao" >주소찾기</button>
+                <input type="text" name="address_detail" />
+            </div>
+
 
 
 
@@ -488,8 +328,25 @@ label {
 
         </div>
 
+        
 
 
+
+
+
+
+
+
+
+           </div>
+
+            
+
+
+        </div>
+        
+
+        
 
 
 
@@ -534,4 +391,22 @@ label {
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script>
+        window.onload = function(){
+            document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+                //카카오 지도 발생
+                new daum.Postcode({
+                    oncomplete: function(data) { //선택시 입력값 세팅
+                        document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                        document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                    }
+                }).open();
+            });
+        }
+        </script>
+
+
 </html>
+
+
