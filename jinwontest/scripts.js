@@ -5,7 +5,7 @@
 */
 
 $(function () {
-    $("")
+
 })
 
 // 주소찾기
@@ -358,54 +358,160 @@ $(document).on("click", ".row-li", function () {
 })
 
 
-// 장바구니
+// 장바구니----------------------------------------------------------------------------------
 $(function () {
 
+    let $total = 0;
+    let $stotal = $(".price-field>.pprice"),
+        $rtotal = $(".result-price>strong");
+
+    let $allCheck = $("#allCheck");
+
+    let arr = [];
+
+    $(document).on("click",".cart-plus-button",function () {
+        let $count = Number($(this).prev().html(Number($(this).prev().html()) + 1).html());
+        let $ptag = Number($(this).parents(".cart-button-panel").next().children('p').html());
+        let $spanTag = $(this).parents(".cart-button-panel").next().children('span');
+
+        console.log($count);
+
+        $spanTag.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+        $stotal.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+        $rtotal.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+    })
+
+    $(document).on("click",".cart-minus-button",function () {
+        if (Number($(this).next().html()) > 1) {
+            let $count = Number($(this).next().html(Number($(this).next().html()) - 1).html());
+            let $ptag = Number($(this).parents(".cart-button-panel").next().children('p').html());
+            let $spanTag = $(this).parents(".cart-button-panel").next().children('span');
+            console.log($count);
+
+            $spanTag.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+            $stotal.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+            $rtotal.html(($count * $ptag).toLocaleString('ko-KR') + "원");
+        }
+    })
+
+    // 페이지 로드시 체크된 값 가져오기
+    $('input[type="checkbox"][name^="subCheck"]').each(function (index, value) {
+        let $price = Number($(this).parent().siblings('.cart-price-panel').children('p').html());
+
+        if ($(this).attr("checked")) {
+            $total = $total + $price;
+
+            $allCheck.next().attr("src", "images/checked-checkbox.png");
+            $allCheck.attr("checked", true);
+
+        } else {
+            $total = $total - $price;
+
+            $allCheck.next().attr("src", "images/unchecked-checkbox.png");
+            $allCheck.attr("checked", false);
+        }
+
+        $stotal.html($total.toLocaleString('ko-KR') + " 원");
+        $rtotal.html($total.toLocaleString('ko-KR'));
+    })
+
+    console.log("처음 장바구니 합계 : " + arr);
+    console.log("총합 : " + $total);
+
+
     // 전체 선택
-    $("#check-img").click(function () {
-        let $allCheck = $("#allCheck");
+    $(document).on('click', "#check-img", function () {
+        let $subCheck = $('input[type="checkbox"][name^="subCheck"]');
+        let $scPrice = Number($subCheck.parent().siblings('.cart-price-panel').children('p').html());
 
         if ($allCheck.attr("checked")) {
+
             $(this).attr("src", "images/unchecked-checkbox.png");
             $allCheck.attr('checked', false);
 
-        } else if (!$allCheck.attr("checked")) {
+            $subCheck.next().attr("src", "images/unchecked-checkbox.png");
+            $subCheck.attr("checked", false);
+
+
+        } else {
             $(this).attr("src", "images/checked-checkbox.png");
             $allCheck.attr('checked', true);
 
+            $subCheck.next().attr("src", "images/checked-checkbox.png");
+            $subCheck.attr("checked", true);
+
         }
 
-    })
+
+
+        // 전체 선택 변경시 값 변경
+        $('input[type="checkbox"][name^="subCheck"]').each(function (index, value) {
+            let $price = Number($(this).parent().siblings('.cart-price-panel').children('p').html());
+
+            if (($('input[name^="subCheck"]:checked').length == $('input[name^="subCheck"]').length) && $allCheck.attr("checked")) {
+                console.log("다채움2");
+                $total = $total + $price;
+                $allCheck.attr('checked', true);
+                $(this).attr("checked", true);
+
+            } else {
+                console.log("다빠짐");
+                $total = 0;
+                $allCheck.attr('checked', false);
+                $(this).attr("checked", false);
+            }
+
+        })
+        console.log($scPrice);
+        console.log("총합! : " + $total);
+
+        console.log($allCheck.attr("checked"));
+
+        $stotal.html($total.toLocaleString('ko-KR') + " 원");
+        $rtotal.html($total.toLocaleString('ko-KR'));
+    });
+
 
     // 선택
-    // 상품 선택 할 떄만 배열에 넣기
-    let arr = [];
+    // 상품 선택 할 떄만 배열에 넣기   
     $('input[type="checkbox"][name^="subCheck"]').click(function () {
-        
-        if ($(this).attr("checked")) {
+
+        let $price = Number($(this).parent().siblings('.cart-price-panel').children('p').html());
+
+        if (($('input[name^="subCheck"]:checked').length == $('input[name^="subCheck"]').length)) {
+            console.log("다채움222");
+
+            $allCheck.next().attr("src", "images/checked-checkbox.png");
+            $allCheck.attr('checked', true);
+        }
+
+        if ($(this).attr("checked")) { // 체크가 되있다면
+
             $(this).next().attr("src", "images/unchecked-checkbox.png");
             $(this).attr("checked", false);
 
-            arr = [];
 
-            console.log(arr);
-        } else {
+            $allCheck.next().attr("src", "images/unchecked-checkbox.png");
+            $allCheck.attr('checked', false);
+
+            $total = $total - $price;
+
+            console.log($allCheck.is(":checked"));
+
+        } else { // 체크가 안되있다면
 
             $(this).next().attr("src", "images/checked-checkbox.png");
             $(this).attr("checked", true);
 
-            $('.cart-price-panel>p').each(function (index, value) {
-                // 배열에 가격 number로 넣기
-                arr.push(Number($(this).html()));
-            })
+            $total = $total + $price;
 
-            console.log(arr);
         }
+        $stotal.html($total.toLocaleString('ko-KR') + " 원");
+        $rtotal.html($total.toLocaleString('ko-KR'));
+
+        console.log($allCheck.attr("checked"));
     })
 
-    // 장바구니 수량별 가격 계산
-
-    //console.log($(".cart-price-panel>p").html());
 
 
 })
