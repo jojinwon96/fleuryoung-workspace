@@ -4,6 +4,27 @@
 * ---------------------------------------------------------------------------
 */
 
+$(function(){
+    $("")
+})
+
+// 주소찾기
+$(function(){
+    // 주소 찾기
+    $(".non-address-find-button").click(function() {
+        //카카오 지도 발생
+       new daum.Postcode({
+           oncomplete: function(data) { //선택시 입력값 세팅
+               $(".non-address-detail").html(data.address); // 주소 넣기
+               $(".non-address-input").val(data.zonecode); // 우편번호 넣기
+               $(".non-address-detail-input").focus(); //상세입력 포커싱
+               console.log(data.zonecode);
+           }
+       }).open();
+   })
+
+});
+
 // 헤더 픽스
 let $defaultHeader = $('header'),
     $defaultsearch = $('#input-panel'),
@@ -32,6 +53,7 @@ $(window).scroll(function () {
         $defaultrank.removeClass('fixed-rank-list-panel');
     }
 
+    // 결제 정보 패널 픽스
     if($(this).scrollTop() > 170){
         $(".cart-side-content").css("position","fixed");
         $(".cart-side-content").css("top","20px");
@@ -40,6 +62,8 @@ $(window).scroll(function () {
         $(".cart-side-content").css("top","0px");
 
     }
+
+
 });
 
 
@@ -335,150 +359,27 @@ $(document).on("click", ".row-li", function () {
 
 // 장바구니
 $(function () {
-    // 전체
-    $("#allCheck").click(function () {
+    // 전체 선택 선택자
+    let allCheck = $("#allCheck");
+    
+    // 전체 선택 버튼 여부
+    let isAllCheck = allCheck.is(":checked");
+    
+    console.log(allCheck.is(":checked"));
+    
 
-        const checked = $(this).is(':checked');
-
-        if (checked) {
-            $(".cart-content-header img").attr("src", "../../resources/image/checked-checkbox.png");
-            $('#subCheck').attr("checked", true);
+    $(allCheck).click(function(){
+        console.log("클릭");
+        if (isAllCheck){
+            $(this).next().attr("src", "images/unchecked-checkbox.png");
+            $(this).attr("checked", false);
         } else {
-            $(".cart-content-header img").attr("src", "../../resources/image/unchecked-checkbox.png");
-            $('#subCheck').attr("checked", false);
+            $(this).next().attr("src", "images/checked-checkbox.png");
+            $(this).attr("checked", true);
         }
+    
     })
-
-    // 전체 체크의 값이 변화했을 때
-    $("#allCheck").change(function () {
-
-        if ($(this).is(":checked")) { //대상이 체크 되어 있을 때
-
-            //같은 네임을 가진 체크박스 체크
-            $(".cart-li img").attr("src", "../../resources/image/checked-checkbox.png");
-            $("input:checkbox[name='subCheck']").prop("checked", true);
-
-        } else { //대상이 체크 해제 되어 있을 때
-
-            //같은 네임을 가진 체크박스 체크해제
-            $(".cart-li img").attr("src", "../../resources/image/unchecked-checkbox.png");
-            $("input:checkbox[name='subCheck']").prop("checked", false);
-        }
-    });
-
-    // 선택
-    $('input[type="checkbox"][name="subCheck"]').click(function () {
-
-        if ($(this).prop('checked')) {
-            $(this).next().attr("src", "../../resources/image/checked-checkbox.png");
-            $(this).prop('checked', true);
-
-        } else {
-            $(this).next().attr("src", "../../resources/image/unchecked-checkbox.png");
-            $(this).prop('checked', false);
-        }
-        console.log($(this).prop('checked'));
-    });
-
-
-    // 수량 가격 감소
-    $('.cart-minus-button').click(function () {
-        let num = parseInt($(this).next().html());
-
-        let origin = $(this).parent().next().children('span');
-        let regex = /[^0-9]/g;
-        let tmp = origin.html().replace(regex, "");
-
-        // 고정 변수
-        let price = $(this).parent().next().children('p').html();
-
-        let result = 0;
-
-        if (num > 1) {
-            num = num - 1;
-            let count = $(this).next().html(num);
-            result = parseInt(tmp) - parseInt(price);
-            origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-            
-            // 결제 예정금액 감소  
-            let arr = []
-            let sum = 0;
-            $('.cart-price-span').each(function (index, value) {
-                arr.push(Number($(this).html().replace(regex, "")));
-            })
-
-            for (let i in arr) {
-                sum -= arr[i];
-            }
-            console.log(arr);
-            console.log(typeof (sum));
-            console.log($('.pprice').html());
-
-            // 상품금액
-            $(".price-field .pprice").html(((sum + "").replace(regex,"")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
-
-            // 결제 예정금액
-            $(".result-price>strong").html(((sum + "").replace(regex,"")).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-
-        }
-
-    })
-
-    // 수량 가격 증가
-    $('.cart-plus-button').click(function () {
-        let num = parseInt($(this).prev().html()) + 1;
-        let count = $(this).prev().html(num);
-
-        let origin = $(this).parent().next().children('span');
-        let regex = /[^0-9]/g;
-        let tmp = origin.html().replace(regex, "");
-
-        // 고정 변수
-        let price = $(this).parent().next().children('p').html();
-
-        let result = (parseInt(price) * num);
-        origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-
-
-        // 결제 예정금액 합계 계산 
-        let arr = []
-        let sum = 0;
-        $('.cart-price-span').each(function (index, value) {
-            arr.push(Number($(this).html().replace(regex, "")));
-        })
-
-        for (let i in arr) {
-            sum += arr[i];
-        }
-        // console.log(arr);
-        // console.log(typeof (sum));
-        // console.log($('.pprice').html());
-
-        // 상품금액
-        $(".price-field .pprice").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
-
-        // 결제 예정금액
-        $(".result-price>strong").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-    })
-
-
-    // 선택삭제 버튼 클릭시
-    $('.cart-content-header button').click(function () {
-        $('input[type="checkbox"][name="subCheck"]').each(function () {
-            let chk = $(this).is(":checked");
-            if (chk) {
-                $(this).parent().parent().remove();
-            }
-        })
-    })
-
-    // X버튼 클릭시 장바구니 항목 삭제
-    $('.cart-delete-button').click(function () {
-        $(this).parent().remove();
-    })
-
-
-
+   
 })
 
 /*

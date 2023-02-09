@@ -352,7 +352,12 @@
     height: 56px;
     border-radius: 3px;
     color: #fff;
-    background-color: rgb(248, 178, 188);;
+    background-color: rgb(248, 178, 188);
     border: 0 none;
     font-weight: 500;
+}
+
+.cart-save-message{
+    font-size: 15px;
+    font-weight: bolder;
 }

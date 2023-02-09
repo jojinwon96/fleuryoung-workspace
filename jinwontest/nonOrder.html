@@ -278,12 +278,14 @@
                                             <input class="non-address-input" disabled="" value="">
                                         </div>
                                         <div class="non-address-detail-panel">
-                                            <textarea class="non-address-detail" disabled="" rows="1" style="overflow: hidden; overflow-wrap: break-word; height: 39.8182px;">
+                                            <textarea class="non-address-detail" disabled="" rows="1"
+                                                style="overflow: hidden; overflow-wrap: break-word; height: 39.8182px;">
 
                                             </textarea>
                                         </div>
                                     </div>
-                                    <input class="non-address-detail-input" name="extraAddress" placeholder="상세주소 입력" maxlength="50" value="">
+                                    <input class="non-address-detail-input" name="extraAddress" placeholder="상세주소 입력"
+                                        maxlength="50" value="">
                                 </div>
                             </label>
 
@@ -291,7 +293,7 @@
                     </div>
                 </section>
 
-                
+
                 <section class="non-product-panel">
                     <section>
                         <div class="non-product-header-title">주문 상품</div>
@@ -306,7 +308,8 @@
                                     <div class="non-product-title-panel3">
                                         <div class="non-product-title">기가막힌 꽃집</div>
                                         <div class="non-product-deli-panel">
-                                            <span>배송비 0원</span>
+                                            <span>배송비 0원</span> &nbsp;
+
                                         </div>
                                     </div>
                                 </div>
@@ -320,6 +323,46 @@
                                                 <span class="non-product-price">10,000원</span>
                                                 <div></div>
                                                 <span class="non-product-count">1개</span>
+
+                                                <!-- 카드쓰기 버튼 시작 -->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                                                    style="background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188); margin-left:435px; margin-top: -70px;">카드쓰기</button>
+                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                    선물용 꽃다발
+                                                                </h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form>
+                                                                <div class="modal-body">
+
+                                                                    <div class="mb-3">
+                                                                        <label for="message-text"
+                                                                            class="col-form-label">메세지:</label>
+                                                                        <textarea class="form-control"
+                                                                            id="message-text"></textarea>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">닫기</button>
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        style="background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">완료
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- 카드쓰기 버튼 시작 -->
+
                                             </div>
                                         </div>
                                     </div>
@@ -330,12 +373,12 @@
                     </div>
                     <!-- 주문 상품 끝 for문끝 -->
                 </section>
-                
+
 
                 <section class="non-message-panel">
-                    
+
                 </section>
-            
+
 
             </div>
 
@@ -387,6 +430,7 @@
 
     </div>
 
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="jquery-3.1.1.min.js"></script>
     <script src="scripts.js"></script>
 

@@ -727,7 +727,17 @@
     height: 56px;
     border-radius: 3px;
     color: #fff;
-    background-color: rgb(248, 178, 188);;
+    background-color: rgb(248, 178, 188);
     border: 0 none;
     font-weight: 500;
 }
+
+.add-card{
+    font-weight: bolder;
+}
+
+.add-card:hover{
+    cursor: pointer;
+    color: rgb(248, 178, 188);
+}
+

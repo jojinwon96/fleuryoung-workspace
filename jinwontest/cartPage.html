@@ -174,12 +174,39 @@
                 <div class="cart-content-header">
                     <div>
                         <label>
-                            <input type="checkbox" id="allCheck">
-                            <img src="/images/unchecked-checkbox.png">
+                            <input type="checkbox" id="allCheck" checked>
+                            <img src="images/checked-checkbox.png">
                             전체선택 (2/2)
                         </label>
                         <span></span>
                         <button>선택삭제</button>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary cart-save" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" style="margin-left: 350px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">
+                            장바구니 저장
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body cart-save-message">
+                                        변경사항을 저장 하시겠습니까?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">취소</button>
+                                        <button type="button" class="btn btn-primary" style="margin-left: 5px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">저장하기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="cart-content-main">
@@ -188,11 +215,11 @@
                         <!-- 1번 -->
                         <li class="cart-li">
                             <label>
-                                <input type="checkbox" name="subCheck">
-                                <img src="/images/unchecked-checkbox.png">
+                                <input type="checkbox" name="subCheck[0]" checked>
+                                <img src="images/checked-checkbox.png">
                             </label>
                             <a href="#">
-                                <span style="background-image: url('/images/test-flower1.jpg')"></span>
+                                <span style="background-image: url('images/test-flower1.jpg')"></span>
                             </a>
                             <div class="cart-content-title">
 
@@ -218,11 +245,11 @@
                         <!-- 2번 -->
                         <li class="cart-li">
                             <label>
-                                <input type="checkbox" name="subCheck">
-                                <img src="/images/unchecked-checkbox.png">
+                                <input type="checkbox" name="subCheck[1]" checked>
+                                <img src="images/checked-checkbox.png">
                             </label>
                             <a href="#">
-                                <span style="background-image: url('/images/test-flower2.jpg')"></span>
+                                <span style="background-image: url('images/test-flower2.jpg')"></span>
                             </a>
                             <div class="cart-content-title">
 
@@ -250,7 +277,7 @@
             </div>
             <div class="cart-side-panel">
                 <div class="cart-side-content">
-                    
+
                     <div class="cart-contents">
                         <div class="price-field">
                             <span class="ptitle">상품금액</span>
@@ -285,7 +312,7 @@
 
                     <div class="result-button-panel">
                         <button class="cart-access-button">
-                            <b>주문하러가기</b> 
+                            <b>주문하러가기</b>
                         </button>
                     </div>
                 </div>
