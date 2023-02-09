@@ -450,6 +450,7 @@ $(function () {
 
         // 결제 예정금액
         $(".result-price>strong").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        
     })
 
 
