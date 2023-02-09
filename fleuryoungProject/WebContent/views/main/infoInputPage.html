@@ -10,12 +10,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
+
+    /* https://food8-g.phpboots.com/join.php */
+    /* 카페 회원정보 부트스트랩 */
+
+
+
+
 #infoInputMeori{
     /* text-align: center; */
     margin-top: 200px;
-    margin-left: 400px;
+    margin-left: 500px;
     margin-bottom: 20px;
     color: lightcoral;
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    content: " ";
 }
 
 
@@ -179,6 +191,210 @@
 
 
 
+
+        <!-- -------------------------------------------------------------- -->
+        <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+			<form class="form-horizontal" role="form" id="joinForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Create Account
+					</div> <!-- panel heading -->
+					
+					<div class="panel-body">
+						<div class="form-group joinForm-id">
+							<label for="id" class="col-sm-4 control-label"> 아이디 <br> <small class="text-danger">(필수입력)</small> </label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<input id="id" name="id" type="text" class="form-control valid" placeholder="User ID" autofocus="">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default id2_btn">중복확인</button>
+									</span>
+								</div>
+								<input id="id2" name="id2" type="text" class="hidden valid">
+							</div>
+						</div>
+						<div class="form-group joinForm-pw">
+							<label for="pw" class="col-sm-4 control-label"> 비밀번호 <br> <small class="text-danger">(필수입력)</small> </label>
+							<div class="col-sm-6">
+								<input id="pw" name="pw" type="password" class="form-control" placeholder="Password">
+							</div>
+						</div>
+						<div class="form-group joinForm-pw2">
+							<label for="pw2" class="col-sm-4 control-label"> 비밀번호 확인 <br> <small class="text-danger">(필수입력)</small> </label>
+							<div class="col-sm-6">
+								<input id="pw2" name="pw2" type="password" class="form-control" placeholder="Password (Re-type)">
+							</div>
+						</div>
+						<div class="form-group joinForm-name">
+							<label for="name" class="col-sm-4 control-label"> 이름 <br> <small class="text-danger">(필수입력)</small> </label>
+							<div class="col-sm-6">
+								<input id="name" name="name" type="text" class="form-control" placeholder="User name" value="">
+							</div>
+						</div>
+						<div class="form-group joinForm-email">
+							<label for="email" class="col-sm-4 control-label"> 이메일  주소 <br> <small class="text-danger">(필수입력)</small> </label>
+							<div class="col-sm-6">
+								<input id="email" name="email" type="text" class="form-control" placeholder="Email Address" value="">
+							</div>
+						</div>
+					    						<div class="form-group joinForm-birthdate">
+							<label for="birthdate" class="col-sm-4 control-label"> 생년월일  </label>
+							<div class="col-sm-6">
+								<input id="birthdate" name="birthdate" type="text" class="form-control" placeholder="Click Here" readonly="" style="cursor:pointer;">
+							</div>
+						</div>
+					    						<div class="form-group joinForm-tel">
+							<label for="tel" class="col-sm-4 control-label"> 전화번호  </label>
+							<div class="col-sm-6">
+								<input id="tel" name="tel" type="text" class="form-control" placeholder="000-0000-0000">
+							</div>
+						</div>
+					    						<div class="form-group joinForm-zipcode">
+							<label for="zip" class="col-sm-4 control-label"> 우편번호  </label>
+							<div class="col-sm-6">
+								<input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="000-000">
+							</div>
+						</div>
+												<div class="form-group joinForm-addr">
+							<label for="addr" class="col-sm-4 control-label"> 주소  </label>
+							<div class="col-sm-6">
+								<input id="addr" name="addr" type="text" class="form-control" placeholder="">
+							</div>
+						</div>
+					    						<div class="form-group joinForm-receive-email">
+							<label for="receive_email" class="col-sm-4 control-label"> 이메일 수신 동의 </label>
+							<div class="col-sm-6 form-control-static">
+								<input id="receive_email" name="receive_email" type="checkbox" value="checked">
+							</div>
+						</div>
+                                                <input name="n_id" type="hidden" value="">
+					</div><!-- panel body -->
+					<div class="panel-footer">
+						<div class="form-group" style="padding-top: 10px">
+							<div class="col-sm-offset-3 col-sm-6">
+								<button class="btn btn-lg btn-primary btn-block submit-btn" type="submit">Create Account</button>
+								<input type="hidden" name="do" value="user_add">
+								<input type="hidden" name="join_priv_agree" value="1">
+								<input type="hidden" name="join_user_agree" value="1">
+							</div>
+						</div>						
+					</div>
+				</div>
+			<input type="hidden" name="csrf_token" value="2e0e83726e49708cfbd5887b00adc4510e3aa615a4adb9ab97ad89326891837e"></form>	
+		</div>
+    </div>
+
+        <!-- -------------------------------------------------------------------- -->
+
+        <div class="modal" id="img_sum_modal" tabindex="-1" aria-hidden="true" style="display: none;">
+
+            <input type="hidden" class="now_img" value="1">
+    <div id="" class="modal-content_img_view" style="width: 100%; background-color: rgb(0, 0, 0); margin: 0px; height: 1041px;">
+        <center>
+            <input type="hidden" class="img_bbs_no">
+            <!-- Slide Image -->
+            <table class="images_sum_main_table" style="background-color: rgb(255, 255, 255); text-align: center; margin-top: -10px;">
+                <tbody><tr>
+                    <td>
+                        <img class="images_sum_main" src="" style="margin: 4px 10px; height: 1021px; max-height: 981px;" alt="main images">
+                        <br>
+                        <table width="100%"><tbody><tr><td width="50%"></td><td><a class="pre_img" href="#" style="color:#000000;"><span class="glyphicon glyphicon-chevron-left"></span></a></td>
+            <td><a class="" href="#" data-dismiss="modal" style="color:#000000;"><span class="glyphicon glyphicon-remove-sign btn-lg"></span></a></td>
+            <td><a class="next_img" href="#"><span class="glyphicon glyphicon-chevron-right" style="color:#000000;"></span></a></td><td width="50%"></td></tr></tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </center>
+
+
+            <a class="carousel-control left pre_img" href="#"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="carousel-control right next_img" href="#"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+           
+</div>
+</div>
+
+<!-- -------------------------------------- -->
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- 
+                <div class="idGroup">
+                <label for="" class="idLabel">
+                    아이디
+                    <br>
+                    <small class="text-danger">(필수입력)</small>
+                </label>
+            </div>
+             -->
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
 
 
 
