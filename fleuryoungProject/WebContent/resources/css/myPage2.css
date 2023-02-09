@@ -44,3 +44,7 @@ a{text-decoration: none;}
     border-bottom: 0;
 } 
 
+.subMenu a{
+    font-size: small;
+}
+
