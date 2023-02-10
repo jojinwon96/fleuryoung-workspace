@@ -1,8 +1,10 @@
 body {
+    
     padding-right: 0px;
 }
 
 .wrap {
+    
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -11,6 +13,7 @@ body {
 }
 
 a {
+    
     background-color: transparent;
     text-decoration: none;
 }
