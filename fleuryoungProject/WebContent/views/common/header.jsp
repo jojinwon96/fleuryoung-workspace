@@ -17,7 +17,7 @@
 			<div class="header-top-top">
 				<a class="join">회원가입</a>
 				<div class="bar"></div>
-				<a class="login">로그인</a>
+				<a href="" class="login">로그인</a>
 				<div class="bar"></div>
 				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
 			</div>
