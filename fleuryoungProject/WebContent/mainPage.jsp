@@ -1,6 +1,15 @@
+<%@page import="com.kh.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.common.JDBCTemplate"%>
+<%
+	String contextPath = request.getContextPath(); // /jsp
+	
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	// 로그인 시도 전 menubar.jsp 로딩시 : null
+	// 로그인 성공 후 menubar.jsp 로딩시 : 로그인 성공한 회원의 정보가 담겨있는 Member 객체
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +53,7 @@
             </button>
         </div>
         <!-- 배너 끝 -->
-         
+         <h1><%= loginUser.getMemName() %></h1>
 
     </div>
 

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String alertMsg = (String)session.getAttribute("alertMsg");	
+	String alertMsg = (String)request.getAttribute("alertMsg");	
 	// 서비스 요청 전 menubar.jsp 로딩시 : null
 	// 서비스 성공 후 menubar.jsp 로싱시 : alert로 띄어줄 메세지 문구
 %>
@@ -20,10 +20,8 @@
 <body>
 
 	<% if (alertMsg != null) { %>
-	<% System.out.println("여기다"); %>
 	<script> 
 		alert("<%= alertMsg %>");
-		console.log("<%= alertMsg %>");
 	</script>
 	<% session.removeAttribute("alertMsg"); %>
 	<% } %>
