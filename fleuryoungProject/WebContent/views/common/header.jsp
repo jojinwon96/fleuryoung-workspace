@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kh.member.model.vo.Member"%>
+<%
+	String contextPath = request.getContextPath(); // /jsp
+	
+	Member loginUser = (Member)session.getAttribute("loginUser");	
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,15 +21,24 @@
 	<div>
 		<div class="header-top">
 			<div class="header-top-top">
+			<% if (loginUser == null) { %>
 				<a class="join">회원가입</a>
 				<div class="bar"></div>
-				<a href="/fleuryoungProject/loginpage.me" class="login">로그인</a>
+				<a href="<%= contextPath %>/loginpage.me" class="login">로그인</a>
 				<div class="bar"></div>
 				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
+			<% } else { %>
+				<a class="join"><%= loginUser.getMemName() %> 님</a>
+				<div class="bar"></div>
+				<a href="<%= contextPath %>/logout.me" class="logout">로그아웃</a>
+				<div class="bar"></div>
+				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
+			<% }  %>
+				
 			</div>
 			<div class="header-top-bottom">
 				<div class="header-top-bottom-left">
-					<a href="${pageContext.request.contextPath}/mainPage.jsp"><img
+					<a href="<%= contextPath %>/mainPage.jsp"><img
 						src="${pageContext.request.contextPath}/resources/image/Fleuryoung.png" class="logo"></a>
 				</div>
 
@@ -165,6 +180,10 @@
 
 		
 
+	<script
+		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
 
 
 </body>
