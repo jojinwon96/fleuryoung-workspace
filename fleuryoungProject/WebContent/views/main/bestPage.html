@@ -135,7 +135,7 @@
           <div class="header-type-panel">
             <ul>
               <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>바구니</span></a></li>
-              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>꽃다발</span></a></li>
+              <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="../type/bouquet.html"><span>꽃다발</span></a></li>
               <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>주문제작</span></a></li>
               <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>축하화환</span></a></li>
               <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>근조화환</span></a></li>
@@ -224,55 +224,102 @@
     <!-- 이게 안에 들어와서 메뉴바 안에 옴 -->
     <i class='bx bx-chevron-right toggle'></i>
   <div class="menu-bar">
-      <div class="menu">
+      <div class="menu search-box">
 
-          <li class="search-box">
+          <!-- <li class="search-box">
               <i class='bx bx-search icon'></i>
               <input type="text" placeholder="Search...">
-          </li>
+          </li> 
+          serch-box가 다크모드 적용을 유도함!! transition 속성이 있음! 그래서 위의 div에 클래스로 줌
+        -->
 
           <ul class="menu-links">
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-home-alt icon' ></i>
-                      <span class="text nav-text">Dashboard</span>
+                      <span class="text nav-text">꽃바달</span>
                   </a>
               </li>
 
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                      <span class="text nav-text">Revenue</span>
+                      <span class="text nav-text">주문제작</span>
                   </a>
               </li>
 
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-bell icon'></i>
-                      <span class="text nav-text">Notifications</span>
+                      <span class="text nav-text">꽃바구니</span>
                   </a>
               </li>
 
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-pie-chart-alt icon' ></i>
-                      <span class="text nav-text">Analytics</span>
+                      <span class="text nav-text">축하화환</span>
                   </a>
               </li>
 
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-heart icon' ></i>
-                      <span class="text nav-text">Likes</span>
+                      <span class="text nav-text">근조화한</span>
                   </a>
               </li>
 
               <li class="nav-link">
                   <a href="#">
                       <i class='bx bx-wallet icon' ></i>
-                      <span class="text nav-text">Wallets</span>
+                      <span class="text nav-text">분재</span>
                   </a>
               </li>
+              <!-- 여기서 부터 내가 추가한거!! -->
+
+              <li class="nav-link">
+                <a href="#">
+                    <i class='bx bx-wallet icon' ></i>
+                    <span class="text nav-text">공기정화</span>
+                </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="#">
+                  <i class='bx bx-wallet icon' ></i>
+                  <span class="text nav-text">동양란</span>
+              </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="#">
+                <i class='bx bx-wallet icon' ></i>
+                <span class="text nav-text">서양란</span>
+            </a>
+        </li>
+
+        <li class="nav-link">
+          <a href="#">
+              <i class='bx bx-wallet icon' ></i>
+              <span class="text nav-text">미니다육</span>
+          </a>
+      </li>
+
+      <li class="nav-link">
+        <a href="#">
+            <i class='bx bx-wallet icon' ></i>
+            <span class="text nav-text">과일바구니</span>
+        </a>
+    </li>
+
+    <li class="nav-link">
+      <a href="#">
+          <i class='bx bx-wallet icon' ></i>
+          <span class="text nav-text">비누꽃</span>
+      </a>
+  </li>
+
+
 
           </ul>
       </div>
@@ -357,11 +404,21 @@ if(body.classList.contains("dark")){
 
 
 
+
+
   <!-- 혜민누나 여기서부터 하시면 되요~ -->
 
 
+  
 
-
+  <!-- 베스트 버튼 -->
+  <div class="ministyle">
+  <div class="btn-group" role="group" aria-label="Basic outlined example" >
+    <button type="button" class="btn btn-outline-primary">판매 베스트</button>
+    <button type="button" class="btn btn-outline-primary">리뷰수 베스트</button>
+    <!-- <button type="button" class="btn btn-outline-primary">Right</button> -->
+  </div>
+</div>
 
 
 
