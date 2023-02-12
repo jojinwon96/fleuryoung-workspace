@@ -682,8 +682,20 @@ $(function () {
 
 
     })
+    
+})
 
+// 상품 상세 페이지
+$(function() {
+    $('.pd-btn').mouseover(function(){
+        $(this).css("border","2px solid pink");
+        let $tmp = $(this).attr("src");
+        $('.pd-main').attr("src", $tmp);
+    })
 
+    $('.pd-btn').mouseout(function(){
+        $(this).css("border","none");
+    })
 })
 
 /*

@@ -19,14 +19,16 @@
 
 <body>
 
-	<% if (alertMsg != null) { %>
+	<%@ include file="../common/header.jsp"%>
+	
+		<% if (alertMsg != null) { %>
 	<script> 
-		alert("<%= alertMsg %>");
+		$(function (){
+			$('.inputId').focus();
+		});
 	</script>
 	<% session.removeAttribute("alertMsg"); %>
 	<% } %>
-
-	<%@ include file="../common/header.jsp"%>
 
 	<div class="section pb-5 pt-5 pt-sm-2 text-center">
 		<h6 class="mb-0 pb-3">
@@ -42,7 +44,7 @@
 							<form action="/fleuryoungProject/login.me" method="post">
 								<h4 class="mb-4 pb-3" id="loginLetter">회원로그인</h4>
 								<div class="form-group">
-									<input type="text" name="userId" class="form-style"
+									<input type="text" name="userId" class="form-style inputId"
 										placeholder="아이디를 입력하세요" id="logemail" autocomplete="off">
 									<i class="input-icon uil uil-at"></i>
 								</div>
@@ -97,11 +99,7 @@
 	</div>
 	
 	
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
-
+	
 </body>
 
 </html>
