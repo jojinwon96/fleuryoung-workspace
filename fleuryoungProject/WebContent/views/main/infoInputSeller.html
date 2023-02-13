@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
+<!--  document.getElementById("myClose").focus(); -->
     <!-- 약관동의 함수 -->
     <script>
         window.onload = function () {
@@ -600,15 +600,22 @@ button{
 
         if(!regExp.test(idInputf.value)){
             alert('유효하지 않은 id를 입력하셨습니다.');
+            if(event.keyCode==13){
+                document.getElementById('idInput').focus();
+            }else{
+                document.getElementById('idInput').focus();
             idInput.select();
             return false;  
+            }
+            
         }
 
         // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
         let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
 
         if(!regExp1.test(pwdInput.value)){
-            alert('유효하지 않은 비밀번호를 입력하셨습니다');
+            document.getElementById('pwdInput').scrollIntoView();
+            // alert('유효하지 않은 비밀번호를 입력하셨습니다');
             pwdInput.value="";      
             pwdInput.focus();       
             return false;
@@ -617,6 +624,7 @@ button{
         // 비밀번호 확인
         if(pwdInput.value != pwdInputCheck.value){
             alert("비밀번호 확인이 일치하지 않습니다.");
+            document.getElementById("pwdInputCheck").focus();
             pwdInputCheck.value="";  
             pwdInputCheck.focus();  
             return false;
@@ -630,6 +638,7 @@ button{
         if(!regExp2.test(registerNoInput2.value)){
 
             alert('유효하지 않은 사업자 등록번호를 입력하셨습니다');
+            document.getElementById("registerNoInput2").focus();
             registerNoInput2.value="";      
             registerNoInput2.focus();       
             return false;
