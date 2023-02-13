@@ -325,6 +325,7 @@ $(document).on("click", ".row-li", function () {
 
 // 장바구니
 $(function () {
+    
     // 전체
     $("#allCheck").click(function () {
 
@@ -370,6 +371,7 @@ $(function () {
         console.log($(this).prop('checked'));
     });
 
+
     // 수량 가격 감소
     $('.cart-minus-button').click(function () {
         let num = parseInt($(this).next().html());
@@ -382,14 +384,35 @@ $(function () {
         let price = $(this).parent().next().children('p').html();
 
         let result = 0;
-        
+
         if (num > 1) {
             num = num - 1;
             let count = $(this).next().html(num);
             result = parseInt(tmp) - parseInt(price);
             origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
+            
+            // 결제 예정금액 감소  
+            let arr = []
+            let sum = 0;
+            $('.cart-price-span').each(function (index, value) {
+                arr.push(Number($(this).html().replace(regex, "")));
+            })
+
+            for (let i in arr) {
+                sum -= arr[i];
+            }
+            console.log(arr);
+            console.log(typeof (sum));
+            console.log($('.pprice').html());
+
+            // 상품금액
+            $(".price-field .pprice").html(((sum + "").replace(regex,"")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
+
+            // 결제 예정금액
+            $(".result-price>strong").html(((sum + "").replace(regex,"")).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
         }
-        
+
     })
 
     // 수량 가격 증가
@@ -407,7 +430,29 @@ $(function () {
         let result = (parseInt(price) * num);
         origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
 
+
+        // 결제 예정금액 합계 계산 
+        let arr = []
+        let sum = 0;
+        $('.cart-price-span').each(function (index, value) {
+            arr.push(Number($(this).html().replace(regex, "")));
+        })
+
+        for (let i in arr) {
+            sum += arr[i];
+        }
+        // console.log(arr);
+        // console.log(typeof (sum));
+        // console.log($('.pprice').html());
+
+        // 상품금액
+        $(".price-field .pprice").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
+
+        // 결제 예정금액
+        $(".result-price>strong").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        
     })
+
 
     // 선택삭제 버튼 클릭시
     $('.cart-content-header button').click(function () {
