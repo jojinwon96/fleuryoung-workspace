@@ -600,13 +600,10 @@ button{
 
         if(!regExp.test(idInputf.value)){
             alert('유효하지 않은 id를 입력하셨습니다.');
-            if(event.keyCode==13){
-                document.getElementById('idInput').focus();
-            }else{
-                document.getElementById('idInput').focus();
+           // document.getElementById('idInput').scrollIntoView();/
             idInput.select();
             return false;  
-            }
+            
             
         }
 
@@ -614,19 +611,19 @@ button{
         let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
 
         if(!regExp1.test(pwdInput.value)){
-            document.getElementById('pwdInput').scrollIntoView();
-            // alert('유효하지 않은 비밀번호를 입력하셨습니다');
+            alert('유효하지 않은 비밀번호를 입력하셨습니다');
+            document.getElementById('idArea').scrollIntoView();
             pwdInput.value="";      
-            pwdInput.focus();       
+                 
             return false;
         }
 
         // 비밀번호 확인
         if(pwdInput.value != pwdInputCheck.value){
             alert("비밀번호 확인이 일치하지 않습니다.");
-            document.getElementById("pwdInputCheck").focus();
+            document.getElementById("pwdArea1").scrollIntoView();
             pwdInputCheck.value="";  
-            pwdInputCheck.focus();  
+            
             return false;
 
         }
