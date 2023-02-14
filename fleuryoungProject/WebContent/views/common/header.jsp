@@ -5,6 +5,8 @@
 	String contextPath = request.getContextPath(); // /jsp
 	
 	Member loginUser = (Member)session.getAttribute("loginUser");	
+	
+	int a = 0;
 %>
 <!DOCTYPE html>
 <html lang="en">

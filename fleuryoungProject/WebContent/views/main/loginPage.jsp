@@ -29,7 +29,7 @@
 	</script>
 	<% session.removeAttribute("alertMsg"); %>
 	<% } %>
-
+	<% a = 10; %>
 	<div class="section pb-5 pt-5 pt-sm-2 text-center">
 		<h6 class="mb-0 pb-3">
 			<span>회원로그인 </span> <span>비회원 주문조회</span>
