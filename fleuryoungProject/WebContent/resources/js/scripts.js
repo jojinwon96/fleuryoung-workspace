@@ -468,7 +468,19 @@ $(function () {
     $('.cart-delete-button').click(function () {
         $(this).parent().remove();
     })
+	
+	    // 찜하기 버튼 클릭시 하트 색 채워지기 + db로 가는건?
+    $('.mini_like').click(function () {
 
+
+        if ($(this).attr("src") == "../../resources/Image-mini/icon/love_full.png") {
+            $(this).attr("src", "../../resources/Image-mini/icon/like.png")
+        } else {
+            $(this).attr("src", "../../resources/Image-mini/icon/love_full.png")
+        }
+
+
+    })
 
 })
 
