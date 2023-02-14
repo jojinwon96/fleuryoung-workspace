@@ -325,3 +325,7 @@ a {
 .link {
     color: white;
 }
+
+#searchOrderButton, #logInButton{
+    color: white;
+}

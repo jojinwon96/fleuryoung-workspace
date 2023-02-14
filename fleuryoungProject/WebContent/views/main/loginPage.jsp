@@ -54,7 +54,7 @@
 									<i class="input-icon uil uil-lock-alt"></i>
 								</div>
 								<!-- <a href="#" class="btn mt-4">로그인</a> <br> -->
-								<button type="submit" class="btn mt-4">로그인</button>
+								<button type="submit" id="logInButton" class="btn mt-4">로그인</button>
 								<br>
 
 							</form>
@@ -87,7 +87,7 @@
 									autocomplete="off"> <i
 									class="input-icon uil uil-lock-alt"></i>
 							</div>
-							<a href="#" class="btn mt-4">주문조회</a> <br>
+							<a href="#" id="searchOrderButton" class="btn mt-4">주문조회</a> <br>
 							<p class="mb-0 mt-4 text-center">
 								<a href="#0" class="link">주문번호찾기</a>
 							</p>
