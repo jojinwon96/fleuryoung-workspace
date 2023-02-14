@@ -22,7 +22,7 @@
 		<div class="header-top">
 			<div class="header-top-top">
 			<% if (loginUser == null) { %>
-				<a class="join">회원가입</a>
+				<a href="<%= contextPath %>/joinpage.me" class="join">회원가입</a>
 				<div class="bar"></div>
 				<a href="<%= contextPath %>/loginpage.me" class="login">로그인</a>
 				<div class="bar"></div>
