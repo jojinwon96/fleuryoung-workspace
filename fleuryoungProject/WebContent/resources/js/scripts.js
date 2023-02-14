@@ -795,6 +795,20 @@ $(function () {
     })
 
 
+    // 사이드바 테스트 챗봇
+
+    const categories = document.querySelectorAll('.category');
+
+    categories.forEach(category => {
+        category.addEventListener('click', () => {
+            categories.forEach(c => {
+                if (c !== category) {
+                    c.classList.remove('active');
+                }
+            });
+            category.classList.toggle('active');
+        });
+    });
 
 
 

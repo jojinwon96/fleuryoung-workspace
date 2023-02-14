@@ -529,7 +529,7 @@
                   <span>&nbsp;(11)</span>
                 </div>
                 <!-- 상품 가격 -->
-
+                <span class="text-muted text-decoration-line-through"></span>
                 <span> 55,000원</span>
               </div>
             </div>
@@ -603,9 +603,22 @@
                   <!-- 리뷰수 노출 -->
                   <span>&nbsp;(112)</span>
                 </div>
-                <!-- 상품 가격 -->
+                <!-- 상품 가격 if문 -->
+
+
                 <span class="text-muted text-decoration-line-through">35,000원</span>
-                <span> 25,000원</span>
+
+                <span>
+                  25,000원
+                </span>
+
+                <!-- <% if (sale == 0) { %>
+                  <span class="text-muted text-decoration-line-through"><%35000%>원</span>
+                <% } else { %>
+                  <span class="text-muted text-decoration-line-through">35,000원</span>
+                  <span> <% orign*0.1%>원</span>
+                <% } %> -->
+
               </div>
             </div>
             <!-- Product actions-->
