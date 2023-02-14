@@ -1,5 +1,5 @@
-<%@ page import="flower.com.kh.seller.model.vo.*" %>
-<%@ page import="flower.com.kh.common.*"%>
+<%@ page import="com.kh.seller.model.vo.*" %>
+<%@ page import="com.kh.common.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
@@ -7,6 +7,7 @@
     Seller loginSeller = (Seller)session.getAttribute("loginSeller");
     
     String alertMsg = (String)session.getAttribute("alertMsg");
+    int a = 0;
     %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +15,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Jassa - Bootstrap Admin HTML Template</title>
-    <link rel="shortcut icon" href="resources/img/favicon.png">
+    <title></title>
+    <link rel="shortcut icon" href="resources/img/logo.png">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
@@ -34,9 +35,9 @@
         <div class="login-wrapper">
             <div class="container">
                 <img class="img-fluid logo-dark mb-2" src="resources/img/Fleuryoung.png" alt="Logo">
-                <div class="loginbox">
-                    <div class="login-right">
-                        <div class="login-right-wrap">
+                <div class="loginbox" style="width: 450px">
+                    <div class="login-right"style="width: 450px">
+                        <div class="login-right-wrap"style="width: 450px">
                             <br>
                             <p class="account-subtitle">Fleuryoung에 오신것을 환영합니다!</p>
                             <form action="<%= contextPath %>/login.se"method="post">
@@ -75,7 +76,12 @@
                                     <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a>
                                     </div> -->
 
-                                <div class="text-center dont-have"> 아직 계정이 없으신가요? <a href="#"> 회원가입</a>
+                                <div class="text-center dont-have"> 아직 계정이 없으신가요? <a style="cursor: pointer;" onclick="register();"> 회원가입</a>
+									<script>
+							            function register(){
+							                location.href = "<%= contextPath %>/registerForm.se";
+							            }
+					            	</script>
                                 </div>
                             </form>
                         </div>
@@ -85,8 +91,15 @@
         </div>
     </div>
 	<% } else{ %>
-	
-    <%@ include file = "dashboard.jsp"%>
+	<!-- 대시보드로 가는 코드 -->
+    
+        <% a = 5 %>
+            
+
+    <%}%>    
+    
+        <%@ include file = "dashboard.jsp"%>
+    
     <div class="main-wrapper">
         <div class="header header-one">
             <div class="header-left header-left-one">
