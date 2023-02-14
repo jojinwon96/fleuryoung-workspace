@@ -1,4 +1,4 @@
-package flower.com.kh.seller.controller;
+package com.kh.seller.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import flower.com.kh.seller.model.service.SellerService;
-import flower.com.kh.seller.model.vo.Seller;
+import com.kh.seller.model.service.SellerService;
+import com.kh.seller.model.vo.Seller;
 /**
  * Servlet implementation class LoginController
  */

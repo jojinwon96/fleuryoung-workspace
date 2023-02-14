@@ -1,11 +1,11 @@
-package flower.com.kh.seller.model.service;
+package com.kh.seller.model.service;
 
-import static flower.com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
-import flower.com.kh.seller.model.dao.SellerDao;
-import flower.com.kh.seller.model.vo.Seller;
+import com.kh.seller.model.dao.SellerDao;
+import com.kh.seller.model.vo.Seller;
 
 public class SellerService {
 	public Seller loginSeller(String selId, String selPw) {

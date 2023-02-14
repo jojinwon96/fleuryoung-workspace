@@ -1,4 +1,4 @@
-package flower.com.kh.seller.model.dao;
+package com.kh.seller.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static flower.com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.*;
 
-import flower.com.kh.seller.model.vo.Seller;
+import com.kh.seller.model.vo.Seller;
 
 public class SellerDao {
 	
@@ -18,7 +18,7 @@ public class SellerDao {
 	
 	public SellerDao() {
 		
-		String filePath = SellerDao.class.getResource("/flower/db/sql/seller-mapper.xml").getPath();
+		String filePath = SellerDao.class.getResource("/db/sql/seller-mapper.xml").getPath();
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (IOException e) {

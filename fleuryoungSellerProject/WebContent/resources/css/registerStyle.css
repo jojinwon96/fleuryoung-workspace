@@ -1,0 +1,157 @@
+#infoInputMeori{
+/* text-align: center; */
+margin-top: 100px;
+margin-left: 400px;
+margin-bottom: 50px;
+color: lightcoral;
+}
+#CreateAccount{
+padding-left: 10px;
+}
+
+small{
+color: red;
+}
+
+h6{
+text-align: center;
+}
+#daejang{
+border: 1px solid lightgray;
+width: 40%;
+margin-left: auto;
+margin-right: auto;
+height: 1500px;
+}
+
+
+#info{
+width: 40%;
+border: 1px solid lightgray;
+margin:0 auto; 
+height: 1700px;
+
+}
+#infoHeader{
+height: 50px;
+border: 1px solid lightgray;
+line-height: 50px;
+background-color: lightgray;
+}
+label{
+width: 30%;
+text-align: right;
+padding-right: 8px;
+height: 100%;
+float: left;
+line-height: 40px;
+}
+::placeholder{
+font-size: 0.8em;
+}
+
+#idArea, #pwdArea1, #pwdArea2, #storeNameArea, #registerNoArea{
+width: 100%;
+height: 80px;
+padding-top: 30px;
+
+}
+#registerNoArea2{
+width: 100%;
+height: 80px;
+padding-top: 30px;
+}
+#registerNoInput2{
+margin-right: 3px;
+}
+#phoneArea{
+width: 100%;
+height: 120px;
+padding-top: 30px;
+
+}
+#emailArea{
+width: 100%;
+height: 120px;
+padding-top: 30px;
+}
+
+#agreeArea{
+
+width: 70%;
+height: 300px;
+padding-top: 30px;
+margin: auto;
+}
+#agreeArea>*{
+margin: 0;padding: 0;box-sizing: border-box}
+body{background-color: #f7f7f7;}
+ul>li{list-style: none}
+a{text-decoration: none;}
+.clearfix::after{content: "";display: block;clear: both;}
+#joinForm{width: 460px;margin: 0 auto;}
+ul.join_box{border: 1px solid #ddd;background-color: #fff;}
+.checkBox,.checkBox>ul{position: relative;}
+.checkBox>ul>li{float: left;}
+.checkBox>ul>li:first-child{width: 85%;font-weight: 600;color: #888; padding: 15px 15px 5px 0px;}
+.checkBox>ul>li:nth-child(2){position: absolute;top: 50%;right: 30px;margin-top: -12px;}
+.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: #888; border: none;}
+.footBtwrap{margin-top: 15px;}
+.footBtwrap>li{float: left;width: 50%;height: 60px;}
+.footBtwrap>li>button{display: block; width: 98%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
+.fpmgBt1{ background-color: #fff;color:#888;border-color: white; border:1px solid lightgray ; margin-right : 10px; margin-top: 70px;}
+.fpmgBt2{background-color: rgb(248, 178, 188);color: #fff; border-color: white; border:1px solid lightgray; margin-top: 70px;
+}
+
+#emailButton, #phoneButton{
+width: 50%;
+height: 38%;
+margin-top: 5px;
+vertical-align: middle;
+}
+#addressArea{
+width: 100%;
+height: 150px;
+padding-top: 30px;
+}
+#idInput, #pwdInput, #pwdInputCheck, #emailInput, #phoneInput, #storeNameInput, #registerNoInput, #registerNoInput2{
+width: 50%;
+display: inline-block;
+}
+#registerNoInput2, #idInput{
+width: 37%;
+}
+input{
+/* font-size: smaller; */
+}
+#address1{
+width: 20%;
+margin-bottom: 5px;
+}
+
+button{
+border: 1px solid gray;
+display: inline-block;
+}
+#addressDiv2{
+width: 70%;
+height: 100%;
+/* display: inline; */
+float: left;
+}
+#address2, #address3 {
+width: 70%;
+margin-bottom: 5px;
+}
+#lastUl{
+margin-bottom: 45px;
+
+}
+#registerNo{
+width: 40%;
+}
+
+#pwdArea1>::placeholder{
+font-size: 0.5em;
+}
+

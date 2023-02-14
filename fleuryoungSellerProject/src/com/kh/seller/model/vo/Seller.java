@@ -1,4 +1,4 @@
-package flower.com.kh.seller.model.vo;
+package com.kh.seller.model.vo;
 
 import java.sql.Date;
 

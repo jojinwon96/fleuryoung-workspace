@@ -1,4 +1,4 @@
-package flower.com.kh.common;
+package com.kh.common;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ public class JDBCTemplate {
 		Connection conn = null;
 		Properties prop = new Properties();
 		// 읽어들이고자 하는 driver.properties 파일의 물리적인 경로 제시
-		String filePath = JDBCTemplate.class.getResource("/flower/db/driver/driver.properties").getPath();
+		String filePath = JDBCTemplate.class.getResource("/db/driver/driver.properties").getPath();
 		// "C:/05_server-workspace2/jspProject/WebContent/classes/db/driver/driver.properties"
 		
 		try {
@@ -39,10 +39,8 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conn;
