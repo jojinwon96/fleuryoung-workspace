@@ -28,7 +28,7 @@ public class RegisterFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 회원가입 폼으로 이동
-		request.getRequestDispatcher("views/common/register.jsp").forward(request, response);
+		request.getRequestDispatcher("views/seller/register.jsp").forward(request, response);
 	}
 
 	/**

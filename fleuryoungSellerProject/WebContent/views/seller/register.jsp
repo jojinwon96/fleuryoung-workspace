@@ -208,7 +208,7 @@
                                     class="google"><i class="fab fa-google"></i></a>
                             </div>
 
-                            <div class="text-center dont-have">이미 계정이 있습니까? <a href="login.html">로그인</a>
+                            <div class="text-center dont-have">이미 계정이 있습니까? <a href="">로그인</a>
                             </div>
                         </div>
                     </div>
