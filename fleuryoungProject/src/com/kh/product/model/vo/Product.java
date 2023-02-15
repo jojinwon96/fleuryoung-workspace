@@ -15,6 +15,11 @@ public class Product {
 	private String salId;
 	private String categorySmall;
 	
+	private int reivewRating;
+	private int reviewCount;
+	private String firstImgSrc;
+	
+	
 	public Product() {}
 
 	public Product(int pId, String pName, int pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
@@ -30,6 +35,42 @@ public class Product {
 		this.pTagYN = pTagYN;
 		this.salId = salId;
 		this.categorySmall = categorySmall;
+	}
+
+	
+	
+	public Product(int pId, String pName, int pNetPrice, int reivewRating, int reviewCount, String firstImgSrc) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pNetPrice = pNetPrice;
+		this.reivewRating = reivewRating;
+		this.reviewCount = reviewCount;
+		this.firstImgSrc = firstImgSrc;
+	}
+
+	public int getReivewRating() {
+		return reivewRating;
+	}
+
+	public void setReivewRating(int reivewRating) {
+		this.reivewRating = reivewRating;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public String getFirstImgSrc() {
+		return firstImgSrc;
+	}
+
+	public void setFirstImgSrc(String firstImgSrc) {
+		this.firstImgSrc = firstImgSrc;
 	}
 
 	public int getpId() {

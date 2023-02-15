@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="selectBestProduct">
+		SELECT P_NAME, NVL(REVIEW_RATING, 0),
+			COUNT(REVIEW_RATING) AS "COUNT" ,P_NETPRICE, P_IMG1
+			FROM TB_REVIEW
+			RIGHT JOIN TB_PRODUCT USING (P_ID)
+			LEFT JOIN TB_PRODUCT_IMG USING (P_ID)
+		GROUP BY P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1
+	</entry>
+</properties>
+

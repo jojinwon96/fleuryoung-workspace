@@ -6650,32 +6650,10 @@ SELECT * FROM TB_MEMBER;
 SELECT * FROM TB_PRODUCT;
 SELECT * FROM TB_PRODUCT_IMG;
 
-INSERT INTO TB_PRODUCT_IMG 
-VALUES(1
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/01.PNG' 
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/02.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/03.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/04.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/05.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/06.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/07.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/08.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_01/09.PNG'
-,'');
-
-INSERT INTO TB_PRODUCT_IMG 
-VALUES(2
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/01.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/02.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/03.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/04.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/05.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/06.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/07.PNG'
-,'${pageContext.request.contextPath}/resources/image/flower-imgaes/bouquet/bouquet_02/08.PNG'
-,''
-,'');
-
-
+SELECT P_ID, P_NAME, NVL(REVIEW_RATING, 0), COUNT(REVIEW_RATING) AS "COUNT" ,P_NETPRICE, P_IMG1
+FROM TB_REVIEW
+RIGHT JOIN TB_PRODUCT USING (P_ID)
+LEFT JOIN TB_PRODUCT_IMG USING (P_ID)
+GROUP BY P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1;
 
 COMMIT;

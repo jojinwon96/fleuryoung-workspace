@@ -63,6 +63,12 @@
 		</div>
 		<!-- 배너 끝 -->
 
+		    <script>
+		    	$(function(){
+					    location.href = '<%=contextPath%>/Best.p';
+		    	})
+    		</script>
+	
 		<!-- Section-->
 		<section class="py-5">
 			<div class="container px-4 px-lg-5 mt-5">
