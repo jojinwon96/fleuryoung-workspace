@@ -39,13 +39,13 @@ public class Product {
 
 	
 	
-	public Product(int pId, String pName, int pNetPrice, int reivewRating, int reviewCount, String firstImgSrc) {
+	public Product(int pId, String pName, int reivewRating, int reviewCount, int pNetPrice, String firstImgSrc) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
-		this.pNetPrice = pNetPrice;
 		this.reivewRating = reivewRating;
 		this.reviewCount = reviewCount;
+		this.pNetPrice = pNetPrice;
 		this.firstImgSrc = firstImgSrc;
 	}
 

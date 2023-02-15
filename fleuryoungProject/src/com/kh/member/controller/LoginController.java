@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+		// 장바구니 객체
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		

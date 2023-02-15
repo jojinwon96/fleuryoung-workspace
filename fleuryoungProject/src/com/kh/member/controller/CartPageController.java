@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginPageController
+ * Servlet implementation class CartPageController
  */
-@WebServlet("/loginpage.me")
-public class LoginPageController extends HttpServlet {
+@WebServlet("/cartpage.me")
+public class CartPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPageController() {
+    public CartPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class LoginPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/main/loginPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/main/cartPage.jsp");
 		view.forward(request, response);
 	}
 

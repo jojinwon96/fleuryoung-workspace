@@ -12,6 +12,8 @@ import java.util.Properties;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.product.model.vo.Product;
 
+import static com.kh.common.JDBCTemplate.*;
+
 public class ProductDao {
 
 	private Properties prop = new Properties();
@@ -29,7 +31,7 @@ public class ProductDao {
 
 	}
 
-	public void selectBestProduct(Connection conn) {
+	public ArrayList<Product> selectBestProduct(Connection conn) {
 		
 		ArrayList<Product> list = new ArrayList<Product>();
 		
@@ -43,14 +45,22 @@ public class ProductDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				
+				list.add(new Product(rs.getInt("P_ID")
+						           , rs.getString("P_NAME")
+						           , rs.getInt("REVIEW_RATING")
+						           , rs.getInt("COUNT")
+						           , rs.getInt("P_NETPRICE")
+						           , rs.getString("P_IMG1")));
 			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
-		
+		return list;
 	}
 
 }
