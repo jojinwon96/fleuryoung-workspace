@@ -22,22 +22,26 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
 <!-- 업버튼 -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/mini_drop.js"></script>
+
 
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <style>
 .mini_like {
 	cursor: pointer;
+	
 }
 
-h5{
-	text-overflow: ellipsis;  
-	overflow : hidden;
+h5 {
+	text-overflow: ellipsis;
+	overflow: hidden;
 	display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+.productbox{
+	cursor: pointer;
 }
 </style>
 </head>
@@ -49,21 +53,20 @@ h5{
 		<%@ include file="../../views/common/header.jsp"%>
 
 		<script>
-									$(function () {
-										$(document).on('click', '.mini_like', function () {
-											<%if (loginUser == null) {%>
-												console.log("null임");
-												alert("로그인이 필요한 기능입니다.");
-											<%} else {%>
-												console.log("로그인한거임");
-												if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
-													$(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
-												} else {
-													$(this).attr("src", "<%=contextPath%>
-			/resources/image/icon/like.png")
-									}
-		<%}%>
-			})
+			$(function () {
+					$(document).on('click', '.mini_like', function () {
+						<%if (loginUser == null) {%>
+								console.log("null임");
+								alert("로그인이 필요한 기능입니다.");
+						<%} else {%>
+								console.log("로그인한거임");
+								if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
+								    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
+								} else {
+									$(this).attr("src", "<%=contextPath%>/resources/image/icon/like.png")
+								}
+		   			    <%}%>
+					})
 			})
 		</script>
 
@@ -105,14 +108,30 @@ h5{
 
 
 		<div align="right" class="container px-4 px-lg-5 mt-5">
-			<select style="width: 200px" class="form-select" aria-label="Default select example">
-			
-			<option value="1">최신순</option>
-			<option value="2">판매순</option>
-			<option value="3">리뷰순</option>
-		</select>
+			<select style="width: 200px" class="form-select" 
+			        id="orderSelect" name= orderSelect
+				aria-label="Default select example">
+				<option selected>선택하기</option>
+				<option value="1">최신순</option>
+				<option value="2">판매순</option>
+				<option value="3">리뷰순</option>
+			</select>
 		</div>
-
+		<script>
+			$(function(){
+				$("#orderSelect").on("change", function(){
+					let tmp = $("#orderSelect option:selected").val();
+					console.log(tmp);
+					if (tmp == 2){
+						location.href = '<%=contextPath%>/saleorder.p';
+					} else if (tmp == 1){
+						location.href = '<%=contextPath%>/latest.p';
+					} else {
+						location.href = '<%=contextPath%>/revieworder.p';
+					}
+				})
+			})
+		</script>
 		<!--  업버튼 -->
 
 		<div id="wrap">
@@ -132,10 +151,10 @@ h5{
 					%>
 					<!-- 상품시작 -->
 					<!-- 일반 배송 + 할인 없는 제품 -->
-					<div class="col mb-5">
+					<div class="productbox col mb-5">
 						<div class="card h-100">
 							<!-- Product image-->
-
+							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getFirstImgSrc() %>"
@@ -149,7 +168,7 @@ h5{
 									</h5>
 									<div
 										class="d-flex justify-content-center small text-warning mb-2">
-										
+
 										<%
 											for (int i = 0; i < p.getReivewRating(); i++) {
 										%>
@@ -222,7 +241,14 @@ h5{
 					<%
 						}
 					%>
-
+					<script>
+						$(function(){
+							$('.card-img-top').click(function(){
+								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
+							})
+							
+						})
+					</script>
 
 
 

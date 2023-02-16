@@ -1,171 +1,28 @@
+<%@page import="com.kh.product.model.vo.Product"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Product p = (Product)request.getAttribute("product");	
+%>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>productDetailPage</title>
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="productDetail.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-    <style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+ 
+ <style>
         .yellow-color {
             color: rgb(238, 238, 6);
         }
-    </style>
+</style>
+    
 </head>
-
-<body class style="padding-right: 0px;">
-
-    <div class="wrap">
-        <div>
-            <div class="header-top">
-                <div class="header-top-top">
-                    <a class="join">회원가입</a>
-                    <div class="bar"></div>
-                    <a class="login">로그인</a>
-                    <div class="bar"></div>
-                    <a href="/board/notice.html" class="board">고객센터</a>
-                </div>
-                <div class="header-top-bottom">
-                    <div class="header-top-bottom-left">
-                        <a href="/main/mainPage.html"><img src="/images/Fleuryoung.png" class="logo"></a>
-                    </div>
-
-                    <div class="header-top-bottom-mid">
-                        <div id="input-panel" class="default-input-panel">
-                            <form id="todo-form" class="form">
-                                <input type="text" id="main-search" placeholder="검색어를 입력해주세요" required
-                                    class="main-input">
-                            </form>
-                            <button type="submit" class="main-input-btn" form="todo-form"></button>
-                        </div>
-                        <div class="real-time-panel" style="display: none;">
-                            <div class="real-time-title">
-                                <h3 class="rtTitle">최근 검색어</h3>
-                                <div class="real-time-list">
-                                    <ul>
-                                        <!-- db에서  -->
-                                        <!-- <li><img src="/images/smallSearch.png"><a href="#">꽃다발</a><button class="real-time-delete"></button></li>
-                                        <li><img src="/images/smallSearch.png"><a href="#">카네이션</a><button class="real-time-delete"></button></li>
-                                        <li><img src="/images/smallSearch.png"><a href="#">튤립</a><button class="real-time-delete"></button></li>
-                                        <li><img src="/images/smallSearch.png"><a href="#">안개꽃</a><button class="real-time-delete"></button></li>
-                                        <li><img src="/images/smallSearch.png"><a href="#">선물</a><button class="real-time-delete"></button></li> -->
-                                    </ul>
-                                    <div class="real-time-allDelete off">전체삭제</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="header-top-bottom-right">
-                        <div class="cartMyPage-panel">
-                            <div class="cart-panel">
-                                <a href="/main/cartPage.html"><img src="/images/cart.png" class="cart-btn"></a>
-                            </div>
-                            <div class="myPage-panel">
-                                <button class="mypage-btn"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <header>
-                <div class="header-nav-panel">
-                    <ul class="header-nav-ul">
-                        <li class="best-li">
-                            <span class="best-span">베스트</span>
-                        </li>
-                        <li class="type-li">
-                            <span class="type-span">종류별</span>
-                        </li>
-                        <li class="present-li">
-                            <span class="present-span">선물</span>
-                        </li>
-                        <li class="delivery-li">
-                            <span class="delivery-span">당일배송</span>
-                        </li>
-                        <li class="props-li">
-                            <span class="props-span">소품</span>
-                        </li>
-                        <div class="rank-panel">
-                            <ul class="rank-ul">
-                                <!-- 자바에서 -->
-                                <li><a href="#"><span>1</span>장미꽃</a></li>
-                                <li><a href="#"><span>2</span>나팔꽃</a></li>
-                                <li><a href="#"><span>3</span>무궁화</a></li>
-                                <li><a href="#"><span>4</span>튤립</a></li>
-                                <li><a href="#"><span>5</span>안개꽃</a></li>
-                                <li><a href="#"><span>6</span>꽃다발</a></li>
-                                <li><a href="#"><span>7</span>카네이션</a></li>
-                                <li><a href="#"><span>8</span>들꽃</a></li>
-                                <li><a href="#"><span>9</span>국화꽃</a></li>
-                                <li><a href="#"><span>10</span>목화</a></li>
-                            </ul>
-                        </div>
-                        <span class="downButton"><img src="/images/downButton.png" style="width: 15px;"></span>
-
-                    </ul>
-                </div>
-                <div class="header-nav-hidden-panel" style="display: none;">
-                    <div class="header-type-panel">
-                        <ul>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>바구니</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>꽃다발</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>주문제작</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>축하화환</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>근조화환</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>동/서양란</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>수경식물</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>생화</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>반려식물</span></a></li>
-                            <li><img src="/images/flower-bouquet.png" alt=""><a href="#"><span>조화</span></a></li>
-
-                            <!-- 꽃바구니 -->
-                            <!-- 꽃다발 -->
-                            <!-- 주문제작 -->
-                            <!-- 축하화환 -->
-                            <!-- 근조화환 -->
-                            <!-- 동/서양란 -->
-                            <!-- 수경식물 -->
-                            <!-- 생화 -->
-                            <!-- 반려식물 -->
-                            <!-- 조화 -->
-                        </ul>
-                    </div>
-                </div>
-        </div>
-        </header>
-    </div>
-
-    <div class="rank-list-panel default-rank-list-panel" style="display: none;">
-        <div class="rank-list-title">
-            <h3 class="rank-title">실시간 인기 검색어</h3>
-            <div class="rank-list">
-                <ul>
-                    <!-- 자바에서 -->
-                    <li><a href="#"><span class="number">1</span><span>장미꽃</span></a></li>
-                    <li><a href="#"><span class="number">2</span><span>나팔꽃</span></a></li>
-                    <li><a href="#"><span class="number">3</span><span>무궁화</span></a></li>
-                    <li><a href="#"><span class="number">4</span><span>튤립</span></a></li>
-                    <li><a href="#"><span class="number">5</span><span>안개꽃</span></a></li>
-                    <li><a href="#"><span class="number">6</span><span>꽃다발</span></a></li>
-                    <li><a href="#"><span class="number">7</span><span>카네이션</span></a></li>
-                    <li><a href="#"><span class="number">8</span><span>들꽃</span></a></li>
-                    <li><a href="#"><span class="number">9</span><span>국화꽃</span></a></li>
-                    <li><a href="#"><span class="number">10</span><span>목화</span></a></li>
-                </ul>
-            </div>
-            <div class="rank-close-panel">
-                <img src="/images/close.png" class="rank-close-btn">
-            </div>
-        </div>
-    </div>
-
-    <div class="pd-wrap mx-auto" style="width: 1050px;">
+<body>
+	<div class="wrap">
+		<%@ include file = "../common/header.jsp" %>
+		
+		<div class="pd-wrap mx-auto" style="width: 1050px;">
         <div class="mt-5 container text-center">
             <div class="d-flex flex-row mb-3">
                 <div class="row" style="margin-left: -30px;">
@@ -182,21 +39,21 @@
                 <div class="col-6">
                     <div class=" row">
                         <img class="pd-main rounded shadow p-1 mb-3 bg-body-tertiary"
-                            src="https://www.1588-39000.com/IS/U=f39000/QG1009_01.png&S=300x300" style="height: 500px;">
+                            src="${pageContext.request.contextPath}<%=p.getImg1() %>" style="height: 500px;">
                     </div>
                     <div class="d-flex justify-content-start">
                         <div class="text-center" style="margin-left: -12px; margin-top: 5px;">
                             <img class="col pd-btn shadow-sm p-1 rounded"
-                                src="https://www.1588-39000.com/IS/U=f39000/QG1009_01.png&S=300x300"
+                                src="${pageContext.request.contextPath}<%=p.getImg1() %>"
                                 style="width: 70px; height: 70px;">
                             <img class="col pd-btn shadow-sm p-1 rounded"
-                                src="https://www.f49000.co.kr/thumbnail/18980/570/0a46864eecae49a324586ad2e2a1d2a0.png"
+                                src="${pageContext.request.contextPath}<%=p.getImg2() %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="flower-imgaes/bouquet/bouquet_01/03.PNG"
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg3() %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="flower-imgaes/bouquet/bouquet_01/04.PNG"
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg4() %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="flower-imgaes/bouquet/bouquet_01/05.PNG"
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg5() %>"
                                 style="width: 70px; height: 70px;">
                         </div>
                     </div>
@@ -204,8 +61,8 @@
                 <div style="width: 10px; margin-left: 20px;"></div>
                 <!-- 상품 정보 -->
                 <div class="col-5 pd-info">
-                    <p class="row" style="font-size: 15px; margin-bottom: -1px;">기가막힌 꽃집</p>
-                    <div class="row" style="font-size: 20px; font-weight: bolder;">꽃다발</div>
+                    <p class="row" style="font-size: 15px; margin-bottom: -1px;"><%=p.getStoreName() %></p>
+                    <div class="row" style="font-size: 20px; font-weight: bolder;"><%=p.getpName()%></div>
                     <div class="row">
                         <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
                         <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
@@ -213,7 +70,7 @@
                         <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
                         <img src="images/empty-star.png"
                             style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        &nbsp;(11)
+                        &nbsp;(<%=p.getReviewCount()%>)
                     </div>
                     <div class="d-flex flex-column">
                         <div class="mt-2 row" style="margin-bottom: -10px;">
@@ -221,7 +78,7 @@
                             <div class="col-1" style="text-decoration: line-through;">30,000</div> -->
                             <div class="col-8"></div>
                         </div>
-                        <div class="row fs-3" style="font-weight: bolder;">27,000원</div>
+                        <div class="row fs-3" style="font-weight: bolder;"><%=p.getpNetPrice()%>원</div>
                     </div>
                     <div class="row" style="margin-top: 5px;">
                         <div class="col" style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
@@ -259,7 +116,7 @@
                             style="margin-left: -60px; padding-top: 10px; font-weight: bolder; font-size: 14px;">총 주문금액
                         </div>
                         <div class="col-4"></div>
-                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">27,000원
+                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;"><%=p.getpNetPrice() %>원
                         </div>
                     </div>
 
@@ -317,8 +174,6 @@
             <img style="margin-top: 20px;" src="flower-imgaes/bouquet/bouquet_01/04.PNG" class="rounded mx-auto d-block"
                 alt="...">
             <img style="margin-top: 20px;" src="flower-imgaes/bouquet/bouquet_01/05.PNG" class="rounded mx-auto d-block"
-                alt="...">
-                <img style="margin-top: 20px;" src="" class="rounded mx-auto d-block"
                 alt="...">
         </div>
 
@@ -481,10 +336,6 @@
             alt="...">
         <br>
     </div>
-    
-    <script src="jquery-3.1.1.min.js"></script>
-    <script src="scripts.js"></script>
-
+	</div>  
 </body>
-
 </html>

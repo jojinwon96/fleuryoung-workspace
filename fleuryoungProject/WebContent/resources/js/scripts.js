@@ -330,7 +330,7 @@ $(function () {
     // 숫자만 뽑는 정규식
     let check = /[^0-9]/g;
 
-    let delivery = Number($('.discount-field>.pprice').html().replace(check, ""));// 배송비
+    let delivery = Number($('.discount-field>.pprice').text().replace(check, ""));// 배송비
 
     let $total = 0; // 총합계
     let $stotal = $(".price-field>.pprice"), // 총 합계 금액

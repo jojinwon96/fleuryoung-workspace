@@ -182,7 +182,7 @@
 		
 
 	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
 

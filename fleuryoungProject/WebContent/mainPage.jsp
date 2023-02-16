@@ -11,7 +11,7 @@
 <body style="padding-right: 0px;">
 	<script>
 		$(function(){
-			location.href = '/fleuryoungProject/Best.p';
+			location.href = '/fleuryoungProject/latest.p';
 		})
 	</script>
 
