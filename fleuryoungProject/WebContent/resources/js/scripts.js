@@ -327,6 +327,9 @@ $(document).on("click", ".row-li", function () {
 // 장바구니----------------------------------------------------------------------------------
 $(function () {
 
+    // 전체
+    $("#allCheck").click(function () {
+
     // 숫자만 뽑는 정규식
     let check = /[^0-9]/g;
 
@@ -375,150 +378,12 @@ $(function () {
             let count = $(this).next().html(num);
             result = parseInt(tmp) - parseInt(price);
             origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-        }
 
-    })
-    currentArr.push($total);
-
-    console.log("처음 총합 : " + $total);
-    console.log("처음 총합 배열 : " + currentArr);
-
-    // 수량 증가
-    $(document).on("click", ".cart-plus-button", function () {
-
-        // 개별 수량 합계
-        let c = 0;
-
-        let $count = Number($(this).prev().html(Number($(this).prev().html()) + 1).html());
-        let $ptag = Number($(this).parents(".cart-button-panel").next().children('p').html());
-
-        // 최종 보여줄곳
-        let $spanTag = $(this).parents(".cart-button-panel").next().children('span');
-
-        // + 클릭시 개별 상품 가격에 추가
-        c = $ptag * $count;
-
-        // + 클릭시 총 상품 배열에 가격 추가
-        currentArr.push($ptag);
-
-        let r = 0;
-
-        if ($(this).parent().siblings('label').children('input').attr("checked")) {
-            console.log("ddddfdfdfdfd");
-
-            // 배열에 들어있는 상품 합해서 결제 예정금액에 담기
-            r = currentArr.reduce(function add(sum, currValue) {
-                return sum + currValue;
-            }, 0);
-
-            $total = r;
-
-            // 결제 예정 금액
-            $stotal.html($total.toLocaleString('ko-KR') + " 원");
-            $rtotal.html(($total + delivery).toLocaleString('ko-KR'));
-        } else {
-            console.log("아닐때 클릭");
-        }
-
-        console.log($count);
-        console.log($ptag);
-        console.log($spanTag.html());
-
-        console.log("개별 수량 합계 : " + c);
-
-        console.log("====================================================")
-
-        console.log("현재 담겨 있는 가격 : " + currentArr);
-        console.log("콘솔 합계 : " + r);
-
-        // 수량 옆에 표시
-        $spanTag.html(c.toLocaleString('ko-KR') + "원");
-
-
-
-    })
-
-    // 수량 감소
-    $(document).on("click", ".cart-minus-button", function () {
-
-        // 개별 수량 합계
-        let c = 0;
-
-        if (Number($(this).next().html()) > 1) {
-            let $count = Number($(this).next().html(Number($(this).next().html()) - 1).html());
-            let $ptag = Number($(this).parents(".cart-button-panel").next().children('p').html());
-
-            // 최종 보여줄곳
-            let $spanTag = $(this).parents(".cart-button-panel").next().children('span');
-
-            // - 클릭시 개별 상품 배열에 가격 삭제
-            c = $ptag * $count;
-
-            // - 클릭시 총 상품 배열에 가격 삭제
-            currentArr.splice($.inArray(10000, currentArr), 1);
-
-            let r = 0;
-
-            if ($(this).parent().siblings('label').children('input').attr("checked")) {
-                console.log("ddddfdfdfdfd");
-
-                // 배열에 들어있는 상품 합해서 결제 예정금액에 담기
-                r = currentArr.reduce(function add(sum, currValue) {
-                    return sum + currValue;
-                }, 0);
-
-                $total = r;
-
-                // 결제 예정 금액
-                $stotal.html($total.toLocaleString('ko-KR') + " 원");
-                $rtotal.html(($total + delivery).toLocaleString('ko-KR'));
-            } else {
-                console.log("아닐때 클릭");
-            }
-
-            console.log($count);
-            console.log($ptag);
-            console.log($spanTag.html());
-
-
-            console.log("개별 수량 합계 : " + c);
-            console.log("====================================================")
-
-
-            console.log("현재 담겨 있는 가격 : " + currentArr);
-            console.log("콘솔 합계 : " + r);
-
-            // 수량 옆에 표시
-            $spanTag.html(c.toLocaleString('ko-KR') + "원");
-
-        }
-    })
-
-    // 전체 선택
-    $(document).on('click', "#check-img", function () {
-        let $subCheck = $('input[type="checkbox"][name^="subCheck"]');
-        let $scPrice = Number($subCheck.parent().siblings('.cart-price-panel').children('p').html());
-
-        if ($allCheck.attr("checked")) {
-
-            $(this).attr("src", "images/unchecked-checkbox.png");
-            $allCheck.attr('checked', false);
-
-            $subCheck.next().attr("src", "images/unchecked-checkbox.png");
-            $subCheck.attr("checked", false);
-
-            // 개별 선택 다 빠짐
-            $('input[type="checkbox"][name^="subCheck"]').each(function (index, value) {
-
-                console.log("전체 선택 눌러서 다빠짐");
-
-                $price = Number($(this).parent().siblings('.cart-price-panel').children('p').html());
-                $total = 0;
-                $allCheck.attr('checked', false);
-                $(this).attr("checked", false);
-
-                $('.cart-access-button').css("backgroundColor", "lightgray");
-                $('.cart-access-button').attr("disabled", false);
+            // 결제 예정금액 감소  
+            let arr = []
+            let sum = 0;
+            $('.cart-price-span').each(function (index, value) {
+                arr.push(Number($(this).html().replace(regex, "")));
             })
 
         } else {
@@ -600,15 +465,11 @@ $(function () {
 
             }
 
-            $(this).next().attr("src", "images/checked-checkbox.png");
-            $(this).attr("checked", true);
+            // 상품금액
+            $(".price-field .pprice").html(((sum + "").replace(regex, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
 
-            let $tmp = Number(($(this).parent().siblings('.cart-price-panel').children('span').html()).replace(check, ""));
-
-            $total = $total + $tmp;
-
-            console.log("선택 체크 채움");
-            console.log("정규식으로 뽑음 : " + $tmp);
+            // 결제 예정금액
+            $(".result-price>strong").html(((sum + "").replace(regex, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
         }
 
@@ -666,7 +527,10 @@ $(function () {
 
         console.log(tmp);
 
-        $('input:checkbox[name^="subCheck"]:checked').parents('li').remove();
+        // 결제 예정금액
+        $(".result-price>strong").html((sum + "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+    })
 
         if ($('input:checkbox[name^="subCheck"]:checked').length == 1) {
             $("#allCheck").attr('checked', true);
@@ -785,10 +649,10 @@ $(function () {
     $('.mini_like').click(function () {
 
 
-        if ($(this).attr("src") == "../../resources/Image-mini/icon/love_full.png") {
+        if ($(this).attr("src") == "../../resources/Image-mini/icon/hearting.gif") {
             $(this).attr("src", "../../resources/Image-mini/icon/like.png")
         } else {
-            $(this).attr("src", "../../resources/Image-mini/icon/love_full.png")
+            $(this).attr("src", "../../resources/Image-mini/icon/hearting.gif")
         }
 
 
