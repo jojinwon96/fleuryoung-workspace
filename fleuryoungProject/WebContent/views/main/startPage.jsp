@@ -87,7 +87,7 @@ h5 {
 				</div>
 				<div class="carousel-item">
 					<img
-						src="https://product-image.kurly.com/cdn-cgi/image/quality=85/banner/main/pc/img/dcb8ce26-b7a6-4d2c-a67f-81cc7cc2e938.jpg"
+						src="${pageContext.request.contextPath}/resources/image/flowerbannwer2.png"
 						class="d-block w-100" alt="...">
 				</div>
 			</div>
@@ -163,7 +163,7 @@ h5 {
 							<div class="card-body p-4">
 								<div class="text-center">
 									<!-- Product name-->
-									<h5 class="fw-bolder">
+									<h5 style="font-size: 15px" class="fw-bolder">
 										<%=p.getpName()%>
 									</h5>
 									<div
@@ -247,6 +247,9 @@ h5 {
 								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
 							})
 							
+							$(".mini_shopping").click(function() {
+								
+							})
 						})
 					</script>
 

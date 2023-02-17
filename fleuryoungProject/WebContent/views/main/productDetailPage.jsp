@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Product p = (Product)request.getAttribute("product");	
+	Product p = (Product)request.getAttribute("product");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,7 @@
             </div>
             <div class="row">
 
+				<% String[] mimgs = p.getImgs().split(","); %>
                 <!-- 사진 -->
                 <div class="col-6">
                     <div class=" row">
@@ -44,33 +46,36 @@
                     <div class="d-flex justify-content-start">
                         <div class="text-center" style="margin-left: -12px; margin-top: 5px;">
                             <img class="col pd-btn shadow-sm p-1 rounded"
-                                src="${pageContext.request.contextPath}<%=p.getImg1() %>"
+                                src="${pageContext.request.contextPath}<%= mimgs[0] %>"
                                 style="width: 70px; height: 70px;">
                             <img class="col pd-btn shadow-sm p-1 rounded"
-                                src="${pageContext.request.contextPath}<%=p.getImg2() %>"
+                                src="${pageContext.request.contextPath}<%= mimgs[1] %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg3() %>"
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%= mimgs[2] %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg4() %>"
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%= mimgs[3] %>"
                                 style="width: 70px; height: 70px;">
-                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%=p.getImg5() %>"
-                                style="width: 70px; height: 70px;">
+                            <img class="col pd-btn shadow-sm p-1 rounded" src="${pageContext.request.contextPath}<%= mimgs[4] %>"
+                            	style="width: 70px; height: 70px;">
                         </div>
                     </div>
                 </div>
                 <div style="width: 10px; margin-left: 20px;"></div>
                 <!-- 상품 정보 -->
                 <div class="col-5 pd-info">
-                    <p class="row" style="font-size: 15px; margin-bottom: -1px;"><%=p.getStoreName() %></p>
-                    <div class="row" style="font-size: 20px; font-weight: bolder;"><%=p.getpName()%></div>
+                    <p class="row" style="font-size: 13px; margin-bottom: -1px;"><%=p.getStoreName() %></p>
+                    <div class="row" style="font-size: 17px; font-weight: bolder;"><%=p.getpName()%></div>
                     <div class="row">
-                        <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        <img src="images/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        <img src="images/empty-star.png"
-                            style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
-                        &nbsp;(<%=p.getReviewCount()%>)
+                    	<% int count = 5;%>
+                    	<% for(int i = 0; i < p.getReivewRating(); i++) { %>
+                        	<img src="${pageContext.request.contextPath}/resources/image/icon/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
+                        	<% count--; %>
+                        <% } %>
+                        <% for (int j = 0; j < count; j++) { %>
+                        	<img src="${pageContext.request.contextPath}/resources/image/icon/empty-star.png"
+                            	style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
+                        <% } %>
+                        (<%=p.getReviewCount()%>)
                     </div>
                     <div class="d-flex flex-column">
                         <div class="mt-2 row" style="margin-bottom: -10px;">
@@ -78,7 +83,7 @@
                             <div class="col-1" style="text-decoration: line-through;">30,000</div> -->
                             <div class="col-8"></div>
                         </div>
-                        <div class="row fs-3" style="font-weight: bolder;"><%=p.getpNetPrice()%>원</div>
+                        <div class="row fs-3" style="font-weight: bolder;"><%= p.getpNetPrice() %>원</div>
                     </div>
                     <div class="row" style="margin-top: 5px;">
                         <div class="col" style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
@@ -163,18 +168,12 @@
         <br>
         <div align="left" style="font-size: 30px; font-weight: bolder; margin-top: 70px;">상품상세정보</div>
         <div class="pd-info-content" style="margin-top: 50px;">
-            <img style="margin-top: 20px;"
-                src="https://www.f49000.co.kr/thumbnail/18979/570/a4ccc8719a8ba70adb84997ac4148048.png"
-                class="rounded mx-auto d-block" alt="...">
-            <img style="margin-top: 20px;"
-                src="https://www.f49000.co.kr/thumbnail/18980/570/0a46864eecae49a324586ad2e2a1d2a0.png"
-                class="rounded mx-auto d-block" alt="...">
-            <img style="margin-top: 20px;" src="flower-imgaes/bouquet/bouquet_01/03.PNG" class="rounded mx-auto d-block"
-                alt="...">
-            <img style="margin-top: 20px;" src="flower-imgaes/bouquet/bouquet_01/04.PNG" class="rounded mx-auto d-block"
-                alt="...">
-            <img style="margin-top: 20px;" src="flower-imgaes/bouquet/bouquet_01/05.PNG" class="rounded mx-auto d-block"
-                alt="...">
+        	<% String[] tmp = p.getImgs().split(","); %>
+        	<% for (int i = 0; i < tmp.length; i++) { %>
+	            <img style="margin-top: 20px;"
+	                src="${pageContext.request.contextPath}<%= tmp[i] %>"
+	                class="rounded mx-auto d-block" alt="...">
+            <% } %>
         </div>
 
         <div class="t2"></div>

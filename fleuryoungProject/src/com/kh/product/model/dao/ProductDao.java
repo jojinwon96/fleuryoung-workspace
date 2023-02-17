@@ -46,7 +46,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1")));
 			}
 
 		} catch (SQLException e) {
@@ -73,7 +73,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1"), rs.getInt("PCOUNT")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getInt("PCOUNT")));
 			}
 
 		} catch (SQLException e) {
@@ -100,7 +100,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1")));
 			}
 
 		} catch (SQLException e) {
@@ -113,7 +113,6 @@ public class ProductDao {
 		return list;
 	}
 
-	
 	public Product selectProductDetail(Connection conn, int pid) {
 		
 		Product p = null;
@@ -135,21 +134,10 @@ public class ProductDao {
 						      , rs.getString("SEL_STORE_NAME")
 						      , rs.getInt("COUNT")
 						      , rs.getInt("REVIEW_RATING")
-						      , rs.getInt("P_NETPRICE")
+						      , rs.getString("P_NETPRICE")
 						      , rs.getString("P_IMG1")
-						      , rs.getString("P_IMG2")
-						      , rs.getString("P_IMG3")
-						      , rs.getString("P_IMG4")
-						      , rs.getString("P_IMG5")
-						      , rs.getString("P_IMG6")
-						      , rs.getString("P_IMG7")
-						      , rs.getString("P_IMG8")
-						      , rs.getString("P_IMG9")
-						      , rs.getString("P_IMG10"));
+						      , rs.getString("IMAGES"));
 			}
-			
-			System.out.println(p.getImg1());
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

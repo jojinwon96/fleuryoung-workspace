@@ -6,7 +6,7 @@ public class Product {
 
 	private int pId;
 	private String pName;
-	private int pNetPrice;
+	private String pNetPrice;
 	private int pDetail;
 	private int pStock;
 	private Date enrollDate;
@@ -21,21 +21,13 @@ public class Product {
 	
 	private String storeName;
 	
+	private String imgs;
 	private String img1;
-	private String img2;
-	private String img3;
-	private String img4;
-	private String img5;
-	private String img6;
-	private String img7;
-	private String img8;
-	private String img9;
-	private String img10;
 	
 	
 	public Product() {}
 
-	public Product(int pId, String pName, int pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
+	public Product(int pId, String pName, String pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
 			String pTagYN, String salId, String categorySmall) {
 		super();
 		this.pId = pId;
@@ -50,7 +42,7 @@ public class Product {
 		this.categorySmall = categorySmall;
 	}
 	
-	public Product(int pId, String pName, int reivewRating, int reviewCount, int pNetPrice, String firstImgSrc) {
+	public Product(int pId, String pName, int reivewRating, int reviewCount, String pNetPrice, String firstImgSrc) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -60,7 +52,7 @@ public class Product {
 		this.firstImgSrc = firstImgSrc;
 	}
 	
-	public Product(int pId, String pName, int reivewRating, int reviewCount ,int pNetPrice,  String firstImgSrc,
+	public Product(int pId, String pName, int reivewRating, int reviewCount ,String pNetPrice,  String firstImgSrc,
 			int saleCount) {
 		super();
 		this.pId = pId;
@@ -73,9 +65,7 @@ public class Product {
 	}
 
 	
-	
-	public Product(String pName, String storeName, int reviewCount, int reivewRating, int pNetPrice,   String img1, String img2,
-			String img3, String img4, String img5, String img6, String img7, String img8, String img9, String img10) {
+	public Product(String pName, String storeName, int reviewCount, int reivewRating, String pNetPrice, String img1, String imgs) {
 		super();
 		this.storeName = storeName;
 		this.pName = pName;
@@ -83,27 +73,11 @@ public class Product {
 		this.reivewRating = reivewRating;
 		this.reviewCount = reviewCount;
 		this.img1 = img1;
-		this.img2 = img2;
-		this.img3 = img3;
-		this.img4 = img4;
-		this.img5 = img5;
-		this.img6 = img6;
-		this.img7 = img7;
-		this.img8 = img8;
-		this.img9 = img9;
-		this.img10 = img10;
+		this.imgs = imgs;
 	}
 
 	
 	
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
 	public String getImg1() {
 		return img1;
 	}
@@ -112,76 +86,20 @@ public class Product {
 		this.img1 = img1;
 	}
 
-	public String getImg2() {
-		return img2;
+	public String getImgs() {
+		return imgs;
 	}
 
-	public void setImg2(String img2) {
-		this.img2 = img2;
+	public void setImgs(String imgs) {
+		this.imgs = imgs;
 	}
 
-	public String getImg3() {
-		return img3;
+	public String getStoreName() {
+		return storeName;
 	}
 
-	public void setImg3(String img3) {
-		this.img3 = img3;
-	}
-
-	public String getImg4() {
-		return img4;
-	}
-
-	public void setImg4(String img4) {
-		this.img4 = img4;
-	}
-
-	public String getImg5() {
-		return img5;
-	}
-
-	public void setImg5(String img5) {
-		this.img5 = img5;
-	}
-
-	public String getImg6() {
-		return img6;
-	}
-
-	public void setImg6(String img6) {
-		this.img6 = img6;
-	}
-
-	public String getImg7() {
-		return img7;
-	}
-
-	public void setImg7(String img7) {
-		this.img7 = img7;
-	}
-
-	public String getImg8() {
-		return img8;
-	}
-
-	public void setImg8(String img8) {
-		this.img8 = img8;
-	}
-
-	public String getImg9() {
-		return img9;
-	}
-
-	public void setImg9(String img9) {
-		this.img9 = img9;
-	}
-
-	public String getImg10() {
-		return img10;
-	}
-
-	public void setImg10(String img10) {
-		this.img10 = img10;
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
 
 	public int getSaleCount() {
@@ -232,11 +150,11 @@ public class Product {
 		this.pName = pName;
 	}
 
-	public int getpNetPrice() {
+	public String getpNetPrice() {
 		return pNetPrice;
 	}
 
-	public void setpNetPrice(int pNetPrice) {
+	public void setpNetPrice(String pNetPrice) {
 		this.pNetPrice = pNetPrice;
 	}
 
