@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="shortcut icon" href="resources/img/logo.png">
+<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../resources/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="../../resources/plugins/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="../../resources/css/style.css">
+</head>
+<body>
+
+
+    <div class="main-wrapper">
+        <div class="header header-one">
+            <div class="header-left header-left-one">
+
+                <!-- 로그 -->
+                <a href="index.jsp" class="logo">
+                    <img src="resources/img/logo.png" alt="Logo">
+                </a>
+                <a href="index.jsp" class="white-logo">
+                    <img src="resources/img/logo.png" alt="Logo">
+                </a>
+                <a href="index.jsp" class="logo logo-small">
+                    <img src="resources/img/logo.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+            
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+            <ul class="nav nav-tabs user-menu">
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <i data-feather="bell"></i> <span class="badge rounded-pill">5</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">알림창</span>
+                            <!-- 알림 전체 삭제 -->
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="activities.html"> 
+                                        <!-- 알림 클릭 -->
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt=""
+                                                    src="assets/img/profiles/usermain.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">판매완료</span>
+                                                    paid the invoice <span class="noti-title"></span></p>
+                                                <p class="noti-time"><span class="notification-time">알림 시간(4 mins ago</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="activities.html">View all Notifications</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- session을 이용해 채워 져야함 -->
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <span class="user-img">
+                            <img src="https://i.pinimg.com/736x/26/4c/0e/264c0e20687a67006bce6c7225e59ec2.jpg" alt="">
+                            <span class="status online"></span>
+                        </span>
+                        <span><%= loginSeller.getSelName() %></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#"><i data-feather="user" class="me-1"></i>
+                            마이페이지</a>
+                        <a class="dropdown-item" href="#"><i data-feather="log-out" class="me-1"></i>
+                            Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="active">
+                            <a href="index.jsp"><i data-feather="home"></i> <span>대시보드</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i data-feather="clipboard"></i> <span> 상품관리</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="#">상품등록</a></li>
+                                <li><a href="#">상품관리</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i data-feather="airplay"></i> <span> 판매관리</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="#">송장 등록</a></li>
+                                <li><a href="#">송장 관리</a></li>
+                                <li><a href="#">미결제 확인</a></li>
+                                <li><a href="#">구매확정 내역</a></li>
+                                <li><a href="#">취소관리 </a></li>
+                                <li><a href="#">반품관리 </a></li>
+                                <li><a href="#">교환관리 </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="#"><i data-feather="clipboard"></i> <span>정산관리</span></a>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i data-feather="clipboard"></i> <span>Q&A관리</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="#">문의 관리</a></li>
+                                <li><a href="#">리뷰 관리</a></li>
+                                <li><a href="#">관리자 문의</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i data-feather="clipboard"></i> <span>통계</span></a>
+                        </li>
+                        <li class="submenu">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+
+
+    
+	<!-- <%@ include file = "menubar.jsp"%> -->
+
+
+
+
+
+
+
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+                                <span class="dash-widget-icon bg-1">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </span>
+                                <div class="dash-count">
+                                    
+                                    <span class="dash-title">신규주문
+                                        <span class="dash-counts" align="right">
+                                        129 건
+                                        </span>
+                                    </span>
+                                    <br><br>
+                                    <span class="dash-title">결제대기
+                                        <span class="dash-counts" align="right">
+                                        129 건
+                                        </span>
+                                    </span>
+                                     <br>
+                                </div>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+                                <span class="dash-widget-icon bg-2">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <br><br>
+                                <div class="dash-count">
+                                    <span class="dash-title">구독자수
+                                        <span class="dash-counts" align="right">
+                                            129 명
+                                        </span>
+                                    </span>
+                                    <br>
+                                </div>
+                            </div>
+
+                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+                                <span class="dash-widget-icon bg-3">
+                                    <i class="fas fa-truck"></i>
+                                </span>
+                                <div class="dash-count">
+                                    <span class="dash-title">취소요청
+                                        <span class="dash-counts" align="right">
+                                            129 명
+                                        </span>
+                                    </span>
+                                     <br>
+                                    <span class="dash-title">교환요청
+                                        <span class="dash-counts" align="right">
+                                            129 명
+                                        </span>
+                                    </span>
+                                    <br>
+                                    <span class="dash-title">반품요청
+                                        <span class="dash-counts" align="right">
+                                            129 명
+                                        </span>
+                                    </span>
+                                  
+                                    
+                                </div>
+                            </div>
+    
+                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+                                <span class="dash-widget-icon bg-4">
+                                    <i class="far fa-file"></i>
+                                </span>
+                                <br><br>
+                                <div class="dash-count">
+                                    <div class="dash-title">오늘매출</div>
+                                    <div class="dash-counts">
+                                        <p>2,201,000 원</p>
+                                    </div>
+                                </div>
+                                <br><br>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-15">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title">판매현황</h5>
+                                </div>
+                                <div class="col-auto">
+                                    <a href="invoices.html" class="btn-right btn btn-sm btn-outline-primary">
+                                        전체보기
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                               
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fas fa-circle text-success me-1"></i> 출고완료
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-circle text-warning me-1"></i> 배송준비
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-circle text-primary me-1"></i> 배송중
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-circle text-danger me-1"></i> 배송지연
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-circle text-info me-1"></i> 배송완료
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive" style="height: 500px;">
+                                <table class="table table-stripped table-hover">
+                                    <thead class="thead-light">
+                                        <tr align="center">
+                                            <th>구매자이름</th>
+                                            <th>가격</th>
+                                            <th>구매일자</th>
+                                            <th>배송현황</th>
+                                            <th class="text-right">비고</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr align="center">
+                                            <td>
+                                                <h2 class="table-avatar">
+                                                    <a href="profile.html"><img
+                                                            class="avatar avatar-sm me-2 avatar-img rounded-circle"
+                                                            src="resources/img/profiles/avatar-04.jpg"
+                                                            alt="User Image">최민수</a>
+                                                </h2>
+                                            </td>
+                                            <td>$118</td>
+                                            <td>23 Nov 2020</td>
+                                            <td><span class="badge bg-success-light">출고완료</span></td>
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                        <a class="dropdown-item" href="view-invoice.html"><i
+                                                                class="far fa-eye me-2"></i>상세보기</a>
+                                                </div>
+                                            </td>   
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 상품 리뷰및 문의 현황들 -->
+
+                <div class="col-md-6 col-sm-15">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-xl-15">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="card-title">문의현황</h5>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a href="invoices.html" class="btn-right btn btn-sm btn-outline-primary">
+                                                    전체보기
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item">
+                                                <a href="#home" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                                    신규상품리뷰
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#profile" data-bs-toggle="tab" aria-expanded="true"
+                                                    class="nav-link active">
+                                                    신규판매자문의
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#messages" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
+                                                    관리자문의
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="home">
+                                                <table class="table table-stripped table-hover">
+                                                    <thead class="thead-light">
+                                                        <tr align="center">
+                                                            <th>작성자이름</th>
+                                                            <th>상품명</th>
+                                                            <th>리뷰제목</th>
+                                                            <th>구매일자</th>
+                                                            <th class="text-right">상세</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr align="center">
+                                                            <td>
+                                                                <h2 class="table-avatar">
+                                                                    <a href="profile.html">
+                                                                        <!-- 작성자 사진-->
+                                                                        <img class="avatar avatar-sm me-2 avatar-img rounded-circle"
+                                                                            src="#" 
+                                                                            alt="User Image">작성자이름
+                                                                    </a>
+                                                                </h2>
+                                                            </td>
+                                                            <td>달고나꽃</td>
+                                                            <td>2023-12-30</td>
+                                                            <td>지금까지 이런 맛은 없었다?</td>
+                                                            <td class="text-right">
+                                                                <div class="dropdown dropdown-action">
+                                                                    <a href="#" class="action-icon dropdown-toggle"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <a class="dropdown-item" href="#"><i
+                                                                                class="far fa-eye me-2"></i>상세보기</a>
+                                                                    
+                                                                </div>
+                                                            </td>   
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane show active" id="profile">
+                                                <table class="table table-stripped table-hover">
+                                                    <thead class="thead-light">
+                                                        <tr align="center">
+                                                            <th>작성자이름</th>
+                                                            <th>상품명</th>
+                                                            <th>리뷰제목</th>
+                                                            <th>구매일자</th>
+                                                            <th class="text-right">상세</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr align="center">
+                                                            <td>
+                                                                <h2 class="table-avatar">
+                                                                    <a href="profile.html">
+                                                                        <!-- 작성자 사진-->
+                                                                        <img class="avatar avatar-sm me-2 avatar-img rounded-circle"
+                                                                            src="#" 
+                                                                            alt="User Image">작성자이름
+                                                                    </a>
+                                                                </h2>
+                                                            </td>
+                                                            <td>달고나꽃</td>
+                                                            <td>2023-12-30</td>
+                                                            <td>지금까지 이런 맛은 없었다?</td>
+                                                            <td class="text-right">
+                                                                <div class="dropdown dropdown-action">
+                                                                    <a href="#" class="action-icon dropdown-toggle"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <a class="dropdown-item" href="#"><i
+                                                                                class="far fa-eye me-2"></i>상세보기</a>
+                                                                    
+                                                                </div>
+                                                            </td>   
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="tab-pane" id="messages">
+                                                <table class="table table-stripped table-hover">
+                                                    <thead class="thead-light">
+                                                        <tr align="center">
+                                                            <th>작성자이름</th>
+                                                            <th>문의카테고리</th>
+                                                            <th>문의제목</th>
+                                                            <th>문의일자</th>
+                                                            <th class="text-right">상세</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr align="center">
+                                                            <td>
+                                                                <h2 class="table-avatar">
+                                                                    <a href="profile.html">
+                                                                        <!-- 작성자 사진-->
+                                                                        <img class="avatar avatar-sm me-2 avatar-img rounded-circle"
+                                                                            src="#" 
+                                                                            alt="User Image">작성자이름
+                                                                    </a>
+                                                                </h2>
+                                                            </td>
+                                                            <td>달고나꽃</td>
+                                                            <td>2023-12-30</td>
+                                                            <td>지금까지 이런 맛은 없었다?</td>
+                                                            <td class="text-right">
+                                                                <div class="dropdown dropdown-action">
+                                                                    <a href="#" class="action-icon dropdown-toggle"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <a class="dropdown-item" href="#"><i
+                                                                                class="far fa-eye me-2"></i>상세보기</a>
+                                                                    
+                                                                </div>
+                                                            </td>   
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../resources/js/jquery-3.6.0.min.js"></script>
+<script src="../../resources/js/bootstrap.bundle.min.js"></script>
+<script src="../../resources/js/feather.min.js"></script>
+<script src="../../resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../resources/plugins/apexchart/apexcharts.min.js"></script>
+<script src="../../resources/plugins/apexchart/chart-data.js"></script>
+<script src="../../resources/js/script.js"></script>
+</body>
+</html>
