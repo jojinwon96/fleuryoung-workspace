@@ -12,6 +12,10 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
  
+ <!-- 스피너 -->
+ <link href="${pageContext.request.contextPath}/resources/css/jquery-ui.css" rel="stylesheet">
+
+  
  <style>
         .yellow-color {
             color: rgb(238, 238, 6);
@@ -87,7 +91,7 @@
                     </div>
                     <div class="row" style="margin-top: 5px;">
                         <div class="col" style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
-                        <div class="col"><img src="images/express-delivery.png"
+                        <div class="col"><img src="${pageContext.request.contextPath}/resources/image/icon/express-delivery.png"
                                 style="width: 25px; height: 25px; margin-right: -100px; margin-top: -10px;"></div>
                         <div class="col" style="font-size: 13px; font-weight: bolder; color: rgb(248, 178, 188);">당일배송
                         </div>
@@ -99,28 +103,72 @@
                     <div class="mt-4 row">
                         <select class="option-select form-select form-select-sm --bs-danger-bg-subtle"
                             aria-label=".form-select-sm example">
-                            <option selected>옵션1</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option selected>색상</option>
+                            <option value="1">레드</option>
+                            <option value="2">블루</option>
+                            <option value="3">옐로우</option>
                         </select>
                     </div>
                     
+                    <br>
+                    
+                    <!-- 옵션 추가시 나올 div -->
+                    <div class="container text-center" style="background-color: #f5f5f5; width: 437px; margin-left: -12px">
+					  <div class="row">
+					    <div style="font-weight: bolder;" align="left" class="py-2 col">
+					     	옐로우
+					    </div>
+					    <div align="right" class="col" >
+							<img class="option-delete" src="${pageContext.request.contextPath}/resources/image/close.png" style="cursor: pointer; width: 15px; height: 15px">
+					    </div>
+					  </div>
+					  <div class="row">
+					    <div align="left" class="col">
+							<div class="py-2 row">
+								<div class="col">
+									<input style="width: 60px" type="text" name="pop_out" value="0" readonly="readonly" style="text-align:right;"/>
+								</div>
+								<div style="margin-left: -74px" class="col">
+									<div class="row">
+										<button style="border: 1px solid; width: 15px; height: 15px" type ="button" onclick="fnCalCount('p',this);"></button>
+									</div>
+									<div class="row">
+										<button style="border: 1px solid; width: 15px; height: 15px" type="button" onclick="fnCalCount('m', this);"></button>
+									</div>
+								</div>
+							</div>					    
+						</div>
+					    <div align="right" class="py-2 col">
+					      	해당 옵션 가격
+					    </div>
+					  </div>
+					  
+					</div>
 					
 					<script>
 						$(function() {
 							$(".option-select").on("change", function() {
-								let tmp = $(".option-select option:selected").val();
+								let tmp = $(".option-select option:selected").html();
 								console.log(tmp);
-								
 							})
 							
+							let $input = $(ths).parents("td").find("input[name='pop_out']");
+							let tCount = Number($input.val());
+							let tEqCount = Number($(ths).parents("tr").find("td.bseq_ea").html());
+						    
+						    if(type=='p'){
+						        if(tCount < tEqCount) 
+						        	$input.val(Number(tCount)+1);
+						        
+						    }else{
+						        if(tCount >0) 
+						        	$input.val(Number(tCount)-1);    
+						        }
 						})
-						
 					</script>
 					
                     <!-- <div class="mt-4 row">옵션 내용</div> -->
-
+			
                     <div class="mt-5 row">
                         <div class="col"
                             style="margin-left: -60px; padding-top: 10px; font-weight: bolder; font-size: 14px;">총 주문금액
@@ -144,22 +192,22 @@
             <!-- Nav tabs -->
             <ul style="margin-top: 56px;" class="nav nav-tabs" id="myTab" role="tablist">
                 <li class=" nav-item" role="presentation">
-                    <button style="background-color: white; width: 267px; color: black;"
+                    <button style="background-color: white; width: 200px; color: black;"
                         class="pd1 pd-mv-btn nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
                         type="button" role="tab" aria-controls="home" aria-selected="true">상품상세정보</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 258px; color: black;" class="pd2 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 200px; color: black;" class="pd2 pd-mv-btn nav-link"
                         id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
                         aria-controls="profile" aria-selected="false">리뷰</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 258px; color: black;" class="pd3 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 200px; color: black;" class="pd3 pd-mv-btn nav-link"
                         id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab"
                         aria-controls="messages" aria-selected="false">문의</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 267px; color: black;" class="pd4 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 200px; color: black;" class="pd4 pd-mv-btn nav-link"
                         id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab"
                         aria-controls="settings" aria-selected="false">교환 및 반품안내</button>
                 </li>
@@ -341,5 +389,6 @@
         <br>
     </div>
 	</div>  
+	
 </body>
 </html>
