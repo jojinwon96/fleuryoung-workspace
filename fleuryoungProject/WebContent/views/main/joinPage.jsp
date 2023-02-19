@@ -68,7 +68,7 @@ label {
 	line-height: 37px;
 }
 
-#idArea, #pwdArea1, #pwdArea2 {
+#idArea, #pwdArea1, #pwdArea2, #birthDateArea, #genderArea, #nameArea {
 	width: 100%;
 	height: 80px;
 	padding-top: 30px;
@@ -207,7 +207,7 @@ ul.join_box {
 	padding-top: 30px;
 }
 
-#pwdInput, #pwdInputCheck, #emailInput, #phoneInput {
+#pwdInput, #pwdInputCheck, #emailInput, #phoneInput, #nameInput {
 	width: 50%;
 	display: inline-block;
 }
@@ -250,6 +250,14 @@ button {
 #pwdArea1>::placeholder {
 	font-size: 0.5em;
 }
+#birthDateInput{
+    margin-top: 6px;
+}
+
+ #male, #female{
+    margin-top: 12px;
+    margin-left: 7px;
+ }
 </style>
 
 
@@ -307,9 +315,9 @@ button {
 
 		<div id="infoDaejang">
 
-
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div>
-				<form action="">
+				<form  id = "enroll-form" action="<%= contextPath %>/insert.me" method="post">
 					<div id="info">
 
 						<div id="infoHeader">
@@ -338,16 +346,26 @@ button {
 								placeholder="비밀번호를 다시 입력해주세요" required>
 						</div>
 
-
+						
+						
+						
 						<div id="emailArea">
 							<label for="email">이메일</label> <input type="email"
-								class="form-control" id="emailInput"> <br> <a
-								href=""><button type="button"
-									class="btn btn-outline-success" id="emailButton">이메일
-									인증하기</button></a>
+							class="form-control" id="emailInput"> <br> <a
+							href=""><button type="button"
+							class="btn btn-outline-success" id="emailButton">이메일
+							인증하기</button></a>
+						</div>
+
+						
+						
+						<div id="nameArea">
+							<label for="id"><small>*</small>이름</label>
+							<input type="text" class="form-control" id="nameInput"  required>
 						</div>
 
 
+						
 						<div id="phoneArea">
 							<label for="phone">휴대폰번호</label> <input type="phone"
 								class="form-control" id="phoneInput"
@@ -356,6 +374,7 @@ button {
 									인증하기</button></a>
 						</div>
 
+						
 
 						<div id="addressArea">
 							<label for="address" id="addressLabel">주소</label>
@@ -371,6 +390,25 @@ button {
 							</div>
 
 						</div>
+						
+
+						<div id="birthDateArea">
+							<label for= "birthDate">생년월일</label>
+							<p><input type="date" id="birthDateInput" value="2000-01-01" min="1900-01-01" max="2022-01-01"></p>
+						</div>
+		
+						<div id="genderArea">
+							<label for= "birthDate">성별</label>
+							<!-- <select name="job" id="gender">
+								<option value="1">남</option>
+								<option value="2">여</option> -->
+								<input type="radio" name="gender" id="male" value="1">남
+								<input type="radio" name="gender" id="female" value="2">여
+							</select>
+						</div>
+
+
+						
 
 
 

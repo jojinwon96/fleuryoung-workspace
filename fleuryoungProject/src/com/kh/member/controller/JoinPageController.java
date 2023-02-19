@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.vo.Member;
+
 /**
  * Servlet implementation class JoinPageController
  */
@@ -28,9 +30,55 @@ public class JoinPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
-		view.forward(request, response);
-	}
+				request.setCharacterEncoding("UTF-8");
+				
+				//2) 요청시 전달값 뽑아서 변수 및 객체에 기록하기
+				String userId = request.getParameter("userId"); //"user03"
+				String userPwd = request.getParameter("userPwd"); //"pass03"
+				String userName = request.getParameter("userName"); //"ㅊ은우"
+				String phone = request.getParameter("phone"); //"010-1111" | ""
+				String email = request.getParameter("email"); //"a@a | ""
+				String address = request.getParameter("address"); // "서울시" | ""
+				String[] interestArr = request.getParameterValues("interest"); // ["운동","등산"] | null
+				
+				//String[]  --> Stirng으로 
+				//["운동", "등산"] --> "운동,등산"
+				String interest = "";
+				if(interestArr != null) {
+					interest = String.join(",", interestArr);
+				}
+				
+				// 기본생성자로 생성 한 후에 setter 메소드 이용해서 담기 => 담으려고 하는게 소량일 때
+				// 매개변수 생성자를 이용해서 생성과 동시에 담기 => 담으려고 하는게 많을 때 유용한 방법
+				
+				Member m = new Member(userId, userPwd, userName, phone, email, address, interest);
+				
+				
+				//3) 요청처리(db에 sql문 실행) => 서비스 메소드 호출 및 결과받기
+				int result = new MemberService().insertMember(m);
+				
+				//4) 처리결과를 가지고 사용자가 보게 될 응답 뷰 지정 후 포워딩 or url 재요청
+				if(result>0) {
+					// 세션활용
+					HttpSession session = request.getSession();
+					session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다");
+					
+					//성공 => index 페이지 => /jsp url 재요청 방식!
+					response.sendRedirect(request.getContextPath());
+					
+				}else {
+					//실패 => 에러문구가 보여지는 에러페이지
+					request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
+					RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+					view.forward(request, response);
+				}
+				
+				
+				
+			}
+//		RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
+//		view.forward(request, response);
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

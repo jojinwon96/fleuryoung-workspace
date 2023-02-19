@@ -73,6 +73,42 @@ public class MemberDao {
 		return member;
 	}
 	
+	public int insertMember(Connection conn, Member m) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql문
+			
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPw());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getMemName());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setInt(6, m.getPostal());
+			pstmt.setString(7, m.getStreet());
+			pstmt.setString(8, m.getAddress());
+			pstmt.setDate(9, m.getMemBirthDate());
+			pstmt.setInt(10, m.getGender());
+			
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+		
+	}
+	
 	
 	
 	
