@@ -36,6 +36,7 @@ public class LatestProductController extends HttpServlet {
 	
 		ArrayList<Product> list =  new ProductService().selectLatestProduct();
 		
+		request.setAttribute("title", "최신순");
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
 		

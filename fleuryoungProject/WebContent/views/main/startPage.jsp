@@ -4,6 +4,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
+
+	String title = (String)request.getAttribute("title");
 %>
 <!DOCTYPE html>
 <html>
@@ -106,17 +108,29 @@ h5 {
 
 		<!-- 드롭다운 -->
 
-
-		<div align="right" class="container px-4 px-lg-5 mt-5">
-			<select style="width: 200px" class="form-select" 
-			        id="orderSelect" name= orderSelect
-				aria-label="Default select example">
-				<option selected>선택하기</option>
-				<option value="1">최신순</option>
-				<option value="2">판매순</option>
-				<option value="3">리뷰순</option>
-			</select>
+		<div class="container text-center">
+		  <div class="row">
+		    <div class="col">
+		    	<div align="left" class="container px-4 px-lg-5 mt-5">
+		      		<h3><%=title%></h3> 
+		      	</div>
+		    </div>
+		    <div class="col">
+		      <div align="right" class="container px-4 px-lg-5 mt-5">
+				<select style="width: 200px" class="form-select" 
+				        id="orderSelect" name= orderSelect
+					aria-label="Default select example">
+					<option selected>선택하기</option>
+					<option value="1">최신순</option>
+					<option value="2">판매순</option>
+					<option value="3">리뷰순</option>
+				</select>
+				</div>
+		    </div>
+		  </div>
 		</div>
+		
+		
 		<script>
 			$(function(){
 				$("#orderSelect").on("change", function(){

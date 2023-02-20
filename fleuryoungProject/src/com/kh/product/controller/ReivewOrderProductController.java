@@ -35,6 +35,7 @@ public class ReivewOrderProductController extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<Product> list = new ProductService().selectReviewOrderProduct();
 
+		request.setAttribute("title", "리뷰순");
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
 		

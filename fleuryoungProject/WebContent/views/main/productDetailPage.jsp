@@ -20,6 +20,22 @@
         .yellow-color {
             color: rgb(238, 238, 6);
         }
+        
+        .add-option{
+        	margin-top: 5px;
+        }
+        
+        .minus,
+        .plus {
+        	margin-bottom: 4px;
+        	line-height: 20px;
+        }
+        
+        .inp{
+        	width: 50px;
+        	height: 35px;
+        }
+        
 </style>
     
 </head>
@@ -102,7 +118,7 @@
                     </div>
                     <div class="mt-4 row">
                         <select class="option-select form-select form-select-sm --bs-danger-bg-subtle"
-                            aria-label=".form-select-sm example">
+                            aria-label=".form-select-sm example" id="selectBox" name="selectBox">
                             <option selected>색상</option>
                             <option value="1">레드</option>
                             <option value="2">블루</option>
@@ -111,9 +127,10 @@
                     </div>
                     
                     <br>
+                    <div class="connect"></div>
                     
                     <!-- 옵션 추가시 나올 div -->
-                    <div class="container text-center" style="background-color: #f5f5f5; width: 437px; margin-left: -12px">
+                    <div class="add-option container text-center" style="background-color: #f5f5f5; width: 437px; margin-left: -12px; display: none">
 					  <div class="row">
 					    <div style="font-weight: bolder;" align="left" class="py-2 col">
 					     	옐로우
@@ -123,47 +140,72 @@
 					    </div>
 					  </div>
 					  <div class="row">
-					    <div align="left" class="col">
-							<div class="py-2 row">
-								<div class="col">
-									<input style="width: 60px" type="text" name="pop_out" value="0" readonly="readonly" style="text-align:right;"/>
-								</div>
-								<div style="margin-left: -74px" class="col">
-									<div class="row">
-										<button style="border: 1px solid; width: 15px; height: 15px" type ="button" onclick="fnCalCount('p',this);"></button>
-									</div>
-									<div class="row">
-										<button style="border: 1px solid; width: 15px; height: 15px" type="button" onclick="fnCalCount('m', this);"></button>
-									</div>
-								</div>
-							</div>					    
-						</div>
-					    <div align="right" class="py-2 col">
-					      	해당 옵션 가격
-					    </div>
-					  </div>
 					  
+					  	<div align="left" class="col">
+					  		<div class="count-wrap _count">
+						  		<button type="button" class="minus btn btn btn-light"><img src="${pageContext.request.contextPath}/resources/image/icon/minus.png"></button>
+  							    <input type="text" class="inp" value="1" />
+							    <button type="button" class="plus btn btn btn-light"><img src="${pageContext.request.contextPath}/resources/image/icon/plus.png"></button>
+							</div>
+					  	</div>
+					  	
+					  	<div class="col">
+					  		<div align="right" class="py-2 col">해당 옵션 가격</div>
+					  	</div>
+					  </div>
 					</div>
 					
 					<script>
 						$(function() {
-							$(".option-select").on("change", function() {
-								let tmp = $(".option-select option:selected").html();
-								console.log(tmp);
-							})
+							console.log($("#selectBox option:not(:selected)").length);		
+						})
+						
+						$(document).on("change", "#selectBox", function () {
+							console.log($("#selectBox option:not(:selected)").length);	
 							
-							let $input = $(ths).parents("td").find("input[name='pop_out']");
-							let tCount = Number($input.val());
-							let tEqCount = Number($(ths).parents("tr").find("td.bseq_ea").html());
-						    
-						    if(type=='p'){
-						        if(tCount < tEqCount) 
-						        	$input.val(Number(tCount)+1);
-						        
-						    }else{
-						        if(tCount >0) 
-						        	$input.val(Number(tCount)-1);    
-						        }
+							$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">옐로우</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">해당 옵션 가격</div></div></div></div>");
+							
+							$('._count :button').on({
+							    'click' : function(e){
+							        e.preventDefault();
+							        let $count = $(this).parent('._count').find('.inp');
+							        let now = parseInt($count.val());
+							        let min = 1;
+							        let max = 999;
+							        let num = now;
+							        if($(this).hasClass('minus')){
+							            var type = 'm';
+							        }else{
+							            var type = 'p';
+							        }
+							        if(type=='m'){
+							            if(now>min){
+							                num = now - 1;
+							            }
+							        }else{
+							            if(now<max){
+							                num = now + 1;
+							            }
+							        }
+							        if(num != now){
+							            $count.val(num);
+							        }
+							    }
+							});
+						});
+					
+						$(document).on(function () {
+							// 옵션 선택시 이벤트
+							  $('#selectBox').change(function() {
+								 console.log("ok");
+							    let result = $('#selectBox option:selected').val();
+							    //if (result == '2') {
+							    //  $('.add-option').show();
+							    //} else {
+							     // $('.add-option').hide();
+							    //}
+							 }); 
+							
 						})
 					</script>
 					

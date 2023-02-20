@@ -35,6 +35,7 @@ public class SaleOrderProductController extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<Product> list = new ProductService().selectSaleOrderProduct();
 
+		request.setAttribute("title", "판매순");
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
 	}
