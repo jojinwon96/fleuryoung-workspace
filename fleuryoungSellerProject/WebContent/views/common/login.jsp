@@ -87,7 +87,6 @@
         </div>
     </div>
     <%}else{ %>
-
         <script>
               window.onload = function(){
                  location.href = "<%= contextPath%>/dashboard.da";

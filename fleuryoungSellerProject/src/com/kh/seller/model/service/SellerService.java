@@ -16,4 +16,14 @@ public class SellerService {
 		
 		return sel;
 	}
+	
+	
+	public int insertSeller(Seller sel) {
+		Connection conn = getConnection();
+		int result = new SellerDao().insertSeller(conn, sel);
+		
+		close(conn);
+		
+		return result;
+	}
 }

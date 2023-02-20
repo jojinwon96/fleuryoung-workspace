@@ -68,4 +68,38 @@ public class SellerDao {
 		}
 		return sel;
 	}
+	
+	public int insertSeller(Connection conn, Seller sel) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertSeller");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sel.getSelId());
+			pstmt.setString(2, sel.getSelPw());
+			pstmt.setString(3, sel.getSelBusinessNo());
+			pstmt.setString(4, sel.getSelStoreName());
+			pstmt.setString(5, sel.getSelName());
+			pstmt.setString(6, sel.getSelEmail());
+			pstmt.setString(7, sel.getSelPhone());
+			pstmt.setString(8, sel.getSelTel());
+			pstmt.setString(9, sel.getSelFax());
+			pstmt.setInt(10, sel.getSelPostal());
+			pstmt.setString(11, sel.getSelStreet());
+			pstmt.setString(12, sel.getSelAddress());
+			pstmt.setString(13, sel.getSelImg());
+			result = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

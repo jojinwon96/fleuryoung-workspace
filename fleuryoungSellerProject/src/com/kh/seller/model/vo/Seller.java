@@ -15,7 +15,7 @@ public class Seller {
 	private String selFax;
 	private int selPostal;
 	private String selStreet;
-	private String selAdress;
+	private String selAddress;
 	private String selImg;
 	private String selStatus;
 	private Date selEnrollDate;
@@ -24,7 +24,7 @@ public class Seller {
 	
 	public Seller(String selId, String selPw, String selBusinessNo, String selStoreName, String selName,
 			String selEmail, String selPhone, String selTel, String selFax, int selPostal, String selStreet,
-			String selAdress, String selImg, String selStatus, Date selEnrollDate) {
+			String selAddress, String selImg, String selStatus, Date selEnrollDate) {
 		this.selId = selId;
 		this.selPw = selPw;
 		this.selBusinessNo = selBusinessNo;
@@ -36,7 +36,7 @@ public class Seller {
 		this.selFax = selFax;
 		this.selPostal = selPostal;
 		this.selStreet = selStreet;
-		this.selAdress = selAdress;
+		this.selAddress = selAddress;
 		this.selImg = selImg;
 		this.selStatus = selStatus;
 		this.selEnrollDate = selEnrollDate;
@@ -130,12 +130,12 @@ public class Seller {
 		this.selStreet = selStreet;
 	}
 
-	public String getSelAdress() {
-		return selAdress;
+	public String getSelAddress() {
+		return selAddress;
 	}
 
-	public void setSelAdress(String selAdress) {
-		this.selAdress = selAdress;
+	public void setSelAddress(String selAddress) {
+		this.selAddress = selAddress;
 	}
 
 	public String getSelImg() {
@@ -167,7 +167,7 @@ public class Seller {
 		return "Seller [selId=" + selId + ", selPw=" + selPw + ", selBusinessNo=" + selBusinessNo + ", selStoreName="
 				+ selStoreName + ", selName=" + selName + ", selEmail=" + selEmail + ", selPhone=" + selPhone
 				+ ", selTel=" + selTel + ", selFax=" + selFax + ", selPostal=" + selPostal + ", selStreet=" + selStreet
-				+ ", selAdress=" + selAdress + ", selImg=" + selImg + ", selStatus=" + selStatus + ", selEnrollDate="
+				+ ", selAdress=" + selAddress + ", selImg=" + selImg + ", selStatus=" + selStatus + ", selEnrollDate="
 				+ selEnrollDate + "]";
 	} 
 }

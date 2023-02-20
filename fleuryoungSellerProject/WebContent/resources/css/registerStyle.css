@@ -50,7 +50,7 @@ line-height: 40px;
 font-size: 0.8em;
 }
 
-#idArea, #pwdArea1, #pwdArea2, #storeNameArea, #registerNoArea{
+ #idArea, #pwdArea1, #pwdArea2, #storeNameArea, #registerNoArea,#registerNoArea3, #faxArea, #telArea{
 width: 100%;
 height: 80px;
 padding-top: 30px;
@@ -114,7 +114,7 @@ width: 100%;
 height: 150px;
 padding-top: 30px;
 }
-#idInput, #pwdInput, #pwdInputCheck, #emailInput, #phoneInput, #storeNameInput, #registerNoInput, #registerNoInput2{
+#fileInput,#idInput, #pwdInput, #pwdInputCheck, #emailInput, #phoneInput, #storeNameInput, #registerNoInput, #registerNoInput2 , #faxInput, #telInput{
 width: 50%;
 display: inline-block;
 }
@@ -126,7 +126,7 @@ input{
 }
 #address1{
 width: 20%;
-margin-bottom: 5px;
+margin-bottom: 15px;
 }
 
 button{

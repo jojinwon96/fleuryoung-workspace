@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
@@ -92,7 +92,7 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="https://i.pinimg.com/736x/26/4c/0e/264c0e20687a67006bce6c7225e59ec2.jpg" alt="">
+                                <img src="<%=loginSeller.getSelImg()%>" alt="">
                                 <span class="status online"></span>
                             </span>
                             <span><%= loginSeller.getSelName() %></span>
@@ -100,7 +100,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#"><i data-feather="user" class="me-1"></i>
                                 마이페이지</a>
-                            <a class="dropdown-item" href="#"><i data-feather="log-out" class="me-1"></i>
+                            <a class="dropdown-item" href="<%= contextPath%>/logout.se"><i data-feather="log-out" class="me-1"></i>
                                 Logout</a>
                         </div>
                     </li>
