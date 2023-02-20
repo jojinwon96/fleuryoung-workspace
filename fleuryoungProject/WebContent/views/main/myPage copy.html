@@ -21,16 +21,6 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-
     <script>
         $(function(){
             $('.subMenu').hide();
@@ -39,6 +29,23 @@
             }).mouseleave(function(){
                 $('.subMenu').stop().slideUp();
             });
+            
+            let items = document.querySelectorAll('.carousel .carousel-item')
+
+            items.forEach((el) => {
+                const minPerSlide = 4
+                let next = el.nextElementSibling
+                for (var i=1; i<minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                    	next = items[0]
+                  	}
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            })
+            
         });
     </script>
     
@@ -195,88 +202,132 @@
         <!-- 준석이형 여기서부터 하시면 되요~ -->
         
         <br><br>
-        <div class="col-lg-3">
-            <div class="hero__categories">
-                <div class="hero__categories__all">
-                    <i class="fa fa-bars"></i>
-                    <span>My Menu</span>
-                </div>
-                <ul>
-                    <li><a href="#">회원정보관리</a></li> <br>
-                    <li><a href="#">주문내역</a></li> <br>
-                    <li><a href="#">장바구니</a></li> <br>
-                    <li><a href="#">관심리스트</a> <br>
-                        <ul class="subMenu">
-                            <li><a href="#">찜한 상품</a></li>
-                            <li><a href="#">찜한 가게</a></li> <br>
-                        </ul>
-                    </li>
-                    <li><a href="#">후기</a> <br>
-                        <ul class="subMenu">
-                            <li><a href="#">구매후기 쓰기</a></li>
-                            <li><a href="#">내가 작성한 후기</a></li> <br>
-                        </ul>
-                    </li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
-            </div>
+        <div id="content-body">
+	        <div class="sidebar">
+	            <div class="hero__categories">
+	                <div class="hero__categories__all">
+	                    <i class="fa fa-bars"></i>
+	                    <span>My Menu</span>
+	                </div>
+	                <ul>
+	                    <li><a href="#">회원정보관리</a></li> <br>
+	                    <li><a href="#">주문내역</a></li> <br>
+	                    <li><a href="#">장바구니</a></li> <br>
+	                    <li><a href="#">관심리스트</a> <br>
+	                        <ul class="subMenu">
+	                            <li><a href="#">찜한 상품</a></li>
+	                            <li><a href="#">찜한 가게</a></li> <br>
+	                        </ul>
+	                    </li>
+	                    <li><a href="#">후기</a> <br>
+	                        <ul class="subMenu">
+	                            <li><a href="#">구매후기 쓰기</a></li>
+	                            <li><a href="#">내가 작성한 후기</a></li> <br>
+	                        </ul>
+	                    </li>
+	                    <li><a href="#">고객센터</a></li>
+	                </ul>
+	            </div>
+	        </div>
+        
+	        <div style="padding-left: 15px; float: left;">
+		        <div class="hero__categories">
+		        	<ul style="width: 800px;">
+		        		<li style="font-weight: bold; font-size: 20px; margin-bottom: 20px;">내 정보</li>
+		        		<li>
+			        		<div class="row">
+			        			<div class="col-sm" style="text-align: center;"><a>POINT <font style="color: rgb(248, 178, 188);">0P</font></a></div>
+			        			<div class="col-sm" style="text-align: center;"><a>COUPON <font style="color: rgb(248, 178, 188);">0장</font></a></div>
+			        			<div class="col-sm" style="text-align: center;"><a>등급 <font style="color: brown;">BRONZE</font></a></div>	
+			        		</div>
+		        		</li>
+		        	</ul>
+		        </div>
+	        </div>
+	        
+	        <div style="padding-left: 15px; float: left;">
+	        	<div class="hero__categories">
+	        		<ul style="width: 800px;">
+	        			<li style="font-weight: bold; font-size: 20px; margin-bottom: 20px;">최근 본 상품</li>
+	        			<li>
+		        			<div class="row mx-auto my-auto justify-content-center">
+						        <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+						            <div class="carousel-inner" role="listbox">
+						                <div class="carousel-item active">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 1</div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="carousel-item">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 2</div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="carousel-item">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 3</div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="carousel-item">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 4</div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="carousel-item">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 5</div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="carousel-item">
+						                    <div class="col-md-3">
+						                        <div class="card">
+						                            <div class="card-img">
+						                                <img src="https://via.placeholder.com/400x400" class="img-fluid">
+						                            </div>
+						                            <div class="card-img-overlay">Slide 6</div>
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
+						                <span class="carousel-control-prev-icon" aria-hidden="true" style="height: 11rem;"></span>
+						            </a>
+						            <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
+						                <span class="carousel-control-next-icon" aria-hidden="true" style="height: 11rem;"></span>
+						            </a>
+						        </div>
+						    </div>
+	        			</li>
+	        		</ul>
+	        	</div>
+	        </div>
+	        
         </div>
-
-         <div class="userForm">
-            <h5>회원정보 관리</h5> <br>
-            
-            <form id="mypage-form" action="<%= contextPath %>/update.me" method="post">
-
-                <table>
-                    <tr>
-                        <td>아이디</td>
-                        <td><input type="text" name="userId" maxlength="12" value = "<%= userId %>" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>현재비밀번호</td>
-                        <td><input type="password" name="userPwd" required></td>
-                    </tr>   
-                    <tr>
-                        <td>변경할 비밀번호</td>
-                        <td><input type="password" name="updatePwd" required></td>
-                    </tr>
-                    <tr>
-                        <td>변경할 비밀번호 확인</td>
-                        <td><input type="password" name="checkPwd" required> <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updatePwdModal">변경하기</button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>이메일</td>
-                        <td><input type="email" name="email" value = "<%= email %>"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>전화번호</td>
-                        <td><input type="text" name="phone" placeholder="- 포함해서 입력" value = "<%= phone %>"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>이름</td>
-                        <td><input type="text" name="userName" maxlength="6" value = "<%= userName %>" required></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>주소</td>
-                        <td><input type="text" name="address" value = "<%= address %>"></td>
-                        <td></td>
-                    </tr>
-                    
-                </table>
-
-               <br><br>
-
-               <div align="center">
-                    <button type="submit" class="btn btn-sm btn-secondary">정보변경</button>
-                    
-                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">회원탈퇴</button>
-                </div>
-         </div>
-    
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>

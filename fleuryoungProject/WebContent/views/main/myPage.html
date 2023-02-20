@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Fleuryoung</title>
@@ -11,6 +10,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script>
+        $(function(){
+            $('.subMenu').hide();
+            $('.hero__categories>ul>li').mouseenter(function(){
+                $(this).find('.subMenu').slideDown();
+            }).mouseleave(function(){
+                $('.subMenu').stop().slideUp();
+            });
+        });
+    </script>
+    
 </head>
 
 <body class style="padding-right: 0px;">
@@ -19,22 +50,20 @@
         <div>
             <div class="header-top">
                 <div class="header-top-top">
-
+                    
                     <a class="login">로그아웃</a>
                     <div class="bar"></div>
                     <a href="../board/notice.html" class="board">고객센터</a>
                 </div>
                 <div class="header-top-bottom">
                     <div class="header-top-bottom-left">
-                        <a href="../main/mainPage.html"><img src="../../resources/image/Fleuryoung.png"
-                                class="logo"></a>
+                        <a href="../main/mainPage.html"><img src="../../resources/image/Fleuryoung.png" class="logo"></a>
                     </div>
 
                     <div class="header-top-bottom-mid">
                         <div id="input-panel" class="default-input-panel">
                             <form id="todo-form" class="form">
-                                <input type="text" id="main-search" placeholder="검색어를 입력해주세요" required
-                                    class="main-input">
+                                <input type="text" id="main-search" placeholder="검색어를 입력해주세요" required class="main-input">
                             </form>
                             <button type="submit" class="main-input-btn" form="todo-form"></button>
                         </div>
@@ -58,13 +87,11 @@
                     <div class="header-top-bottom-right">
                         <div class="cartMyPage-panel">
                             <div class="cart-panel">
-                                <a href="../main/"><img src="../../resources/image/bookmark.png"
-                                        class="bookmark-btn"></a>
+                                <a href="../main/"><img src="../../resources/image/bookmark.png" class="bookmark-btn"></a>
                             </div>
                             <div class="cart-panel">
                                 <!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
-                                <a href="../main/cartPage.html"><img src="../../resources/image/cart.png"
-                                        class="cart-btn"></a>
+                                <a href="../main/cartPage.html"><img src="../../resources/image/cart.png" class="cart-btn"></a>
                             </div>
                             <div class="myPage-panel">
                                 <button class="mypage-btn"></button>
@@ -106,35 +133,24 @@
                                 <li><a href="#"><span>10</span>목화</a></li>
                             </ul>
                         </div>
-                        <span class="downButton"><img src="../../resources/image/downButton.png"
-                                style="width: 15px;"></span>
+                        <span class="downButton"><img src="../../resources/image/downButton.png" style="width: 15px;"></span>
 
                     </ul>
                 </div>
                 <div class="header-nav-hidden-panel" style="display: none;">
                     <div class="header-type-panel">
                         <ul>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>바구니</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>꽃다발</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>주문제작</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>축하화환</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>근조화환</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>동/서양란</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>수경식물</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>생화</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>반려식물</span></a></li>
-                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a
-                                    href="#"><span>조화</span></a></li>
-
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>바구니</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>꽃다발</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>주문제작</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>축하화환</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>근조화환</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>동/서양란</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>수경식물</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>생화</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>반려식물</span></a></li>
+                            <li><img src="../../resources/image/flower-bouquet.png" alt=""><a href="#"><span>조화</span></a></li>
+                            
                             <!-- 꽃바구니 -->
                             <!-- 꽃다발 -->
                             <!-- 주문제작 -->
@@ -148,45 +164,48 @@
                         </ul>
                     </div>
                 </div>
-        </div>
-        </header>
-    </div>
-
-    <div class="rank-list-panel default-rank-list-panel" style="display: none;">
-        <div class="rank-list-title">
-            <h3 class="rank-title">실시간 인기 검색어</h3>
-            <div class="rank-list">
-                <ul>
-                    <!-- 자바에서 -->
-                    <li><a href="#"><span class="number">1</span><span>장미꽃</span></a></li>
-                    <li><a href="#"><span class="number">2</span><span>나팔꽃</span></a></li>
-                    <li><a href="#"><span class="number">3</span><span>무궁화</span></a></li>
-                    <li><a href="#"><span class="number">4</span><span>튤립</span></a></li>
-                    <li><a href="#"><span class="number">5</span><span>안개꽃</span></a></li>
-                    <li><a href="#"><span class="number">6</span><span>꽃다발</span></a></li>
-                    <li><a href="#"><span class="number">7</span><span>카네이션</span></a></li>
-                    <li><a href="#"><span class="number">8</span><span>들꽃</span></a></li>
-                    <li><a href="#"><span class="number">9</span><span>국화꽃</span></a></li>
-                    <li><a href="#"><span class="number">10</span><span>목화</span></a></li>
-                </ul>
             </div>
-            <div class="rank-close-panel">
-                <img src="../../resources/image/close.png" class="rank-close-btn">
+            </header>
+        </div>
+
+        <div class="rank-list-panel default-rank-list-panel" style="display: none;">
+            <div class="rank-list-title">
+                <h3 class="rank-title">실시간 인기 검색어</h3>
+                <div class="rank-list">
+                    <ul>
+                        <!-- 자바에서 -->
+                        <li><a href="#"><span class="number">1</span><span>장미꽃</span></a></li>
+                        <li><a href="#"><span class="number">2</span><span>나팔꽃</span></a></li>
+                        <li><a href="#"><span class="number">3</span><span>무궁화</span></a></li>
+                        <li><a href="#"><span class="number">4</span><span>튤립</span></a></li>
+                        <li><a href="#"><span class="number">5</span><span>안개꽃</span></a></li>
+                        <li><a href="#"><span class="number">6</span><span>꽃다발</span></a></li>
+                        <li><a href="#"><span class="number">7</span><span>카네이션</span></a></li>
+                        <li><a href="#"><span class="number">8</span><span>들꽃</span></a></li>
+                        <li><a href="#"><span class="number">9</span><span>국화꽃</span></a></li>
+                        <li><a href="#"><span class="number">10</span><span>목화</span></a></li>
+                    </ul>
+                </div>
+                <div class="rank-close-panel">
+                    <img src="../../resources/image/close.png" class="rank-close-btn">
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- 준석이형 여기서부터 하시면 되요~ -->
-
-
-    <div class="myPage-wrap">
-        <div class="myPage-wrap-panel">
-            <div class="sideBar">
-                <div class="my-menu">MY MENU</div>
-                <nav>
-                    <ul id="mainMenu">
+        
+        <!-- 준석이형 여기서부터 하시면 되요~ -->
+        
+        <br><br>
+        
+        <div id="content-body">
+            <div class="sidebar">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>My Menu</span>
+                    </div>
+                    <ul>
                         <li><a href="#">회원정보관리</a></li> <br>
-                        <li><a href="#">주문내역</a> </li> <br>
+                        <li><a href="#">주문내역</a></li> <br>
                         <li><a href="#">장바구니</a></li> <br>
                         <li><a href="#">관심리스트</a> <br>
                             <ul class="subMenu">
@@ -200,31 +219,73 @@
                                 <li><a href="#">내가 작성한 후기</a></li> <br>
                             </ul>
                         </li>
-                        <li><a href="#">고객센터</a> <br>
-                        </li>
+                        <li><a href="#">고객센터</a></li>
                     </ul>
-                </nav>
+                </div>
             </div>
-            <div class="main_1">
-                <h2>메인</h2>
+            
+            <div class="content"> 
+                <div id="form">
+                    <div class="userForm" align="center">
+                        <h5>회원정보 관리</h5> <br>
+                        
+                        <form id="mypage-form" action="<%= contextPath %>/update.me" method="post">
+            
+                            <table>
+                                <tr>
+                                    <td>아이디</td>
+                                    <td><input type="text" name="userId" maxlength="12" value = "<%= userId %>" readonly></td>
+                                </tr>
+                                <tr>
+                                    <td>현재비밀번호</td>
+                                    <td><input type="password" name="userPwd" required></td>
+                                </tr>   
+                                <tr>
+                                    <td>변경할 비밀번호</td>
+                                    <td><input type="password" name="updatePwd" required></td>
+                                </tr>
+                                <tr>
+                                    <td>변경할 비밀번호 확인</td>
+                                    <td><input type="password" name="checkPwd" required> <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updatePwdModal">변경하기</button></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>이메일</td>
+                                    <td><input type="email" name="email" value = "<%= email %>"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>전화번호</td>
+                                    <td><input type="text" name="phone" placeholder="- 포함해서 입력" value = "<%= phone %>"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>이름</td>
+                                    <td><input type="text" name="userName" maxlength="6" value = "<%= userName %>" required></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>주소</td>
+                                    <td><input type="text" name="address" value = "<%= address %>"></td>
+                                    <td></td>
+                                </tr>
+                                
+                            </table>
+            
+                           <br><br>
+            
+                           <div align="center">
+                                <button type="submit" class="btn btn-sm btn-secondary">정보변경</button>
+                                
+                                <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">회원탈퇴</button>
+                            </div>
+                     </div>
+                </div>
             </div>
+
+
         </div>
-
-    </div>
-
-
-
-
-    <script>
-        $(function () {
-            $('.subMenu').hide();
-            $('#mainMenu>li').mouseenter(function () {
-                $(this).find('.subMenu').slideDown();
-            }).mouseleave(function () {
-                $('.subMenu').stop().slideUp();
-            });
-        });
-    </script>
+    
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
