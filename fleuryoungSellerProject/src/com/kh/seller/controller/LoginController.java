@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			session.setAttribute("alertMsg", "로그인에 성공하였습니다.");
 			session.setAttribute("loginSeller", loginSeller);
-			request.getRequestDispatcher("views/common/dashboard.jsp").forward(request,response);
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 

@@ -1,43 +1,35 @@
 package com.kh.seller.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.seller.model.service.SellerService;
+import com.kh.seller.model.vo.Seller;
 
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation class DashboardController
  */
-@WebServlet("/register.se")
-public class RegisterController extends HttpServlet {
+@WebServlet("/dashboard.da")
+public class DashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public DashboardController() {
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String selId = request.getParameter("selId");
-		String selPwd = request.getParameter("selPwd");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String storeName = request.getParameter("storeName");
-		String selName = request.getParameter("selName");
-		String register = request.getParameter("register");
-		String poster = request.getParameter("poster");
-		String street = request.getParameter("street");
-		String address = request.getParameter("address");
-
+		System.out.println("오예");
+		request.getRequestDispatcher("views/common/dashboard.jsp").forward(request, response);
 	}
 
 	/**

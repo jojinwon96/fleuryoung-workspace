@@ -59,7 +59,6 @@ public class SellerDao {
 								,rset.getDate("SEL_ENROLL_DATE")
 						);
 			}
-			System.out.println(sel);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
