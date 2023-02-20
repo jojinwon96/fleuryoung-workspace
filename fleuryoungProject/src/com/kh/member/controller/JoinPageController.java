@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
@@ -17,6 +21,9 @@ import com.kh.member.model.vo.Member;
 @WebServlet("/joinpage.me")
 public class JoinPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,26 +39,35 @@ public class JoinPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
 				
-				//2) 요청시 전달값 뽑아서 변수 및 객체에 기록하기
-				String userId = request.getParameter("userId"); //"user03"
-				String userPwd = request.getParameter("userPwd"); //"pass03"
-				String userName = request.getParameter("userName"); //"ㅊ은우"
-				String phone = request.getParameter("phone"); //"010-1111" | ""
-				String email = request.getParameter("email"); //"a@a | ""
-				String address = request.getParameter("address"); // "서울시" | ""
-				String[] interestArr = request.getParameterValues("interest"); // ["운동","등산"] | null
 				
-				//String[]  --> Stirng으로 
-				//["운동", "등산"] --> "운동,등산"
-				String interest = "";
-				if(interestArr != null) {
-					interest = String.join(",", interestArr);
-				}
+				String memId = request.getParameter("memId"); 
+				String memPw = request.getParameter("memPw"); 
+				String memName = request.getParameter("memName"); 
+				String memEmail = request.getParameter("memEmail");
+				String memPhone = request.getParameter("memPhone");
+				int memPostal = Integer.parseInt(request.getParameter("memPostal"));
+				String memStreet = request.getParameter("memStreet");
+				String memAddress = request.getParameter("memAddress");
+				String memBirthdate = request.getParameter("memBirthDate");
 				
-				// 기본생성자로 생성 한 후에 setter 메소드 이용해서 담기 => 담으려고 하는게 소량일 때
-				// 매개변수 생성자를 이용해서 생성과 동시에 담기 => 담으려고 하는게 많을 때 유용한 방법
 				
-				Member m = new Member(userId, userPwd, userName, phone, email, address, interest);
+				//sql로 import? util로 import?
+				/*
+				String dateString = request.getParameter("memBirthDate");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM//dd");
+				Date memBirthdate = (Date) sdf.parse(dateString);
+				*/
+				Date memBirthDate = request.getp
+				
+				
+						
+				int memGender = Integer.parseInt(request.getParameter("memGender"));
+				
+				
+				
+				
+				Member m = new Member(memId, memPw, memName, memEmail, memPhone, memPostal, memStreet, 
+						memAddress, memBirthdate,  memGender); 
 				
 				
 				//3) 요청처리(db에 sql문 실행) => 서비스 메소드 호출 및 결과받기
