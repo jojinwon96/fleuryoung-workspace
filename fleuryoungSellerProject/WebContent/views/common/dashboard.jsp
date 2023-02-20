@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="shortcut icon" href="resources/img/logo.png">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
 
@@ -23,22 +27,18 @@
                                     <i class="fas fa-dollar-sign"></i>
                                 </span>
                                 <div class="dash-count">
-                                    
-                                    <span class="dash-title">신규주문
-                                        <span class="dash-counts" align="right">
-                                        129 건
-                                        </span>
-                                    </span>
-                                    <br><br>
-                                    <span class="dash-title">결제대기
-                                        <span class="dash-counts" align="right">
-                                        129 건
-                                        </span>
-                                    </span>
-                                     <br>
+                                    <div class="dash-title">Amount Due</div>
+                                    <div class="dash-counts">
+                                        <p>1,642</p>
+                                    </div>
                                 </div>
                             </div>
-                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"></p>
+                            <div class="progress progress-sm mt-3">
+                                <div class="progress-bar bg-5" role="progressbar" style="width: 75%"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                class="fas fa-arrow-down me-1"></i>1.15%</span> since last week</p>
                         </div>
                     </div>
                 </div>
@@ -49,18 +49,19 @@
                                 <span class="dash-widget-icon bg-2">
                                     <i class="fas fa-users"></i>
                                 </span>
-                                <br><br>
                                 <div class="dash-count">
-                                    <span class="dash-title">구독자수
-                                        <span class="dash-counts" align="right">
-                                            129 명
-                                        </span>
-                                    </span>
-                                    <br>
+                                    <div class="dash-title">Customers</div>
+                                    <div class="dash-counts">
+                                        <p>3,642</p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"></p>
+                            <div class="progress progress-sm mt-3">
+                                <div class="progress-bar bg-6" role="progressbar" style="width: 65%"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i
+                                class="fas fa-arrow-up me-1"></i>2.37%</span> since last week</p>
                         </div>
                     </div>
                 </div>
@@ -69,32 +70,21 @@
                         <div class="card-body">
                             <div class="dash-widget-header">
                                 <span class="dash-widget-icon bg-3">
-                                    <i class="fas fa-truck"></i>
+                                    <i class="fas fa-file-alt"></i>
                                 </span>
                                 <div class="dash-count">
-                                    <span class="dash-title">취소요청
-                                        <span class="dash-counts" align="right">
-                                            129 명
-                                        </span>
-                                    </span>
-                                     <br>
-                                    <span class="dash-title">교환요청
-                                        <span class="dash-counts" align="right">
-                                            129 명
-                                        </span>
-                                    </span>
-                                    <br>
-                                    <span class="dash-title">반품요청
-                                        <span class="dash-counts" align="right">
-                                            129 명
-                                        </span>
-                                    </span>
-                                  
-                                    
+                                    <div class="dash-title">Invoices</div>
+                                    <div class="dash-counts">
+                                        <p>1,041</p>
+                                    </div>
                                 </div>
                             </div>
-    
-                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"></p>
+                            <div class="progress progress-sm mt-3">
+                                <div class="progress-bar bg-7" role="progressbar" style="width: 85%"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-success me-1"><i
+                                        class="fas fa-arrow-up me-1"></i>3.77%</span> since last week</p>
                         </div>
                     </div>
                 </div>
@@ -105,16 +95,19 @@
                                 <span class="dash-widget-icon bg-4">
                                     <i class="far fa-file"></i>
                                 </span>
-                                <br><br>
                                 <div class="dash-count">
-                                    <div class="dash-title">오늘매출</div>
+                                    <div class="dash-title">Estimates</div>
                                     <div class="dash-counts">
-                                        <p>2,201,000 원</p>
+                                        <p>2,150</p>
                                     </div>
                                 </div>
-                                <br><br>
                             </div>
-                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"></p>
+                            <div class="progress progress-sm mt-3">
+                                <div class="progress-bar bg-8" role="progressbar" style="width: 45%"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-muted mt-3 mb-0"><span class="text-danger me-1"><i
+                                        class="fas fa-arrow-down me-1"></i>8.68%</span> since last week</p>
                         </div>
                     </div>
                 </div>

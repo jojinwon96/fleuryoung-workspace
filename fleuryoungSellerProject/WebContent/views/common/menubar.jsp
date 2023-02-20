@@ -21,98 +21,32 @@
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
-    <% if(alertMsg != null){ %>
-        <script>
-            alert("<%= alertMsg %>");
-        </script>
-    <% session.removeAttribute("alertMsg"); %>
-    <%} %>
-  <% if(loginSeller == null) { %>
-  <div class="main-wrapper login-body">
-        <div class="login-wrapper">
-            <div class="container">
-                <img class="img-fluid logo-dark mb-2" src="resources/img/Fleuryoung.png" alt="Logo">
-                <div class="loginbox" style="width: 450px">
-                    <div class="login-right"style="width: 450px">
-                        <div class="login-right-wrap"style="width: 450px">
-                            <br>
-                            <p class="account-subtitle">Fleuryoung에 오신것을 환영합니다!</p>
-                            <form action="<%= contextPath %>/login.se"method="post">
-                                <div class="form-group">
-                                    <label class="form-control-label">ID</label>
-                                    <input type="text" class="form-control" name="selId"required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">PASSWORD</label>
-                                    <div class="pass-group">
-                                        <input type="password" class="form-control pass-input"name="selPw" required>
-                                        <span class="fas fa-eye toggle-password"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="cb1">
-                                                <label class="custom-control-label" for="cb1">아이디 저장</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <a class="forgot-link" href="#">비밀번호 찾기</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-lg btn-block btn-primary w-100" type="submit">로그인</button>
-                                <div class="login-or">
-                                    <span class="or-line"></span>
-                                    <span class="span-or">or</span>
-                                </div>
-								<!--  간편로그인? -->
-                                <!-- <div class="social-login mb-3">
-                                    <span>Login with</span>
-                                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a>
-                                    </div> -->
 
-                                <div class="text-center dont-have"> 아직 계정이 없으신가요? <a style="cursor: pointer;" onclick="register();"> 회원가입</a>
-									<script>
-							            function register(){
-							                location.href = "<%= contextPath %>/registerForm.se";
-							            }
-					            	</script>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	<% } else{ %>
-	<!-- 대시보드로 가는 코드 -->
-    
-
+ 
         <div class="main-wrapper">
             <div class="header header-one">
                 <div class="header-left header-left-one">
     
                     <!-- 로그 -->
-                    <a href="index.jsp" class="logo">
+                    <a href="<%= contextPath %>" class="logo">
                         <img src="resources/img/logo.png" alt="Logo">
                     </a>
-                    <a href="index.jsp" class="white-logo">
+                    <a href="<%= contextPath %>" class="white-logo">
                         <img src="resources/img/logo.png" alt="Logo">
                     </a>
-                    <a href="index.jsp" class="logo logo-small">
+                    <a href="<%= contextPath %>" class="logo logo-small">
                         <img src="resources/img/logo.png" alt="Logo" width="30" height="30">
                     </a>
                 </div>
                 <a href="javascript:void(0);" id="toggle_btn">
                     <i class="fas fa-bars"></i>
                 </a>
-                
+
                 <a class="mobile_btn" id="mobile_btn">
                     <i class="fas fa-bars"></i>
                 </a>
@@ -141,7 +75,7 @@
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">판매완료</span>
                                                         paid the invoice <span class="noti-title"></span></p>
-                                                    <p class="noti-time"><span class="notification-time">알림 시간(4 mins ago</span>
+                                                    <p class="noti-time"><span class="notification-time">알림 시간(4 mins ago)</span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -178,7 +112,7 @@
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
                             <li class="active">
-                                <a href="index.jsp"><i data-feather="home"></i> <span>대시보드</span></a>
+                                <a href="<%= contextPath %>"><i data-feather="home"></i> <span>대시보드</span></a>
                             </li>
                             <li class="submenu">
                                 <a href="#"><i data-feather="clipboard"></i> <span> 상품관리</span> <span
@@ -222,9 +156,7 @@
                     </div>
                 </div>
             </div>
-        
     
-	<%} %>
 	
     <!-- js 호출 -->
     <script src="resources/js/jquery-3.6.0.min.js"></script>
