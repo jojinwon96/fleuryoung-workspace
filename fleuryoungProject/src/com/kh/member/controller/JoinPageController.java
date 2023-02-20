@@ -48,7 +48,12 @@ public class JoinPageController extends HttpServlet {
 				int memPostal = Integer.parseInt(request.getParameter("memPostal"));
 				String memStreet = request.getParameter("memStreet");
 				String memAddress = request.getParameter("memAddress");
+				
+				
+				
 				String memBirthdate = request.getParameter("memBirthDate");
+				
+				
 				
 				
 				//sql로 import? util로 import?
@@ -57,7 +62,7 @@ public class JoinPageController extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM//dd");
 				Date memBirthdate = (Date) sdf.parse(dateString);
 				*/
-				Date memBirthDate = request.getp
+				
 				
 				
 						
