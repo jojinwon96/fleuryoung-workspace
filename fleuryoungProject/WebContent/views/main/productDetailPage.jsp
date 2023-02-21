@@ -157,7 +157,8 @@
 					
 					<script>
 						$(function() {
-							console.log($("#selectBox option:not(:selected)").length);		
+							console.log($("#selectBox option:not(:selected)").length);
+							console.log($("#selectBox option:selected").html());
 						})
 						
 						$(document).on("change", "#selectBox", function () {
