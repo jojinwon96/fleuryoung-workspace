@@ -98,7 +98,7 @@
                             <span><%= loginSeller.getSelName() %></span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#"><i data-feather="user" class="me-1"></i>
+                            <a class="dropdown-item" href="<%=contextPath%>/myPage.se"><i data-feather="user" class="me-1"></i>
                                 마이페이지</a>
                             <a class="dropdown-item" href="<%= contextPath%>/logout.se"><i data-feather="log-out" class="me-1"></i>
                                 Logout</a>

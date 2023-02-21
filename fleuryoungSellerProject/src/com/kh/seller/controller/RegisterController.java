@@ -73,6 +73,8 @@ public class RegisterController extends HttpServlet {
 			
 			if(multipartRequest.getOriginalFileName("upfile")!= null) {
 				sel.setSelImg("resources/img/seller_img/"+ multipartRequest.getFilesystemName("upfile"));
+			} else {
+				sel.setSelImg("resources/img/seller_img/userImg.png");				
 			}
 			
 			
@@ -80,7 +82,7 @@ public class RegisterController extends HttpServlet {
 			int result = new SellerService().insertSeller(sel);
 			
 			if(result > 0) {
-				// 성ㄷ공 /jps/list.bo?cpage=1
+				// 성공 /jps/list.bo?cpage=1
 				request.getSession().setAttribute("alertMsg", "회원가입에 성공하였습니다.");
 				response.sendRedirect(request.getContextPath() + "/login.se");
 				

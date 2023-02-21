@@ -142,9 +142,13 @@
 
 									<div id="registerNoArea3">
                                         <label for="file">프로필 사진</label>
-                                        <input type="file" name="upfile" id="fileInput">
+                                        <img id="file1" width="150" height="150" onclick="chooseFile();" onerror="this.style.display='none'">
+                                        <small>왼쪽 박스 클릭시 이미지 삽입(미등록 기본이미지)</small>
+                                        
                                     </div>
+                                        <input type="file" name="upfile" id="fileInput" style="display: none;" onchange="loadImg(this,1);">
 								
+								<br><br><br><br>
                                     <div id="addressArea">
                                         <label for="address" id="addressLabel">주소</label>
                    
@@ -241,7 +245,43 @@
         </div>
     </div>
 
-<script>function juso() {
+<script>
+
+
+
+function chooseFile(){
+    $("#fileInput").click();
+}
+
+function loadImg(inputFile ,num){
+
+    if(inputFile.files.length ==1){ // 파일 선택된 경우 => 파일 읽어들임
+        
+        // 파일을 읽어들일 FileReader 객체 생성
+        const reader = new FileReader();
+
+        // 파일을 읽어들이는 메소드 호출
+        reader.readAsDataURL(inputFile.files[0]);
+        // 해당 파일을 읽어들이는 순간 해당 이 파일만이 고유한 url부
+
+        //파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
+        reader.onload = function(e){
+            // e.target.result => 읽어들인 파일의 고유한 url
+
+            switch(num){
+                case 1: $("#file1").attr("src", e.target.result); break;
+               
+                 }
+            }
+            
+        } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
+        switch(num){
+                case 1: $("#file1").attr("src", null); break;
+        }
+    }
+} //loadImg end
+
+function juso() {
     new daum.Postcode({
         oncomplete: function(data) {
             var addr = ''; // 주소 변수
@@ -258,7 +298,10 @@
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("address3").focus();
         }
-    }).open()}</script>
+    }).open()}
+    
+    
+    </script>
  	
     <script src="resources/js/jquery-3.6.0.min.js"></script>
 

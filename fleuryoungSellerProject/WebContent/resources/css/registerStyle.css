@@ -155,3 +155,11 @@ width: 40%;
 font-size: 0.5em;
 }
 
+#file1{
+    cursor: pointer;
+    width: 150;
+    height: 150;
+}
+#file1:hover{
+    background-color: rgb(248, 178, 188);
+}
