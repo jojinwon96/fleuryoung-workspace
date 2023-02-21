@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        const regex = /^(19[0-9][0-9]|20[0-1][0-9])(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
+const date = "19990631";
+if (regex.test(date)) {
+  console.log("Valid date");
+} else {
+  console.log("Invalid date");
+}
+    </script>
+</body>
+</html>
