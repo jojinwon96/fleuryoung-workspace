@@ -26,6 +26,13 @@ public class SellerDao {
 		}
 	}
 	
+	/**
+	 * 로그인 메소드
+	 * @param conn
+	 * @param selId
+	 * @param selPw
+	 * @return
+	 */
 	public Seller loginSeller(Connection conn, String selId, String selPw) {
 		
 		Seller sel = null;
@@ -33,16 +40,14 @@ public class SellerDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("loginSeller");
-		System.out.println(selId);
-		System.out.println(selPw);
-		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, selId);
 			pstmt.setString(2, selPw);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				sel = new Seller(rset.getString("SEL_ID")
+				sel = new Seller(rset.getInt("SEL_NO")
+								,rset.getString("SEL_ID")
 								,rset.getString("SEL_PW")
 								,rset.getString("SEL_BUSINESS_NO")
 								,rset.getString("SEL_STORE_NAME")
@@ -69,6 +74,11 @@ public class SellerDao {
 		return sel;
 	}
 	
+	/**
+	 * 회원가입 메소드
+	 * @param sel
+	 * @return
+	 */
 	public int insertSeller(Connection conn, Seller sel) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -102,4 +112,80 @@ public class SellerDao {
 		}
 		return result;
 	}
+	
+	/**
+	 * 마이페이지 수정 메소드
+	 * @param sel
+	 * @return
+	 */
+	public int updateSeller(Connection conn, Seller sel) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateSeller");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sel.getSelBusinessNo());
+			pstmt.setString(2, sel.getSelStoreName());
+			pstmt.setString(3, sel.getSelName());
+			pstmt.setString(4, sel.getSelEmail());
+			pstmt.setString(5, sel.getSelPhone());
+			pstmt.setString(6, sel.getSelTel());
+			pstmt.setString(7, sel.getSelFax());
+			pstmt.setInt(8, sel.getSelPostal());
+			pstmt.setString(9, sel.getSelStreet());
+			pstmt.setString(10, sel.getSelAddress());
+			pstmt.setString(11, sel.getSelImg());
+			pstmt.setInt(12, sel.getSelNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Seller selectSeller(Connection conn, int selNo) {
+		Seller sel = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectSeller");
+
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, selNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				sel = new Seller(rset.getInt("SEL_NO")
+								,rset.getString("SEL_ID")
+								,rset.getString("SEL_PW")
+								,rset.getString("SEL_BUSINESS_NO")
+								,rset.getString("SEL_STORE_NAME")
+								,rset.getString("SEL_NAME")
+								,rset.getString("SEL_EMAIL")
+								,rset.getString("SEL_PHONE")
+								,rset.getString("SEL_TEL")
+								,rset.getString("SEL_FAX")
+								,rset.getInt("SEL_POSTAL")
+								,rset.getString("SEL_STREET")
+								,rset.getString("SEL_ADDRESS")
+								,rset.getString("SEL_IMG")
+								,rset.getString("SEL_STATUS")
+								,rset.getDate("SEL_ENROLL_DATE")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return sel;
+	}
+	
 }

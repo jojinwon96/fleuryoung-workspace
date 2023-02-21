@@ -7,7 +7,6 @@
     Seller loginSeller = (Seller)session.getAttribute("loginSeller");
     
     String alertMsg = (String)session.getAttribute("alertMsg");
-    int a = 0;
     %>
 <!DOCTYPE html>
 <html lang="en">

@@ -4,7 +4,8 @@
 <entry key="loginSeller">
 
 	SELECT
-			SEL_ID
+			SEL_NO
+			,SEL_ID
 			, SEL_PW
 			, SEL_BUSINESS_NO
 			, SEL_STORE_NAME
@@ -26,43 +27,82 @@
 </entry>
 
 <entry key="insertSeller">
-	INSERT INTO TB_SELLER 
-            (
-                 SEL_NO
-               ,SEL_ID 
-               ,SEL_PW
-               ,SEL_BUSINESS_NO
-               ,SEL_STORE_NAME
-               ,SEL_NAME
-               ,SEL_EMAIL
-               ,SEL_PHONE
-               ,SEL_TEL
-               ,SEL_FAX
-               ,SEL_POSTAL
-               ,SEL_STREET
-               ,SEL_ADDRESS
-               ,SEL_IMG
-               ,SEL_STATUS
-               ,SEL_ENROLL_DATE
-            )
-        VALUES
-            (
-            SEQ_SELLER.NEXTVAL
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,?
-            ,'Y'
-            ,SYSDATE
-            )
+INSERT INTO TB_SELLER 
+           (
+                SEL_NO
+              ,SEL_ID 
+              ,SEL_PW
+              ,SEL_BUSINESS_NO
+              ,SEL_STORE_NAME
+              ,SEL_NAME
+              ,SEL_EMAIL
+              ,SEL_PHONE
+              ,SEL_TEL
+              ,SEL_FAX
+              ,SEL_POSTAL
+              ,SEL_STREET
+              ,SEL_ADDRESS
+              ,SEL_IMG
+              ,SEL_STATUS
+              ,SEL_ENROLL_DATE
+           )
+       VALUES
+           (
+           SEQ_SELLER.NEXTVAL
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,'Y'
+           ,SYSDATE
+           )
+</entry>
+<entry key="updateSeller">
+UPDATE    TB_SELLER
+   SET    SEL_BUSINESS_NO = ?
+        , SEL_STORE_NAME = ?
+        , SEL_NAME = ?
+        , SEL_EMAIL = ?
+        , SEL_PHONE = ?
+        , SEL_TEL = ?
+        , SEL_FAX = ?
+        , SEL_POSTAL = ?
+        , SEL_STREET = ?
+        , SEL_ADDRESS = ?
+        , SEL_IMG = ?
+ WHERE    SEL_NO = ?
+
+</entry>
+
+<entry key="selectSeller">
+	SELECT
+			SEL_NO
+			, SEL_ID
+			, SEL_PW
+			, SEL_BUSINESS_NO
+			, SEL_STORE_NAME
+			, SEL_NAME
+			, SEL_EMAIL
+			, SEL_PHONE
+			, SEL_TEL
+			, SEL_FAX
+			, SEL_POSTAL
+			, SEL_STREET
+			, SEL_ADDRESS
+			, SEL_IMG
+			, SEL_STATUS
+			, SEL_ENROLL_DATE
+	  FROM  TB_SELLER
+	 WHERE  SEL_NO = ?
+	   AND  SEL_STATUS = 'Y'
 </entry>
 </properties>

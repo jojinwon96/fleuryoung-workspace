@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Seller {
 
+	private int selNo;
 	private String selId;
 	private String selPw;
 	private String selBusinessNo;
@@ -22,9 +23,10 @@ public class Seller {
 	
 	public Seller() {}
 	
-	public Seller(String selId, String selPw, String selBusinessNo, String selStoreName, String selName,
+	public Seller(int selNo, String selId, String selPw, String selBusinessNo, String selStoreName, String selName,
 			String selEmail, String selPhone, String selTel, String selFax, int selPostal, String selStreet,
 			String selAddress, String selImg, String selStatus, Date selEnrollDate) {
+		this.selNo = selNo;
 		this.selId = selId;
 		this.selPw = selPw;
 		this.selBusinessNo = selBusinessNo;
@@ -40,6 +42,14 @@ public class Seller {
 		this.selImg = selImg;
 		this.selStatus = selStatus;
 		this.selEnrollDate = selEnrollDate;
+	}
+
+	public int getSelNo() {
+		return selNo;
+	}
+
+	public void setSelNo(int selNo) {
+		this.selNo = selNo;
 	}
 
 	public String getSelId() {
