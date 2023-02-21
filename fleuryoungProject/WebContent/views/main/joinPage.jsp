@@ -374,6 +374,11 @@ button {
 									인증하기</button></a>
 						</div>
 
+						<div id="birthDateArea">
+							<label for= "birthDate">생년월일</label>
+							<p><input type="text"  id="birthDateInput" placeholder="생년월일 8자리를 입력해주세요"></p>
+						</div>
+
 						
 
 						<div id="addressArea">
