@@ -6650,4 +6650,29 @@ SELECT * FROM TB_MEMBER;
 SELECT * FROM TB_PRODUCT;
 SELECT * FROM TB_PRODUCT_IMG;
 
+
+
+COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 COMMIT;

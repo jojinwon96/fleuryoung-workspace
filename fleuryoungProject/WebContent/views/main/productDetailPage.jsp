@@ -119,10 +119,10 @@
                     <div class="mt-4 row">
                         <select class="option-select form-select form-select-sm --bs-danger-bg-subtle"
                             aria-label=".form-select-sm example" id="selectBox" name="selectBox">
-                            <option selected>색상</option>
-                            <option value="1">레드</option>
-                            <option value="2">블루</option>
-                            <option value="3">옐로우</option>
+                            <option selected>기본</option>
+                            <option value="1">레드 (+5000)</option>
+                            <option value="2">블루 (+4000)</option>
+                            <option value="3">옐로우 (+3000)</option>
                         </select>
                     </div>
                     
@@ -150,74 +150,70 @@
 					  	</div>
 					  	
 					  	<div class="col">
-					  		<div align="right" class="py-2 col">해당 옵션 가격</div>
+					  		<div align="right" class="py-2 col">+ 5000</div>
 					  	</div>
 					  </div>
 					</div>
 					
 					<script>
-						$(function() {
-							console.log($("#selectBox option:not(:selected)").length);
-							console.log($("#selectBox option:selected").html());
-						})
+						let opArr = [];
 						
-						$(document).on("change", "#selectBox", function () {
-							console.log($("#selectBox option:not(:selected)").length);	
+						$(document).ready(function(){
 							
-							$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">옐로우</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">해당 옵션 가격</div></div></div></div>");
+							$(document).on('click', '#plus', function() {
+								console.log("plus~~~");
+							})
 							
-							$('._count :button').on({
-							    'click' : function(e){
-							        e.preventDefault();
-							        let $count = $(this).parent('._count').find('.inp');
-							        let now = parseInt($count.val());
-							        let min = 1;
-							        let max = 999;
-							        let num = now;
-							        if($(this).hasClass('minus')){
-							            var type = 'm';
-							        }else{
-							            var type = 'p';
-							        }
-							        if(type=='m'){
-							            if(now>min){
-							                num = now - 1;
-							            }
-							        }else{
-							            if(now<max){
-							                num = now + 1;
-							            }
-							        }
-							        if(num != now){
-							            $count.val(num);
-							        }
-							    }
-							});
+							$("#selectBox").on('change', function(){
+								if (!opArr.includes($(this).val())){
+									
+									let optTitle = $("#selectBox option:selected").html();
+									
+									// 한글만 추출
+									let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+									let onlyTitle = optTitle.replace(kor, '');
+									
+									// 숫자만 추출
+									let n = /[^0-9]/g;
+									let onlyNum = optTitle.replace(n, '');
+									
+									console.log("한글만 추출 : " + onlyTitle);
+									console.log("숫자만 추출 : " + onlyNum);
+									
+									if(optTitle != '기본'){
+										opArr.push($(this).val());	
+										
+										console.log($("#selectBox option:selected").html());
+										
+										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">가격</div></div></div></div>");	
+									}
+
+								} else {
+									alert('이미 추가한 옵션입니다.');
+								}
+								console.log(opArr);
+							})		
+							
+							
 						});
-					
-						$(document).on(function () {
-							// 옵션 선택시 이벤트
-							  $('#selectBox').change(function() {
-								 console.log("ok");
-							    let result = $('#selectBox option:selected').val();
-							    //if (result == '2') {
-							    //  $('.add-option').show();
-							    //} else {
-							     // $('.add-option').hide();
-							    //}
-							 }); 
+						
+						$(function() {
+							let pBtn = $("#plus");
+							let mBtn = $("#minus");
+							let inp = $(".inp");
+							let total = 0;
+							
+							
 							
 						})
 					</script>
-					
-                    <!-- <div class="mt-4 row">옵션 내용</div> -->
 			
                     <div class="mt-5 row">
                         <div class="col"
                             style="margin-left: -60px; padding-top: 10px; font-weight: bolder; font-size: 14px;">총 주문금액
                         </div>
                         <div class="col-4"></div>
-                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;"><%=p.getpNetPrice() %>원
+                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">원
                         </div>
                     </div>
 
