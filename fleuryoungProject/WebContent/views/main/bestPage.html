@@ -35,12 +35,33 @@
 
 
 
+  <!-- 버튼 css -->
+  <link rel="stylesheet" href="../../resources/css/hyemin - btn/btn5.css">
 
   <style>
     .mini_like {
       cursor: pointer;
     }
+
+
+    .bestbtn {
+      margin-top: 50px;
+    }
+
+
+    svg {
+      width: 100px;
+      height: 100px;
+      color: limegreen;
+    }
   </style>
+
+
+
+
+
+
+
 
 
 </head>
@@ -213,74 +234,68 @@
   <!-- 사이드바 시작 -->
 
 
+
+
+
+
   <nav class="sidebar close">
     <header>
-      <!-- <div class="image-text">
-          <span class="image">
-              <img src="logo.png" alt="">
-          </span>
 
-          <div class="text logo-text">
-              <span class="name">Codinglab</span>
-              <span class="profession">Web developer</span>
-          </div>
-      </div> -->
 
     </header>
-    <!-- 이게 안에 들어와서 메뉴바 안에 옴 -->
-    <i class='bx bx-chevron-right toggle'></i>
+
+
+
+
+    <div class="togright">
+      <i class='bi bi-toggle-off toggle minitoggle'> </i>
+    </div>
+
+
+
     <div class="menu-bar">
       <div class="menu search-box">
 
-        <!-- <li class="search-box">
-              <i class='bx bx-search icon'></i>
-              <input type="text" placeholder="Search...">
-          </li> 
-          serch-box가 다크모드 적용을 유도함!! transition 속성이 있음! 그래서 위의 div에 클래스로 줌
-        -->
 
-        <ul class="menu-links">
+
+        <ul class="menu-links" style="padding: 5px; ">
+
+
+          <!-- 씁 div로 감싸도 똑같.. -->
+          <div>
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-home-alt icon'></i>
+                <span class="text nav-text">꽃바구니</span>
+              </a>
+              <div class="test" style="border: 3px solid red; width: 10px; height: 10px;"></div>
+            </li>
+          </div>
           <li class="nav-link">
             <a href="#">
-              <i class='bx bx-home-alt icon'></i>
-              <span class="text nav-text">꽃바달</span>
-            </a>
-          </li>
 
-          <li class="nav-link">
-            <a href="#">
               <i class='bx bx-bar-chart-alt-2 icon'></i>
-              <span class="text nav-text">주문제작</span>
+              <span class="text nav-text">꽃다발</span>
             </a>
           </li>
 
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-bell icon'></i>
-              <span class="text nav-text">꽃바구니</span>
-            </a>
-          </li>
+
 
           <li class="nav-link">
             <a href="#">
               <i class='bx bx-pie-chart-alt icon'></i>
-              <span class="text nav-text">축하화환</span>
+              <span class="text nav-text">화환</span>
             </a>
           </li>
 
           <li class="nav-link">
             <a href="#">
               <i class='bx bx-heart icon'></i>
-              <span class="text nav-text">근조화한</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
               <span class="text nav-text">분재</span>
             </a>
           </li>
+
+
           <!-- 여기서 부터 내가 추가한거!! -->
 
           <li class="nav-link">
@@ -295,28 +310,7 @@
               <i class='bx bx-wallet icon'></i>
               <span class="text nav-text ">동양란</span>
             </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-              <li>
-                <a href="forms-elements.html">
-                  <i class="bi bi-circle"></i><span>Form Elements</span>
-                </a>
-              </li>
-              <li>
-                <a href="forms-layouts.html">
-                  <i class="bi bi-circle"></i><span>Form Layouts</span>
-                </a>
-              </li>
-              <li>
-                <a href="forms-editors.html">
-                  <i class="bi bi-circle"></i><span>Form Editors</span>
-                </a>
-              </li>
-              <li>
-                <a href="forms-validation.html">
-                  <i class="bi bi-circle"></i><span>Form Validation</span>
-                </a>
-              </li>
-            </ul>
+
           </li>
 
           <li class="nav-link">
@@ -329,50 +323,43 @@
           <li class="nav-link">
             <a href="#">
               <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">미니다육</span>
+              <span class="text nav-text">수경식물</span>
             </a>
           </li>
 
           <li class="nav-link">
             <a href="#">
               <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">과일바구니</span>
+              <span class="text nav-text">생화</span>
             </a>
           </li>
 
           <li class="nav-link">
             <a href="#">
               <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">비누꽃</span>
+              <span class="text nav-text">반려식물</span>
             </a>
           </li>
 
+          <li class="nav-link">
+            <a href="#">
+              <i class='bx bx-wallet icon'></i>
+              <span class="text nav-text">소품</span>
+            </a>
+          </li>
 
+          <li class="">
+            <a href="#">
+              <i class='bx bx-log-out icon'></i>
+              <span class="text nav-text">Logout</span>
+            </a>
+          </li>
 
         </ul>
       </div>
 
-      <div class="bottom-content">
-        <li class="">
-          <a href="#">
-            <i class='bx bx-log-out icon'></i>
-            <span class="text nav-text">Logout</span>
-          </a>
-        </li>
 
-        <li class="mode">
-          <div class="sun-moon">
-            <i class='bx bx-moon icon moon'></i>
-            <i class='bx bx-sun icon sun'></i>
-          </div>
-          <span class="mode-text text">Dark mode</span>
-
-          <div class="toggle-switch">
-            <span class="switch"></span>
-          </div>
-        </li>
-
-      </div>
+    </div>
     </div>
 
   </nav>
@@ -440,15 +427,25 @@
 
 
   <!-- 베스트 버튼 -->
-  <div class="ministyle">
-    <div class="btn-group" role="group" aria-label="Basic outlined example">
-      <button type="button" class="btn btn-outline-primary">판매 베스트</button>
-      <button type="button" class="btn btn-outline-primary">리뷰수 베스트</button>
-      <!-- <button type="button" class="btn btn-outline-primary">Right</button> -->
-    </div>
+  <!-- <div class="ministyle"> -->
+  <!-- <div class="btn-group" role="group" aria-label="Basic outlined example"> -->
+  <!-- <button type="button" class="btn btn-outline-primary">판매 베스트</button> -->
+  <!-- <button type="button" class="btn btn-outline-primary">리뷰수 베스트</button> -->
+  <!-- <button type="button" class="btn btn-outline-primary">Right</button> -->
+  <!-- </div> -->
+  <!-- </div> -->
+
+
+  <div class="bestbtn">
+
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side" type="button">
+      판매 베스트
+    </button>
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side" type="button">
+      리뷰수 베스트
+    </button>
+
   </div>
-
-
 
   <!-- 여기서 부터 상품 시작 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -457,10 +454,6 @@
   <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
-
-
-
 
 
 
@@ -919,318 +912,6 @@
         </div>
 
 
-
-        <!-- 일반 배송 + 할인 있는 상품 -->
-
-        <div class="col mb-5">
-          <div class="card h-100">
-
-            <!-- 이미지 경로 -->
-            <img class="card-img-top" src="../../resources/Image-mini/돈꽃다발.JPG" alt="..." />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- 상품 이름 -->
-                <h5 class="fw-bolder">돈 꽃다발</h5>
-                <!-- 별점 -->
-                <div class="d-flex justify-content-center small text-warning mb-2">
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <!-- 리뷰수 노출 -->
-                  <span>&nbsp;(61)</span>
-                </div>
-                <!-- 상품 가격 -->
-                <span class="text-muted text-decoration-line-through">120,000원</span>
-                <span> 100,000원</span>
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <!-- 찜하기, 장바구니 아이콘 -->
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-
-                    <!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-                    <img class="mini_like" src="../../resources/Image-mini/icon/like.png" alt="">
-
-                  </div>
-                  <div class="col">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <!-- a가 클릭되면 장바구니에 추가됐습니다 알람창 + 장바구니 보러가기 알람창 안내 -->
-                      <img class="mini_shopping" src="../../resources/Image-mini/icon/add-to-basket.png" alt="">
-                    </button>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog ">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" align="center">장바구니 추가</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            해당 상품을 장바구니에 추가했습니다
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-outline-success">장바구니 바로가기</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-        <!-- 일반 배송 + 할인 있는 상품 -->
-
-        <div class="col mb-5">
-          <div class="card h-100">
-
-            <!-- 이미지 경로 -->
-            <img class="card-img-top" src="../../resources/Image-mini/주황파랑.png" alt="..." />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- 상품 이름 -->
-                <h5 class="fw-bolder">작약 꽃다발</h5>
-                <!-- 별점 -->
-                <div class="d-flex justify-content-center small text-warning mb-2">
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <!-- 리뷰수 노출 -->
-                  <span>&nbsp;(67)</span>
-                </div>
-                <!-- 상품 가격 -->
-                <span class="text-muted text-decoration-line-through">70,000원</span>
-                <span> 65,000원</span>
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <!-- 찜하기, 장바구니 아이콘 -->
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-
-                    <!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-                    <img class="mini_like" src="../../resources/Image-mini/icon/like.png" alt="">
-
-                  </div>
-                  <div class="col">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <!-- a가 클릭되면 장바구니에 추가됐습니다 알람창 + 장바구니 보러가기 알람창 안내 -->
-                      <img class="mini_shopping" src="../../resources/Image-mini/icon/add-to-basket.png" alt="">
-                    </button>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog ">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" align="center">장바구니 추가</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            해당 상품을 장바구니에 추가했습니다
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-outline-success">장바구니 바로가기</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-        <!-- 당일 배송 + 할인 없는 상품 -->
-
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- 당일 배송여부 -->
-            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
-            </div>
-            <!-- 이미지 경로 -->
-            <img class="card-img-top" src="../../resources/Image-mini/레드꽃다발1.JPG" alt="..." />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- 상품 이름 -->
-                <h5 class="fw-bolder">장미 꽃다발</h5>
-                <!-- 별점 -->
-                <div class="d-flex justify-content-center small text-warning mb-2">
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <!-- 리뷰수 노출 -->
-                  <span>&nbsp;(245)</span>
-                </div>
-                <!-- 상품 가격 -->
-                <span> 75,000원</span>
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <!-- 찜하기, 장바구니 아이콘 -->
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-
-                    <!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-                    <img class="mini_like" src="../../resources/Image-mini/icon/like.png" alt="">
-
-                  </div>
-                  <div class="col">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <!-- a가 클릭되면 장바구니에 추가됐습니다 알람창 + 장바구니 보러가기 알람창 안내 -->
-                      <img class="mini_shopping" src="../../resources/Image-mini/icon/add-to-basket.png" alt="">
-                    </button>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog ">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" align="center">장바구니 추가</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            해당 상품을 장바구니에 추가했습니다
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-outline-success">장바구니 바로가기</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-        <!-- 당일 배송 + 할인 없는 상품 -->
-
-        <div class="col mb-5">
-          <div class="card h-100">
-            <!-- 당일 배송여부 -->
-            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
-            </div>
-            <!-- 이미지 경로 -->
-            <img class="card-img-top" src="../../resources/Image-mini/화이트코랄.png" alt="..." />
-            <!-- Product details-->
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- 상품 이름 -->
-                <h5 class="fw-bolder">델피니움 꽃다발</h5>
-                <!-- 별점 -->
-                <div class="d-flex justify-content-center small text-warning mb-2">
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <div class="bi-star-fill"></div>
-                  <!-- 리뷰수 노출 -->
-                  <span>&nbsp;(26)</span>
-                </div>
-                <!-- 상품 가격 -->
-
-                <span> 55,000원</span>
-              </div>
-            </div>
-            <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <!-- 찜하기, 장바구니 아이콘 -->
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-
-                    <!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-                    <img class="mini_like" src="../../resources/Image-mini/icon/like.png" alt="">
-
-                  </div>
-                  <div class="col">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                      <!-- a가 클릭되면 장바구니에 추가됐습니다 알람창 + 장바구니 보러가기 알람창 안내 -->
-                      <img class="mini_shopping" src="../../resources/Image-mini/icon/add-to-basket.png" alt="">
-                    </button>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                      aria-hidden="true">
-                      <div class="modal-dialog ">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" align="center">장바구니 추가</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            해당 상품을 장바구니에 추가했습니다
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">닫기</button>
-                            <button type="button" class="btn btn-outline-success">장바구니 바로가기</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
 

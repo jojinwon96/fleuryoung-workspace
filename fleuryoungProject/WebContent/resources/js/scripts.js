@@ -659,6 +659,25 @@ $(function () {
     })
 
 
+    // 사이드바 토글 버튼 왔다갔다
+    $('.minitoggle').click(function () {
+
+
+        if ($(this).attr("class") == "bi-toggle-on") {
+            $(this).attr("class", "bi-toggle-off")
+        } else {
+            $(this).attr("class", "bi-toggle-on")
+        }
+
+
+    })
+
+
+
+
+
+
+
     // 사이드바 테스트 챗봇
 
     const categories = document.querySelectorAll('.category');

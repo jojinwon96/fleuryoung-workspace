@@ -141,6 +141,60 @@
 
 
 
+    <!-- 준석오빠 사이드바 -->
+
+
+    <link rel="stylesheet" href="../../resources/css/myPage2_c.css">
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <script>
+        $(function () {
+            $('.subMenu').hide();
+            $('.hero__categories>ul>li').mouseenter(function () {
+                $(this).find('.subMenu').slideDown();
+            }).mouseleave(function () {
+                $('.subMenu').stop().slideUp();
+            });
+
+            let items = document.querySelectorAll('.carousel .carousel-item')
+
+            items.forEach((el) => {
+                const minPerSlide = 4
+                let next = el.nextElementSibling
+                for (var i = 1; i < minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                        next = items[0]
+                    }
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            })
+
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -403,6 +457,43 @@
         </div>
     </div>
     </div>
+
+
+
+
+
+
+    <!-- <br><br>
+    <div id="content-body">
+        <div class="sidebar">
+            <div class="hero__categories">
+                <div class="hero__categories__all">
+                    <i class="fa fa-bars"></i>
+                    <span>My Menu</span>
+                </div>
+                <ul>
+                    <li><a href="#">회원정보관리</a></li> <br>
+                    <li><a href="#">주문내역</a></li> <br>
+                    <li><a href="#">장바구니</a></li> <br>
+                    <li><a href="#">관심리스트</a> <br>
+                        <ul class="subMenu">
+                            <li><a href="#">찜한 상품</a></li>
+                            <li><a href="#">찜한 가게</a></li> <br>
+                        </ul>
+                    </li>
+                    <li><a href="#">후기</a> <br>
+                        <ul class="subMenu">
+                            <li><a href="#">구매후기 쓰기</a></li>
+                            <li><a href="#">내가 작성한 후기</a></li> <br>
+                        </ul>
+                    </li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+
+
 
 
     <!-- 사이드바 끝 -->
@@ -704,7 +795,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/꽃바구니1.JPG" alt="..." />
@@ -868,7 +960,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/노란꽃바구니1.JPG" alt="..." />
@@ -1279,7 +1372,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/레드꽃다발1.JPG" alt="..." />
@@ -1366,7 +1460,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/화이트코랄.png" alt="..." />
@@ -1611,7 +1706,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/주황다발.JPG" alt="..." />
@@ -1775,7 +1871,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/블랙다발.JPG" alt="..." />
@@ -1858,7 +1955,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/미니부케.png" alt="..." />
@@ -1942,7 +2040,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/양귀비.jpg" alt="..." />
@@ -2108,7 +2207,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- 당일 배송여부 -->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- 이미지 경로 -->
                         <img class="card-img-top" src="../../resources/Image-mini/드라이.png" alt="..." />
@@ -2192,7 +2292,8 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">
+                            당일배송
                         </div>
                         <!-- Product image-->
                         <img class="card-img-top" src="../../resources/Image-mini/보라노랑.png" alt="..." />
