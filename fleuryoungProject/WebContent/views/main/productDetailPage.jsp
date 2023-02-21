@@ -156,6 +156,30 @@
 					</div>
 					
 					<script>
+						$(function() {
+							let pBtn = $("#plus");
+							let mBtn = $("#minus");
+							let inp = $(".inp");
+							
+							let max = 0; 
+							let current = 0;
+							let total = 0;
+							
+							console.log(total);
+							
+							// 증가
+							$(document).on("click", ".minus", function(){
+								if (Number($(this).next().val()) > 0){
+									$(this).next().val(Number($(this).siblings('.inp').val()) - 1);	
+								}
+							});
+							
+							// 감소
+							$(document).on("click", ".plus", function(){
+							    $(this).prev().val(Number($(this).siblings('.inp').val()) + 1); 
+							});
+						})
+						
 						let opArr = [];
 						
 						$(document).ready(function(){
@@ -188,24 +212,17 @@
 										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">가격</div></div></div></div>");	
 									}
 
+									// 원래 여기
+								
 								} else {
 									alert('이미 추가한 옵션입니다.');
 								}
-								console.log(opArr);
 							})		
 							
 							
 						});
 						
-						$(function() {
-							let pBtn = $("#plus");
-							let mBtn = $("#minus");
-							let inp = $(".inp");
-							let total = 0;
-							
-							
-							
-						})
+
 					</script>
 			
                     <div class="mt-5 row">
