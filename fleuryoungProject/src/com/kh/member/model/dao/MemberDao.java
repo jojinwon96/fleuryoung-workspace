@@ -58,7 +58,7 @@ public class MemberDao {
 						          , rs.getInt("MEM_MILEAGE")
 						          , rs.getString("MEM_IMG")
 						          , rs.getString("MEM_GET_PHONE")
-						          , rs.getDate("MEM_BIRTHDATE")
+						          , rs.getString("MEM_BIRTHDATE")
 						          , rs.getInt("MEM_GENDER")
 						          , rs.getString("MEM_STATUS"));
 			}
@@ -91,7 +91,7 @@ public class MemberDao {
 			pstmt.setInt(6, m.getPostal());
 			pstmt.setString(7, m.getStreet());
 			pstmt.setString(8, m.getAddress());
-			pstmt.setDate(9, m.getMemBirthDate());
+			pstmt.setString(9, m.getMemBirthDate());
 			pstmt.setInt(10, m.getGender());
 			
 			

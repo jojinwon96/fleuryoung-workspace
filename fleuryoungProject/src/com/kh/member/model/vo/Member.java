@@ -16,15 +16,30 @@ public class Member {
 	private int mileage;
 	private String memImg;
 	private String getPhone;
-	private Date memBirthDate;
+	private String memBirthDate;
 	private int gender;
 	private String status;
 	
 	public Member() {}
-	
+
 	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
-			String address, Date enrollDate, int mileage, String memImg, String getPhone, Date memBirthDate, int gender,
-			String status) {
+			String address, String memBirthDate, int gender) {
+		super();
+		this.memId = memId;
+		this.memPw = memPw;
+		this.email = email;
+		this.memName = memName;
+		this.phone = phone;
+		this.postal = postal;
+		this.street = street;
+		this.address = address;
+		this.memBirthDate = memBirthDate;
+		this.gender = gender;
+	}
+
+	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
+			String address, Date enrollDate, int mileage, String memImg, String getPhone, String memBirthDate,
+			int gender, String status) {
 		super();
 		this.memId = memId;
 		this.memPw = memPw;
@@ -41,21 +56,6 @@ public class Member {
 		this.memBirthDate = memBirthDate;
 		this.gender = gender;
 		this.status = status;
-	}
-
-	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
-			String address, Date memBirthDate, int gender) {
-		super();
-		this.memId = memId;
-		this.memPw = memPw;
-		this.email = email;
-		this.memName = memName;
-		this.phone = phone;
-		this.postal = postal;
-		this.street = street;
-		this.address = address;
-		this.memBirthDate = memBirthDate;
-		this.gender = gender;
 	}
 
 	public String getMemId() {
@@ -154,11 +154,11 @@ public class Member {
 		this.getPhone = getPhone;
 	}
 
-	public Date getMemBirthDate() {
+	public String getMemBirthDate() {
 		return memBirthDate;
 	}
 
-	public void setMemBirthDate(Date memBirthDate) {
+	public void setMemBirthDate(String memBirthDate) {
 		this.memBirthDate = memBirthDate;
 	}
 
@@ -184,7 +184,10 @@ public class Member {
 				+ phone + ", postal=" + postal + ", street=" + street + ", address=" + address + ", enrollDate="
 				+ enrollDate + ", mileage=" + mileage + ", memImg=" + memImg + ", getPhone=" + getPhone
 				+ ", memBirthDate=" + memBirthDate + ", gender=" + gender + ", status=" + status + "]";
-	} 
+	}
+	
+	
+	
 	
 	
 }
