@@ -38,7 +38,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = prop.getProperty("selectBestProduct");
+		String sql = prop.getProperty("selectLatestProduct");
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -73,7 +73,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getInt("PCOUNT")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -100,7 +100,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1")));
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -129,15 +129,6 @@ public class ProductDao {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				p = new Product(rs.getString("P_NAME")
-						      , rs.getString("SEL_STORE_NAME")
-						      , rs.getInt("COUNT")
-						      , rs.getInt("REVIEW_RATING")
-						      , rs.getString("P_NETPRICE")
-						      , rs.getString("P_IMG1")
-						      , rs.getString("IMAGES"));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -1,11 +1,16 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
 
 /**
  * Servlet implementation class StartPageController
@@ -27,10 +32,27 @@ public class StartPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int num = (int)request.getAttribute("num");
+		int num = Integer.parseInt(request.getParameter("num"));
+		String title = "";
 		
-		System.out.println(num);
-	
+		ArrayList<Product> list;
+		ProductService pService = new ProductService();
+		
+		if (num == 1) {
+			list = pService.selectLatestProduct();
+			title = "최신순";
+		} else if(num == 2) {
+			list = pService.selectSaleOrderProduct();
+			title = "판매순";
+		} else {
+			list = pService.selectReviewOrderProduct();
+			title = "리뷰순";
+		}
+
+		request.setAttribute("title", title);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
+		
 	}
 
 	/**

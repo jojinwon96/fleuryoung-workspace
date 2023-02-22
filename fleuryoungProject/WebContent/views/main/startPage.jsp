@@ -133,8 +133,11 @@ h5 {
 		<script>
 			$(function(){
 				$("#orderSelect").on("change", function(){
-					let num = $("#orderSelect option:selected").val();
-					location.href = '<%=contextPath%>/startPage.p?=' + num;
+					let setNum = $("#orderSelect option:selected").val();
+					console.log(typeof(num));
+					if (Number(setNum) > 0){
+						location.href = '<%=contextPath%>/startPage.p?num=' + setNum;	
+					}
 				})
 			})
 		</script>
@@ -164,7 +167,7 @@ h5 {
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 							<img class="card-img-top"
-								src="${pageContext.request.contextPath}<%=p.getFirstImgSrc() %>"
+								src="<%=contextPath%><%=p.getMainImg()%>"
 								alt="..." />
 							<!-- Product details-->
 							<div class="card-body p-4">
@@ -177,7 +180,7 @@ h5 {
 										class="d-flex justify-content-center small text-warning mb-2">
 
 										<%
-											for (int i = 0; i < p.getReivewRating(); i++) {
+											for (int i = 0; i < p.getReviewRating(); i++) {
 										%>
 										<div class="bi-star-fill"></div>
 										<%
