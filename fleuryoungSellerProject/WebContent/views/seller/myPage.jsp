@@ -21,8 +21,8 @@
                     <h5 class="card-title">마이페이지</h5>
                 </div>
                 <div class="card-body">
-
                     <form action="<%=contextPath %>/myPage.se" method="post" enctype="multipart/form-data">
+						<input type="hidden" value="<%=loginSeller.getSelImg()%>" name="imgSrc">
                         <input type="hidden" value="<%=loginSeller.getSelNo()%>"name="selNo">
                         <div class="row form-group">
                             <label for="file" class="col-sm-3 col-form-label input-label">프로필사진</label>
@@ -30,7 +30,7 @@
                                 <div class="d-flex align-items-center">
                                     <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                         for="file" onclick="chooseFile();">
-                                        <img id="file1" class="avatar-img" src="<%=loginSeller.getSelImg() %>" name="selImg" >
+                                        <img id="file1" class="avatar-img" src="<%=contextPath %>/<%=loginSeller.getSelImg() %>" name="selImg" >
                                     </label>
                                     <span><small>이미지 변경을 원하시면 이미지를 클릭해주세요</small></span>
                                     
