@@ -39,7 +39,7 @@ public class JoinPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
 				
-				
+				/*
 				String memId = request.getParameter("memId"); 
 				String memPw = request.getParameter("memPw"); 
 				String memName = request.getParameter("memName"); 
@@ -52,7 +52,7 @@ public class JoinPageController extends HttpServlet {
 				
 				
 				String memBirthdate = request.getParameter("memBirthDate");
-				
+				*/
 				
 				
 				
@@ -65,12 +65,12 @@ public class JoinPageController extends HttpServlet {
 				
 				
 				
-						
+				/*		
 				int memGender = Integer.parseInt(request.getParameter("memGender"));
+				*/
 				
 				
-				
-				
+				/*
 				Member m = new Member(memId, memPw, memName, memEmail, memPhone, memPostal, memStreet, 
 						memAddress, memBirthdate,  memGender); 
 				
@@ -94,6 +94,9 @@ public class JoinPageController extends HttpServlet {
 					view.forward(request, response);
 				}
 				
+				*/
+				RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
+				view.forward(request, response);
 				
 				
 			}
