@@ -105,7 +105,6 @@ h5 {
 			</button>
 		</div>
 		<!-- 배너 끝 -->
-
 		<!-- 드롭다운 -->
 
 		<div class="container text-center">
@@ -134,15 +133,8 @@ h5 {
 		<script>
 			$(function(){
 				$("#orderSelect").on("change", function(){
-					let tmp = $("#orderSelect option:selected").val();
-					console.log(tmp);
-					if (tmp == 2){
-						location.href = '<%=contextPath%>/saleorder.p';
-					} else if (tmp == 1){
-						location.href = '<%=contextPath%>/latest.p';
-					} else {
-						location.href = '<%=contextPath%>/revieworder.p';
-					}
+					let num = $("#orderSelect option:selected").val();
+					location.href = '<%=contextPath%>/startPage.p?=' + num;
 				})
 			})
 		</script>

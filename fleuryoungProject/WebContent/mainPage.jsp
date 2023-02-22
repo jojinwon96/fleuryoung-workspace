@@ -11,7 +11,8 @@
 <body style="padding-right: 0px;">
 	<script>
 		$(function(){
-			location.href = '/fleuryoungProject/latest.p';
+			let num = 1;
+			location.href = '/fleuryoungProject/startPage.p?=' + num;
 		})
 	</script>
 

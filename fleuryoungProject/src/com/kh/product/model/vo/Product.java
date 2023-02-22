@@ -4,31 +4,24 @@ import java.sql.Date;
 
 public class Product {
 
-	private int pId;
-	private String pName;
-	private String pNetPrice;
-	private int pDetail;
-	private int pStock;
-	private Date enrollDate;
-	private String returnYN;
-	private String pTagYN;
-	private String salId;
-	private String categorySmall;
-	private int reivewRating;
-	private int reviewCount;
-	private String firstImgSrc;
+	private int pId; // 상품번호
+	private String pName; // 상품명
+	private String pNetPrice; // 가격
+	private int pDetail; // 상세설명
+	private int pStock; // 총수량
+	private Date enrollDate; // 등록일 
+	private String returnYN; // 환불여부
+	private String pTagYN; // 카드여부
 	private int saleCount; // 판매량
-	
-	private String storeName;
-	
-	private String imgs;
-	private String img1;
-	
+	private String pDayDelivery; // 당일배송여부
+	private String pGift; // 선물여부
+	private String selNo; // 판매자 번호 
+	private String categoryNO; // 카테고리 번호
 	
 	public Product() {}
 
 	public Product(int pId, String pName, String pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
-			String pTagYN, String salId, String categorySmall) {
+			String pTagYN, int saleCount, String pDayDelivery, String pGift, String selNo, String categoryNO) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -38,100 +31,11 @@ public class Product {
 		this.enrollDate = enrollDate;
 		this.returnYN = returnYN;
 		this.pTagYN = pTagYN;
-		this.salId = salId;
-		this.categorySmall = categorySmall;
-	}
-	
-	public Product(int pId, String pName, int reivewRating, int reviewCount, String pNetPrice, String firstImgSrc) {
-		super();
-		this.pId = pId;
-		this.pName = pName;
-		this.reivewRating = reivewRating;
-		this.reviewCount = reviewCount;
-		this.pNetPrice = pNetPrice;
-		this.firstImgSrc = firstImgSrc;
-	}
-	
-	public Product(int pId, String pName, int reivewRating, int reviewCount ,String pNetPrice,  String firstImgSrc,
-			int saleCount) {
-		super();
-		this.pId = pId;
-		this.pName = pName;
-		this.pNetPrice = pNetPrice;
-		this.reivewRating = reivewRating;
-		this.reviewCount = reviewCount;
-		this.firstImgSrc = firstImgSrc;
 		this.saleCount = saleCount;
-	}
-
-	
-	public Product(String pName, String storeName, int reviewCount, int reivewRating, String pNetPrice, String img1, String imgs) {
-		super();
-		this.storeName = storeName;
-		this.pName = pName;
-		this.pNetPrice = pNetPrice;
-		this.reivewRating = reivewRating;
-		this.reviewCount = reviewCount;
-		this.img1 = img1;
-		this.imgs = imgs;
-	}
-
-	
-	
-	public String getImg1() {
-		return img1;
-	}
-
-	public void setImg1(String img1) {
-		this.img1 = img1;
-	}
-
-	public String getImgs() {
-		return imgs;
-	}
-
-	public void setImgs(String imgs) {
-		this.imgs = imgs;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName;
-	}
-
-	public int getSaleCount() {
-		return saleCount;
-	}
-
-	public void setSaleCount(int saleCount) {
-		this.saleCount = saleCount;
-	}
-
-	public int getReivewRating() {
-		return reivewRating;
-	}
-
-	public void setReivewRating(int reivewRating) {
-		this.reivewRating = reivewRating;
-	}
-
-	public int getReviewCount() {
-		return reviewCount;
-	}
-
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-
-	public String getFirstImgSrc() {
-		return firstImgSrc;
-	}
-
-	public void setFirstImgSrc(String firstImgSrc) {
-		this.firstImgSrc = firstImgSrc;
+		this.pDayDelivery = pDayDelivery;
+		this.pGift = pGift;
+		this.selNo = selNo;
+		this.categoryNO = categoryNO;
 	}
 
 	public int getpId() {
@@ -198,27 +102,52 @@ public class Product {
 		this.pTagYN = pTagYN;
 	}
 
-	public String getSalId() {
-		return salId;
+	public int getSaleCount() {
+		return saleCount;
 	}
 
-	public void setSalId(String salId) {
-		this.salId = salId;
+	public void setSaleCount(int saleCount) {
+		this.saleCount = saleCount;
 	}
 
-	public String getCategorySmall() {
-		return categorySmall;
+	public String getpDayDelivery() {
+		return pDayDelivery;
 	}
 
-	public void setCategorySmall(String categorySmall) {
-		this.categorySmall = categorySmall;
+	public void setpDayDelivery(String pDayDelivery) {
+		this.pDayDelivery = pDayDelivery;
+	}
+
+	public String getpGift() {
+		return pGift;
+	}
+
+	public void setpGift(String pGift) {
+		this.pGift = pGift;
+	}
+
+	public String getSelNo() {
+		return selNo;
+	}
+
+	public void setSelNo(String selNo) {
+		this.selNo = selNo;
+	}
+
+	public String getCategoryNO() {
+		return categoryNO;
+	}
+
+	public void setCategoryNO(String categoryNO) {
+		this.categoryNO = categoryNO;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [pId=" + pId + ", pName=" + pName + ", pNetPrice=" + pNetPrice + ", pDetail=" + pDetail
 				+ ", pStock=" + pStock + ", enrollDate=" + enrollDate + ", returnYN=" + returnYN + ", pTagYN=" + pTagYN
-				+ ", salId=" + salId + ", categorySmall=" + categorySmall + "]";
+				+ ", saleCount=" + saleCount + ", pDayDelivery=" + pDayDelivery + ", pGift=" + pGift + ", selNo="
+				+ selNo + ", categoryNO=" + categoryNO + "]";
 	}
 	
 	
