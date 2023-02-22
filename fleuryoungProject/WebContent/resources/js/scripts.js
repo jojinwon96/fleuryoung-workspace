@@ -698,6 +698,18 @@ $(function () {
 
 
 
+    $(".bigBox, .smellBox").mouseover(function () {
+        $('.smellBox').show();
+        $('.smellBox').css("marginTop", "-10px");
+
+    });
+
+    $(".bigBox, .smellBox").mouseout(function () {
+        $('.smellBox').hide();
+
+    });
+
+
 
 
 
