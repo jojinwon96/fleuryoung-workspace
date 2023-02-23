@@ -4,26 +4,32 @@
 * ---------------------------------------------------------------------------
 */
 
-$(function () {
 
-})
+// 챗gtp 체크박스 테스트
 
-// 주소찾기
-$(function () {
-    // 주소 찾기
-    $(".non-address-find-button").click(function () {
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function (data) { //선택시 입력값 세팅
-                $(".non-address-detail").html(data.address); // 주소 넣기
-                $(".non-address-input").val(data.zonecode); // 우편번호 넣기
-                $(".non-address-detail-input").focus(); //상세입력 포커싱
-                console.log(data.zonecode);
-            }
-        }).open();
-    })
 
+const checkboxes = document.querySelectorAll('input[name="language"]');
+let selectedLanguages = [];
+
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            selectedLanguages.push(event.target.value);
+        } else {
+            selectedLanguages = selectedLanguages.filter((language) => {
+                return language !== event.target.value;
+            });
+        }
+        console.log(selectedLanguages);
+    });
 });
+
+
+
+
+
+
+
 
 // 헤더 픽스
 let $defaultHeader = $('header'),
@@ -696,7 +702,7 @@ $(function () {
 
 
 
-
+    // 사이드바 호버시 아래메뉴 출력
 
     $(".bigBox, .smellBox").mouseover(function () {
         $('.smellBox').show();
