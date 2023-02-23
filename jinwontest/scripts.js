@@ -63,6 +63,17 @@ $(window).scroll(function () {
 
     }
 
+    if ($(this).scrollTop() > 770) {
+        $(".pd-tabs").addClass("fixed-top");
+        $(".pd-tabs").css("marginLeft", "425px");
+        $(".pd-tabs").css("marginRight", "425px");
+    } else {
+        $(".pd-tabs").removeClass("fixed-top");
+        $(".pd-tabs").css("marginLeft", "0");
+        $(".pd-tabs").css("marginRight", "0");
+    }
+
+    $("pd-mv")
 
 });
 
@@ -682,20 +693,65 @@ $(function () {
 
 
     })
-    
+
 })
 
 // 상품 상세 페이지
-$(function() {
-    $('.pd-btn').mouseover(function(){
-        $(this).css("border","2px solid pink");
+$(function () {
+    $('.pd-btn').mouseover(function () {
+        $(this).css("border", "2px solid pink");
         let $tmp = $(this).attr("src");
         $('.pd-main').attr("src", $tmp);
     })
 
-    $('.pd-btn').mouseout(function(){
-        $(this).css("border","none");
+    $('.pd-btn').mouseout(function () {
+        $(this).css("border", "none");
     })
+
+    $('.pd-mv-btn').click(function () {
+        $(".pd-mv-btn").css("color", "black");
+        $(this).css("color", "pink");
+    })
+
+    // 상세페이지 위치 이동
+    $(".pd1").click(function () {
+        var height = $(".t1").offset();
+
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+    $(".pd2").click(function () {
+        var height = $(".t2").offset();
+
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+    $(".pd3").click(function () {
+        var height = $(".t3").offset();
+
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+    $(".pd4").click(function () {
+        var height = $(".t4").offset();
+
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+
+
+    $(".call-tr").click(function(){
+        let $tr = $(this).next();
+
+        if ($tr.css("display") == "none"){
+            $tr.show();
+        } else {
+            $tr.hide();
+        }
+        
+    })
+    
+
 })
 
 /*

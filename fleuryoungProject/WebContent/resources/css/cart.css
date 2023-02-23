@@ -46,6 +46,7 @@
     -webkit-box-align: center;
     align-items: center;
     padding: 100px 10px 10px 2px;
+    padding-left: 5px;
     font-size: 14px;
     line-height: 26px;
     font-weight: 500;
@@ -57,7 +58,7 @@
     display: inline-flex;
     font-size: 14px;
     line-height: 26px;
-    padding: 0px;
+    padding-top: 5px;
     position: relative;
     vertical-align: top;
     font-weight: bold;
@@ -87,14 +88,14 @@
 .cart-content-header span {
     display: inline-block;
     width: 1px;
-    height: 15px;
+    height: 20px;
     background: rgb(221, 221, 221);
-    margin: 6px 15px 10px 15px;
+    margin: 7px 15px 15px 15px;
     vertical-align: top;
 }
 
 .cart-content-header button {
-    margin-left: -5px;
+    margin-left: -9px;
     font-weight: bold;
 }
 
@@ -111,7 +112,7 @@
     -webkit-box-align: center;
     align-items: center;
     position: relative;
-    padding: 40px 0px;
+    padding: 15px 0px;
 }
 
 .cart-li a {
@@ -141,6 +142,16 @@
     word-break: break-all;
 }
 
+.cart-content-title>span, p{
+    height: 100%;
+}
+
+.cart-content-title>span{
+    font-weight: bolder;
+    font-size: 17px;
+    padding-top: 30px;
+}
+
 .cart-content-title a {
     background-color: transparent;
     text-decoration: none;
@@ -151,7 +162,7 @@
 .cart-content-title p {
     width: 140px;
     max-height: 54px;
-    padding-top: 27px;
+    padding-top: 5px;
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
@@ -249,13 +260,14 @@
     position: relative;
     width: 300px;
     min-height: 942px;
+    padding-left: 10px;
 }
 
 .cart-side-content{
-    position: absolute;
+    position: fixed;
     width: 300px;
     border: 1px solid #f2f2f2;
-    margin-top: 140px;
+    margin-top: 40px;
 }
 
 .cart-title-panel{
@@ -351,7 +363,12 @@
     height: 56px;
     border-radius: 3px;
     color: #fff;
-    background-color: rgb(248, 178, 188);;
+    background-color: rgb(248, 178, 188);
     border: 0 none;
     font-weight: 500;
+}
+
+.cart-save-message{
+    font-size: 15px;
+    font-weight: bolder;
 }
