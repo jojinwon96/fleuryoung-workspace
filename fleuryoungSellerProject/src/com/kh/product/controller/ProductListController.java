@@ -36,8 +36,7 @@ public class ProductListController extends HttpServlet {
 		
 		ArrayList<Product> list = new ProductService().selectProductList(selNo);
 		
-		
-		
+		request.setAttribute("list",  list);
 		request.getRequestDispatcher("views/product/productList.jsp").forward(request, response);
 	}
 

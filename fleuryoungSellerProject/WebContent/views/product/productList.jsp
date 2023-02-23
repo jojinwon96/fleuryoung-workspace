@@ -1,9 +1,11 @@
+<%@page import="com.kh.product.model.vo.Product"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 
-<%@
-	
+<%
+	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
 %>
 
 <head>
@@ -66,53 +68,55 @@
                                                     <i data-feather="plus-circle"></i> 상품등록
                                                 </a>
                                             </div>
-                                        </div>
+                                     	</div>
+                                     
                                     <thead class="thead-light">
                                         <tr>
                                             <th>상품사진</th>
                                             <th>카테고리</th>
                                             <th>상품명</th>
-                                            <th>총 재고량</th>
                                             <th>가격</th>
+                                            <th>총 재고량</th>
+                                            <th>판매량</th>
                                             <th>등록일</th>
-                                            <th>Status</th>
                                             <th >메뉴</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     
                                     <!-- for 해줘야함 -->
-                                        <tr>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    <img class="avatar avatar-xl me-2 avatar-img rounded-circle"
-                                                            src="resources/img/profiles/avatar-04.jpg">
-                                                </h2>
-                                                
-                                            </td>
-                                            <td><%= p. %></td>
-                                            <td>16 Mar 2022</td>
-                                            <td>120개</td>
-                                            <td>$154,220</td>
-                                            <td>23 Mar 2022</td>
-                                            <td><span class="badge bg-success-light">Paid</span></td>
-                                            <td class="text-end">
-                                                <div class="dropdown dropdown-action" align="center">
-                                                    <a href="#" class="action-icon dropdown-toggle"
-                                                        data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                            class="fas fa-ellipsis-v"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item" href="edit-invoice.html"><i
-                                                                class="far fa-edit me-2"></i>상품수정</a>
-                                                        <a class="dropdown-item" href="view-invoice.html"><i
-                                                                class="far fa-eye me-2"></i>상품상세조회</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="far fa-trash-alt me-2"></i>상품삭제</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
+                                        <% for(Product p : list){ %>
+	                                        <tr>
+	                                            <td>
+	                                                <h2 class="table-avatar">
+	                                                    <img class="avatar avatar-xl me-2 avatar-img rounded-circle"
+	                                                            src="<%= p.getpPicture()%>">
+	                                                </h2>
+	                                                
+	                                            </td>
+	                                            <td><%= p.getCategoryNo()%></td>
+	                                            <td><%= p.getpName()%></td>
+	                                            <td><%= p.getNetPrice()%></td>
+	                                            <td><%= p.getStock()%></td>
+	                                            <td><%= p.getpSales()%></td>
+	                                            <td><%= p.getpEnrollDate()%></td>
+	                                            <td class="text-end">
+	                                                <div class="dropdown dropdown-action" align="center">
+	                                                    <a href="#" class="action-icon dropdown-toggle"
+	                                                        data-bs-toggle="dropdown" aria-expanded="false"><i
+	                                                            class="fas fa-ellipsis-v"></i></a>
+	                                                    <div class="dropdown-menu dropdown-menu-end">
+	                                                        <a class="dropdown-item" href="edit-invoice.html"><i
+	                                                                class="far fa-edit me-2"></i>상품수정</a>
+	                                                        <a class="dropdown-item" href="view-invoice.html"><i
+	                                                                class="far fa-eye me-2"></i>상품상세조회</a>
+	                                                        <a class="dropdown-item" href="javascript:void(0);"><i
+	                                                                class="far fa-trash-alt me-2"></i>상품삭제</a>
+	                                                    </div>
+	                                                </div>
+	                                            </td>
+	                                        </tr>
+                                        <% } %>
                                         <!-- 요까지 -->
                                     </tbody>
                                 </table>

@@ -16,9 +16,6 @@ public class ProductService {
 	public ArrayList<Product> selectProductList(int selNo){
 		Connection conn = getConnection();
 		ArrayList<Product> list = new ProductDao().selectProductList(conn, selNo);
-		
-		
-		
 		close(conn);
 		return list;
 	}

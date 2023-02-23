@@ -1,5 +1,7 @@
 package com.kh.product.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,7 +13,6 @@ import java.util.Properties;
 
 import com.kh.product.model.vo.Product;
 import com.kh.seller.model.dao.SellerDao;
-import com.kh.seller.model.vo.Seller;
 
 public class ProductDao {
 
@@ -38,11 +39,21 @@ private Properties prop = new Properties();
 			pstmt.setInt(1, selNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				list.add(new Product(rset.pPic))
+				list.add(new Product(rset.getString("P_PICTURE")
+									,rset.getString("P_NAME")
+									,rset.getInt("P_NETPRICE")
+									,rset.getInt("P_STOCK")
+									,rset.getString("P_ENROLL_DATE")
+									,rset.getInt("P_SALES")
+									,rset.getString("CATEGORY_NAME")));
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
 		}
 		
 		
