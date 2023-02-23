@@ -4,7 +4,8 @@
 <%
 	String contextPath = request.getContextPath(); // /jsp
 	
-	Member loginUser = (Member)session.getAttribute("loginUser");	
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,8 +72,8 @@
 					<div class="cartMyPage-panel">
 						<div class="cart-panel">
 							<!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
-							<a href="${pageContext.request.contextPath}/views/main/cartPage.jsp" class="cart-btn"><img
-								src="" class="cart-btn"></a>
+							<a href="<%= contextPath %>/cartpage.me" class="cart-btn">
+							<img src="" class="cart-btn"></a>
 						</div>
 						<div class="myPage-panel">
 							<button class="mypage-btn"></button>
