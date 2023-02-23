@@ -19,7 +19,7 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		
 		// 2. 5자리 랜덤값 (int ranNum)
-		int ranNum = (int)Math.random() * 90000 + 10000;
+		int ranNum = (int)(Math.random() * 90000 + 10000);
 		
 		// 3. 원본파일 확장자 (String ext)
 		String ext = originName.substring(originName.lastIndexOf("."));

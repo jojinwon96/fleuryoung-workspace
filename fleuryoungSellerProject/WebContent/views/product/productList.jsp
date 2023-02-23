@@ -2,6 +2,10 @@
 <!DOCTYPE html>
 <html>
 
+<%@
+	
+%>
+
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -86,7 +90,7 @@
                                                 </h2>
                                                 
                                             </td>
-                                            <td>Advertising</td>
+                                            <td><%= p. %></td>
                                             <td>16 Mar 2022</td>
                                             <td>120개</td>
                                             <td>$154,220</td>

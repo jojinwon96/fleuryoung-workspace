@@ -116,7 +116,7 @@
                                 <a href="<%= contextPath %>"><i data-feather="home"></i> <span>대시보드</span></a>
                             </li>
                             <li class="submenu">
-                                <a href="<%=contextPath%>/productList.pr"><i data-feather="clipboard"></i> <span> 상품관리</span></a>
+                                <a href="<%=contextPath%>/productList.pr?selNo="<%= loginSeller.getSelNo() %>><i data-feather="clipboard"></i> <span> 상품관리</span></a>
                             </li>
                             <li class="submenu">
                                 <a href="#"><i data-feather="airplay"></i> <span> 판매관리</span> <span
