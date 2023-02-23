@@ -33,7 +33,7 @@ public class StartPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int num = Integer.parseInt(request.getParameter("num"));
-		String title = "";
+		String title = "최신순";
 		
 		ArrayList<Product> list;
 		ProductService pService = new ProductService();
@@ -50,6 +50,7 @@ public class StartPageController extends HttpServlet {
 		}
 
 		request.setAttribute("title", title);
+		request.setAttribute("optNo", num);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
 		

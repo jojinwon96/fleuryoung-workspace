@@ -4,8 +4,9 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-
+	
 	String title = (String)request.getAttribute("title");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -109,17 +110,13 @@ h5 {
 
 		<div class="container text-center">
 		  <div class="row">
-		    <div class="col">
-		    	<div align="left" class="container px-4 px-lg-5 mt-5">
-		      		<h3><%=title%></h3> 
-		      	</div>
-		    </div>
+		    
 		    <div class="col">
 		      <div align="right" class="container px-4 px-lg-5 mt-5">
 				<select style="width: 200px" class="form-select" 
 				        id="orderSelect" name= orderSelect
 					aria-label="Default select example">
-					<option selected>선택하기</option>
+					<option selected disabled><%=title%></option>
 					<option value="1">최신순</option>
 					<option value="2">판매순</option>
 					<option value="3">리뷰순</option>
@@ -134,11 +131,10 @@ h5 {
 			$(function(){
 				$("#orderSelect").on("change", function(){
 					let setNum = $("#orderSelect option:selected").val();
-					console.log(typeof(num));
-					if (Number(setNum) > 0){
-						location.href = '<%=contextPath%>/startPage.p?num=' + setNum;	
-					}
+					location.href = '<%=contextPath%>/startPage.p?num=' + setNum;
 				})
+				
+				
 			})
 		</script>
 		<!--  업버튼 -->
@@ -163,11 +159,12 @@ h5 {
 					<!-- 일반 배송 + 할인 없는 제품 -->
 					<div class="productbox col mb-5">
 						<div class="card h-100">
+							
 							<!-- Product image-->
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 							<img class="card-img-top"
-								src="<%=contextPath%><%=p.getMainImg()%>"
+								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"
 								alt="..." />
 							<!-- Product details-->
 							<div class="card-body p-4">
@@ -356,5 +353,6 @@ h5 {
 
 
 </body>
+
 
 </html>
