@@ -216,7 +216,7 @@ $(function () {
         const item = document.createElement("li");
         const img = document.createElement("img");
         const atag = document.createElement("a");
-        img.src = '../../resources/image/smallSearch.png';
+        img.src = '${pageContext.request.contextPath}/resources/image/smallSearch.png';
         const button = document.createElement("button");
         button.className = "real-time-delete";
 

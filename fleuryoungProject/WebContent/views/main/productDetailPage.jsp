@@ -1,9 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.product.model.vo.ProductOption"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Product p = (Product)request.getAttribute("product");
 
+	ArrayList<ProductOption> optList = (ArrayList<ProductOption>)request.getAttribute("optList");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,12 +59,12 @@
             </div>
             <div class="row">
 
-				<% String[] mimgs = p.getImgs().split(","); %>
+				<% String[] mimgs = p.getImages().split(","); %>
                 <!-- 사진 -->
                 <div class="col-6">
                     <div class=" row">
                         <img class="pd-main rounded shadow p-1 mb-3 bg-body-tertiary"
-                            src="${pageContext.request.contextPath}<%=p.getImg1() %>" style="height: 500px;">
+                            src="${pageContext.request.contextPath}<%=mimgs[0] %>" style="height: 500px;">
                     </div>
                     <div class="d-flex justify-content-start">
                         <div class="text-center" style="margin-left: -12px; margin-top: 5px;">
@@ -87,7 +90,7 @@
                     <div class="row" style="font-size: 17px; font-weight: bolder;"><%=p.getpName()%></div>
                     <div class="row">
                     	<% int count = 5;%>
-                    	<% for(int i = 0; i < p.getReivewRating(); i++) { %>
+                    	<% for(int i = 0; i < p.getReviewRating(); i++) { %>
                         	<img src="${pageContext.request.contextPath}/resources/image/icon/star.png" style="margin-top: 5px; padding: 0; width: 15px; height: 15px;">
                         	<% count--; %>
                         <% } %>
@@ -106,26 +109,34 @@
                         <div class="row fs-3" style="font-weight: bolder;"><%= p.getpNetPrice() %>원</div>
                     </div>
                     <div class="row" style="margin-top: 5px;">
-                        <div class="col" style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
+                         <% if (p.getpDayDelivery().charAt(0) == 'Y') { %>
+                         <div class="col" style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
                         <div class="col"><img src="${pageContext.request.contextPath}/resources/image/icon/express-delivery.png"
                                 style="width: 25px; height: 25px; margin-right: -100px; margin-top: -10px;"></div>
                         <div class="col" style="font-size: 13px; font-weight: bolder; color: rgb(248, 178, 188);">당일배송
                         </div>
+                        <% } else { %>
+                        	<div class="col" style="margin-left: -190px; font-size: 13px; font-weight: bolder;">무료배송</div>
+                        <%} %>
                         <div class="col-5"></div>
                     </div>
                     <div class="mt-4 row">
                         <hr>
                     </div>
+                    
+                    <!-- 옵션 -->
+                    <% if(!optList.isEmpty()) { %>
+                    <% String title = optList.get(0).getOptTitle(); %>
                     <div class="mt-4 row">
                         <select class="option-select form-select form-select-sm --bs-danger-bg-subtle"
                             aria-label=".form-select-sm example" id="selectBox" name="selectBox">
-                            <option selected>기본</option>
-                            <option value="1">레드 (+5000)</option>
-                            <option value="2">블루 (+4000)</option>
-                            <option value="3">옐로우 (+3000)</option>
+                            <option selected><%= title %></option>
+                            <% for (ProductOption opt : optList) { %>
+                            	<option value="<%= opt.getOpt2ndNo()%>"><%=opt.getOptContent()%> (+<%=opt.getOptPrice() %>)</option>
+                            <% } %>
                         </select>
                     </div>
-                    
+                    <% } %>
                     <br>
                     <div class="connect"></div>
                     
@@ -192,6 +203,9 @@
 								if (!opArr.includes($(this).val())){
 									
 									let optTitle = $("#selectBox option:selected").html();
+									let tmp = $("#selectBox option:selected").html();
+									
+									tmp = tmp.split("+");
 									
 									// 한글만 추출
 									let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
@@ -199,21 +213,16 @@
 									
 									// 숫자만 추출
 									let n = /[^0-9]/g;
-									let onlyNum = optTitle.replace(n, '');
+									let onlyNum = tmp[1].replace(n, '');
 									
-									console.log("한글만 추출 : " + onlyTitle);
-									console.log("숫자만 추출 : " + onlyNum);
 									
-									if(optTitle != '기본'){
+									if(optTitle != '<%= optList.get(0).getOptTitle() %>'){
 										opArr.push($(this).val());	
 										
 										console.log($("#selectBox option:selected").html());
 										
-										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">가격</div></div></div></div>");	
+										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + onlyNum + "</div></div></div></div>");	
 									}
-
-									// 원래 여기
-								
 								} else {
 									alert('이미 추가한 옵션입니다.');
 								}
@@ -230,10 +239,15 @@
                             style="margin-left: -60px; padding-top: 10px; font-weight: bolder; font-size: 14px;">총 주문금액
                         </div>
                         <div class="col-4"></div>
-                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">원
-                        </div>
+                        <% if (optList.isEmpty()) { %>
+	                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;"><%= p.getpNetPrice() %>원
+	                        </div>
+                        <% } else { %>
+                        	<div id="opt-total" class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">원
+                        	</div>
+                        <% } %>
                     </div>
-
+									
                     <div class="mt-3 row">
                         <button class="py-3 col-4 rounded"
                             style="font-weight: bolder; color: rgb(248, 178, 188); background-color: white; border: 1px solid rgb(248, 178, 188);">장바구니</button>
@@ -277,11 +291,13 @@
         <br>
         <div align="left" style="font-size: 30px; font-weight: bolder; margin-top: 70px;">상품상세정보</div>
         <div class="pd-info-content" style="margin-top: 50px;">
-        	<% String[] tmp = p.getImgs().split(","); %>
+        	<% String[] tmp = p.getImages().split(","); %>
         	<% for (int i = 0; i < tmp.length; i++) { %>
-	            <img style="margin-top: 20px;"
+        		<% if (!tmp[i].equals(" ")) { %>
+	            <img style="margin-top: 20px; widtsh: 500px; height: 500px"
 	                src="${pageContext.request.contextPath}<%= tmp[i] %>"
 	                class="rounded mx-auto d-block" alt="...">
+	             <% } %>
             <% } %>
         </div>
 

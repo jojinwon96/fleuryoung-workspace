@@ -159,7 +159,10 @@ h5 {
 					<!-- 일반 배송 + 할인 없는 제품 -->
 					<div class="productbox col mb-5">
 						<div class="card h-100">
-							
+							<% if (p.getpDayDelivery().charAt(0) == 'Y') { %>
+								<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+            					</div>
+							<%} %>
 							<!-- Product image-->
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
 

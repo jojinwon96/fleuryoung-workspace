@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Product;
+import com.kh.product.model.vo.ProductOption;
 
 public class ProductService {
 
@@ -53,6 +54,17 @@ public class ProductService {
 		close(conn);
 
 		return p;
+	}
+
+	public ArrayList<ProductOption> selectProductOption(int pid) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<ProductOption> optList = new ProductDao().selectProductOption(conn, pid);
+		
+		close(conn);
+		
+		return optList;
 	}
 
 }
