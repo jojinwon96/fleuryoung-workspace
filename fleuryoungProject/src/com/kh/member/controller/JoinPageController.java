@@ -2,7 +2,10 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+<<<<<<< HEAD
 import java.text.DateFormat;
+=======
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -50,19 +53,39 @@ public class JoinPageController extends HttpServlet {
 				int postal = Integer.parseInt(request.getParameter("postal"));
 				String street = request.getParameter("street");
 				String address = request.getParameter("address");
+<<<<<<< HEAD
 				int gender  = Integer.parseInt(request.getParameter("gender"));
+=======
+				int gender =Integer.parseInt(request.getParameter("gender"));
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 				
 				/*
 				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				 Date memBirthDate;
 				
+<<<<<<< HEAD
+=======
+				//Date memBirthdate = request.getParameter("memBirthDate");
+				
+				String memBirthdate = request.getParameter("memBirthDate");
+				
+				/*
+				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				 Date memBirthDate;
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 				try {
 					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+<<<<<<< HEAD
 				*/
+=======
+				 */
+				 
+				
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 				
 				
 				String memBirthDate = request.getParameter("memBirthDate");
@@ -93,24 +116,24 @@ public class JoinPageController extends HttpServlet {
 				*/
 				
 				
+<<<<<<< HEAD
+				
+=======
+				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
+										street, address, memBirthdate, gender  );
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 				
 				
 				
-				
-				//3) 요청처리(db에 sql문 실행) => 서비스 메소드 호출 및 결과받기
 				int result = new MemberService().insertMember(m);
 				
-				//4) 처리결과를 가지고 사용자가 보게 될 응답 뷰 지정 후 포워딩 or url 재요청
 				if(result>0) {
-					// 세션활용
 					HttpSession session = request.getSession();
 					session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다");
 					
-					//성공 => index 페이지 => /jsp url 재요청 방식!
 					response.sendRedirect(request.getContextPath());
 					
 				}else {
-					//실패 => 에러문구가 보여지는 에러페이지
 					request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
 					RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
 					view.forward(request, response);

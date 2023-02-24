@@ -21,10 +21,30 @@ public class Member {
 	private String status;
 	
 	public Member() {}
-	
+
 	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
+<<<<<<< HEAD
 			String address, Date enrollDate, int mileage, String memImg, String getPhone, String memBirthDate, int gender,
 			String status) {
+=======
+			String address, String memBirthDate, int gender) {
+		super();
+		this.memId = memId;
+		this.memPw = memPw;
+		this.email = email;
+		this.memName = memName;
+		this.phone = phone;
+		this.postal = postal;
+		this.street = street;
+		this.address = address;
+		this.memBirthDate = memBirthDate;
+		this.gender = gender;
+	}
+
+	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
+			String address, Date enrollDate, int mileage, String memImg, String getPhone, String memBirthDate,
+			int gender, String status) {
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 		super();
 		this.memId = memId;
 		this.memPw = memPw;
@@ -43,6 +63,7 @@ public class Member {
 		this.status = status;
 	}
 
+<<<<<<< HEAD
 	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
 			String address, String memBirthDate, int gender) {
 		super();
@@ -58,6 +79,8 @@ public class Member {
 		this.gender = gender;
 	}
 
+=======
+>>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
 	public String getMemId() {
 		return memId;
 	}
@@ -184,7 +207,10 @@ public class Member {
 				+ phone + ", postal=" + postal + ", street=" + street + ", address=" + address + ", enrollDate="
 				+ enrollDate + ", mileage=" + mileage + ", memImg=" + memImg + ", getPhone=" + getPhone
 				+ ", memBirthDate=" + memBirthDate + ", gender=" + gender + ", status=" + status + "]";
-	} 
+	}
+	
+	
+	
 	
 	
 }
