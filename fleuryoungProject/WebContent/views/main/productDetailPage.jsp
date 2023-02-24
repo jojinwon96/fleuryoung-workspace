@@ -1,5 +1,5 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.product.model.vo.ProductOption"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -216,13 +216,18 @@
 									let onlyNum = tmp[1].replace(n, '');
 									
 									
-									if(optTitle != '<%= optList.get(0).getOptTitle() %>'){
-										opArr.push($(this).val());	
-										
-										console.log($("#selectBox option:selected").html());
-										
-										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + onlyNum + "</div></div></div></div>");	
-									}
+									<% if (!optList.isEmpty()){ %>
+										if(optTitle != '<%= optList.get(0).getOptTitle() %>'){
+											opArr.push($(this).val());	
+											
+											console.log($("#selectBox option:selected").html());
+											
+											$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + onlyNum + "</div></div></div></div>");	
+										}	
+									<%} else { %>
+										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
+									<% } %>
+									
 								} else {
 									alert('이미 추가한 옵션입니다.');
 								}

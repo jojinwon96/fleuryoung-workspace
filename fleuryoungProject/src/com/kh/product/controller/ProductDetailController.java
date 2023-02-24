@@ -41,6 +41,8 @@ public class ProductDetailController extends HttpServlet {
 		//옵션
 		ArrayList<ProductOption> optList = new ProductService().selectProductOption(pid);
 		
+		System.out.println(p);
+		System.out.println(optList);
 		// 리뷰
 		request.setAttribute("product", p);
 		request.setAttribute("optList", optList);
