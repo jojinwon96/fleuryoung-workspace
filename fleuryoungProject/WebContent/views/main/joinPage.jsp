@@ -324,7 +324,7 @@ button {
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div>
-				<form  id = "enroll-form" action="<%= contextPath %>/insert.me" method="post">
+				<form  id = "enroll-form" action="<%= contextPath %>/join.me" method="post">
 					<div id="info">
 
 						<div id="infoHeader">

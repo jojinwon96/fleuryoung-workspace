@@ -2,6 +2,8 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -18,7 +20,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class JoinPageController
  */
-@WebServlet("/joinpage.me")
+@WebServlet("/join.me")
 public class JoinPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,20 +41,41 @@ public class JoinPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
 				
-				/*
+				
 				String memId = request.getParameter("memId"); 
 				String memPw = request.getParameter("memPw"); 
 				String memName = request.getParameter("memName"); 
-				String memEmail = request.getParameter("memEmail");
-				String memPhone = request.getParameter("memPhone");
-				int memPostal = Integer.parseInt(request.getParameter("memPostal"));
-				String memStreet = request.getParameter("memStreet");
-				String memAddress = request.getParameter("memAddress");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				int postal = Integer.parseInt(request.getParameter("postal"));
+				String street = request.getParameter("street");
+				String address = request.getParameter("address");
+				int gender  = Integer.parseInt(request.getParameter("gender"));
 				
+				/*
+				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				 Date memBirthDate;
 				
-				
-				String memBirthdate = request.getParameter("memBirthDate");
+				try {
+					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				*/
+				
+				
+				String memBirthDate = request.getParameter("memBirthDate");
+				
+				
+				
+				//Date memBirthdate = request.getParameter("memBirthDate");
+				
+				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
+						street, address, memBirthDate, gender  );
+				
+				
+				
 				
 				
 				
@@ -70,9 +93,8 @@ public class JoinPageController extends HttpServlet {
 				*/
 				
 				
-				/*
-				Member m = new Member(memId, memPw, memName, memEmail, memPhone, memPostal, memStreet, 
-						memAddress, memBirthdate,  memGender); 
+				
+				
 				
 				
 				//3) 요청처리(db에 sql문 실행) => 서비스 메소드 호출 및 결과받기
@@ -94,7 +116,7 @@ public class JoinPageController extends HttpServlet {
 					view.forward(request, response);
 				}
 				
-				*/
+				
 				RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
 				view.forward(request, response);
 				

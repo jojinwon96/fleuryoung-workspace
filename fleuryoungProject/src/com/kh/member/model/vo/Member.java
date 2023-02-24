@@ -16,14 +16,14 @@ public class Member {
 	private int mileage;
 	private String memImg;
 	private String getPhone;
-	private Date memBirthDate;
+	private String memBirthDate;
 	private int gender;
 	private String status;
 	
 	public Member() {}
 	
 	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
-			String address, Date enrollDate, int mileage, String memImg, String getPhone, Date memBirthDate, int gender,
+			String address, Date enrollDate, int mileage, String memImg, String getPhone, String memBirthDate, int gender,
 			String status) {
 		super();
 		this.memId = memId;
@@ -44,7 +44,7 @@ public class Member {
 	}
 
 	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
-			String address, Date memBirthDate, int gender) {
+			String address, String memBirthDate, int gender) {
 		super();
 		this.memId = memId;
 		this.memPw = memPw;
@@ -154,11 +154,11 @@ public class Member {
 		this.getPhone = getPhone;
 	}
 
-	public Date getMemBirthDate() {
+	public String getMemBirthDate() {
 		return memBirthDate;
 	}
 
-	public void setMemBirthDate(Date memBirthDate) {
+	public void setMemBirthDate(String memBirthDate) {
 		this.memBirthDate = memBirthDate;
 	}
 
