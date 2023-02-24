@@ -73,6 +73,8 @@ public class MemberDao {
 		return member;
 	}
 	
+	
+	
 	public int insertMember(Connection conn, Member m) {
 		
 		int result = 0;
@@ -81,7 +83,7 @@ public class MemberDao {
 		String sql = prop.getProperty("insertMember");
 		
 		try {
-			pstmt = conn.prepareStatement(sql); // 미완성된 sql문
+			pstmt = conn.prepareStatement(sql); 
 			
 			pstmt.setString(1, m.getMemId());
 			pstmt.setString(2, m.getMemPw());
@@ -108,6 +110,9 @@ public class MemberDao {
 		
 		
 	}
+	
+	
+	
 	
 	
 	

@@ -33,6 +33,7 @@
         ,MEM_NAME
         ,MEM_PHONE
         ,MEM_POSTAL
+        ,MEM_STREET
         ,MEM_ADDRESS
         ,MEM_ENROLL_DATE
         ,MEM_GET_PHONE
@@ -49,11 +50,13 @@
         , ?
         , ?
         , ?
+        ,?
         , SYSDATE
         ,'N'
+        ,(TO_DATE)?
         ,?
         ,?
-        'Y'
+        ,'Y'
         )
 	
 	</entry>

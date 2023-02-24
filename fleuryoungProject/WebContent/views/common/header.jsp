@@ -22,11 +22,14 @@
 		<div class="header-top">
 			<div class="header-top-top">
 			<% if (loginUser == null) { %>
-				<a href="<%= contextPath %>/joinpage.me" class="join">회원가입</a>
+				<a href="<%= contextPath %>/joinpage.me" onclick="enrollPage();" class="join">회원가입</a>
 				<div class="bar"></div>
 				<a href="<%= contextPath %>/loginpage.me" class="login">로그인</a>
 				<div class="bar"></div>
 				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
+				
+			
+            </script>
 			<% } else { %>
 				<a class="join"><%= loginUser.getMemName() %> 님</a>
 				<div class="bar"></div>

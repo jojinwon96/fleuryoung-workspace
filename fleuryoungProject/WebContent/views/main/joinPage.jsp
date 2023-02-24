@@ -324,7 +324,8 @@ button {
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div>
-				<form  id = "enroll-form" action="<%= contextPath %>/insert.me" method="post">
+			<!-- id = "enroll-form" -->
+				<form action="/fleuryoungProject/insert.me"  method="post">
 					<div id="info">
 
 						<div id="infoHeader">
@@ -333,16 +334,17 @@ button {
 
 
 						<div id="idArea">
-							<label for="id"><small>*</small> 아이디</label> <input type="text"
+							<label for="id"><small>*</small> 아이디</label> <input type="text" name="userId" 
 								class="form-control" id="idInput" required
 								placeholder="공백없이 소문자,숫자로 5~12글자">
-							<button id="idCheckBtn">중복확인</button>
+							<button id="idCheckBtn" onclick="idCheck();">중복확인</button>
 						</div>
 
 
 						<div id="pwdArea1">
-							<label for="password"><small>*</small> 비밀번호</label> <input
+							<label for="password"><small>*</small> 비밀번호</label> <input 
 								type="password" class="form-control" id="pwdInput" required
+								name = "userPwd"
 								placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
 						</div>
 
@@ -358,6 +360,7 @@ button {
 						
 						<div id="emailArea">
 							<label for="email">이메일</label> <input type="email"
+							name="email"
 							class="form-control" id="emailInput"> <br> <a
 							href=""><button type="button"
 							class="btn btn-outline-success" id="emailButton">이메일
@@ -459,7 +462,7 @@ button {
 								</li>
 							</ul>
 							<ul class="footBtwrap clearfix">
-								<li><button class="fpmgBt1">비동의</button></li>
+								<li><button class="fpmgBt1" type="reset">초기화</button></li>
 								<li><button type="submit" class="fpmgBt2"
 										id="userEnrollButton" onclick="return userEnroll();">회원가입</button></li>
 							</ul>
@@ -572,8 +575,139 @@ button {
 
             }
 
-        }
+        
+        
+        // 생일 유효성 검사
+    	var birthJ = false;
+    	
+    	// 생년월일	birthJ 유효성 검사
+    		var dateStr = $('#birthDateInput').val();		
+    	    var year = Number(dateStr.substr(0,4)); // 입력한 값의 0~4자리까지 (연)
+    	    var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+    	    var day = Number(dateStr.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+    	    var today = new Date(); // 날짜 변수 선언
+    	    var yearNow = today.getFullYear(); // 올해 연도 가져옴
+    		
+    	    if (dateStr.length <=8) {
+    			// 1900년~올해
+    		    if (1900 > year || year > yearNow){
+    		    	
+    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
+                    birthDateInput.value="";
+                    return false;
+    		    	
+    		    }else if (month < 1 || month > 12) {
+    		    		
+                    alert('유효하지 않은 생년월일을 입력하셨습니다');
+                    birthDateInput.value="";
+                    return false;
+    		    
+    		    }else if (day < 1 || day > 31) {
+    		    	
+    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
+                    birthDateInput.value="";
+                    return false;
+    		    	
+    		    }else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+    		    	 
+                    alert('유효하지 않은 생년월일을 입력하셨습니다');
+                    birthDateInput.value="";
+                    return false;
+    		    	 
+    		    }else if (month == 2) {
+    		    	 
+    		       	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    		       	
+    		     	if (day>29 || (day==29 && !isleap)) {
+    		     		
+                        alert('유효하지 않은 생년월일을 입력하셨습니다');
+                        birthDateInput.value="";
+                        return false;
+    		    	
+    				}else{
+    					$('#birth_check').text('');
+    					birthJ = true;
+    				}//end of if (day>29 || (day==29 && !isleap))
+    		     	
+    		    }else{
+    		    	
+    		    	$('#birth_check').text(''); 
+    				birthJ = true;
+    			}
+    			
+    			}else{
+    				//1.입력된 생년월일이 8자 초과할때 :  auth:false
+    				alert('유효하지 않은 생년월일을 입력하셨습니다');
+    			}
+    	    
+    	    
+    	  	
+    	    
+    	    
+    	    
+    	    
+    	    
+    	    
+    		};
     </script>
+    
+    <!-- ------------------------------------------------------------------------------------------------- -->
+    
+    <Script>
+		function readonlyFalse(){
+			const $idInput = $("#enroll-form input[name=userId]");
+			$idInput.removeAttr("readonly").focus();
+			$idInput.css("backgroundColor", "")
+		}
+	
+		function idCheck(){
+			// 사용자가 중복확인 버튼 클릭시 사용자가 입력한 아이디값을 넘겨서 조회요청(존재하는지 안하는지) => 응답데이터 돌려받기
+			// 1) 사용불가능(NNNNN)일 경우 => alert로 메시지 출력, 다시 입력할 수 있도록 유도
+			// 2) 사용가능(NNNNY)일 경우 => 진짜 사용할껀지 의사를 물어볼꺼임(Confirm 메소드)
+ 			//						 => 사용하겠다는 경우 => 더 이상 아이디 수정못하게끔 픽스, 회원가입버튼 활성화
+ 			//						 => 사용안하겠다는 경우 => 다시 입력할 수 있도록 유도
+ 			
+ 			// 입력한 아이디 input 요소 객체
+ 			const $idInput = $("#enroll-form input[name=userId]");
+ 			
+ 			$.ajax({
+ 				url:"idCheck.me",
+ 				data:{checkId:$idInput.val()},
+ 				success:function(result){
+ 					console.log(result)
+ 					
+ 					if(result == "NNNNN"){
+ 		 				alert("이미 사용중인 아이디입니다.")
+                        $idInput.val("")
+                        $idInput.focus()
+ 		 			}else if(result == "NNNNY"){
+ 		 				if($idInput.val() != null){
+	 		 				if(confirm("이 아이디를 사용하시겠습니까?")){
+	 		 					$idInput.attr("readonly", true)
+	 		 					//$("#enroll-form :submit").attr("disabled", false);
+	 		 					$("#enroll-form :submit").removeAttr("disabled");
+	 		 					$idInput.css("backgroundColor", "gray")
+	 		 				}else { // 취소
+	 		 					$idInput.val("")
+	 	                        $idInput.focus()
+	 	                        $idInput.css("backgroundColor", "")
+	 	                       	$idInput.removeAttr("readonly").focus();
+	 		 				}
+ 		 					
+ 		 				}
+ 		                //confirm("이 아이디를 사용하시겠습니까?")
+                        // 확인 누르면 readonly 옵션 달아주기 그러면서 회원가입버튼 enable 처리
+ 		            }
+ 				},
+ 				error:function(){
+ 					console.log("아이디 중복체크용 ajax 통신 실패!");
+ 				}
+ 			});
+ 			
+ 			
+            
+		}
+	</Script>
     
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>

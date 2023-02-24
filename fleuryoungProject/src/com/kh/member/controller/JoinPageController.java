@@ -40,78 +40,12 @@ public class JoinPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
 				
-				
-				String memId = request.getParameter("memId"); 
-				String memPw = request.getParameter("memPw"); 
-				String memName = request.getParameter("memName"); 
-				String email = request.getParameter("email");
-				String phone = request.getParameter("phone");
-				int postal = Integer.parseInt(request.getParameter("postal"));
-				String street = request.getParameter("street");
-				String address = request.getParameter("address");
-				int gender =Integer.parseInt(request.getParameter("gender"));
-				
-				
-				//Date memBirthdate = request.getParameter("memBirthDate");
-				
-				String memBirthdate = request.getParameter("memBirthDate");
-				
-				/*
-				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				 Date memBirthDate;
-				try {
-					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				 */
-				 
-				
-				
-				
-				
-				//sql로 import? util로 import?
-				/*
-				String dateString = request.getParameter("memBirthDate");
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM//dd");
-				Date memBirthdate = (Date) sdf.parse(dateString);
-				*/
-				
-				
-				
-				/*		
-				int memGender = Integer.parseInt(request.getParameter("memGender"));
-				*/
-				
-				
-				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
-										street, address, memBirthdate, gender  );
-				
-				
-				
-				int result = new MemberService().insertMember(m);
-				
-				if(result>0) {
-					HttpSession session = request.getSession();
-					session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다");
-					
-					response.sendRedirect(request.getContextPath());
-					
-				}else {
-					request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
-					RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
-					view.forward(request, response);
-				}
+			
 				
 				
 				RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
 				view.forward(request, response);
-				
-				
 			}
-//		RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
-//		view.forward(request, response);
 	
 
 	/**
@@ -123,3 +57,26 @@ public class JoinPageController extends HttpServlet {
 	}
 
 }
+
+/*
+				//Date memBirthdate = request.getParameter("memBirthDate");
+				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				 Date memBirthDate;
+				try {
+					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+ */
+
+//sql로 import? util로 import?
+/*
+				String dateString = request.getParameter("memBirthDate");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM//dd");
+				Date memBirthdate = (Date) sdf.parse(dateString);
+ */
+
+/*		
+				int memGender = Integer.parseInt(request.getParameter("memGender"));
+ */

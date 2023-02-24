@@ -20,6 +20,8 @@ public class MemberService {
 		return member;
 	}
 	
+	
+	
 	public int insertMember(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -40,5 +42,8 @@ public class MemberService {
 		
 		return result;
 }
+
+
+
 
 }
