@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     <% 
     String contextPath = request.getContextPath(); 
-    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    Seller  loginSeller = (Seller)session.getAttribute("loginSeller");
     
     String alertMsg = (String)session.getAttribute("alertMsg");
     int a = 0;

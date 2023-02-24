@@ -64,7 +64,7 @@
                                             <a href="invoices-settings.html" class="invoices-settings-icon btn-primary">
                                                 <i data-feather="settings"></i>
                                                     </a>
-                                                     <a href="add-invoice.html" class="btn">
+                                                     <a href="<%=contextPath%>/productInsertForm.pr" class="btn">
                                                     <i data-feather="plus-circle"></i> 상품등록
                                                 </a>
                                             </div>
@@ -86,7 +86,7 @@
                                     
                                     <!-- for 해줘야함 -->
                                         <% for(Product p : list){ %>
-	                                        <tr>
+	                                        <tr style="cursor: pointer;">
 	                                            <td>
 	                                                <h2 class="table-avatar">
 	                                                    <img class="avatar avatar-xl me-2 avatar-img rounded-circle"

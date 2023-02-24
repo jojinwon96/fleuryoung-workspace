@@ -14,10 +14,11 @@
            <div class="page-header">
                <div class="row align-items-center">
                    <div class="col">
-                       <h3 class="page-title">Invoices</h3>
+                       <h3 class="page-title">상품등록</h3>
                        <ul class="breadcrumb">
-                           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                           <li class="breadcrumb-item active">Invoices</li>
+                           <li class="breadcrumb-item"><a href="<%=contextPath%>/dashboard.da">대시보드</a></li>
+                           <li class="breadcrumb-item"><a href="<%=contextPath%>/productList.pr?sno=<%=loginSeller.getSelNo()%">상품관리</a></li>
+                           <li class="breadcrumb-item active">상품등록</li>
                        </ul>
                    </div>
                    <div class="col-auto">
