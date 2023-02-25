@@ -10,7 +10,7 @@
 <script src="resources/js/scripts.js"></script>
 <body style="padding-right: 0px;">
 	<script>
-		$(function(){
+		$(function() {
 			location.href = '/fleuryoungProject/startPage.p?num=1';
 		})
 	</script>

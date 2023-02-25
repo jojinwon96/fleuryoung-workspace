@@ -132,7 +132,7 @@
                             aria-label=".form-select-sm example" id="selectBox" name="selectBox">
                             <option selected><%= title %></option>
                             <% for (ProductOption opt : optList) { %>
-                            	<option value="<%= opt.getOpt2ndNo()%>"><%=opt.getOptContent()%> (+<%=opt.getOptPrice() %>)</option>
+                            	<option value="<%= opt.getOpt2ndNo()%>"><%=opt.getOptContent()%> +<%=opt.getOptPrice()%>원</option>
                             <% } %>
                         </select>
                     </div>
@@ -155,18 +155,34 @@
 					  	<div align="left" class="col">
 					  		<div class="count-wrap _count">
 						  		<button type="button" class="minus btn btn btn-light"><img src="${pageContext.request.contextPath}/resources/image/icon/minus.png"></button>
-  							    <input type="text" class="inp" value="1" />
+  							    <input type="text" id="inp" class="inp" value="1" />
 							    <button type="button" class="plus btn btn btn-light"><img src="${pageContext.request.contextPath}/resources/image/icon/plus.png"></button>
 							</div>
 					  	</div>
 					  	
 					  	<div class="col">
 					  		<div align="right" class="py-2 col">+ 5000</div>
+					  		
 					  	</div>
 					  </div>
 					</div>
 					
 					<script>
+						let opArr = [];
+						
+						//천단위 콤마 펑션
+					   	function comma(str) {
+					        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+					    }
+						
+					   	function onlyNo(str) {
+					   		return str.replace(/[^0-9]/g, '');
+					   	}			   	
+					   	
+					   	function onlyStr(str){
+					   		return str.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g, '');
+					   	}
+					   	
 						$(function() {
 							let pBtn = $("#plus");
 							let mBtn = $("#minus");
@@ -176,40 +192,82 @@
 							let current = 0;
 							let total = 0;
 							
-							console.log(total);
-							
-							// 증가
+							// 감소
 							$(document).on("click", ".minus", function(){
-								if (Number($(this).next().val()) > 0){
-									$(this).next().val(Number($(this).siblings('.inp').val()) - 1);	
+								if (Number($(this).next().val()) > 1){
+									let tmp = $(this).next().val(Number($(this).siblings('.inp').val()) - 1);
+									let optget = $(this).parents(".add-option").find(".hideOptPrice").html();
+									let optNum = $(this).parents(".add-option").find(".optPrice");
+									
+									// 숫자만
+									console.log("이거 : " + onlyStr(optget));
+									console.log("여기" + typeof(onlyNo(optget)));
+									
+									// 결과
+									optNum.html(comma((Number(onlyNo(optNum.html())) - Number(optget))+"") + "원");
 								}
 							});
 							
-							// 감소
+							// 증가
 							$(document).on("click", ".plus", function(){
-							    $(this).prev().val(Number($(this).siblings('.inp').val()) + 1); 
+								let tmp = $(this).prev().val(Number($(this).siblings('.inp').val()) + 1);
+								let optget = $(this).parents(".add-option").find(".hideOptPrice").html();
+								let optNum = $(this).parents(".add-option").find(".optPrice"); 
+						        
+								// 결과
+								optNum.html(comma((Number(optget) * Number(tmp.val()))+"") + "원");
+								
+								
 							});
-						})
-						
-						let opArr = [];
-						
-						$(document).ready(function(){
 							
-							$(document).on('click', '#plus', function() {
-								console.log("plus~~~");
+							// 수량 변경 감지, 총 주문금액
+							$(document).on("click", ".minus, .plus, .option-select", function(){
+								let sum = 0;
+								$(".optPrice").each(function(){
+									sum += Number(onlyNo($(this).html()));
+								})
+								
+								$(".opt-total").html(comma(sum+"")+"원");
+								console.log(opArr);
 							})
 							
+							// 삭제
+							Array.prototype.remove = function(value) {
+							    this.splice(this.indexOf(value), 1);
+							}
+							
+							$(document).on("click", ".option-delete", function(){
+								let optNum = Number(onlyNo($(this).parents(".add-option").find(".optPrice").html()));
+								let total = Number(onlyNo($(".opt-total").html()));
+								
+								$(".opt-total").html(comma((total-optNum)+"")+"원");
+								
+								let optTitle = $(this).parents(".add-option").find(".opt-title").html();
+								
+								opArr.remove(optTitle);
+								console.log(opArr);
+								
+								$(this).parents(".add-option").remove();
+							})
+							
+						})
+						
+						
+						$(document).ready(function(){
+														
 							$("#selectBox").on('change', function(){
-								if (!opArr.includes($(this).val())){
-									
-									let optTitle = $("#selectBox option:selected").html();
-									let tmp = $("#selectBox option:selected").html();
-									
+								
+								let optTitle = $("#selectBox option:selected").html();
+								let tmp = $("#selectBox option:selected").html();
 									tmp = tmp.split("+");
+								
+								if (!opArr.includes(tmp[0])){
 									
 									// 한글만 추출
 									let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
-									let onlyTitle = optTitle.replace(kor, '');
+									let onlyTitle = tmp[0].replace(kor, '');
+									
+									console.log(onlyTitle);
 									
 									// 숫자만 추출
 									let n = /[^0-9]/g;
@@ -218,24 +276,24 @@
 									
 									<% if (!optList.isEmpty()){ %>
 										if(optTitle != '<%= optList.get(0).getOptTitle() %>'){
-											opArr.push($(this).val());	
 											
-											console.log($("#selectBox option:selected").html());
+											opArr.push(tmp[0]);	
 											
-											$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">"+ onlyTitle +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + onlyNum + "</div></div></div></div>");	
+											console.log(opArr);
+											
+											$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma(onlyNum) + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div></div></div>");	
 										}	
 									<%} else { %>
-										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" class=\"inp\" value=\"1\" /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
+										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly/><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
 									<% } %>
 									
 								} else {
 									alert('이미 추가한 옵션입니다.');
 								}
+									
 							})		
 							
-							
 						});
-						
 
 					</script>
 			
@@ -248,7 +306,7 @@
 	                        <div class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;"><%= p.getpNetPrice() %>원
 	                        </div>
                         <% } else { %>
-                        	<div id="opt-total" class="col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">원
+                        	<div class="opt-total col" style="margin-right: -50px; font-weight: bolder; font-size: 25px;">
                         	</div>
                         <% } %>
                     </div>
@@ -265,24 +323,24 @@
 
         <div class="pd-tabs">
             <!-- Nav tabs -->
-            <ul style="margin-top: 56px;" class="nav nav-tabs" id="myTab" role="tablist">
+            <ul style="margin-top: 56px; border-bottom : none; border-radius: 0;" class="nav nav-tabs" id="myTab" role="tablist" >
                 <li class=" nav-item" role="presentation">
-                    <button style="background-color: white; width: 200px; color: black;"
+                    <button style="background-color: white; width: 150px; color: black;"
                         class="pd1 pd-mv-btn nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
                         type="button" role="tab" aria-controls="home" aria-selected="true">상품상세정보</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 200px; color: black;" class="pd2 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 150px; color: black;" class="pd2 pd-mv-btn nav-link"
                         id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
                         aria-controls="profile" aria-selected="false">리뷰</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 200px; color: black;" class="pd3 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 150px; color: black;" class="pd3 pd-mv-btn nav-link"
                         id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab"
                         aria-controls="messages" aria-selected="false">문의</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button style="background-color: white; width: 200px; color: black;" class="pd4 pd-mv-btn nav-link"
+                    <button style="background-color: white; width: 160px; color: black;" class="pd4 pd-mv-btn nav-link"
                         id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab"
                         aria-controls="settings" aria-selected="false">교환 및 반품안내</button>
                 </li>
