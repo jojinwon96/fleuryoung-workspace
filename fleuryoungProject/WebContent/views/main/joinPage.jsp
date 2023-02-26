@@ -434,9 +434,9 @@ button {
 		
 							<div id="addressDiv2"> 
 							 <input type="text" id="address1" placeholder="주소번호" name="postal"  >
-							<button id="btn-address" onclick="sample6_execDaumPostcode()" >주소검색</button>  <br>
+							<button id="btn-address" onclick="sample6_execDaumPostcode()" type="button" >주소검색</button>  <br>
 							<input type="text"  id="address2" placeholder="도로명주소" name="street" > <br>
-							<input type="text" class="form-control" id="address3" placeholder="상세주소를 입력해주세요" name="address" required> 
+							<input type="text" class="form-control" id="address3" placeholder="상세주소를 입력해주세요" name="address"> 
 							
 							</div>
 		
