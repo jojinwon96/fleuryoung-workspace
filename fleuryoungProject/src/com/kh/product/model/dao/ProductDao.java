@@ -9,9 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.member.model.dao.MemberDao;
+import com.kh.product.model.vo.Inquiry;
 import com.kh.product.model.vo.Product;
 import com.kh.product.model.vo.ProductOption;
+import com.kh.product.model.vo.Review;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -151,7 +152,6 @@ public class ProductDao {
 		return p;
 	}
 
-
 	public ArrayList<ProductOption> selectProductOption(Connection conn, int pid) {
 		
 		ArrayList<ProductOption> optList = new ArrayList<ProductOption>();
@@ -183,6 +183,73 @@ public class ProductDao {
 		}
 		
 		return optList;
+	}
+
+	public ArrayList<Review> selectProductReview(Connection conn, int pid) {
+
+		ArrayList<Review> reviewList = new ArrayList<Review>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectProductReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				reviewList.add(new Review(rs.getInt("P_ID")
+					      , rs.getInt("REVIEW_ID")
+					      , rs.getInt("REVIEW_RATING")
+					      , rs.getString("CONTENT")
+					      , rs.getString("MEM_ID")
+					      , rs.getString("DATE")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reviewList;
+	}
+
+	public ArrayList<Inquiry> selectProductInquiry(Connection conn, int pid) {
+		
+		ArrayList<Inquiry> inquiryList = new ArrayList<Inquiry>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectProductInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				inquiryList.add(new Inquiry(rs.getInt("P_ID")
+						  , rs.getString("MEM_ID")
+						  , rs.getString("MEM_NAME")
+						  , rs.getInt("INQUIRY_ID")
+					      , rs.getInt("INQUIRY_TYPE")
+					      , rs.getString("INQUIRY_TITLE")
+					      , rs.getString("INQUIRY_COMMENT")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return inquiryList;
 	}
 
 }

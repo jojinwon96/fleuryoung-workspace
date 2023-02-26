@@ -70,6 +70,25 @@
 		JOIN TB_2ND_OPTION USING (OPTION_1ND_NO)
 		WHERE P_ID = ?
 	</entry>
+	
+	<entry key="selectProductReview">
+		SELECT R.P_ID AS "P_ID"
+		     , REVIEW_ID
+		     , REVIEW_RATING
+		     , REVIEW_DETAIL AS "CONTENT"
+		     , (SELECT MEM_ID FROM TB_MEM_ORDER_DETAIL M WHERE R.OD_ID = M.OD_ID) AS "MEM_ID"
+		     , TO_CHAR(REVIEW_ADD_DATE, 'YYYY-MM-DD') AS "DATE"
+		FROM TB_REVIEW R
+		JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
+		WHERE R.P_ID = ?
+	</entry>
+	
+	<entry key="selectProductInquiry">
+		SELECT P_ID, MEM_ID, MEM_NAME, INQUIRY_ID, INQUIRY_TYPE, INQUIRY_TITLE, INQUIRY_COMMENT   
+		FROM TB_INQUIRY
+		JOIN TB_MEMBER USING (MEM_ID)
+		WHERE P_ID = ?
+	</entry>
 </properties>
 
 

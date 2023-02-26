@@ -741,12 +741,18 @@ $(function () {
 
 
     $(".call-tr").click(function(){
-        let $tr = $(this).next();
+        let $tr1 = $(this).next(); 
+        let $tr2 = $(this).next().next();
+        let $tr3 = $(this).next().next().next();
 
-        if ($tr.css("display") == "none"){
-            $tr.show();
+        if ($tr1.css("display") == "none" && $tr2.css("display") == "none" && $tr3.css("display") == "none"){
+            $tr1.show();
+            $tr2.show();
+            $tr3.show();
         } else {
-            $tr.hide();
+            $tr1.hide();
+            $tr2.hide();
+            $tr3.hide();
         }
         
     })
