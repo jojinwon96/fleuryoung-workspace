@@ -52,7 +52,7 @@
         , SYSDATE
         ,'N'
         ,(TO_DATE)?
-        ,?
+        ,(TO_NUMBER)?
         'Y'
         )
 	

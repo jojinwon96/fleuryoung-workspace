@@ -2,10 +2,9 @@ package com.kh.member.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-<<<<<<< HEAD
+
 import java.text.DateFormat;
-=======
->>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -23,7 +22,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class JoinPageController
  */
-@WebServlet("/join.me")
+@WebServlet("/insert.me")
 public class JoinPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,52 +49,25 @@ public class JoinPageController extends HttpServlet {
 				String memName = request.getParameter("memName"); 
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
-				int postal = Integer.parseInt(request.getParameter("postal"));
+				String postal = request.getParameter("postal");
 				String street = request.getParameter("street");
 				String address = request.getParameter("address");
-<<<<<<< HEAD
-				int gender  = Integer.parseInt(request.getParameter("gender"));
-=======
-				int gender =Integer.parseInt(request.getParameter("gender"));
->>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
+
+				//String[] gender = (request.getParameterValues("gender"));
+				String gender = request.getParameter("gender");
 				
-				/*
-				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				 Date memBirthDate;
-				
-<<<<<<< HEAD
-=======
-				//Date memBirthdate = request.getParameter("memBirthDate");
-				
-				String memBirthdate = request.getParameter("memBirthDate");
-				
-				/*
-				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				 Date memBirthDate;
->>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
-				try {
-					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-<<<<<<< HEAD
-				*/
-=======
-				 */
-				 
-				
->>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
-				
-				
+
 				String memBirthDate = request.getParameter("memBirthDate");
 				
 				
 				
 				//Date memBirthdate = request.getParameter("memBirthDate");
 				
+				/*
 				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
 						street, address, memBirthDate, gender  );
+						
+						*/
 				
 				
 				
@@ -116,12 +88,10 @@ public class JoinPageController extends HttpServlet {
 				*/
 				
 				
-<<<<<<< HEAD
-				
-=======
+
 				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
-										street, address, memBirthdate, gender  );
->>>>>>> 025564b9a6e42ab398fd70c4e64518ef931321ab
+										street, address, memBirthDate, gender  );
+
 				
 				
 				
@@ -134,14 +104,14 @@ public class JoinPageController extends HttpServlet {
 					response.sendRedirect(request.getContextPath());
 					
 				}else {
-					request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
-					RequestDispatcher view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+					request.setAttribute("alertMsg", "회원가입에 실패했습니다.");
+					RequestDispatcher view = request.getRequestDispatcher("/views/main/joinPage.jsp");
 					view.forward(request, response);
 				}
 				
 				
-				RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
-				view.forward(request, response);
+				//RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
+				//view.forward(request, response);
 				
 				
 			}
@@ -158,3 +128,25 @@ public class JoinPageController extends HttpServlet {
 	}
 
 }
+
+/*
+				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				 Date memBirthDate;
+				
+
+				//Date memBirthdate = request.getParameter("memBirthDate");
+				
+				String memBirthdate = request.getParameter("memBirthDate");
+				
+				/*
+				 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				 Date memBirthDate;
+
+				try {
+					memBirthDate = (Date) format.parse(request.getParameter("memBirthDate"));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+ */
