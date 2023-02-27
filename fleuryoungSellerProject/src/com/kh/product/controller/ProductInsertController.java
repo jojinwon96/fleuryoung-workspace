@@ -1,28 +1,23 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Category;
-
 /**
- * Servlet implementation class ProductInsertFormController
+ * Servlet implementation class ProductInsertController
  */
-@WebServlet("/productInsertForm.pr")
-public class ProductInsertFormController extends HttpServlet {
+@WebServlet("/insert.pr")
+public class ProductInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductInsertFormController() {
+    public ProductInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +26,11 @@ public class ProductInsertFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Category> clist = new ProductService().selectCategoryList();
-		request.setAttribute("clist",  clist);
-		request.getRequestDispatcher("views/product/productInsertView.jsp").forward(request, response);
+		int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+		String pName = request.getParameter("pName");
+		int price = Integer.parseInt(request.getParameter("pPrice"));
+		int pStock =Integer.parseInt(request.getParameter("pStock")); 
+		String filePath(request.getParameter("pDetailFile"));
 		
 	}
 

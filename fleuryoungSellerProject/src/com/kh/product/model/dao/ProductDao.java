@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.product.model.vo.Category;
 import com.kh.product.model.vo.Product;
 import com.kh.seller.model.dao.SellerDao;
 
@@ -27,6 +28,10 @@ private Properties prop = new Properties();
 		}
 	}
 	
+	/**
+	 * 상품리스트 조회
+	 * @return
+	 */
 	public ArrayList<Product> selectProductList(Connection conn, int selNo){
 		ArrayList<Product> list = new ArrayList<>();
 		ResultSet rset = null;
@@ -46,6 +51,39 @@ private Properties prop = new Properties();
 									,rset.getString("P_ENROLL_DATE")
 									,rset.getInt("P_SALES")
 									,rset.getString("CATEGORY_NAME")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 카테고리 리스트 조회
+	 * @return
+	 */
+	public ArrayList<Category> selectCategoryList(Connection conn){
+		ArrayList<Category> list = new ArrayList<>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectCategoryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Category((rset.getInt("CATEGORY_NO"))
+									, rset.getString("CATEGORY_DETAIL")
+									, rset.getString("CATEGORY_NAME")));
 			}
 			
 			

@@ -13,4 +13,12 @@ SELECT
   FROM 	TB_PRODUCT P
  WHERE 	SEL_NO = ?
 </entry>
+<entry key="selectCategoryList">
+SELECT
+		CATEGORY_NO
+	  , CATEGORY_DETAIL
+	  , CATEGORY_NAME
+  FROM 
+  		TB_CATEGORY
+</entry>
 </properties>
