@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,7 @@ public class ProductAddCartController extends HttpServlet {
 			
 			int pId = Integer.parseInt(request.getParameter("pId"));
 			int selNo = Integer.parseInt(request.getParameter("selNo"));
+			int opt1No = Integer.parseInt(request.getParameter("optFirstNo"));
 			
 		    String jsonStr = request.getParameter("jsonData");
 		    
@@ -47,13 +49,14 @@ public class ProductAddCartController extends HttpServlet {
 			// 데이터의 길이만큼 반복 및 JSONObject로 변환하며 확인
 		    for(int i=0;i<jsonArr.size();i++){
 		    	JSONObject jsonObj = jsonArr.getJSONObject(i);
-		    	System.out.println("옵션번호 : " + jsonObj.get("oNum"));
+		    	System.out.println("옵션번호 : " + jsonObj.get("optSecondNum"));
 		    	System.out.println("가격 : " + jsonObj.get("oPrice"));
 		    	System.out.println("수량 : " + jsonObj.get("oCount"));
 		    }
 		    
 		    System.out.println("pid : " + pId);
 		    System.out.println("selNo : " + selNo);
+		    System.out.println("opt1No : " + opt1No);
 	
 	}
 

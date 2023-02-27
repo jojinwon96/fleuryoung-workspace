@@ -41,7 +41,6 @@ public class ProductDetailController extends HttpServlet {
 		
 		// 상품(가게이름, 상품이름, 별점, 리뷰수, 가격, 옵션 ,상세이미지들)
 		Product p = pService.selectProductDetail(pid);
-		
 		//옵션
 		ArrayList<ProductOption> optList = pService.selectProductOption(pid);
 		
@@ -50,9 +49,13 @@ public class ProductDetailController extends HttpServlet {
 		
 		// 문의
 		ArrayList<Inquiry> inquiryList = pService.selectProductInquiry(pid);
-		System.out.println(p);
-		System.out.println(optList);
-		System.out.println(reviewList);
+		
+		if (optList.isEmpty()) {
+			System.out.println("null");
+		}
+		//System.out.println(p);
+		//System.out.println(optList);
+		//System.out.println(reviewList);
 		
 		request.setAttribute("product", p);
 		request.setAttribute("optList", optList);

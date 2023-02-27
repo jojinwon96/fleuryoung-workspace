@@ -7,6 +7,7 @@
 	
 	String title = (String)request.getAttribute("title");
 	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -305,11 +306,6 @@ h5 {
 							// 상품 이미지 클릭시 상품 상세 페이지로 이동
 							$('.card-img-top').click(function(){
 								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
-							})
-							
-							// 장바구니 아이콘 클릭시 해당 상품을 장바구니에 추가 
-							$(".mini_shopping").click(function() {
-								
 							})
 						})
 					</script>

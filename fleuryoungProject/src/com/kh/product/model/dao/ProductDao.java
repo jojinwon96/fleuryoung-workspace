@@ -231,7 +231,7 @@ public class ProductDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pid);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
 				inquiryList.add(new Inquiry(rs.getInt("P_ID")
 						  , rs.getString("MEM_ID")

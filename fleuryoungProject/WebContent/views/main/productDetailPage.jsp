@@ -12,7 +12,8 @@
 	ArrayList<ProductOption> optList = (ArrayList<ProductOption>) request.getAttribute("optList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) request.getAttribute("reviewList");
 	ArrayList<Inquiry> inquiryList = (ArrayList<Inquiry>) request.getAttribute("inquiryList");
-
+	
+	request.setCharacterEncoding("utf-8");
 %>
 <!DOCTYPE html>
 <html>
@@ -142,15 +143,12 @@
 							<%
 								if (p.getpDayDelivery().charAt(0) == 'Y') {
 							%>
-							<div class="col"
-								style="margin-left: -19px; font-size: 13px; font-weight: bolder;">무료배송</div>
-							<div class="col">
-								<img
-									src="${pageContext.request.contextPath}/resources/image/icon/express-delivery.png"
-									style="width: 25px; height: 25px; margin-right: -100px; margin-top: -10px;">
+							<div class="col-5"
+								style="margin-left: -18px; font-size: 12px; font-weight: bolder;">50,000원 이상시 무료배송
 							</div>
-							<div class="col"
-								style="font-size: 13px; font-weight: bolder; color: rgb(248, 178, 188);">당일배송
+							
+							<div class="row"
+								style="margin-left: -10px; font-size: 13px; font-weight: bolder; color: rgb(248, 178, 188);">당일배송
 							</div>
 							<%
 								} else {
@@ -346,18 +344,19 @@
 											console.log($(this).val());
 											$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma((Number(onlyNum) + price) + "") + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div><h1 class=\"hideOptNo\" style=\"display: none\";>"+ $(this).val() +"</h1></div></div></div>");
 											
+											$('#selectBox').val('<%=optList.get(0).getOptTitle()%>').trigger('change');
 										}	
 									<%} else {%>
-										$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly/><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
+										console.log('<%=p.getpNetPrice()%>');
+										$('.connect').append("<div class=\"option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly/><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
 									<%}%>
 									
-								} else {
-									alert('이미 추가한 옵션입니다.');
-								}
-									$('#selectBox').val('<%=optList.get(0).getOptTitle()%>').trigger('change');
-							})
+										} else {
+										alert('이미 추가한 옵션입니다.');
+									}
+								})
 
-						});
+							});
 						</script>
 
 						<div class="mt-5 row">
@@ -431,6 +430,11 @@
 					$(".add-cart").click(function(){
 						let selNo = "";
 						let pId = "";
+						<% if( !optList.isEmpty()) { %>
+							let optFirstNo = "<%=optList.get(0).getOpt1ndNo()%>"
+						<% }%>
+						
+						console.log("1번옵션 : " + typeof(optFirstNo));
 						// 옵션 있을때
 						let cartList = [];
 						if (opArr != ""){ // 장바구니에 상품 담겼을때
@@ -442,7 +446,7 @@
 								let optCount = $(this).find(".inp").val();
 								
 								if (optNo != null){
-									cartList[index] = {oNum:optNo, oPrice:optPrice, oCount:optCount};	
+									cartList[index] = {optSecondNum:optNo, oPrice:optPrice, oCount:optCount};	
 								}
 								
 								console.log(typeof(optNo));
@@ -477,7 +481,7 @@
 		                    type : "post", // 요청방식 지정
 		                    traditional :true,	
 		                    //dataType : "json",
-		                    data : {jsonData:jsonData, selNo:selNo, pId:pId}, 
+		                    data : {jsonData:jsonData, selNo:selNo, pId:pId, optFirstNo:optFirstNo}, 
 		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
 		                        console.log("ajax 통신 성공!");
 		                    },
