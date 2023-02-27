@@ -54,9 +54,14 @@
         , SYSDATE
         ,'N'
         ,(TO_DATE)?
+<<<<<<< HEAD
         ,?
         ,?
         ,'Y'
+=======
+        ,(TO_NUMBER)?
+        'Y'
+>>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
         )
 	
 	</entry>

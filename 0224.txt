@@ -1,0 +1,3 @@
+	  	flower 						server
+header		joinpage.me					enrollForm.me
+server->회원가입 클릭 시 화면은 memberEnrollForm.jsp로, controller는 MemberEnrollFormController로(enrollForm.me)
