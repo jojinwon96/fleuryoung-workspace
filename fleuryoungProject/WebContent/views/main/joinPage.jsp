@@ -334,27 +334,17 @@ button {
 
 
 						<div id="idArea">
-<<<<<<< HEAD
-							<label for="id"><small>*</small> 아이디</label> <input type="text" name="userId" 
-								class="form-control" id="idInput" required
-=======
 							<label for="id"><small>*</small> 아이디</label> <input type="text"
 								class="form-control" id="idInput" required name="memId"
->>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
 								placeholder="공백없이 소문자,숫자로 5~12글자">
 							<button id="idCheckBtn" onclick="idCheck();">중복확인</button>
 						</div>
 
 
 						<div id="pwdArea1">
-<<<<<<< HEAD
 							<label for="password"><small>*</small> 비밀번호</label> <input 
 								type="password" class="form-control" id="pwdInput" required
 								name = "userPwd"
-=======
-							<label for="password"><small>*</small> 비밀번호</label> <input
-								type="password" class="form-control" id="pwdInput" name="memPwd" required
->>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
 								placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
 						</div>
 
@@ -370,14 +360,9 @@ button {
 						
 						<div id="emailArea">
 							<label for="email">이메일</label> <input type="email"
-<<<<<<< HEAD
 							name="email"
 							class="form-control" id="emailInput"> <br> <a
 							href=""><button type="button"
-=======
-							class="form-control" id="emailInput" name="email"> <br> <a
-							href="" required><button type="button"
->>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
 							class="btn btn-outline-success" id="emailButton">이메일
 							인증하기</button></a>
 						</div>
@@ -635,7 +620,6 @@ button {
                 
 			
 
-<<<<<<< HEAD
 	<!-- 아이디, 비밀번호 정규표현식  -->
 	<script>
         function userEnroll() {
@@ -747,9 +731,6 @@ button {
     	    
     		};
     </script>
-=======
-	
->>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
     
     <!-- ------------------------------------------------------------------------------------------------- -->
     

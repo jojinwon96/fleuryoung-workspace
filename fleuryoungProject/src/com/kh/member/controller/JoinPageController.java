@@ -43,13 +43,13 @@ public class JoinPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
 				
-<<<<<<< HEAD
+
 			
 				
 				
-				RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
-				view.forward(request, response);
-=======
+				//RequestDispatcher view = request.getRequestDispatcher("views/main/joinPage.jsp");
+				//view.forward(request, response);
+
 				
 				String memId = request.getParameter("memId"); 
 				String memPw = request.getParameter("memPw"); 
@@ -112,8 +112,8 @@ public class JoinPageController extends HttpServlet {
 					
 				}else {
 					request.setAttribute("alertMsg", "회원가입에 실패했습니다.");
-					RequestDispatcher view = request.getRequestDispatcher("/views/main/joinPage.jsp");
-					view.forward(request, response);
+					RequestDispatcher view1 = request.getRequestDispatcher("/views/main/joinPage.jsp");
+					view1.forward(request, response);
 				}
 				
 				
@@ -121,7 +121,7 @@ public class JoinPageController extends HttpServlet {
 				//view.forward(request, response);
 				
 				
->>>>>>> 88f7c9c3eef32207cbe395f67c009176ae85be7a
+
 			}
 	
 
