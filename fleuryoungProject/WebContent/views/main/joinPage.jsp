@@ -344,7 +344,7 @@ button {
 						<div id="pwdArea1">
 							<label for="password"><small>*</small> 비밀번호</label> <input 
 								type="password" class="form-control" id="pwdInput" required
-								name = "userPwd"
+								name = "memPw"
 								placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
 						</div>
 
@@ -392,12 +392,8 @@ button {
 						
 						<div id="genderArea">
 							<label for= "birthDate">성별</label>
-							<!-- <select name="job" id="gender">
-								<option value="1">남</option>
-								<option value="2">여</option> -->
 								<input type="radio" name="gender" id="male"  value="1" onchange="checkMale(this);">남
 								<input type="radio" name="gender" id="female"  value="2" onchange="checkFemale(this);">여
-							</select>
 						</div>
 						
 						<script>

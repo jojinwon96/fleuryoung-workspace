@@ -112,8 +112,8 @@ public class JoinPageController extends HttpServlet {
 					
 				}else {
 					request.setAttribute("alertMsg", "회원가입에 실패했습니다.");
-					RequestDispatcher view1 = request.getRequestDispatcher("/views/main/joinPage.jsp");
-					view1.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("/views/main/joinPage.jsp");
+					view.forward(request, response);
 				}
 				
 				

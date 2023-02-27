@@ -43,22 +43,19 @@
         )
     VALUES
     (
-          ?
-        , ?
-        , ?
-        , ?
-        , ?
-        , ?
-        , ?
+         ?
         ,?
-        , SYSDATE
+        ,?
+        ,?
+        ,?
+        ,?
+        ,?
+        ,?
+        ,SYSDATE
         ,'N'
         ,(TO_DATE)?
-        ,?
-        ,?
-        ,'Y'
         ,(TO_NUMBER)?
-        'Y'
+        ,'Y'
         )
 	
 	</entry>

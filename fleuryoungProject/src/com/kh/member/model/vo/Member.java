@@ -70,7 +70,6 @@ public class Member {
 	
 	
 	
-	
 
 	public String getMemId() {
 		return memId;
