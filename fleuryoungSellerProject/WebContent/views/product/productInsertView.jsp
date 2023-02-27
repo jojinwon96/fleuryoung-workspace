@@ -88,42 +88,38 @@
 				
 								<div class="form-group row">
 									<label class="col-form-label col-md-2">상품 총수량
-									<span onclick="remove_table();" style="cursor:pointer"><i>+</i></span>
-									<span onclick="add_table();" style="cursor:pointer"><i>-</i></span>
 									</label>
 									<div class="col-md-10">
-										<table id="table01">
-										 <tbody>
+										<table>
+											<tbody id="table_1">
+												<tr>
+													<td>
+														옵션 제목
+														<button id="add" type="button" class="btn btn-primary btn-sm">+</button>
+														<button id="remove" type="button" class="btn btn-primary btn-sm">-</button>
+												</td>
+											</tr>
 										 </tbody>
 										</table>
 									</div>
 								</div> <!-- 옵션 -->		
 								<script>
-									var is_number=<?=$ix?>; // 기존 input 갯수(현재총갯수 default)
-									function add_table()
-									{
-										var max5=5;//최대추가갯수
-									
-										for(var i=0;i<max5;i++)
-										{
-										 $("#table01 > tbody:last").append("<tr><td><input type='text' name='st_num[]' style='width:260px;' value=''/></td><td><input type='text' name='st_name[]' style='width:260px;' value=''/></td></tr>");
-										}
-									     is_number=is_number+5;//총갯수+5
-									}
-									
-									function remove_table()
-									{
-										if(is_number > <?=$ix?>)
-										{
-										     var max5=5; //최대 제거 갯수
-										     for(var i=0;i<max5;i++)
-										     {
-										        $("#table01 > tbody:last > tr:last").remove();
-										     }
-										     is=is-5;//총 갯수 -5를 한다.
-										}
+									$(document).ready(function(){
+										let count = 1;
 										
-									}
+										$('#add').click(function(){
+											let option_1 = "<tr><td><input type='text' class='form-control' name='pStock' placeholder='1차 옵션을 입력하세요' required ></td></tr>"
+											if(count <=3){
+												$("#table_1").append(option_1);
+												count++;
+											}else {
+												alert("너무 많습니다.");
+											}
+											
+										});
+
+										$('#remove').click()
+									})
 								</script>
 								
 								<div class="form-group row">

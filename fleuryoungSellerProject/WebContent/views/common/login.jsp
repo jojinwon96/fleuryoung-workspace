@@ -1,10 +1,11 @@
-<%@ page import="com.kh.seller.model.vo.*" %>
-<%@ page import="com.kh.common.*"%>
+
+<%@page import="com.kh.seller.model.vo.Seller"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
     String contextPath = request.getContextPath(); 
     Seller loginSeller = (Seller)session.getAttribute("loginSeller");
+    
     
     String alertMsg = (String)session.getAttribute("alertMsg");
     %>

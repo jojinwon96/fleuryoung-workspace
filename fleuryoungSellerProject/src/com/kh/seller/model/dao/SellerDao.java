@@ -1,5 +1,7 @@
 package com.kh.seller.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import static com.kh.common.JDBCTemplate.*;
 
 import com.kh.seller.model.vo.Seller;
 
