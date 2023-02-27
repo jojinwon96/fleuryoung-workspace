@@ -72,6 +72,36 @@ public class MemberDao {
 		
 		return member;
 	}
+
+	public String checkMember(Connection conn, String memId) {
+
+		String result = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("checkMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getString("MEM_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	

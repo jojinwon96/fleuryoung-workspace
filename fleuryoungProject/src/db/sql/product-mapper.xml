@@ -89,6 +89,59 @@
 		JOIN TB_MEMBER USING (MEM_ID)
 		WHERE P_ID = ?
 	</entry>
+	
+	<entry key="insertMemberCart">
+		INSERT INTO 
+		    TB_CART 
+		        (
+		         CART_ID
+		       , OPTION_1ND_NO
+		       , OPTION_2ND_NO
+		       , OPTION_STOCK
+		       , NON_OPTION_STOCK
+		       , CART_ADD_DATE
+		       , P_ID
+		       , MEM_ID
+		       , NON_MEM_ID
+		       )
+		       VALUES
+		      (
+		       SEQ_CART.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="selectOptCart">
+		SELECT OPTION_2ND_NO, OPTION_STOCK, P_ID
+		FROM TB_CART
+		WHERE MEM_ID = ? AND P_ID = ? AND OPTION_2ND_NO = ?
+	</entry>
+	
+	<entry key="selectDefaultCart">
+		SELECT NON_OPTION_STOCK, P_ID
+		FROM TB_CART
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="updateOptCart">
+		UPDATE TB_CART
+		SET OPTION_STOCK = ?
+		WHERE MEM_ID = ? AND OPTION_2ND_NO = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="updateDefaultCart">
+		UPDATE TB_CART
+		SET NON_OPTION_STOCK = ?
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
 </properties>
 
 

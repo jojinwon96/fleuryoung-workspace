@@ -154,7 +154,7 @@
 								} else {
 							%>
 							<div class="col"
-								style="margin-left: -190px; font-size: 13px; font-weight: bolder;">무료배송</div>
+								style="margin-left: -100px; font-size: 13px; font-weight: bolder;">50,000원 이상시 무료배송</div>
 							<%
 								}
 							%>
@@ -232,6 +232,7 @@
 						<script>
 						let opArr = [];
 						let price = Number(onlyNo("<%= p.getpNetPrice()%>"));
+						let count = 0;
 						//천단위 콤마 펑션
 					   	function comma(str) {
 					        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -246,13 +247,6 @@
 					   	}
 					   	
 						$(function() {
-							let pBtn = $("#plus");
-							let mBtn = $("#minus");
-							let inp = $(".inp");
-							
-							let max = 0; 
-							let current = 0;
-							let total = 0;
 							
 							// 감소
 							$(document).on("click", ".minus", function(){
@@ -265,8 +259,13 @@
 									console.log("이거 : " + onlyStr(optget));
 									console.log("여기" + typeof(onlyNo(optget)));
 									
+									console.log("optList : " + '<%=optList%>');
 									// 결과
-									optNum.html(comma((Number(onlyNo(optNum.html())) -( Number(optget) + price))+"") + "원");
+									<%if (!optList.isEmpty()) {%>
+										optNum.html(comma((Number(onlyNo(optNum.html())) - (Number(optget) + price))+"") + "원");
+									<% } else { %>
+										optNum.html(comma((Number(onlyNo(optNum.html())) - Number(optget))+"") + "원");
+									<% } %>
 								}
 							});
 							
@@ -277,8 +276,11 @@
 								let optNum = $(this).parents(".add-option").find(".optPrice"); 
 						        
 								// 결과
-								optNum.html(comma(((Number(optget) + price) * Number(tmp.val()))+"") + "원");
-								
+								<%if (!optList.isEmpty()) {%>
+									optNum.html(comma(((Number(optget) + price) * Number(tmp.val()))+"") + "원");
+								<% } else { %>
+									optNum.html(comma((Number(optget) * Number(tmp.val()))+"") + "원");
+								<% } %>
 								
 							});
 							
@@ -317,44 +319,47 @@
 						
 						$(document).ready(function(){
 														
-							$("#selectBox").on('change', function(){
-								
-								let optTitle = $("#selectBox option:selected").html();
-								let tmp = $("#selectBox option:selected").html();
-									tmp = tmp.split("+");
-								
-								if (!opArr.includes(tmp[0])){
+							<%if (!optList.isEmpty()) {%>
+								$("#selectBox").on('change', function(){
 									
-									// 한글만 추출
-									let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
-									let onlyTitle = tmp[0].replace(kor, '');
+									let optTitle = $("#selectBox option:selected").html();
+									let tmp = $("#selectBox option:selected").html();
+										tmp = tmp.split("+");
 									
-									console.log(onlyTitle);
-									
-									// 숫자만 추출
-									let n = /[^0-9]/g;
-									let onlyNum = tmp[1].replace(n, '');
-									
-									// 원가
-									<%if (!optList.isEmpty()) {%>
+									if (!opArr.includes(tmp[0])){
+										
+										// 한글만 추출
+										let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+										let onlyTitle = tmp[0].replace(kor, '');
+										
+										console.log(onlyTitle);
+										
+										// 숫자만 추출
+										let n = /[^0-9]/g;
+										let onlyNum = tmp[1].replace(n, '');
+										
+										
 										if(optTitle != '<%=optList.get(0).getOptTitle()%>'){
-											
-											opArr.push(tmp[0]);	
-											
-											console.log($(this).val());
-											$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma((Number(onlyNum) + price) + "") + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div><h1 class=\"hideOptNo\" style=\"display: none\";>"+ $(this).val() +"</h1></div></div></div>");
-											
-											$('#selectBox').val('<%=optList.get(0).getOptTitle()%>').trigger('change');
-										}	
-									<%} else {%>
-										console.log('<%=p.getpNetPrice()%>');
-										$('.connect').append("<div class=\"option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\"></div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly/><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"py-2 col\">" + <%=p.getpNetPrice()%> + "</div></div></div></div>");
-									<%}%>
-									
+												
+												opArr.push(tmp[0]);	
+												
+												console.log($(this).val());
+												$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma((Number(onlyNum) + price) + "") + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div><h1 class=\"hideOptNo\" style=\"display: none\";>"+ $(this).val() +"</h1></div></div></div>");
+												
+												$('#selectBox').val('<%=optList.get(0).getOptTitle()%>').trigger('change');
+											}	
+										
 										} else {
-										alert('이미 추가한 옵션입니다.');
-									}
-								})
+											alert('이미 추가한 옵션입니다.');
+										}
+									})
+								<%} else {%>
+								
+									let optNonePrice = $.trim('<%=p.getpNetPrice()%>') + "원";
+									let onlyNum = onlyNo(optNonePrice);
+									
+									$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"py-2 col\">기본</div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly/><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + optNonePrice + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div></div></div>");
+								<%}%>
 
 							});
 						</script>
@@ -367,8 +372,8 @@
 							<%
 								if (optList.isEmpty()) {
 							%>
-							<div class="col"
-								style="margin-right: -50px; font-weight: bolder; font-size: 25px;"><%=p.getpNetPrice()%>원
+							<div class="opt-total col"
+								style="margin-right: -30px; font-weight: bolder; font-size: 25px;"><%=p.getpNetPrice()%>원
 							</div>
 							<%
 								} else {
@@ -427,61 +432,58 @@
 			
 			<script>
 				$(document).ready(function(){
+					console.log(opArr);
 					$(".add-cart").click(function(){
-						let selNo = "";
-						let pId = "";
-						<% if( !optList.isEmpty()) { %>
-							let optFirstNo = "<%=optList.get(0).getOpt1ndNo()%>"
+						
+						let selNo = '<%=p.getSelNo() %>';
+						let pId = '<%=p.getpId()%>';
+						let memId = "";
+						let optFirstNo = 0;
+						let cartList = [];
+						
+						<% if(loginUser != null) {%>
+							memId = '<%=loginUser.getMemId()%>';
 						<% }%>
 						
-						console.log("1번옵션 : " + typeof(optFirstNo));
-						// 옵션 있을때
-						let cartList = [];
-						if (opArr != ""){ // 장바구니에 상품 담겼을때
-							let arr = [];
+						<% if( !optList.isEmpty()) { %>  // 옵션 있을때
+							optFirstNo = "<%=optList.get(0).getOpt1ndNo()%>"
+								
+								if (opArr != ""){ // 장바구니에 옵션이 있을때
 
-							$(".add-option").each(function(index){
-								let optNo = $(this).find(".hideOptNo").html();
-								let optPrice = $(this).find(".hideOptPrice").html();
-								let optCount = $(this).find(".inp").val();
-								
-								if (optNo != null){
-									cartList[index] = {optSecondNum:optNo, oPrice:optPrice, oCount:optCount};	
+									$(".add-option").each(function(index){
+										let optNo = $(this).find(".hideOptNo").html();
+										let optCount = $(this).find(".inp").val();
+										
+										if (optNo != null){
+											cartList[index] = {opt2ndNo:optNo, optCount:optCount};	
+										}
+									})
+									
+									// 판매자No, 상품ID, 옵션명, 옵션수량,  옵션가격, 
+									//location.href = '/fleuryoungProject/startPage.p?num=1';
+									$(".cart-modal").show();
+									$(".cart-modal-none").hide();
+								} else {
+									$(".cart-modal").hide();
+									$(".cart-modal-none").show();
 								}
-								
-								console.log(typeof(optNo));
-								console.log(typeof(optPrice));
-								console.log(typeof(optCount));
-							})
-							
-							selNo = '<%=p.getSelNo() %>';
-							pId = '<%=p.getpId()%>';
-							
-							console.log("판매자 : "  +typeof(selNo));
-							console.log("상품 : " + typeof(pId));
-							
-							// 판매자No, 상품ID, 옵션명, 옵션수량,  옵션가격, 
-							//location.href = '/fleuryoungProject/startPage.p?num=1';
-							$(".cart-modal").show();
-							$(".cart-modal-none").hide();
-						} else {
-							$(".cart-modal").hide();
-							$(".cart-modal-none").show();
-						}
+						<% } else { %> // 옵션 없을때
+								$(".cart-modal").show();
+								$(".cart-modal-none").hide();
+						<% }%>
 						
-						console.log("여기 : " + typeof(cartList[0]));
 						
+						console.log("요기다 : " + count);
 						let jsonData = JSON.stringify(cartList);
 						
 						// 장바구니 추가 
-						
 		                $.ajax({
 		                    // 요청보내기
 		                    url : "addCart.p", // 어느 url로 보낼 건지
 		                    type : "post", // 요청방식 지정
 		                    traditional :true,	
 		                    //dataType : "json",
-		                    data : {jsonData:jsonData, selNo:selNo, pId:pId, optFirstNo:optFirstNo}, 
+		                    data : {jsonData:jsonData, selNo:selNo, pId:pId, opt1stNo:optFirstNo, memId:memId, count:count}, 
 		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
 		                        console.log("ajax 통신 성공!");
 		                    },
