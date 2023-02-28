@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <%
+	String alertMsg = (String)request.getAttribute("alertMsg");	
 	// 서비스 요청 전 menubar.jsp 로딩시 : null
 	// 서비스 성공 후 menubar.jsp 로싱시 : alert로 띄어줄 메세지 문구
-	String alertMsg = (String)request.getAttribute("alertMsg");
 %>
 
 <!DOCTYPE html>
@@ -29,6 +29,7 @@
 	</script>
 	<% session.removeAttribute("alertMsg"); %>
 	<% } %>
+
 	<div class="section pb-5 pt-5 pt-sm-2 text-center">
 		<h6 class="mb-0 pb-3">
 			<span>회원로그인 </span> <span>비회원 주문조회</span>
@@ -97,7 +98,6 @@
 		</div>
 	</div>
 	
-
 	
 	
 </body>

@@ -38,7 +38,7 @@ public class JDBCTemplate {
 			// 접속하고자 하는 db의 url, 계정명, 비번 제시해서 Connection 객체 생성
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"),
 					prop.getProperty("password"));
-			conn.setAutoCommit(false);
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
