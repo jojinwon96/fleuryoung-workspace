@@ -1,6 +1,7 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,7 @@ public class ProductInsertController extends HttpServlet {
 		String pName = request.getParameter("pName");
 		int price = Integer.parseInt(request.getParameter("pPrice"));
 		int pStock =Integer.parseInt(request.getParameter("pStock")); 
-		String filePath(request.getParameter("pDetailFile"));
+		String filePath = (request.getParameter("pDetailFile"));
 		
 	}
 
