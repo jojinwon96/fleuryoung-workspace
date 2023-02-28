@@ -51,7 +51,7 @@ public class MemberDao {
 						          , rs.getString("MEM_EMAIL")
 						          , rs.getString("MEM_NAME")
 						          , rs.getString("MEM_PHONE")
-						          , rs.getString("MEM_POSTAL")
+						          , rs.getInt("MEM_POSTAL")
 						          , rs.getString("MEM_STREET")
 						          , rs.getString("MEM_ADDRESS")
 						          , rs.getDate("MEM_ENROLL_DATE")
@@ -59,7 +59,7 @@ public class MemberDao {
 						          , rs.getString("MEM_IMG")
 						          , rs.getString("MEM_GET_PHONE")
 						          , rs.getString("MEM_BIRTHDATE")
-						          , rs.getString("MEM_GENDER")
+						          , rs.getInt("MEM_GENDER")
 						          , rs.getString("MEM_STATUS"));
 			}
 			
@@ -85,26 +85,29 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql); 
 			
+			System.out.println();
+			
 			pstmt.setString(1, m.getMemId());
 			pstmt.setString(2, m.getMemPw());
 			pstmt.setString(3, m.getEmail());
 			pstmt.setString(4, m.getMemName());
 			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getPostal());
+			pstmt.setInt(6, m.getPostal());
 			pstmt.setString(7, m.getStreet());
 			pstmt.setString(8, m.getAddress());
 			pstmt.setString(9, m.getMemBirthDate());
-			pstmt.setString(10, m.getGender());
-			//pstmt.setString(10, m.getGender[0]);
-			
+			pstmt.setInt(10, m.getGender());
 			
 			
 			
 			result = pstmt.executeUpdate();
 			
+			System.out.println(result);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			
 			close(pstmt);
 		}
 		return result;

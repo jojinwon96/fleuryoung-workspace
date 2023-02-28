@@ -56,47 +56,15 @@ public class JoinPageController extends HttpServlet {
 				String memName = request.getParameter("memName"); 
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
-				String postal = request.getParameter("postal");
+				int postal = Integer.parseInt(request.getParameter("postal"));
 				String street = request.getParameter("street");
 				String address = request.getParameter("address");
-
-				//String[] gender = (request.getParameterValues("gender"));
-				String gender = request.getParameter("gender");
-				
-
+				int gender = Integer.parseInt(request.getParameter("gender"));
+				System.out.println(gender);
 				String memBirthDate = request.getParameter("memBirthDate");
-				
-				
-				
-				//Date memBirthdate = request.getParameter("memBirthDate");
-				
-				/*
-				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
-						street, address, memBirthDate, gender  );
-						
-						*/
-				
-				
-				
-				
-				
-				
-				//sql로 import? util로 import?
-				/*
-				String dateString = request.getParameter("memBirthDate");
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM//dd");
-				Date memBirthdate = (Date) sdf.parse(dateString);
-				*/
-				
-				
-				
-				/*		
-				int memGender = Integer.parseInt(request.getParameter("memGender"));
-				*/
-				
-				
+				System.out.println(memBirthDate);
 
-				Member m = new 	Member(memId, memPw, email , memName,  phone, postal,
+				Member m = new 	Member(memId, memPw, email , memName,  phone, postal, 
 										street, address, memBirthDate, gender  );
 
 				
@@ -106,12 +74,10 @@ public class JoinPageController extends HttpServlet {
 				
 				if(result>0) {
 					HttpSession session = request.getSession();
-					session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다");
 					
 					response.sendRedirect(request.getContextPath());
 					
 				}else {
-					request.setAttribute("alertMsg", "회원가입에 실패했습니다.");
 					RequestDispatcher view = request.getRequestDispatcher("/views/main/joinPage.jsp");
 					view.forward(request, response);
 				}

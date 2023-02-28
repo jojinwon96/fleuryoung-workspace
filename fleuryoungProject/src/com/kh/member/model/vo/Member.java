@@ -9,7 +9,7 @@ public class Member {
 	private String email;
 	private String memName;
 	private String phone;
-	private String postal; // 우편번호
+	private int postal; // 우편번호
 	private String street;
 	private String address;
 	private Date enrollDate;
@@ -17,7 +17,7 @@ public class Member {
 	private String memImg;
 	private String getPhone;
 	private String memBirthDate;
-	private String gender;
+	private int gender;
 	private String status;
 	
 	
@@ -28,9 +28,9 @@ public class Member {
 	
 	
 
-	public Member(String memId, String memPw, String email, String memName, String phone, String postal, String street,
+	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
 			String address, Date enrollDate, int mileage, String memImg, String getPhone, String memBirthDate,
-			String gender, String status) {
+			int gender, String status) {
 		super();
 		this.memId = memId;
 		this.memPw = memPw;
@@ -51,8 +51,8 @@ public class Member {
 
 
 
-	public Member(String memId, String memPw, String email, String memName, String phone, String postal, String street,
-			String address, String memBirthDate, String gender) {
+	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
+			String address, String memBirthDate, int gender) {
 		super();
 		this.memId = memId;
 		this.memPw = memPw;
@@ -68,9 +68,6 @@ public class Member {
 	}
 	
 	
-	
-	
-
 	public String getMemId() {
 		return memId;
 	}
@@ -111,11 +108,11 @@ public class Member {
 		this.phone = phone;
 	}
 
-	public String getPostal() {
+	public int getPostal() {
 		return postal;
 	}
 
-	public void setPostal(String postal) {
+	public void setPostal(int postal) {
 		this.postal = postal;
 	}
 
@@ -143,11 +140,11 @@ public class Member {
 		this.memBirthDate = memBirthDate;
 	}
 
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 

@@ -60,12 +60,9 @@
 
 							</form>
 							<p class="mb-0 mt-4 text-center">
-								<a href="#0" class="link">아이디찾기</a>
+								<a href="<%= contextPath %>/findIdPage.me" class="link" style="text-decoration: none;">아이디찾기 | 비밀번호찾기</a>
 							</p>
-							<p>|</p>
-							<p class="mb-0 mt-4 text-center">
-								<a href="#0" class="link">비밀번호찾기</a>
-							</p>
+							
 						</div>
 					</div>
 				</div>

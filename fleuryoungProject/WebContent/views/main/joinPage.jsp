@@ -316,7 +316,7 @@ button {
 		</div>
 
 		<h6>
-			<small>*</small> 항목은 필수 입력 항목입니다.
+			<small>*</small> 아래 항목들은 전부 필수 입력 항목입니다.
 		</h6>
 		<br>
 
@@ -325,6 +325,7 @@ button {
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div>
 			<!-- id = "enroll-form" -->
+			<!-- <small>*</small> -->
 				<form action="/fleuryoungProject/insert.me"  method="post">
 					<div id="info">
 
@@ -334,7 +335,7 @@ button {
 
 
 						<div id="idArea">
-							<label for="id"><small>*</small> 아이디</label> <input type="text"
+							<label for="id"> 아이디</label> <input type="text"
 								class="form-control" id="idInput" required name="memId"
 								placeholder="공백없이 소문자,숫자로 5~12글자">
 							<button id="idCheckBtn" onclick="idCheck();">중복확인</button>
@@ -342,7 +343,7 @@ button {
 
 
 						<div id="pwdArea1">
-							<label for="password"><small>*</small> 비밀번호</label> <input 
+							<label for="password"> 비밀번호</label> <input 
 								type="password" class="form-control" id="pwdInput" required
 								name = "memPw"
 								placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
@@ -350,7 +351,7 @@ button {
 
 
 						<div id="pwdArea2">
-							<label for="password"><small>*</small>비밀번호 확인</label> <input
+							<label for="password">비밀번호 확인</label> <input
 								type="password" class="form-control" id="pwdInputCheck"
 								placeholder="비밀번호를 다시 입력해주세요" required>
 						</div>
@@ -370,7 +371,7 @@ button {
 						
 						
 						<div id="nameArea">
-							<label for="id"><small>*</small>이름</label>
+							<label for="id">이름</label>
 							<input type="text" class="form-control" id="nameInput" name="memName"  required>
 						</div>
 
@@ -392,8 +393,8 @@ button {
 						
 						<div id="genderArea">
 							<label for= "birthDate">성별</label>
-								<input type="radio" name="gender" id="male"  value="1" onchange="checkMale(this);">남
-								<input type="radio" name="gender" id="female"  value="2" onchange="checkFemale(this);">여
+								<input type="radio" name="gender" id="male"  value=1 onchange="checkMale(this);">남
+								<input type="radio" name="gender" id="female"  value=2 onchange="checkFemale(this);">여
 						</div>
 						
 						<script>
@@ -432,7 +433,7 @@ button {
 							<label for="address" id="addressLabel">주소</label>
 		
 							<div id="addressDiv2"> 
-							 <input type="text" id="address1" placeholder="주소번호" name="postal"  >
+							 <input type="number" id="address1" placeholder="주소번호" name="postal"  >
 							<button id="btn-address" onclick="sample6_execDaumPostcode()" type="button" >주소검색</button>  <br>
 							<input type="text"  id="address2" placeholder="도로명주소" name="street" > <br>
 							<input type="text" class="form-control" id="address3" placeholder="상세주소를 입력해주세요" name="address"> 

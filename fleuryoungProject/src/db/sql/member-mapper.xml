@@ -25,7 +25,8 @@
 	
 	<entry key="insertMember">
 	INSERT
-    INTO MEMBER
+    INTO 
+    TB_MEMBER
     (
          MEM_ID
         ,MEM_PW
@@ -53,8 +54,8 @@
         ,?
         ,SYSDATE
         ,'N'
-        ,(TO_DATE)?
-        ,(TO_NUMBER)?
+        ,TO_DATE(?)
+        ,?
         ,'Y'
         )
 	
