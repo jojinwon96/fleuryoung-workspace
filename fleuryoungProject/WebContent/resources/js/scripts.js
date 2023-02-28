@@ -626,15 +626,11 @@ $(function () {
 
 
 
-    $(".call-tr").click(function(){
-        let $tr1 = $(this).next(); 
-        let $tr2 = $(this).next().next();
-        let $tr3 = $(this).next().next().next();
+    $(".call-tr").click(function () {
+        let $tr = $(this).next();
 
-        if ($tr1.css("display") == "none" && $tr2.css("display") == "none" && $tr3.css("display") == "none"){
-            $tr1.show();
-            $tr2.show();
-            $tr3.show();
+        if ($tr.css("display") == "none") {
+            $tr.show();
         } else {
             $tr1.hide();
             $tr2.hide();
@@ -680,55 +676,48 @@ $(function () {
 
 
 
+}); // 상품 상세 페이지
 
 
 
+//--------------------------챗 사이드바 -------------------------
 
-    // 사이드바 테스트 챗봇
 
-    const categories = document.querySelectorAll('.category');
+// 마우스가 toggleBox 영역을 떠나면 모든 smallBox를 숨김
+// toggleBox.mouseleave(function () {
+//     $(".smallBox").hide();
+// });
 
-    categories.forEach(category => {
-        category.addEventListener('click', () => {
-            categories.forEach(c => {
-                if (c !== category) {
-                    c.classList.remove('active');
-                }
-            });
-            category.classList.toggle('active');
-        });
+// // bigBox에 마우스 호버시 해당 bigBox에 속한 smallBox만 보여줌
+// bigBox.hover(function () {
+//     $(this).siblings(".smallBox").show();
+// }, function () {
+//     $(this).siblings(".smallBox").hide();
+// });
+
+// // smallBox에 마우스 호버시 해당 smallBox를 보여줌
+// smallBox.hover(function () {
+//     $(this).show();
+// }, function () {
+//     $(this).hide();
+// });
+
+
+
+// html dom 이 다 로딩된 후 실행된다.
+$(document).ready(function () {
+    // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+    $(".menu>a").click(function () {
+        var submenu = $(this).next("ul");
+
+        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if (submenu.is(":visible")) {
+            submenu.slideUp();
+        } else {
+            submenu.slideDown();
+        }
     });
-
-
-
-
-    // 사이드바 호버시 아래메뉴 출력
-
-    $(".bigBox, .smellBox").mouseover(function () {
-        $('.smellBox').show();
-        $('.smellBox').css("marginTop", "-10px");
-
-    });
-
-    $(".bigBox, .smellBox").mouseout(function () {
-        $('.smellBox').hide();
-
-    });
-
-
-
-
-
-
-
-
-
-
-})
-
-
-
-
+});
 
 
 
@@ -753,14 +742,6 @@ $(function () {
 * Vanilla JavaScript Version
 * ---------------------------------------------------------------------------
 */
-
-
-
-
-
-
-
-
 
 
 
