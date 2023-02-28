@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectProductList">
+SELECT
+      	  (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
+    	, P_NAME
+    	, P_NETPRICE
+    	, P_STOCK
+    	, TO_CHAR(P_ENROLL_DATE, 'YY/MM/dd') "P_ENROLL_DATE"
+    	, P_SALES
+    	, (SELECT CATEGORY_NAME FROM TB_CATEGORY C WHERE C.CATEGORY_NO = P.CATEGORY_NO) "CATEGORY_NAME"
+  FROM 	TB_PRODUCT P
+ WHERE 	SEL_NO = ?
+</entry>
+<entry key="selectCategoryList">
+SELECT
+		CATEGORY_NO
+	  , CATEGORY_DETAIL
+	  , CATEGORY_NAME
+  FROM 
+  		TB_CATEGORY
+</entry>
+</properties>

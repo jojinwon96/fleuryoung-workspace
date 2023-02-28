@@ -512,16 +512,16 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
     border: 1px solid rgb(248, 178, 188);
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
-    background-color: #621aff;
-    border: 1px solid #621aff;
+    background-color: rgb(248, 130,130);
+    border: 1px solid rgb(248, 130,130);
 }
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.focus:active, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-    background-color: #621aff;
-    border: 1px solid #621aff;
+    background-color: rgb(248, 130,130);
+    border: 1px solid rgb(248, 130,130);
 }
 .btn-primary.active:not(:disabled):not(.disabled), .btn-primary:active:not(:disabled):not(.disabled), .show>.btn-primary.dropdown-toggle {
-    background-color: #621aff;
-    border-color: #621aff;
+    background-color: rgb(248, 130,130);
+    border-color: rgb(248, 130,130);
     color: #fff;
 }
 .btn-primary.active:focus:not(:disabled):not(.disabled), .btn-primary:active:focus:not(:disabled):not(.disabled), .show>.btn-primary.dropdown-toggle:focus {
@@ -3337,7 +3337,7 @@ table.table-inbox tbody tr.checked {
     box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
     display: flex;
     margin: 1.875rem auto;
-    max-width: 450px;
+    max-width: 700px;
     width: 100%}
 .login-wrapper .loginbox .login-left {
     align-items: center;
@@ -3346,7 +3346,7 @@ table.table-inbox tbody tr.checked {
     flex-direction: column;
     justify-content: center;
     padding: 80px;
-    width: 450px;
+    width: 700px;
     display: flex;
 }
 .login-wrapper .loginbox .login-right {
@@ -3354,7 +3354,7 @@ table.table-inbox tbody tr.checked {
     display: flex;
     justify-content: center;
     padding: 2rem;
-    width: 450px;
+    width: 700px;
 }
 .login-wrapper .loginbox .login-right .login-right-wrap {
     max-width: 100%;
@@ -6262,6 +6262,7 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     justify-content: end;
     -webkit-justify-content: end;
     -ms-flex-pack: end;
+    padding: 12px;
 }
 .invoices-settings-icon {
     color: rgb(248, 178, 188);
@@ -6276,8 +6277,8 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     color: #fff;
     padding: 12px 10px;
     min-width: 167px;
-    background: #1b2559;
-    border: 1px solid #1b2559;
+    background: rgb(248, 178, 188);
+    border: 1px solid rgb(248, 178, 188);
     border-radius: 6px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -6290,8 +6291,10 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
     -ms-flex-pack: center;
 }
 .invoices-settings-btn .btn:hover {
-    background: rgb(248, 178, 188);
+    background: #fff;
     border: 1px solid rgb(248, 178, 188);
+    color: rgb(248, 178, 188);
+    
 }
 .invoices-settings-btn .btn .feather {
     margin-right: 6px;
@@ -6299,6 +6302,11 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-o
 .inovices-card {
     border-radius: 5px;
 }
+
+.size-ht{
+    height: 1000px;
+}
+
 .inovices-card .card-body {
     padding: 15px;
 }
@@ -8776,4 +8784,6 @@ p:last-child {
 .btn .btn-primary .waves-light {
     margin-bottom: 20px;
 }
+
+
 }
