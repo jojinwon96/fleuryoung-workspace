@@ -13,76 +13,82 @@
 
 
 
-
-/* gpt 체크박스  */
-
+/* gpt 체크박스 시작 */
 
 
 
-.checkbox-group {
+.container_check {
+  background-color: #fef4f4;
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
+  max-width: 1200px;
   display: flex;
-  flex-wrap: wrap;
+  /* 수평 및 수직 중앙 정렬을 위해 flexbox 사용 */
+  align-items: center;
+  justify-content: center;
+  /* max-width: 600px; */
+  /* 원하는 최대 너비로 조절 */
+  margin: 0 auto;
+  /* 수평 중앙 정렬 */
 }
 
-label {
-  display: block;
-  position: relative;
-  padding-left: 25px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-label input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
+.ck_table_op {
+  /* 테이블 */
+  border-collapse: collapse;
+  width: 100%;
+  margin: 15px;
   border-radius: 5px;
 }
 
-label:hover input~.checkmark {
-  background-color: #ccc;
+
+
+
+/* 라벨에 호버 시, 배경색을 연하게 변경 */
+label:hover {
+  background-color: rgb(248, 178, 188);
+
 }
 
-label input:checked~.checkmark {
-  background-color: #2196F3;
+
+
+.ck_table_op td {
+  padding: 10px;
+  border: 1px solid #fce8e8;
+  /* border: 1px solid #fce2e2; */
+  /* 테두리 색상 */
+  text-align: center;
 }
 
-.checkmark:after {
-  content: "";
-  position: absolute;
+.ck_table_op input[type=checkbox] {
   display: none;
 }
 
-label input:checked~.checkmark:after {
-  display: block;
+.ck_table_op label {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-label .checkmark:after {
-  left: 7px;
-  top: 3px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
+.ck_table_op input[type=checkbox]:checked+label {
+  background-color: rgb(248, 178, 188);
+  color: #fff;
 }
 
+.ck_table_op tr td:nth-child(n+2) {
+  width: 16%;
+  max-width: 70px;
+  /* 최대 너비 */
+  white-space: nowrap;
+  /* 텍스트 줄바꿈 방지 */
+  overflow: hidden;
+  /* 넘치는 부분 숨김 */
+  text-overflow: ellipsis;
+  /* 넘칠 경우 "..."로 표시 */
+}
 
-
-
-
-
-
+/* gpt 체크박스 끝 */
 
 
 
