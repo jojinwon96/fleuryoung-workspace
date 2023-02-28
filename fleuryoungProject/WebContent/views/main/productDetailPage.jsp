@@ -247,7 +247,6 @@
 					   	}
 					   	
 						$(function() {
-							
 							// 감소
 							$(document).on("click", ".minus", function(){
 								if (Number($(this).next().val()) > 1){
@@ -266,6 +265,9 @@
 									<% } else { %>
 										optNum.html(comma((Number(onlyNo(optNum.html())) - Number(optget))+"") + "원");
 									<% } %>
+									
+									count = tmp.val();
+									console.log("수량: " + count);
 								}
 							});
 							
@@ -282,6 +284,8 @@
 									optNum.html(comma((Number(optget) * Number(tmp.val()))+"") + "원");
 								<% } %>
 								
+								count = tmp.val();
+								console.log("수량: "+ count);
 							});
 							
 							// 수량 변경 감지, 총 주문금액
@@ -332,7 +336,7 @@
 										let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
 										let onlyTitle = tmp[0].replace(kor, '');
 										
-										console.log(onlyTitle);
+										console.log("공백제거 " + );
 										
 										// 숫자만 추출
 										let n = /[^0-9]/g;
@@ -344,7 +348,7 @@
 												opArr.push(tmp[0]);	
 												
 												console.log($(this).val());
-												$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma((Number(onlyNum) + price) + "") + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div><h1 class=\"hideOptNo\" style=\"display: none\";>"+ $(this).val() +"</h1></div></div></div>");
+												$('.connect').append("<div class=\"add-option container text-center\" style=\"background-color: #f5f5f5; width: 437px; margin-left: -12px; \"><div class=\"row\"><div style=\"font-weight: bolder;\" align=\"left\" class=\"opt-title py-2 col\">"+ tmp[0] +"</div><div align=\"right\" class=\"col\" ><img class=\"option-delete\" src=\"${pageContext.request.contextPath}/resources/image/close.png\" style=\"cursor: pointer; width: 15px; height: 15px\"></div></div><div class=\"row\"><div align=\"left\" class=\"col\"><div class=\"count-wrap _count\"><button type=\"button\" class=\"minus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/minus.png\"></button><input type=\"text\" id=\"inp\" class=\"inp\" value=\"1\" readonly /><button type=\"button\" class=\"plus btn btn btn-light\"><img src=\"${pageContext.request.contextPath}/resources/image/icon/plus.png\"></button></div></div><div class=\"col\"><div align=\"right\" class=\"optPrice py-2 col\">" + comma((Number(onlyNum) + price) + "") + "원" + "</div><h1 class=\"hideOptPrice\" style=\"display: none\";>"+ onlyNum +"</h1></div><h1 class=\"hideOptNo\" style=\"display: none\";>"+ $(this).val() +"</h1><h1 class=\"hideOptTitle\" style=\"display: none\";>"+ $.trim(tmp[0]) +"</h1></div></div></div>");
 												
 												$('#selectBox').val('<%=optList.get(0).getOptTitle()%>').trigger('change');
 											}	
@@ -453,9 +457,9 @@
 									$(".add-option").each(function(index){
 										let optNo = $(this).find(".hideOptNo").html();
 										let optCount = $(this).find(".inp").val();
-										
+										let optTitle = $(this).find(".hideOptTitle").html();
 										if (optNo != null){
-											cartList[index] = {opt2ndNo:optNo, optCount:optCount};	
+											cartList[index] = {opt2ndNo:optNo, optCount:optCount, optTitle:optTitle};	
 										}
 									})
 									

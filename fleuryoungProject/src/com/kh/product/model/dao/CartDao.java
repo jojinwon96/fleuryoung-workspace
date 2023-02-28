@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.member.model.dao.MemberDao;
@@ -28,8 +29,6 @@ public class CartDao {
 			e.printStackTrace();
 		}
 	}
-	
-
 
 	public int insertMemberCart(Connection conn, Cart cart) {
 
@@ -60,8 +59,6 @@ public class CartDao {
 		
 		return result;
 	}
-
-
 
 	public Cart selectCheckCart(Connection conn, Cart cart) {
 
@@ -111,8 +108,6 @@ public class CartDao {
 		return newCart;
 	}
 
-
-
 	public int updateCart(Connection conn, Cart origincart, Cart addCart) {
 
 		int result = 0;
@@ -152,6 +147,47 @@ public class CartDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Cart> selectCart(Connection conn, String memId) {
+
+		ArrayList<Cart> list = new ArrayList<Cart>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectCart");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(new Cart(rs.getInt("SEL_NO")
+						        , rs.getInt("P_ID")
+						        , rs.getString("MEM_ID")
+						        , rs.getString("P_NAME")
+						        , rs.getString("SEL_STORE_NAME")
+						        , rs.getInt("OPTION_1ND_NO")
+						        , rs.getString("OPTION_TITLE")
+						        , rs.getInt("OPTION_2ND_NO")
+						        , rs.getInt("OPTION_STOCK")
+						        , rs.getInt("NON_OPTION_STOCK")
+						        , rs.getInt("P_NETPRICE")
+						        ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

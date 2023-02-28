@@ -3,45 +3,59 @@
 <%@page import="com.kh.member.model.vo.Member"%>
 <%
 	String contextPath = request.getContextPath(); // /jsp
-	
-	Member loginUser = (Member)session.getAttribute("loginUser");
-		
+
+	Member loginUser = (Member) session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
-	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/header.css">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 <body>
 	<div>
 		<div class="header-top">
 			<div class="header-top-top">
-			<% if (loginUser == null) { %>
-				<a href="<%= contextPath %>/joinpage.me" class="join">회원가입</a>
+				<%
+					if (loginUser == null) {
+				%>
+				<a href="<%=contextPath%>/joinpage.me" class="join">회원가입</a>
 				<div class="bar"></div>
-				<a href="<%= contextPath %>/loginpage.me" class="login">로그인</a>
+				<a href="<%=contextPath%>/loginpage.me" class="login">로그인</a>
 				<div class="bar"></div>
-				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
-			<% } else { %>
-				<a class="join"><%= loginUser.getMemName() %> 님</a>
+				<a href="${pageContext.request.contextPath}/views/board/notice.jsp"
+					class="board">고객센터</a>
+				<%
+					} else {
+				%>
+				<a class="join"><%=loginUser.getMemName()%> 님</a>
 				<div class="bar"></div>
-				<a href="<%= contextPath %>/logout.me" class="logout">로그아웃</a>
+				<a href="<%=contextPath%>/logout.me" class="logout">로그아웃</a>
 				<div class="bar"></div>
-				<a href="${pageContext.request.contextPath}/views/board/notice.jsp" class="board">고객센터</a>
-			<% }  %>
-				
+				<a href="${pageContext.request.contextPath}/views/board/notice.jsp"
+					class="board">고객센터</a>
+				<%
+					}
+				%>
+
 			</div>
 			<div class="header-top-bottom">
 				<div class="header-top-bottom-left">
-					<a href="<%= contextPath %>/mainPage.jsp"><img
-						src="${pageContext.request.contextPath}/resources/image/Fleuryoung.png" class="logo"></a>
+					<a href="<%=contextPath%>/mainPage.jsp"><img
+						src="${pageContext.request.contextPath}/resources/image/Fleuryoung.png"
+						class="logo"></a>
 				</div>
 
 				<div class="header-top-bottom-mid">
@@ -73,7 +87,6 @@
 					<div class="cartMyPage-panel">
 						<div class="cart-panel">
 							<!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
-							<a href="<%= contextPath %>/cartpage.me" class="cart-btn">
 							<img src="" class="cart-btn"></a>
 						</div>
 						<div class="myPage-panel">
@@ -83,6 +96,18 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+			$(function() {
+				$(".cart-btn").click(function() {
+					<% if (loginUser != null && !loginUser.equals("")) {%>
+						location.href = '<%=contextPath%>/cartpage.me?memId=<%=loginUser.getMemId()%>';
+						console.log("클릭");
+					<% } %>
+				})
+			})
+		</script>
+		
 		<header>
 			<div class="header-nav-panel">
 				<ul class="header-nav-ul">
@@ -108,7 +133,8 @@
 						</ul>
 					</div>
 					<span class="downButton"> <img
-						src="${pageContext.request.contextPath}/resources/image/downButton.png" style="width: 15px;">
+						src="${pageContext.request.contextPath}/resources/image/downButton.png"
+						style="width: 15px;">
 					</span>
 
 				</ul>
@@ -116,25 +142,35 @@
 			<div class="header-nav-hidden-panel" style="display: none;">
 				<div class="header-type-panel">
 					<ul>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>바구니</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>꽃다발</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>주문제작</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>축하화환</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>근조화환</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>동/서양란</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>수경식물</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>생화</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>반려식물</span></a></li>
-						<li><img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
+						<li><img
+							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>조화</span></a></li>
 
 						<!-- 꽃바구니 -->
@@ -174,12 +210,14 @@
 				</ul>
 			</div>
 			<div class="rank-close-panel">
-				<img src="${pageContext.request.contextPath}/resources/image/close.png" class="rank-close-btn">
+				<img
+					src="${pageContext.request.contextPath}/resources/image/close.png"
+					class="rank-close-btn">
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>

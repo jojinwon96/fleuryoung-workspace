@@ -283,6 +283,7 @@ button {
     height: 40px;
     cursor: pointer;
     content: url("../../resources/image/cart.png");
+    margin-bottom: 10px;
 }
 
 .myPage-panel {

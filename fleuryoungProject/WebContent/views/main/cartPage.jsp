@@ -38,72 +38,12 @@
                             </label>
                             <span></span>
                             <button class="selectDel">선택삭제</button>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary cart-save" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                style="margin-left: 350px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">
-                                장바구니 저장
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                            </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body cart-save-message">
-                                            변경사항을 저장 하시겠습니까?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">취소</button>
-                                            <button type="button" class="btn btn-primary"
-                                                style="margin-left: 5px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">저장하기</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="cart-content-main">
                         <ul style="list-style-type: none;">
-
-                            <!-- 1번 -->
-                            <li class="cart-li">
-                                <label>
-                                    <input type="checkbox" id="subCheck" name="subCheck[0]" checked>
-                                    <img src="images/checked-checkbox.png">
-                                </label>
-                                <a href="#">
-                                    <span style="background-image: url('images/test-flower1.jpg')"></span>
-                                </a>
-                                <div class="cart-content-title">
-                                    <span>기가막힌 꽃집1</span>
-                                    <a href="#">
-                                        <p>선물용 꽃다발</p>
-                                    </a>
-                                </div>
-                                <div class="cart-button-panel">
-                                    <button class="cart-minus-button"></button>
-                                    <div class="cart-number">1</div>
-                                    <button class="cart-plus-button"></button>
-                                </div>
-                                <div class="cart-price-panel">
-                                    <p style="display: none;">10000</p>
-                                    <span class="cart-price-span">10,000원</span>
-                                </div>
-                                <button class="cart-delete-button">
-                                    <span>
-                                    </span>
-                                </button>
-                            </li>
-
-                            <!-- 2번 -->
+							
+							<br>
                             <li class="cart-li">
                                 <label>
                                     <input type="checkbox" id="subCheck" name="subCheck[1]" checked>
@@ -113,10 +53,15 @@
                                     <span style="background-image: url('images/test-flower2.jpg')"></span>
                                 </a>
                                 <div class="cart-content-title">
-                                    <span>기가막힌 꽃집2</span>
-                                    <a href="#">
-                                        <p>선물용 꽃상자</p>
-                                    </a>
+	                                 <div class="row" style="font-weight: bolder; font-size: 17px;">
+                                        가게이름
+                                    </div>
+                                    <div class="row" style="font-size: 14px;">
+                                        상품명
+                                    </div>
+                                    <div class="row" style="font-size: 12px;">
+                                        옵션명
+                                    </div>
                                 </div>
                                 <div class="cart-button-panel">
                                     <button class="cart-minus-button"></button>
@@ -132,39 +77,13 @@
                                     </span>
                                 </button>
                             </li>
-
-                            <!-- <li class="cart-li">
-                            <label>
-                                <input type="checkbox" id="subCheck" name="subCheck[2]" checked>
-                                <img src="images/checked-checkbox.png">
-                            </label>
-                            <a href="#">
-                                <span style="background-image: url('images/test-flower2.jpg')"></span>
-                            </a>
-                            <div class="cart-content-title">
-
-                                <a href="#">
-                                    <p>선물용 꽃상자2</p>
-                                </a>
-                            </div>
-                            <div class="cart-button-panel">
-                                <button class="cart-minus-button"></button>
-                                <div class="cart-number">1</div>
-                                <button class="cart-plus-button"></button>
-                            </div>
-                            <div class="cart-price-panel">
-                                <p style="display: none;">20000</p>
-                                <span class="cart-price-span">20,000원</span>
-                            </div>
-                            <button class="cart-delete-button">
-                                <span>
-                                </span>
-                            </button>
-                        </li> -->
-
+							<hr>		
+												
                         </ul>
                     </div>
                 </div>
+                
+                <!-- 총금액 패널 -->
                 <div class="cart-side-panel">
                     <div class="cart-side-content">
 

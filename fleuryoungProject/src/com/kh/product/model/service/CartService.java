@@ -1,6 +1,7 @@
 package com.kh.product.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.product.model.dao.CartDao;
 import com.kh.product.model.vo.Cart;
@@ -53,6 +54,18 @@ public class CartService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	public ArrayList<Cart> selectCart(String memId) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Cart> list = new CartDao().selectCart(conn, memId);
+		
+		close(conn);
+		
+		return list;
 	}
 
 	

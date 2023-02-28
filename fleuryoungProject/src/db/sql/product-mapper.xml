@@ -142,6 +142,25 @@
 		WHERE MEM_ID = ? AND P_ID = ?
 	</entry>
 	
+	<entry key="selectCart">
+		SELECT 
+		        P.SEL_NO AS "SEL_NO"
+		      , C.P_ID AS "P_ID"
+		      , C.MEM_ID AS "MEM_ID"
+		      , P.P_NAME AS "P_NAME"
+		      , S.SEL_STORE_NAME AS "SEL_STORE_NAME"
+		      , C.OPTION_1ND_NO AS "OPTION_1ND_NO"
+		      , O.OPTION_TITLE AS "OPTION_TITLE"
+		      , C.OPTION_2ND_NO AS "OPTION_2ND_NO"
+		      , C.OPTION_STOCK AS "OPTION_STOCK"
+		      , C.NON_OPTION_STOCK AS "NON_OPTION_STOCK"
+		      , P.P_NETPRICE AS "P_NETPRICE"
+		FROM TB_CART C
+		LEFT JOIN TB_PRODUCT P ON (C.P_ID = P.P_ID)
+		LEFT JOIN TB_SELLER S ON (P.SEL_NO = S.SEL_NO)
+		LEFT JOIN TB_1ST_OPTION O ON (C.OPTION_1ND_NO = O.OPTION_1ND_NO)
+		WHERE MEM_ID = ?
+	</entry>
 </properties>
 
 

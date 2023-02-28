@@ -47,7 +47,9 @@ public class ProductAddCartController extends HttpServlet {
 		int selNo = Integer.parseInt(request.getParameter("selNo"));
 		int opt1stNo = Integer.parseInt(request.getParameter("opt1stNo"));
 		int noneOptCount = Integer.parseInt(request.getParameter("count"));
-
+		String optTitle = request.getParameter("optTitle");
+		System.out.println(optTitle);
+		
 		String jsonStr = request.getParameter("jsonData");
 		JSONArray jsonArr = new JSONArray();
 		// 문자열 형식의 데이터를 JSONArray로 가공
@@ -135,7 +137,6 @@ public class ProductAddCartController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
