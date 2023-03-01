@@ -15,13 +15,14 @@ public class Cart {
 	private String opt1Title;
 	private String opt2Title;
 	private int pNetPrice;
-	
+	private String img;
+	private int optPrice;
 	
 	public Cart() {}
 	
 
 	public Cart(int selNo, int pId, String memId, String pName, String storeName, int opt1stNo
-			, String opt1Title, int opt2ndNo, int optCount, int noneOptCount, int pNetPrice) {
+			, String opt1Title, String opt2Title, int opt2ndNo, int optPrice, int optCount, int noneOptCount, int pNetPrice, String img) {
 		super();
 		this.memId = memId;
 		this.selNo = selNo;
@@ -33,22 +34,36 @@ public class Cart {
 		this.pName = pName;
 		this.storeName = storeName;
 		this.opt1Title = opt1Title;
+		this.opt2Title = opt2Title; 
 		this.pNetPrice = pNetPrice;
+		this.img = img;
+		this.optPrice = optPrice;
 	}
 
 
-	public Cart(String memId, int selNo, int pId, int opt1stNo, int opt2ndNo, int optCount, int noneOptCount) {
+	public Cart(String memId, int selNo, int pId, int opt1stNo, int opt2ndNo, int optCount, int noneOptCount, String opt2Title, int optPrice) {
 		super();
 		this.memId = memId;
 		this.selNo = selNo;
 		this.pId = pId;
 		this.opt1stNo = opt1stNo;
 		this.opt2ndNo = opt2ndNo;
+		this.opt2Title = opt2Title;
 		this.optCount = optCount;
 		this.noneOptCount = noneOptCount;
+		this.optPrice = optPrice;
 	}
 
 	
+	public Cart(String memId, int pId, int opt1stNo, int opt2ndNo) {
+		super();
+		this.memId = memId;
+		this.pId = pId;
+		this.opt1stNo = opt1stNo;
+		this.opt2ndNo = opt2ndNo;
+	}
+
+
 	public Cart(int opt2ndNo, int optCount, int pId) { // 옵션 있는 생성자
 		super();
 		this.pId = pId;
@@ -63,6 +78,27 @@ public class Cart {
 		this.noneOptCount = noneOptCount;
 	}
 	
+	
+	public int getOptPrice() {
+		return optPrice;
+	}
+
+
+	public void setOptPrice(int optPrice) {
+		this.optPrice = optPrice;
+	}
+
+
+	public String getImg() {
+		return img;
+	}
+
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
 	public String getpName() {
 		return pName;
 	}

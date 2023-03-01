@@ -38,26 +38,7 @@ public class CartPageController extends HttpServlet {
 
 		String memId = request.getParameter("memId");
 
-		// 상점이름, 상품명, 대표이미지, 옵션1, 옵션1이름, 옵션2, 옵션2이름, 옵션2가격, 옵션2수량, 옵션x수량
-		// ArrayList<Cart> list = new ArrayList<Cart>();
-
-		ArrayList<Cart> list = null;
-		String[] optArr = null;
-		if (!memId.equals("")) {
-			list = new CartService().selectCart(memId); // 2번 옵션 이름은 없음
-
-			String opts = "";
-			// 2번 옵션 이름 받아오기
-			for (int i = 0; i < list.size(); i++) {
-				if (i == list.size() - 1) {
-					opts += list.get(i).getOpt2ndNo();
-				} else {
-					opts += list.get(i).getOpt2ndNo() + ",";
-				}
-			}
-			optArr = opts.split(",");
-			
-		}
+		ArrayList<Cart> list = new CartService().selectCart(memId);
 
 		request.setAttribute("list", list);
 		RequestDispatcher view = request.getRequestDispatcher("views/main/cartPage.jsp");

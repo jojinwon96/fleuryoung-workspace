@@ -232,7 +232,7 @@
 						<script>
 						let opArr = [];
 						let price = Number(onlyNo("<%= p.getpNetPrice()%>"));
-						let count = 0;
+						let count = 1;
 						//천단위 콤마 펑션
 					   	function comma(str) {
 					        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -336,12 +336,9 @@
 										let kor = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
 										let onlyTitle = tmp[0].replace(kor, '');
 										
-										console.log("공백제거 " + );
-										
 										// 숫자만 추출
 										let n = /[^0-9]/g;
 										let onlyNum = tmp[1].replace(n, '');
-										
 										
 										if(optTitle != '<%=optList.get(0).getOptTitle()%>'){
 												
@@ -408,7 +405,7 @@
 							      </div>
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-							        <button type="button" class="btn btn-primary">장바구니 이동</button>
+							        <button type="button" class="go-to-cart btn btn-primary">장바구니 이동</button>
 							      </div>
 							    </div>
 							    
@@ -458,8 +455,9 @@
 										let optNo = $(this).find(".hideOptNo").html();
 										let optCount = $(this).find(".inp").val();
 										let optTitle = $(this).find(".hideOptTitle").html();
+										let optPrice = Number($(this).find(".hideOptPrice").html());
 										if (optNo != null){
-											cartList[index] = {opt2ndNo:optNo, optCount:optCount, optTitle:optTitle};	
+											cartList[index] = {opt2ndNo:optNo, optCount:optCount, optTitle:optTitle, optPrice:optPrice};	
 										}
 									})
 									
@@ -503,7 +501,15 @@
 		                }); 
 					})
 					
-					
+				})
+				
+				// 장바구니로 이동
+				$(function() {
+					$(".go-to-cart").click(function() {
+						<% if (loginUser != null && !loginUser.equals("")) {%>
+							location.href = '<%=contextPath%>/cartpage.me?memId=<%=loginUser.getMemId()%>';
+						<% } %>
+					})
 				})
 			</script>
 			

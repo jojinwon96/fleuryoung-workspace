@@ -102,7 +102,6 @@
 				$(".cart-btn").click(function() {
 					<% if (loginUser != null && !loginUser.equals("")) {%>
 						location.href = '<%=contextPath%>/cartpage.me?memId=<%=loginUser.getMemId()%>';
-						console.log("클릭");
 					<% } %>
 				})
 			})

@@ -47,9 +47,7 @@ public class ProductAddCartController extends HttpServlet {
 		int selNo = Integer.parseInt(request.getParameter("selNo"));
 		int opt1stNo = Integer.parseInt(request.getParameter("opt1stNo"));
 		int noneOptCount = Integer.parseInt(request.getParameter("count"));
-		String optTitle = request.getParameter("optTitle");
-		System.out.println(optTitle);
-		
+
 		String jsonStr = request.getParameter("jsonData");
 		JSONArray jsonArr = new JSONArray();
 		// 문자열 형식의 데이터를 JSONArray로 가공
@@ -57,23 +55,23 @@ public class ProductAddCartController extends HttpServlet {
 
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
 
-		if (jsonArr.isEmpty()) { // 옵션 없을때
-			cartList.add(new Cart(memId, selNo, pId, opt1stNo, 0, 0, noneOptCount));
+		System.out.println("1번옵션 : " + opt1stNo);
+
+		if (opt1stNo == 0) {
+			cartList.add(new Cart(memId, selNo, pId, 0, 0, 0, noneOptCount, "NONE", 0));
 		} else {
-			// 데이터의 길이만큼 반복 및 JSONObject로 변환하며 확인
 			for (int i = 0; i < jsonArr.size(); i++) { // 옵션 있을때
 				JSONObject jsonObj = jsonArr.getJSONObject(i);
 				int opt2ndNo = jsonObj.getInt("opt2ndNo");
 				int optCount = jsonObj.getInt("optCount");
-
-				if (opt1stNo == 0) { // 기본 옵션일때
-					cartList.add(new Cart(memId, selNo, pId, opt1stNo, opt2ndNo, 0, noneOptCount));
-				} else { // 옵션 있을때
-					cartList.add(new Cart(memId, selNo, pId, opt1stNo, opt2ndNo, optCount, 0));
-				}
-
+				String opt2Title = jsonObj.getString("optTitle");
+				int optPrice = jsonObj.getInt("optPrice");
+				
+				cartList.add(new Cart(memId, selNo, pId, opt1stNo, opt2ndNo, optCount, 0, opt2Title, optPrice));
+				
 			}
 		}
+		// 데이터의 길이만큼 반복 및 JSONObject로 변환하며 확인
 
 		if (!memId.equals("")) { // 회원일때
 			String getMemId = new MemberService().checkMember(memId);
@@ -85,10 +83,10 @@ public class ProductAddCartController extends HttpServlet {
 				for (Cart cart : cartList) { // 장바구니에 해당 상품이 있는지 확인
 
 					Cart newCart = new CartService().selectCheckCart(cart);
-					
+
 					if (newCart != null) { // 상품이 존재할때
 						int result = new CartService().updateCart(cart, newCart);
-						
+
 						if (result > 0) {
 							System.out.println((successUpdate + 1) + "번째 수정 성공");
 						} else {
@@ -96,7 +94,7 @@ public class ProductAddCartController extends HttpServlet {
 							break;
 						}
 						successUpdate++;
-						
+
 					} else { // 상품 존재하지 않을때 새로 삽입
 						int result = new CartService().insertMemberCart(cart);
 
@@ -115,7 +113,7 @@ public class ProductAddCartController extends HttpServlet {
 				} else {
 					System.out.println("수정실패");
 				}
-				
+
 				if (cartList.size() == successInsert) {
 					System.out.println("삽입성공");
 				} else {
