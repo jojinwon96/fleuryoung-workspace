@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>그래</h1>
+    <h1>준호가 넣음</h1>
+    
+    <h2>최민수남김</h2>
+
 	<br><br>
 	
 	<h1 align="center" style="color:red"><%= request.getAttribute("errorMsg") %></h1>

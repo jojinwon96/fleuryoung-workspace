@@ -1,5 +1,5 @@
-<%@ page import="flower.com.kh.seller.model.vo.*" %>
-<%@ page import="flower.com.kh.common.*"%>
+<%@ page import="com.kh.seller.model.vo.*" %>
+<%@ page import="com.kh.common.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    
@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <%@ include file ="views/common/menubar.jsp" %>
+    <%@ include file ="views/common/login.jsp" %>
+    
 </body>
 </html>
