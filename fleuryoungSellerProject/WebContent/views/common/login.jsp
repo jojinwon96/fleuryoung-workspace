@@ -30,8 +30,9 @@
   <div class="main-wrapper login-body">
         <div class="login-wrapper">
             <div class="container">
-                <img class="img-fluid logo-dark mb-2" src="resources/img/Fleuryoung.png" alt="Logo">
-                <div class="loginbox" style="width: 450px">
+                <a href="<%= contextPath%>/loginView.se"><img class="img-fluid logo-dark mb-2" src="resources/img/Fleuryoung.png" alt="Logo"></a>
+                
+                    <div class="loginbox" style="width: 450px">
                     <div class="login-right"style="width: 450px">
                         <div class="login-right-wrap"style="width: 450px">
                             <br>
@@ -40,7 +41,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">ID</label>
                                     <input type="text" class="form-control" name="selId"required>
-                                </div>
+                                </div>  
                                 <div class="form-group">
                                     <label class="form-control-label">PASSWORD</label>
                                     <div class="pass-group">
@@ -57,7 +58,8 @@
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <a class="forgot-link" href="#">비밀번호 찾기</a>
+                                            <a class="forgot-link"href="<%= contextPath %>/idSelect.se">아이디 찾기</a>/
+                                            <a class="forgot-link"href="pwdSelect.jsp">비밀번호 찾기</a>
                                         </div>
                                     </div>
                                 </div>

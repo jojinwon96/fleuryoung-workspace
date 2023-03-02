@@ -8050,7 +8050,7 @@ a.comment-btn:hover {
     width: 78px;
 }
 .mini-sidebar .sidebar {
-    width: 78px;
+    width: 50px;
 }
 .mini-sidebar.expand-menu .sidebar {
     width: 240px;
@@ -8081,7 +8081,7 @@ a.comment-btn:hover {
     opacity: 1;
 }
 .mini-sidebar .page-wrapper {
-    margin-left: 78px;
+    margin-left: 50px;
 }
 .mini-sidebar .header-two:before {
     margin-left: 78px;

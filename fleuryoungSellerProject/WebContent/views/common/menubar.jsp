@@ -21,12 +21,24 @@
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
 
-  
+    <script type="text/javascript">
+        window.addEventListener( "pageshow", function ( event ) {
+          var historyTraversal = event.persisted || 
+                                 ( typeof window.performance != "undefined" && 
+                                      window.performance.navigation.type === 2 );
+          if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.reload();
+          }
+        });
+     </script>
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
 
- 
+ <%if(loginSeller == null){%>
+    <script> location.href = "<%=contextPath%>"</script>
+<%}else{%>
         <div class="main-wrapper">
             <div class="header header-one">
                 <div class="header-left header-left-one">
@@ -152,7 +164,7 @@
                     </div>
                 </div>
             </div>
-    
+    <%}%>
 	
     <!-- js 호출 -->
     <script src="resources/js/jquery-3.6.0.min.js"></script>

@@ -1,23 +1,27 @@
 package com.kh.seller.controller;
 
 import java.io.IOException;
-import java.net.PasswordAuthentication;
-import java.util.Properties;
-import java.util.Random;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.kh.common.EncryptionUtils;
+import com.kh.common.RanNumUtils;
+import com.kh.seller.model.service.SellerService;
+import com.kh.seller.model.vo.Seller;
 
 /**
  * Servlet implementation class EmailController
  */
+
 @WebServlet("/email.se")
 public class EmailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String PrintWriter = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,89 +35,64 @@ public class EmailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = req.getParameter("memberId");
+		// 클래스 이름은 EmailController지만 SellerController 같은곳에 메서드 안에 넣어서 사용 하세요
 
-		// 먼저 아이디로 회원정보를 받아오고 가져온 데이터에서 email값을 비교하여 존재하지 않으면 인증메일 보내지 못함
-		/*
-		 * Member m = new MemberService().memberLogin(memberId); if(m==null ||
-		 * !m.getEmail().equals(email)) { req.setAttribute("msg",
-		 * "아이디나 이메일 정보가 맞지 않습니다"); req.setAttribute("loc", "/member/searchPw");
-		 * req.getRequestDispatcher("/views/common/msg.jsp").forward(req, resp); return;
-		 * }
-		 */
-		// mail server 설정
-		String host = "smtp.naver.com";
-		String user = "dhsdb1541@naver.com"; // 자신의 네이버 계정
-		String password = "";// 자신의 네이버 패스워드
+		String uri = request.getRequestURI(); 			// requestURL : @Webservlet("매핑 URL") 
+		String ctxPath = request.getContextPath();		// 절대경로 : 디버깅 하거나 System.out.println 으로 찍어보세용
+		String cmd = request.getParameter("selname");	// 아이디찾기, 비밀번호찾기 식별자
+		PrintWriter out = response.getWriter();			// 싱글톤 디자인 패터에 많이 쓰이는 함수 response(응답함수 자세한건 구글링 ㄱㄱ)
 
-		// 메일 받을 주소
-		/* String to_email = m.getEmail(); */
-		String to_email = "dhsdb1541@naver.com";
-
-		// SMTP 서버 정보를 설정한다.
-		Properties props = new Properties();
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", 465);
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.ssl.enable", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.debug", "true");
-
-		// 인증 번호 생성기
-		StringBuffer temp = new StringBuffer();
-		Random rnd = new Random();
-		for (int i = 0; i < 10; i++) {
-			int rIndex = rnd.nextInt(3);
-			switch (rIndex) {
-			case 0:
-				// a-z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-				break;
-			case 1:
-				// A-Z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-				break;
-			case 2:
-				// 0-9
-				temp.append((rnd.nextInt(10)));
-				break;
+		System.out.println("전체uri : " + uri);			// uri 출력
+		System.out.println("절대경로 : " + ctxPath);		// ctxPath 출력
+		System.out.println("요청uri : " + cmd); 			// cmd 출력
+		
+		// 이메일로 패스워드 찾기
+		if(cmd.equals("idSelect")) {
+					// 수신 확인
+					String user_email = request.getParameter("email");
+					System.out.println("user_email : " + user_email);
+					try { 									// DB확인 후 콜백(어떠한 함수 호출후에 다시 돌아 오는 것을 콜백 ex:Ajax)
+						Seller sel = new SellerService().selectByEmail(user_email); // 이메일을 조회 하는 로직 후에 MemberDTO형 dto 변수에 담는 객체
+						if(sel == null) { 		// email에 해당하는 회원 정보가 없음
+							out.write("false");
+						} else { 							// id반환 후, 추가 인증을 더 필요함
+							out.write(sel.getSelEmail());
+						}
+					} catch(Exception e) {
+						response.sendRedirect("/error.jsp"); // 에러 페이지 호출
+						e.printStackTrace();
+					}
+				}
+		//이메일로 패스워드 찾기
+		else if(cmd.equals("pwdSelect")) {
+			// 수신 확인
+			String userId = request.getParameter("id");		// user_id 가져오기
+			String userEmail = request.getParameter("email");	// user_email 가져오기
+			System.out.println(userId + " : " + userEmail);	// 출력 (디버깅 가능 하시면 로그 출력 하지 말고 디버깅으로 찍어보세요)
+			// 무작위 임시 패스워드 생성
+			String tempPw = RanNumUtils.getTempPassword();  // RanNumUtils 클래스에 있는 무작위 번호 생성 e.g) 암호화 클래스, 랜덤 번호 클래스, 메일 보내는 클래스는 패키지를 하나 만들어서 import 해서 쓰세요. ex) kh.minsoo.com.util 패키지 생성후 클래스 생성해서 넣어서 사용
+			// 이메일 발송 서비스 호출
+			new SellerService().sendEmail(userEmail, tempPw);	// MemberService 에 있는 메서드 호출
+			// 패스워드 암호화
+			tempPw = EncryptionUtils.getSHA512(tempPw);		// Password 암호화 EncryptionUtils 클래스에 getSHA512 메서드 호출
+			try { 											// DB에 저장 & 홈이동 try/catch문으로 Exception(예외 설정 안해주면 에러 남)
+				int rs = new SellerService().updatePw(userId, tempPw);		// 본인의 DAO에 맞게 dao.메서드이름(인자값 수정)
+				if(rs > 0) { 								// int형이기 때문에 db 조회시 값이 있으면 1을 반환 없으면 0을 반환
+					System.out.println("임시 패스워드 발송 완료");
+					out.write("true");
+				} else { 									// 등록 실패
+					System.out.println("임시 패스워드 발송 실패");
+					out.write("false");
+				}
+			} catch(Exception e) {
+				response.sendRedirect("/error.jsp");		// 에러 페이지를 따로 만들어 놓으면 에러페이 호출 에러 페이지 없을시에 삭제
+				e.printStackTrace();
+				System.out.println(e);				// Exception 발생시 에러 로그 출력
 			}
 		}
-		String AuthenticationKey = temp.toString();
-		System.out.println(AuthenticationKey);
-
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(user, password);
-			}
-		});
-
-		// email 전송
-		try {
-			MimeMessage msg = new MimeMessage(session);
-			msg.setFrom(new InternetAddress(user, "KH"));
-			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
-
-			// 메일 제목
-			msg.setSubject("안녕하세요  인증 메일입니다.");
-			// 메일 내용
-			msg.setText("인증 번호는 :" + temp);
-
-			Transport.send(msg);
-			System.out.println("이메일 전송");
-
-		} catch (Exception e) {
-			e.printStackTrace();// TODO: handle exception
-		}
-		HttpSession saveKey = request.getSession();
-		saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
-		// 패스워드 바꿀때 뭘 바꿀지 조건에 들어가는 id
-		/*
-		 * req.setAttribute("id", memberId);
-		 * req.getRequestDispatcher("/views/login_myPage/searchPasswordEnd.jsp").forward
-		 * (req, resp);
-		 */
 	}
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

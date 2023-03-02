@@ -105,4 +105,36 @@ UPDATE    TB_SELLER
 	 WHERE  SEL_NO = ?
 	   AND  SEL_STATUS = 'Y'
 </entry>
+
+<entry key="selectByEmail">
+
+	SELECT
+			SEL_NO
+			,SEL_ID
+			, SEL_PW
+			, SEL_BUSINESS_NO
+			, SEL_STORE_NAME
+			, SEL_NAME
+			, SEL_EMAIL
+			, SEL_PHONE
+			, SEL_TEL
+			, SEL_FAX
+			, SEL_POSTAL
+			, SEL_STREET
+			, SEL_ADDRESS
+			, SEL_IMG
+			, SEL_STATUS
+			, SEL_ENROLL_DATE
+	  FROM  TB_SELLER
+	 WHERE  SEL_EMAIL = ?
+	   AND  SEL_STATUS = 'Y'
+</entry>
+
+
+<entry key="updatePw">
+UPDATE    TB_SELLER
+   SET    SEL_PW = ?
+ WHERE    SEL_ID = ?
+
+</entry>
 </properties>

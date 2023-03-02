@@ -28,7 +28,6 @@ public class DashboardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("오예");
 		request.getRequestDispatcher("views/common/dashboard.jsp").forward(request, response);
 	}
 

@@ -188,4 +188,68 @@ public class SellerDao {
 		return sel;
 	}
 	
+	public Seller selectByEmail(Connection conn, String email) {
+		
+		Seller sel = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectByEmail");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				sel = new Seller(rset.getInt("SEL_NO")
+								,rset.getString("SEL_ID")
+								,rset.getString("SEL_PW")
+								,rset.getString("SEL_BUSINESS_NO")
+								,rset.getString("SEL_STORE_NAME")
+								,rset.getString("SEL_NAME")
+								,rset.getString("SEL_EMAIL")
+								,rset.getString("SEL_PHONE")
+								,rset.getString("SEL_TEL")
+								,rset.getString("SEL_FAX")
+								,rset.getInt("SEL_POSTAL")
+								,rset.getString("SEL_STREET")
+								,rset.getString("SEL_ADDRESS")
+								,rset.getString("SEL_IMG")
+								,rset.getString("SEL_STATUS")
+								,rset.getDate("SEL_ENROLL_DATE")
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return sel;
+		
+	}
+	
+	public int updatePw(Connection conn, String userId, String tempPw) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePw");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, tempPw);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }

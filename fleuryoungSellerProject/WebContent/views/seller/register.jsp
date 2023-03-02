@@ -6,13 +6,13 @@
     <% 
     String contextPath = request.getContextPath(); // /jsp
     // 로그인 시도 전 menubar.jsp 로딩시 : null
-    // 로그인 시도 후 menubar.jsp 로딩시 : 로그인한 회원의 객체 생성
     
     String errorMsg = (String)session.getAttribute("errorMsg");
     // 서비스 요청 전 menubar.jsp 로딩시 : null
     // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구
     %>
 <!DOCTYPE html>
+    // 로그인 시도 후 menubar.jsp 로딩시 : 로그인한 회원의 객체 생성
 <html lang="en">
 
 <head>
@@ -247,6 +247,31 @@
 
 <script>
 
+$(function(){
+    // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
+    let user_id = ""; 
+        document.getElementById("emailButton").addEventListener("click", function () {
+            $.ajax({
+                type: "post",
+                url: "${pageContext.request.contextPath}/findIdByEmailProc.mem",
+                data: {
+                    email: document.getElementById("email").value
+                }
+            }).done(function (data) {
+                if (data == "false") {
+                    alert("존재하지 않는 이메일입니다.");
+                } else {
+                    user_id = data;
+                    alert("인증번호를 입력해주세요");
+                    document.getElementById("sendNum_Wrapper").style.display = "flex"; 
+                    sendNumberByEmail(); 
+                    document.getElementById("btnSendEmail").disabled = "disabled";
+                }
+            }).fail(function (e) {
+                console.log(e);
+            });
+        });
+})
 
 
 function chooseFile(){

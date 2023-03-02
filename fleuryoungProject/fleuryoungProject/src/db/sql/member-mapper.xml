@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="loginMember">
+		SELECT
+		 	MEM_ID
+			,MEM_PW
+			,MEM_EMAIL
+			,MEM_NAME
+			,MEM_PHONE
+			,MEM_POSTAL
+			,MEM_STREET
+			,MEM_ADDRESS
+			,MEM_ENROLL_DATE
+			,MEM_MILEAGE
+			,MEM_IMG
+			,MEM_GET_PHONE
+			,MEM_BIRTHDATE
+			,MEM_GENDER
+			,MEM_STATUS
+		FROM TB_MEMBER
+		WHERE MEM_ID = ? AND MEM_PW = ?
+	</entry>
+	
+	<entry key="checkMember">
+		SELECT MEM_ID
+		FROM TB_MEMBER
+		WHERE MEM_ID = ?
+	</entry>
+	
+</properties>
+
