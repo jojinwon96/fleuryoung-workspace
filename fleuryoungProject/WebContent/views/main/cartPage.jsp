@@ -6,9 +6,6 @@
 <% 
 	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list"); 
 
-	response.setHeader("cache-control","no-store");
-	response.setHeader("expires","0");
-	response.setHeader("pragma","no-cache");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,7 +45,7 @@
             </div>
         </div>
 
-        <form action="#" method="get">
+        <form action="<%=contextPath%>/orderPage.p" method="post">
             <div class="cart-content">
                 <div class="cart-content-panel">
                     <div class="cart-content-header">
@@ -62,6 +59,7 @@
                             <button type="button" class="selectDel">선택삭제</button>
                         </div>
                     </div>
+                    
                     <div class="cart-content-main">
                         <ul style="list-style-type: none;">			
 							<br>
@@ -154,16 +152,9 @@
                                 </span>
                             </div>
 
-                            <div class="dprice-field">
-                                <span class="ptitle">할인금액</span>
-                                <span class="pprice">
-                                    <span class="won">0 원</span>
-                                </span>
-                            </div>
-
                             <div class="discount-field">
                                 <span class="ptitle">배송비</span>+
-                                <span class="pprice">4,500
+                                <span class="pprice">0
                                     <span class="won">원</span>
                                 </span>
                             </div>
@@ -179,7 +170,7 @@
                         </div>
 
                         <div class="result-button-panel">
-                            <button class="cart-access-button">
+                            <button type="submit" class="cart-access-button">
                                 <b>주문하러가기</b>
                             </button>
                         </div>
@@ -195,7 +186,8 @@
 		let delList = [];
 		let indexList = [];
 		let active = "";
-		//천단위 콤마 펑션
+		
+		// 천단위 콤마 
 	   	function comma(str) {
 	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 	    }
@@ -227,7 +219,7 @@
 			}
 		}
 		
-		// 판매 업체 얻어오기
+		// 판매자 번호 얻어오기
 		function getSelNoArr(){
 			let selNoArr = [];
 			let distinct = [];
@@ -245,31 +237,69 @@
 		
 		// 배송비
 		function getDeliveryPrice(){
+
+			let dPrice = [];
 			let arr = getSelNoArr();
-			let sum = 0;
+			let delCalc = 0;
 			
 			for (let i in arr){
+				dPrice[i] = {sNo:arr[i], price:0};
+			} 
+			
+			for (let i = 0; i < arr.length; i++){
+				let sum = 0;
 				$(".selNo").each(function(){
-					if (arr[i] == $(this).html()){
-						sum += 5000;
+					let selNo = Number($(this).html());
+					let selPrice = Number(onlyNo($(this).parent().next().children(".cart-price-span").html()));
+					if (dPrice[i].sNo == selNo && $(this).parents(".cart-li").find(".subCheck").attr("checked")){
+						sum += selPrice;
+						dPrice[i].price = sum;
 					}
 				})
-			}
+			} 
 			
-			console.log("sum : " + sum);
+			for (let i = 0; i < arr.length; i++){
+				if (dPrice[i].price > 0 && dPrice[i].price < 50000){
+					delCalc += 3000;
+				}
+			}
+				
+			
+			
+			
+			// 상품 금액
+			let result = Number(onlyNo($(".price-field").children('.pprice').html()));
+			
+			// 배송비
+			$(".discount-field").children('.pprice').html(comma(delCalc+"")+" 원");
+			
+			// 결제 예정금액
+			$(".result-price").children("strong").html(comma((result+delCalc) + ""));
+			
+			console.log("sNo : " + dPrice[0].sNo);
+			console.log("price : " + dPrice[0].price);
+			console.log("sNo : " + dPrice[1].sNo);
+			console.log("price : " + dPrice[1].price);
+			console.log(dPrice);
+			console.log("배송비 : " + delCalc);
+			console.log(result);
 		}
 		
 		
-		// 상품금액 셋팅
+		// 상품금액 
 		resultPrice();
 		
+		// 배송비 포함 결제 예정금액
 		getDeliveryPrice();
+		
+		console.log("체크된길이 : " + $('input:checkbox[name^="subCheck"]:checked').length);
 		
 		$(".cart-price-span").each(function(){
 			$(this).html(comma($(this).html()));
 		})
 	
 		$(document).ready(function(){
+			
 			let index = 0;
 			let count = 0;
 			
@@ -278,7 +308,7 @@
 			
 			// 체크박스 제어
 			$(document).on("click", ".allCheck, .subCheck", function(){
-				
+				getDeliveryPrice();	
 				if ($(this).hasClass("allCheck")){
 					
 					if ($(this).attr("checked")){
@@ -294,6 +324,12 @@
 						})
 						
 						$(".price-field").children('.pprice').html("0 원");
+						
+	            		// 배송비
+	        			$(".discount-field").children('.pprice').html("0 원");
+	        			// 결제 예정금액
+	        			$(".result-price").children("strong").html("0");
+
 					} else {
 						$('.cart-access-button').css("backgroundColor", "rgb(248, 178, 188)");
 			            $('.cart-access-button').attr("disabled", true);
@@ -312,6 +348,8 @@
 						}) 
 						
 						$(".price-field").children('.pprice').html(comma(chkSum +"") +  " 원");
+						
+	            		getDeliveryPrice();	
 					}
                 	
 					
@@ -319,6 +357,7 @@
 					if ($('input:checkbox[name^="subCheck"]:checked').length == 0){
 						$('.cart-access-button').css("backgroundColor", "lightgray");
 			            $('.cart-access-button').attr("disabled", false);
+			         	
 					} else {
 						$('.cart-access-button').css("backgroundColor", "rgb(248, 178, 188)");
 			            $('.cart-access-button').attr("disabled", true);
@@ -327,9 +366,11 @@
 					if (($('input:checkbox[name^="subCheck"]:checked').length == $('input:checkbox[name^="subCheck"]').length)) {
 						$(".allCheck").next().attr("src", chkImg);
 						$(".allCheck").attr("checked", true);
+						
 					} else {
 						$(".allCheck").next().attr("src", unChkImg);
 						$(".allCheck").attr("checked", false);
+						
 					} 
 					
 					
@@ -340,7 +381,6 @@
 						$(this).attr("checked", false);
 						
 						chkResult(subPrice, "-");
-						
 						$(".allCheck").next().attr("src", unChkImg);
 						$(".allCheck").attr("checked", false);
 					} else { // 가격 담기
@@ -349,15 +389,10 @@
 						
 						chkResult(subPrice, "+");
 					}
+						
+						getDeliveryPrice();	
 				} 
 				
-				
-				
-				$(".subCheck").each(function(){
-					if ($(this).attr("checked")){
-						
-					}
-				})
 			})
 			
 
@@ -454,8 +489,8 @@
 		                    		
 			                        $(".cart-number").eq(index).html(cnt+"");
 			                    	$(".cart-price-span").eq(index).html(comma(result + "") + " 원");
-			                    	
 			                    	$(".hide-cart-price").eq(index).html(result);
+			                    	getDeliveryPrice();
 			                    	
 		                    	} else {
 		                    		cnt = Number(pram[0]);
@@ -464,8 +499,8 @@
 		                    		
 				                    $(".cart-number").eq(index).html(cnt+"");
 			                    	$(".cart-price-span").eq(index).html(comma(result + "") + "원");
-			                    	
 			                    	$(".hide-cart-price").eq(index).html(result);
+			                    	getDeliveryPrice();
 		                    	}
 		                    	
 		                    	let chkSum = 0;
@@ -475,6 +510,7 @@
 									if (isChk.attr("checked")){
 										chkSum += Number($(this).html());
 										$(".price-field").children('.pprice').html(comma(chkSum + "") + " 원");
+										getDeliveryPrice();
 									} else {
 										console.log("체크아니다.");
 									}
@@ -503,7 +539,10 @@
 	                				$(".price-field").children('.pprice').html(comma((total-delSum)+"") + " 원");
 	                				console.log("delSum : " + delSum);
 	                    		}
+	                    		
+	                    		getDeliveryPrice();	
 	                    	}
+	                    	
 	                    	
 	                    },
 
@@ -516,7 +555,8 @@
 	                    }
 	                    
 	                }); 
-				
+					
+					
 			})
 		 })
 	</script>
