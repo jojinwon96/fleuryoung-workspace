@@ -10,46 +10,27 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-
-
-
-
-/* gpt 사이드바 시작 */
-
-
-/* .toggleBox {
-  position: relative;
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.smallBox {
-  display: none;
+
+
+
+.header-top-bottom-left a {
+ display: block;
 }
-
-.bigBox:hover~.smallBox {
-  display: block;
-} */
-
-
- .menu a {
-   cursor: pointer;
- }
-
- .menu .hide {
-   display: none;
- }
-
-
-
-/* gpt 사이드바 끝 */
-
-
 
 /* gpt 체크박스 시작 */
 
 
 
 .container_check {
-  background-color: #fef4f4;
+  background-color: #fff7f7;
+  /* background-color: #fef4f4; */
   border-radius: 8px;
   padding: 20px;
   width: 80%;
@@ -67,6 +48,7 @@
 .ck_table_op {
   /* 테이블 */
   border-collapse: collapse;
+    border: 1px solid #fce8e8;
   width: 100%;
   margin: 15px;
   border-radius: 5px;
@@ -81,6 +63,12 @@ label:hover {
 
 }
 
+.ck_table_op th {
+  padding: 10px;
+  /* 테이블 테두리 색상 */
+  border: 1px solid #fce8e8;
+  text-align: center;
+}
 
 
 .ck_table_op td {
@@ -133,7 +121,7 @@ label:hover {
 
 a {
   text-decoration: none !important;
-  color: black !important;
+color: rgb(68, 59, 59) !important;
     width: 100%;
       height: 100%;
         /* display: block; */
@@ -178,8 +166,55 @@ a {
 }
 
 
+/* gpt 사이드바 시작 */
+
+
+
+.clickmenu .hide {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  margin-top: 10px;
+  padding: 10px;
+  z-index: 1;
+}
+
+.clickmenu a {
+  display: block;
+  width: 100%;
+  height: 100%;
+   
+}
+
+.clickmenu.dropdown-div {
+  position: relative;
+}
+
+.clickmenu.dropdown-div .hide-div {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+}
+
+.clickmenu.dropdown-div:hover .hide-div {
+  display: block;
+}
+
+
+
+
+/* gpt 사이드바 끝 */
+
 
 /* 사이드바 시작 */
+
+
+
 
 
 /* Google Font Import - Poppins */
@@ -231,15 +266,23 @@ body.dark {
 /* ===== Sidebar ===== */
 .sidebar {
   position: fixed;
+  /* fixed로 해야 사이드바가 스크롤을 따라다님.. */
+  /* position: absolute; */
+
   top: 0;
+  /* top: 50px; */
   left: 0;
   height: 100%;
   width: 200px;
-  /* padding: 10px 14px; */
-  background: var(--sidebar-color);
+  /* background: var(--sidebar-color); */
+  background: #fdf8ff;
   transition: var(--tran-05);
+  /* z-index: 100; */
   z-index: 100;
+
 }
+
+
 
 .sidebar.close {
   width: 85px;
@@ -250,7 +293,8 @@ body.dark {
 .sidebar li {
   height: 42px;
   list-style: none;
-  display: flex;
+  /* display: flex; */
+  display: block;
   align-items: center;
   margin-top: 10px;
 }
@@ -259,6 +303,7 @@ body.dark {
 .sidebar .icon {
   min-width: 60px;
   border-radius: 6px;
+  
 }
 
 .sidebar .icon {
@@ -273,7 +318,8 @@ body.dark {
 
 .sidebar .text,
 .sidebar .icon {
-  color: var(--text-color);
+  /* color: var(--text-color); */
+  color: #000;
   transition: var(--tran-03);
 }
 
@@ -282,6 +328,7 @@ body.dark {
   font-weight: 500;
   white-space: nowrap;
   opacity: 1;
+  line-height: 40px;
 }
 
 .sidebar.close .text {
@@ -316,16 +363,16 @@ header .image-text .profession {
   display: block;
 }
 
-.sidebar header .image {
+/* .sidebar header .image {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.sidebar header .image img {
+/* .sidebar header .image img {
   width: 40px;
   border-radius: 6px;
-}
+} */
 
 .sidebar header .toggle {
   position: absolute;
@@ -364,25 +411,14 @@ body.dark .sidebar header .toggle {
   transition: var(--tran-05);
 }
 
-.sidebar li.search-box input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  background-color: var(--primary-color-light);
-  color: var(--text-color);
-  border-radius: 6px;
-  font-size: 17px;
-  font-weight: 500;
-  transition: var(--tran-05);
-}
+
 
 .sidebar li a {
   list-style: none;
   height: 100%;
   background-color: transparent;
-  display: flex;
-    /* display: block; */
+  /* display: flex; */
+  display: block;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -391,6 +427,7 @@ body.dark .sidebar header .toggle {
   transition: var(--tran-03);
 }
 
+/* 호버시 색 변함 */
 .sidebar li a:hover {
   background-color: rgb(250, 200, 208);
   /* var(--primary-color) */
@@ -414,6 +451,7 @@ body.dark .sidebar li a:hover .text {
   overflow-y: scroll;
 }
 
+/* 사이드바에 스크롤바가 보임 */
 .menu-bar::-webkit-scrollbar {
   display: none;
 }
@@ -530,7 +568,6 @@ body.dark .home .text {
 .togright {
   margin-top: 60px;
 }
-
 
 /* 사이드바 끝 */
 
@@ -12856,4 +12893,7 @@ fieldset:disabled .btn {
   .d-print-none {
     display: none !important;
   }
+
+
+
 }

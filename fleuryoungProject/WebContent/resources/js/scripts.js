@@ -644,35 +644,7 @@ $(function () {
 
 
 
-    // 혜민 테스트중
-
-
-    // 찜하기 버튼 클릭시 하트 색 채워지기 + db로 가는건?
-    $('.mini_like').click(function () {
-
-
-        if ($(this).attr("src") == "../../resources/Image-mini/icon/hearting.gif") {
-            $(this).attr("src", "../../resources/Image-mini/icon/like.png")
-        } else {
-            $(this).attr("src", "../../resources/Image-mini/icon/hearting.gif")
-        }
-
-
-    })
-
-
-    // 사이드바 토글 버튼 왔다갔다
-    $('.minitoggle').click(function () {
-
-
-        if ($(this).attr("class") == "bi-toggle-on") {
-            $(this).attr("class", "bi-toggle-off")
-        } else {
-            $(this).attr("class", "bi-toggle-on")
-        }
-
-
-    })
+ 
 
 
 
@@ -680,44 +652,137 @@ $(function () {
 
 
 
+
+//----------------------------------------------------------------------------------
+
+
+    // 찜하기 버튼 클릭시 하트 색 채워지기 + db로 가는건?
+$('.mini_like').click(function () {
+
+
+    if ($(this).attr("src") == "../../resources/Image-mini/icon/hearting.gif") {
+        $(this).attr("src", "../../resources/Image-mini/icon/like.png")
+    } else {
+        $(this).attr("src", "../../resources/Image-mini/icon/hearting.gif")
+    }
+
+
+})
+
 //--------------------------챗 사이드바 -------------------------
 
-
-// 마우스가 toggleBox 영역을 떠나면 모든 smallBox를 숨김
-// toggleBox.mouseleave(function () {
-//     $(".smallBox").hide();
-// });
-
-// // bigBox에 마우스 호버시 해당 bigBox에 속한 smallBox만 보여줌
-// bigBox.hover(function () {
-//     $(this).siblings(".smallBox").show();
-// }, function () {
-//     $(this).siblings(".smallBox").hide();
-// });
-
-// // smallBox에 마우스 호버시 해당 smallBox를 보여줌
-// smallBox.hover(function () {
-//     $(this).show();
-// }, function () {
-//     $(this).hide();
-// });
+    // 사이드바 토글 버튼 왔다갔다
 
 
-
-// html dom 이 다 로딩된 후 실행된다.
 $(document).ready(function () {
-    // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-    $(".menu>a").click(function () {
-        var submenu = $(this).next("ul");
-
-        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-        if (submenu.is(":visible")) {
-            submenu.slideUp();
+    // Toggle 버튼 클릭 이벤트
+    $('.toggle').click(function () {
+        // 사이드바 열림/닫힘 상태 체크
+        if ($('.sidebar').hasClass('close')) {
+            // 사이드바가 닫힌 상태이면 열림
+            $('.sidebar').removeClass('close').addClass('open');
+            $('.minitoggle').attr("class", "bi-toggle-on");
         } else {
-            submenu.slideDown();
+            // 사이드바가 열린 상태이면 닫힘
+            $('.sidebar').removeClass('open').addClass('close');
+            $('.minitoggle').attr("class", "bi-toggle-off");
+            $('.sub-menu').addClass('closed'); // 서브 메뉴를 닫음
+        }
+    });
+
+    $('.minitoggle').click(function () {
+        if ($(this).attr("class") == "bi-toggle-on") {
+            $(this).attr("class", "bi-toggle-off")
+        } else {
+            $(this).attr("class", "bi-toggle-on")
+        }
+    });
+
+    // 서브 메뉴 클릭 이벤트
+    $('.dropdown-trigger').click(function () {
+        // 클릭한 서브 메뉴의 상태 체크
+        if ($(this).find('.sub-menu').hasClass('closed')) {
+            // 서브 메뉴가 닫힌 상태이면 열림
+            $(this).find('.sub-menu').removeClass('closed');
+        } else {
+            // 서브 메뉴가 열린 상태이면 닫힘
+            $(this).find('.sub-menu').addClass('closed');
         }
     });
 });
+
+
+
+
+
+
+// 몇초만큼 부드럽게 열리고 닫히는 코드
+$(document).ready(function () {
+    var toggle = $(".minitoggle");
+    var sidebar = $(".sidebar");
+
+    toggle.on("click", function () {
+        if (sidebar.hasClass("close")) {
+            sidebar.animate(
+                {
+                    width: "200px"
+                },
+                300,
+                function () {
+                    $(this).removeClass("close");
+                }
+            );
+        } else {
+            sidebar.animate(
+                {
+                    width: "85px"
+                },
+                300,
+                function () {
+                    $(this).addClass("close");
+                }
+            );
+        }
+    });
+});
+
+
+
+
+$(document).ready(function () {
+    $(".clickmenu > a").click(function () {
+        var $ul = $(this).next("ul");
+        if ($ul.hasClass("hide")) {
+            $(".clickmenu.active > ul").slideUp(300, function () {
+                $(this).addClass("hide");
+            });
+            $(".clickmenu.active").removeClass("active");
+            $ul.removeClass("hide");
+            $ul.slideDown(300);
+            $(this).parent().addClass("active");
+        } else {
+            $ul.slideUp(300, function () {
+                $(this).addClass("hide");
+            });
+            $(this).parent().removeClass("active");
+        }
+    });
+
+   
+});
+
+
+
+
+
+
+// ----------------------------------------------------------------
+
+
+
+
+
+
 
 
 
