@@ -5,6 +5,10 @@
 
 <% 
 	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list"); 
+
+	response.setHeader("cache-control","no-store");
+	response.setHeader("expires","0");
+	response.setHeader("pragma","no-cache");
 %>
 <!DOCTYPE html>
 <html>
@@ -111,6 +115,7 @@
 	                                	<h1 class="opt2No" style="display: none"><%= c.getOpt2ndNo() %></h1>
 	                                	<h1 class="optPrice" style="display: none"><%= c.getOptPrice() %></h1>
 	                                	<h1 class="pId" style="display: none"><%= c.getpId() %></h1>
+	                                	<h1 class="selNo" style="display: none"><%= c.getSelNo() %></h1>
 	                                	<h1 class="index" style="display: none"><%=index++%></h1>
 	                                </div>
 	                                
@@ -152,7 +157,7 @@
                             <div class="dprice-field">
                                 <span class="ptitle">할인금액</span>
                                 <span class="pprice">
-                                    <span class="won">원</span>
+                                    <span class="won">0 원</span>
                                 </span>
                             </div>
 
@@ -222,9 +227,43 @@
 			}
 		}
 		
+		// 판매 업체 얻어오기
+		function getSelNoArr(){
+			let selNoArr = [];
+			let distinct = [];
+			let sum = 0;
+			$(".selNo").each(function(idx){
+				let key = Number($(this).html());
+				let value = Number(onlyNo($(this).parent().next().children(".cart-price-span").html()));
+				selNoArr[idx] = key; 				
+			})
+			// 중복제거
+			distinct = selNoArr.filter((v, i) => selNoArr.indexOf(v) === i);
+			
+			return distinct;
+		}
+		
+		// 배송비
+		function getDeliveryPrice(){
+			let arr = getSelNoArr();
+			let sum = 0;
+			
+			for (let i in arr){
+				$(".selNo").each(function(){
+					if (arr[i] == $(this).html()){
+						sum += 5000;
+					}
+				})
+			}
+			
+			console.log("sum : " + sum);
+		}
+		
+		
 		// 상품금액 셋팅
 		resultPrice();
 		
+		getDeliveryPrice();
 		
 		$(".cart-price-span").each(function(){
 			$(this).html(comma($(this).html()));

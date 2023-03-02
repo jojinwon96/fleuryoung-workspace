@@ -5,11 +5,14 @@
 	String contextPath = request.getContextPath(); // /jsp
 
 	Member loginUser = (Member) session.getAttribute("loginUser");
+	
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <title>Document</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/header.css">
@@ -23,6 +26,20 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	
+	<!-- 뒤로가기시 무조건 메인페이지 -->
+	<script type="text/javascript">
+       window.addEventListener( "pageshow", function ( event ) {
+         var historyTraversal = event.persisted || 
+                                ( typeof window.performance != "undefined" && 
+                                     window.performance.navigation.type === 2 );
+         if ( historyTraversal ) {
+           // Handle page restore.
+           window.location.reload();
+         }
+       });
+    </script>
+    
 </head>
 <body>
 	<div>
@@ -42,7 +59,7 @@
 				%>
 				<a class="join"><%=loginUser.getMemName()%> 님</a>
 				<div class="bar"></div>
-				<a href="<%=contextPath%>/logout.me" class="logout">로그아웃</a>
+				<a class="logout" onclick="location.replace('<%=contextPath%>/logout.me')">로그아웃</a>
 				<div class="bar"></div>
 				<a href="${pageContext.request.contextPath}/views/board/notice.jsp"
 					class="board">고객센터</a>
@@ -216,8 +233,7 @@
 		</div>
 	</div>
 
-
-
+	
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
 	<script

@@ -6526,7 +6526,7 @@ WHERE OPTION_2ND_NO = ? AND P_ID = ? AND MEM_ID = ?
 -- ajax로 장바구니 상품 삭제 (옵션X)
 DELETE
 FROM TB_CART
-WHERE P_ID = ? AND MEM_ID = ?
+WHERE P_ID = ? AND MEM_ID = ?;
 
 SELECT *
 FROM TB_CART;

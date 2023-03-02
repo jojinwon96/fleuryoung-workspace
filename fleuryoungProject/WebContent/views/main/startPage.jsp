@@ -7,7 +7,9 @@
 	
 	String title = (String)request.getAttribute("title");
 	
-	
+	response.setHeader("cache-control","no-store");
+	response.setHeader("expires","0");
+	response.setHeader("pragma","no-cache");
 %>
 <!DOCTYPE html>
 <html>
