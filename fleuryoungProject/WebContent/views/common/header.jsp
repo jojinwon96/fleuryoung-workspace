@@ -89,9 +89,11 @@
 							<!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
 							<img src="" class="cart-btn"></a>
 						</div>
+						<form action="<%= contextPath %>/myPageMain.my" method="post">
 						<div class="myPage-panel">
 							<button type="button" class="mypage-btn"></button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
