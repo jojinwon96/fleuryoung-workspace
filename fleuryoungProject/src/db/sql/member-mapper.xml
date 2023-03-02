@@ -60,5 +60,11 @@
         )
 	
 	</entry>
+	
+	<entry key="findId">
+	SELECT MEM_ID
+	FROM TB_MEMBER
+	WHERE MEM_NAME = ? AND MEM_EMAIL = ?
+	</entry>
 </properties>
 

@@ -42,6 +42,20 @@ public class MemberService {
 		
 		return result;
 }
+	
+	
+public Member findId(String userName, String userEmail) {
+		
+		Connection conn = getConnection();
+		
+		Member member = new MemberDao().findId(conn, userName, userEmail);
+		 System.out.println(userName);
+		
+		close(conn);
+		
+		System.out.println(member);
+		return member;
+	}
 
 
 

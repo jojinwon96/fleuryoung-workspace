@@ -239,21 +239,6 @@ span {
                   <div class="sign-up-container">
                     <form>
                       <h3 id="h3Pwd"><b>비밀번호 찾기</b>  </h3>
-                      <!-- 
-                          <div class="social-links">
-                            <div>
-                              <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            </div>
-                            <div>
-                              <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </div>
-                            <div>
-                              <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                            <span>or use your email for registration</span>
-                          </div>
-                       -->
-
                        <input type="text" id="idInputPwd" placeholder="아이디를 입력해주세요">
                        <input type="email" id="emailInputPwd" placeholder="가입시 사용하신 이메일을 입력해주세요">
                       <button class="form_btn" id="findPwdButton" style="margin-top: 15px; border-radius: 20px;"><b> 비밀번호 찾기</b></button>
@@ -263,34 +248,41 @@ span {
                   
                   
                   <!-- 아이디찾기 -->
-                    <form action="/fleuryoungProject/findId.me" method="post">
+                  <!-- action="/fleuryoungProject/findId.me" -->
+                    <form action="/fleuryoungProject/findId.me"  name="idfindscreen" method="post">
                       <h3 id="h3Id"><b> 아이디 찾기</b></h3>
-                      <!--
-                          <div class="social-links">
-                        <div>
-                          <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        </div>
-                        <div>
-                          <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        </div>
-                        <div>
-                          <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </div>
-                      </div>
-                      <span>or use your account</span>
-                        -->
                     
-                      
-                        <input type="text" id="nameInputId" placeholder="이름을 입력해주세요">
-                        <input type="email" id="emailInputId" placeholder="가입시 사용하신 이메일을 입력해주세요">
-                      <button class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;"><b>아이디 찾기</b></button>
+                        <input type="text" id="nameInputId" name="member_name" placeholder="이름을 입력해주세요">
+                        <input type="email" id="emailInputId" name="member_email" placeholder="가입시 사용하신 이메일을 입력해주세요">
+                        <button type="submit"  class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;" onClick="id_search()"><b>아이디 찾기</b></button>
                     </form>
+                    
+                     <script>
+          function id_search() { 
+          var frm = document.idfindscreen;
+
+          if (frm.member_name.value.length < 1) {
+            alert("이름 입력해주세요");
+            return;
+          }
+          if (frm.member_email.value.length < 1) {
+            alert("이메일을 입력해주세요");
+            return;
+          }
+        //frm.method = "post";
+        //frm.action = "/views/main/FindIdResult.jsp"; 
+        //frm.submit();  
+        }
+        </script>
+                  
+                  
+                  
                   </div>
                   <div class="overlay-container">
                     <div class="overlay-left">
                       <h4>아이디를 잊어버리셨나요?</h4>
                       <p style="text-align: center;">아이디를 잊어버리셨다면 <br> 아래 버튼을 클릭해주세요</p>
-                      <button id="signIn" class="overlay_btn" style="border-radius: 20px;">아이디 찾기</button>
+                      <button id="signIn" class="overlay_btn" style="border-radius: 20px;" >아이디 찾기</button>
                     </div>
                     <div class="overlay-right">
                       <h5>비밀번호를 잊어버리셨나요?</h5>
@@ -305,6 +297,8 @@ span {
 
 
         </div>
+
+      
 
 
         <script>

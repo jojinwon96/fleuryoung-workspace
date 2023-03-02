@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.member.model.vo.Member"%>
+<%
+	String contextPath = request.getContextPath(); 
+	
+	Member idFind = (Member)session.getAttribute("idFind");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -244,7 +250,7 @@ a{
                 <br>
                 <div id="message">
                     <h5 align="center" style="display: inline-block;"><b>고객님의 아이디는</b></h5>
-                    <label for="idResult" align="center" style="display: inline-block;"><b></b></label>
+                    <label for="idResult" align="center" style="display: inline-block; color: blue; font-size: larger;"><b><%= idFind.getMemId() %></b></label><!-- --------------------------------------------------- -->
                  <h5 align="center" style="display: inline-block;"><b>입니다</b></h5>
                 </div>
                

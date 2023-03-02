@@ -116,6 +116,37 @@ public class MemberDao {
 		
 	}
 	
+	public Member findId(Connection conn, String userName, String userEmail) {
+		
+		Member member = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("findId");
+		System.out.println("다오");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userEmail);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				member = new Member(rs.getString("MEM_ID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(member);
+		return member;
+
+	}
+	
 	
 	
 	
