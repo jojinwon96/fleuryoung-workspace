@@ -90,7 +90,7 @@
 							<img src="" class="cart-btn"></a>
 						</div>
 						<div class="myPage-panel">
-							<button class="mypage-btn"></button>
+							<button type="button" class="mypage-btn"></button>
 						</div>
 					</div>
 				</div>
