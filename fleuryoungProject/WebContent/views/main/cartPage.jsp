@@ -1,5 +1,11 @@
+<%@page import="com.kh.product.model.vo.Cart"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<% 
+	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +13,18 @@
     <meta charset="utf-8">
     <title>Fleuryoung</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
+    <style>
+    	.store-name{
+    		text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+    	}
+    	
+    	label{
+    		cursor: pointer;
+    	}
+    	
+    </style>
 </head>
 
 <body class style="padding-right: 0px;">
@@ -32,138 +50,15 @@
                     <div class="cart-content-header">
                         <div>
                             <label>
-                                <input type="checkbox" id="allCheck" checked>
-                                <img id="check-img" src="images/checked-checkbox.png">
+                                <input type="checkbox" class="allCheck" checked>
+                                <img id="check-img" src="<%=contextPath%>/resources/image/checked-checkbox.png">
                                 전체선택
                             </label>
                             <span></span>
-                            <button class="selectDel">선택삭제</button>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary cart-save" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                                style="margin-left: 350px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">
-                                장바구니 저장
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                            </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body cart-save-message">
-                                            변경사항을 저장 하시겠습니까?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">취소</button>
-                                            <button type="button" class="btn btn-primary"
-                                                style="margin-left: 5px; background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188);">저장하기</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="button" class="selectDel">선택삭제</button>
                         </div>
                     </div>
                     <div class="cart-content-main">
-<<<<<<< Updated upstream
-                        <ul style="list-style-type: none;">
-
-                            <!-- 1번 -->
-                            <li class="cart-li">
-                                <label>
-                                    <input type="checkbox" id="subCheck" name="subCheck[0]" checked>
-                                    <img src="images/checked-checkbox.png">
-                                </label>
-                                <a href="#">
-                                    <span style="background-image: url('images/test-flower1.jpg')"></span>
-                                </a>
-                                <div class="cart-content-title">
-                                    <span>기가막힌 꽃집1</span>
-                                    <a href="#">
-                                        <p>선물용 꽃다발</p>
-                                    </a>
-                                </div>
-                                <div class="cart-button-panel">
-                                    <button class="cart-minus-button"></button>
-                                    <div class="cart-number">1</div>
-                                    <button class="cart-plus-button"></button>
-                                </div>
-                                <div class="cart-price-panel">
-                                    <p style="display: none;">10000</p>
-                                    <span class="cart-price-span">10,000원</span>
-                                </div>
-                                <button class="cart-delete-button">
-                                    <span>
-                                    </span>
-                                </button>
-                            </li>
-
-                            <!-- 2번 -->
-                            <li class="cart-li">
-                                <label>
-                                    <input type="checkbox" id="subCheck" name="subCheck[1]" checked>
-                                    <img src="images/checked-checkbox.png">
-                                </label>
-                                <a href="#">
-                                    <span style="background-image: url('images/test-flower2.jpg')"></span>
-                                </a>
-                                <div class="cart-content-title">
-                                    <span>기가막힌 꽃집2</span>
-                                    <a href="#">
-                                        <p>선물용 꽃상자</p>
-                                    </a>
-                                </div>
-                                <div class="cart-button-panel">
-                                    <button class="cart-minus-button"></button>
-                                    <div class="cart-number">1</div>
-                                    <button class="cart-plus-button"></button>
-                                </div>
-                                <div class="cart-price-panel">
-                                    <p style="display: none;">20000</p>
-                                    <span class="cart-price-span">20,000원</span>
-                                </div>
-                                <button class="cart-delete-button">
-                                    <span>
-                                    </span>
-                                </button>
-                            </li>
-
-                            <!-- <li class="cart-li">
-                            <label>
-                                <input type="checkbox" id="subCheck" name="subCheck[2]" checked>
-                                <img src="images/checked-checkbox.png">
-                            </label>
-                            <a href="#">
-                                <span style="background-image: url('images/test-flower2.jpg')"></span>
-                            </a>
-                            <div class="cart-content-title">
-
-                                <a href="#">
-                                    <p>선물용 꽃상자2</p>
-                                </a>
-                            </div>
-                            <div class="cart-button-panel">
-                                <button class="cart-minus-button"></button>
-                                <div class="cart-number">1</div>
-                                <button class="cart-plus-button"></button>
-                            </div>
-                            <div class="cart-price-panel">
-                                <p style="display: none;">20000</p>
-                                <span class="cart-price-span">20,000원</span>
-                            </div>
-                            <button class="cart-delete-button">
-                                <span>
-                                </span>
-                            </button>
-                        </li> -->
-
-=======
                         <ul style="list-style-type: none;">			
 							<br>
 							<br>
@@ -216,7 +111,6 @@
 	                                	<h1 class="opt2No" style="display: none"><%= c.getOpt2ndNo() %></h1>
 	                                	<h1 class="optPrice" style="display: none"><%= c.getOptPrice() %></h1>
 	                                	<h1 class="pId" style="display: none"><%= c.getpId() %></h1>
-	                                	<h3 class="selNo" style="display: none"><%= c.getSelNo() %></h3>
 	                                	<h1 class="index" style="display: none"><%=index++%></h1>
 	                                </div>
 	                                
@@ -239,10 +133,11 @@
 								<br>
 								</div>									
 							 <% } %>				
->>>>>>> Stashed changes
                         </ul>
                     </div>
                 </div>
+                
+                <!-- 총금액 패널 -->
                 <div class="cart-side-panel">
                     <div class="cart-side-content">
 
@@ -291,10 +186,6 @@
 
     </div>
 
-<<<<<<< Updated upstream
-	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
-=======
 	<script>
 		let delList = [];
 		let indexList = [];
@@ -331,27 +222,15 @@
 			}
 		}
 		
-		let deliveryArr = [];
-		// 배송비 결정
-		function deliveryPrice(){
-			$(".selNo").each(function(){
-				console.log("pid : " + $(this).html());
-				
-			})
-		}
-		
 		// 상품금액 셋팅
 		resultPrice();
 		
-		// 배송비 셋팅
-		deliveryPrice();
 		
 		$(".cart-price-span").each(function(){
 			$(this).html(comma($(this).html()));
 		})
 	
 		$(document).ready(function(){
-			
 			let index = 0;
 			let count = 0;
 			
@@ -360,7 +239,7 @@
 			
 			// 체크박스 제어
 			$(document).on("click", ".allCheck, .subCheck", function(){
-
+				
 				if ($(this).hasClass("allCheck")){
 					
 					if ($(this).attr("checked")){
@@ -571,20 +450,19 @@
 		                    		
 		                    		$(".cart-delete-button").eq(index).parents(".p-wrap").remove();
 	                    		} else {
-	                    			console.log("선택삭제 성공~");
-			                    	let total = Number(onlyNo($(".price-field").children('.pprice').html()));
-			                    	let delSum = 0;
-			                    	
-	                    			$(".subCheck").each(function(index){
+	                    			
+	                    			let delSum = 0;
+	                    			let total = Number(onlyNo($(".price-field").children('.pprice').html()));
+	                    			$(".subCheck").each(function(){
 	                					if ($(this).attr("checked")){
 	                						let delPrice = Number(onlyNo($(this).parents(".p-wrap").find(".cart-price-span").html()));
 	                						delSum += delPrice;
-	                						console.log("삭제할 가격 : " + delPrice);
+	                						console.log("delPrice : " + delPrice);
 	                						$(this).parents('.p-wrap').remove();
 	                					}
 	                				})
+	                				$(".price-field").children('.pprice').html(comma((total-delSum)+"") + " 원");
 	                				console.log("delSum : " + delSum);
-									$(".price-field").children('.pprice').html(comma((total-delSum)+"") + " 원");		
 	                    		}
 	                    	}
 	                    	
@@ -604,9 +482,20 @@
 		 })
 	</script>
 	 
->>>>>>> Stashed changes
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

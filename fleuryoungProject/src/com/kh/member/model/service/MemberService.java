@@ -19,4 +19,15 @@ public class MemberService {
 		return member;
 	}
 
+	public String checkMember(String memId) {
+		
+		Connection conn = getConnection();
+		
+		String result = new MemberDao().checkMember(conn, memId);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

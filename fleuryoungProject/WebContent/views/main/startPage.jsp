@@ -7,6 +7,7 @@
 	
 	String title = (String)request.getAttribute("title");
 	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -159,7 +160,10 @@ h5 {
 					<!-- 일반 배송 + 할인 없는 제품 -->
 					<div class="productbox col mb-5">
 						<div class="card h-100">
-							
+							<% if (p.getpDayDelivery().charAt(0) == 'Y') { %>
+								<div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; left: 0.5rem">당일배송
+            					</div>
+							<%} %>
 							<!-- Product image-->
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
@@ -204,40 +208,8 @@ h5 {
 												alt="">
 
 										</div>
-										<div class="col">
-											<button type="button" data-bs-toggle="modal"
-												data-bs-target="#exampleModal">
-												<!-- a가 클릭되면 장바구니에 추가됐습니다 알람창 + 장바구니 보러가기 알람창 안내 -->
-												<img class="mini_shopping"
-													src="${pageContext.request.contextPath}/resources/image/icon/add-to-basket.png"
-													alt="">
-											</button>
-
-
-											<!-- Modal -->
-											<div class="modal fade" id="exampleModal" tabindex="-1"
-												aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog ">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h1 class="modal-title fs-5" id="exampleModalLabel"
-																align="center">장바구니 추가</h1>
-															<button type="button" class="btn-close"
-																data-bs-dismiss="modal" aria-label="Close"></button>
-														</div>
-														<div class="modal-body">해당 상품을 장바구니에 추가했습니다</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-outline-primary"
-																data-bs-dismiss="modal">닫기</button>
-															<button type="button" class="btn btn-outline-success">장바구니
-																바로가기</button>
-														</div>
-													</div>
-												</div>
-											</div>
-
-
-										</div>
+										<!--
+										 -->
 									</div>
 								</div>
 
@@ -334,11 +306,6 @@ h5 {
 							// 상품 이미지 클릭시 상품 상세 페이지로 이동
 							$('.card-img-top').click(function(){
 								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
-							})
-							
-							// 장바구니 아이콘 클릭시 해당 상품을 장바구니에 추가 
-							$(".mini_shopping").click(function() {
-								
 							})
 						})
 					</script>
