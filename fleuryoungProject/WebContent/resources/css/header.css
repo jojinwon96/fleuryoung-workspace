@@ -1,10 +1,8 @@
 body {
-    
     padding-right: 0px;
 }
 
 .wrap {
-    
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -13,7 +11,6 @@ body {
 }
 
 a {
-    
     background-color: transparent;
     text-decoration: none;
 }
@@ -68,6 +65,7 @@ button {
 
 .join,
 .login,
+.logout,
 .board {
     color: #333;
     background-color: transparent;
@@ -77,6 +75,9 @@ button {
     vertical-align: middle;
 }
 
+.logout{
+    font-weight: bolder;
+}
 
 
 .header-top-bottom-left {
@@ -164,7 +165,7 @@ button {
     width: 20px;
     height: 20px;
     background-size: 363px 300px;
-    content: "";
+    content: url(../../resources/image/smallSearch.png);
 }
 
 .real-time-list a{
@@ -280,8 +281,9 @@ button {
 .cart-btn {
     width: 40px;
     height: 40px;
-    /* background: url("/images/cart.png") 0px 0px no-repeat; */
     cursor: pointer;
+    content: url("../../resources/image/cart.png");
+    margin-bottom: 10px;
 }
 
 .myPage-panel {
@@ -541,4 +543,3 @@ header{
     cursor: pointer;
 }
 /* 여기까지 헤더 */
-

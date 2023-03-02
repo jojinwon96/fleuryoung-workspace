@@ -4,6 +4,27 @@
 * ---------------------------------------------------------------------------
 */
 
+$(function () {
+
+})
+
+// 주소찾기
+$(function () {
+    // 주소 찾기
+    $(".non-address-find-button").click(function () {
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function (data) { //선택시 입력값 세팅
+                $(".non-address-detail").html(data.address); // 주소 넣기
+                $(".non-address-input").val(data.zonecode); // 우편번호 넣기
+                $(".non-address-detail-input").focus(); //상세입력 포커싱
+                console.log(data.zonecode);
+            }
+        }).open();
+    })
+
+});
+
 // 헤더 픽스
 let $defaultHeader = $('header'),
     $defaultsearch = $('#input-panel'),
@@ -11,10 +32,11 @@ let $defaultHeader = $('header'),
 
 $(window).scroll(function () {
     console.log($(this).scrollTop())
-    if ($(this).scrollTop() > 130) {
+    if ($(this).scrollTop() > 120) {
         $defaultHeader.addClass('fixedheader');
         $defaultsearch.removeClass('default-input-panel');
         $defaultsearch.addClass('fixed-input-panel');
+
     } else {
         $defaultHeader.removeClass('fixedheader');
         $defaultsearch.removeClass('fixed-input-panel');
@@ -23,13 +45,36 @@ $(window).scroll(function () {
     }
 
     // 실시간 검색어 픽스
-    if ($(this).scrollTop() > 130) {
+    if ($(this).scrollTop() > 120) {
         $defaultrank.removeClass('default-rank-list-panel');
         $defaultrank.addClass('fixed-rank-list-panel');
     } else {
         $defaultrank.addClass('default-rank-list-panel');
         $defaultrank.removeClass('fixed-rank-list-panel');
     }
+
+    // 결제 정보 패널 픽스
+    if ($(this).scrollTop() > 120) {
+        $(".cart-side-content").css("position", "fixed");
+        $(".cart-side-content").css("top", "20px");
+    } else {
+        $(".cart-side-content").css("position", "absolute");
+        $(".cart-side-content").css("top", "0px");
+
+    }
+
+    if ($(this).scrollTop() > 770) {
+        $(".pd-tabs").addClass("fixed-top");
+        $(".pd-tabs").css("marginLeft", "425px");
+        $(".pd-tabs").css("marginRight", "425px");
+    } else {
+        $(".pd-tabs").removeClass("fixed-top");
+        $(".pd-tabs").css("marginLeft", "0");
+        $(".pd-tabs").css("marginRight", "0");
+    }
+
+    $("pd-mv")
+
 });
 
 
@@ -171,7 +216,7 @@ $(function () {
         const item = document.createElement("li");
         const img = document.createElement("img");
         const atag = document.createElement("a");
-        img.src = '../../resources/image/smallSearch.png';
+        img.src = '${pageContext.request.contextPath}/resources/image/smallSearch.png';
         const button = document.createElement("button");
         button.className = "real-time-delete";
 
@@ -242,51 +287,6 @@ $(function () {
         }
     })
 
-    //  // 전체 삭제
-    //  allDelete.click(function () {
-    //      // 화면
-    //      $(".real-time-list li").remove();
-    //  })
-
-    // // 각각 삭제
-    // $(document).on("click", ".real-time-delete", function () {
-    //     // 화면
-    //     $(this).parents("li").remove();
-    // })
-
-    // let mainInput = $("#main-search"),
-    //     searchBtn = $(".main-input-btn"),
-    //     liList = $(".real-time-list>ul");
-
-    // // enter 했을때 최근 검색어 추가
-    // mainInput.keyup(function (key) {
-    //     //let text = $(this).val();
-    //     if (key.keyCode == 13) {
-    //         // if (text == "") {
-    //         //     return;
-    //         // }
-
-    //         if (liList.children().length > 4) {
-    //             liList.children().last().remove();
-    //         }
-    //         //liList.prepend("<li><img src=\"/images/smallSearch.png\"><a href=\"#\">" + text + "</a><button class=\"real-time-delete\"></button></li>");
-    //     }
-    // });
-
-    // 검색 버튼 클릭 했을떄 검색어 추가
-    // searchBtn.click(function () {
-    //     // let text = mainInput.val();
-    //     // if (text == "") {
-    //     //     return;
-    //     // }
-
-    //     if (liList.children().length > 4) {
-    //         liList.children().last().remove();
-    //     }
-    //     //liList.prepend("<li><img src=\"/images/smallSearch.png\"><a href=\"#\">" + text + "</a><button class=\"real-time-delete\"></button></li>");
-    // })
-
-
 })
 
 $(function () {
@@ -323,107 +323,69 @@ $(document).on("click", ".row-li", function () {
     }
 })
 
-// 장바구니
+
+
+// 상품 상세 페이지
 $(function () {
-    // 전체
-    $("#allCheck").click(function () {
-
-        const checked = $(this).is(':checked');
-
-        if (checked) {
-            $(".cart-content-header img").attr("src", "../../resources/image/checked-checkbox.png");
-            $('#subCheck').attr("checked", true);
-        } else {
-            $(".cart-content-header img").attr("src", "../../resources/image/unchecked-checkbox.png");
-            $('#subCheck').attr("checked", false);
-        }
+    $('.pd-btn').mouseover(function () {
+        $(this).css("border", "2px solid pink");
+        let $tmp = $(this).attr("src");
+        $('.pd-main').attr("src", $tmp);
     })
 
-    // 전체 체크의 값이 변화했을 때
-    $("#allCheck").change(function () {
+    $('.pd-btn').mouseout(function () {
+        $(this).css("border", "none");
+    })
 
-        if ($(this).is(":checked")) { //대상이 체크 되어 있을 때
+    $('.pd-mv-btn').click(function () {
+        $(".pd-mv-btn").css("color", "black");
+        $(this).css("color", "pink");
+    })
 
-            //같은 네임을 가진 체크박스 체크
-            $(".cart-li img").attr("src", "../../resources/image/checked-checkbox.png");
-            $("input:checkbox[name='subCheck']").prop("checked", true);
+    // 상세페이지 위치 이동
+    $(".pd1").click(function () {
+        var height = $(".t1").offset();
 
-        } else { //대상이 체크 해제 되어 있을 때
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
 
-            //같은 네임을 가진 체크박스 체크해제
-            $(".cart-li img").attr("src", "../../resources/image/unchecked-checkbox.png");
-            $("input:checkbox[name='subCheck']").prop("checked", false);
-        }
-    });
+    $(".pd2").click(function () {
+        var height = $(".t2").offset();
 
-    // 선택
-    $('input[type="checkbox"][name="subCheck"]').click(function () {
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
 
-        if ($(this).prop('checked')) {
-            $(this).next().attr("src", "../../resources/image/checked-checkbox.png");
-            $(this).prop('checked', true);
+    $(".pd3").click(function () {
+        var height = $(".t3").offset();
 
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+    $(".pd4").click(function () {
+        var height = $(".t4").offset();
+
+        $("html, body").animate({ scrollTop: height.top }, -0);
+    })
+
+
+
+    $(".call-tr").click(function(){
+        let $tr1 = $(this).next(); 
+        let $tr2 = $(this).next().next();
+        let $tr3 = $(this).next().next().next();
+
+        if ($tr1.css("display") == "none" && $tr2.css("display") == "none" && $tr3.css("display") == "none"){
+            $tr1.show();
+            $tr2.show();
+            $tr3.show();
         } else {
-            $(this).next().attr("src", "../../resources/image/unchecked-checkbox.png");
-            $(this).prop('checked', false);
-        }
-        console.log($(this).prop('checked'));
-    });
-
-    // 수량 가격 감소
-    $('.cart-minus-button').click(function () {
-        let num = parseInt($(this).next().html());
-
-        let origin = $(this).parent().next().children('span');
-        let regex = /[^0-9]/g;
-        let tmp = origin.html().replace(regex, "");
-
-        // 고정 변수
-        let price = $(this).parent().next().children('p').html();
-
-        let result = 0;
-        
-        if (num > 1) {
-            num = num - 1;
-            let count = $(this).next().html(num);
-            result = parseInt(tmp) - parseInt(price);
-            origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
+            $tr1.hide();
+            $tr2.hide();
+            $tr3.hide();
         }
         
     })
-
-    // 수량 가격 증가
-    $('.cart-plus-button').click(function () {
-        let num = parseInt($(this).prev().html()) + 1;
-        let count = $(this).prev().html(num);
-
-        let origin = $(this).parent().next().children('span');
-        let regex = /[^0-9]/g;
-        let tmp = origin.html().replace(regex, "");
-
-        // 고정 변수
-        let price = $(this).parent().next().children('p').html();
-
-        let result = (parseInt(price) * num);
-        origin.html((result + "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원");
-
-    })
-
-    // 선택삭제 버튼 클릭시
-    $('.cart-content-header button').click(function () {
-        $('input[type="checkbox"][name="subCheck"]').each(function () {
-            let chk = $(this).is(":checked");
-            if (chk) {
-                $(this).parent().parent().remove();
-            }
-        })
-    })
-
-    // X버튼 클릭시 장바구니 항목 삭제
-    $('.cart-delete-button').click(function () {
-        $(this).parent().remove();
-    })
-
+    
 
 })
 
