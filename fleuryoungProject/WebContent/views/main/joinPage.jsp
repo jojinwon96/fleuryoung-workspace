@@ -16,6 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <style>
 #infoInputMeori {
 	/* text-align: center; */
@@ -76,7 +78,7 @@ label {
 
 #phoneArea {
 	width: 100%;
-	height: 120px;
+	height: 80px;
 	padding-top: 30px;
 }
 
@@ -326,7 +328,7 @@ button {
 			<div>
 			<!-- id = "enroll-form" -->
 			<!-- <small>*</small> -->
-				<form action="/fleuryoungProject/insert.me"  method="post">
+				<form id="enroll-form" action="/fleuryoungProject/insert.me"  method="post">
 					<div id="info">
 
 						<div id="infoHeader">
@@ -338,7 +340,7 @@ button {
 							<label for="id"> 아이디</label> <input type="text"
 								class="form-control" id="idInput" required name="memId"
 								placeholder="공백없이 소문자,숫자로 5~12글자">
-							<button id="idCheckBtn" onclick="idCheck();">중복확인</button>
+							<button type="button" id="idCheckBtn" onclick="idCheck();">중복확인</button>
 						</div>
 
 
@@ -362,7 +364,7 @@ button {
 						<div id="emailArea">
 							<label for="email">이메일</label> <input type="email"
 							name="email"
-							class="form-control" id="emailInput"> <br> <a
+							class="form-control" id="emailInput" required> <br> <a
 							href=""><button type="button"
 							class="btn btn-outline-success" id="emailButton">이메일
 							인증하기</button></a>
@@ -380,9 +382,11 @@ button {
 						<div id="phoneArea">
 							<label for="phone">휴대폰번호</label> <input type="phone"
 								class="form-control" id="phoneInput"
-								placeholder="-는 빼고 숫자만 입력해주세요" name="phone" required> <a href=""><button
+								placeholder="-는 빼고 숫자만 입력해주세요" name="phone" required> 
+								<!--<a href=""><button
 									type="button" class="btn btn-outline-info" id="phoneButton">휴대폰
-									인증하기</button></a>
+									인증하기</button></a>-->
+								
 						</div>
 
 						<div id="birthDateArea">
@@ -433,10 +437,10 @@ button {
 							<label for="address" id="addressLabel">주소</label>
 		
 							<div id="addressDiv2"> 
-							 <input type="number" id="address1" placeholder="주소번호" name="postal"  >
+							 <input type="number" id="address1" placeholder="주소번호" name="postal" required >
 							<button id="btn-address" onclick="sample6_execDaumPostcode()" type="button" >주소검색</button>  <br>
-							<input type="text"  id="address2" placeholder="도로명주소" name="street" > <br>
-							<input type="text" class="form-control" id="address3" placeholder="상세주소를 입력해주세요" name="address"> 
+							<input type="text"  id="address2" placeholder="도로명주소" name="street" required> <br>
+							<input type="text" class="form-control" id="address3" placeholder="상세주소를 입력해주세요" name="address" required> 
 							
 							</div>
 		
@@ -461,7 +465,7 @@ button {
 								<li class="checkBox check02">
 									<ul class="clearfix">
 										<li>이용약관 동의(필수)</li>
-										<li class="checkBtn"><input type="checkbox" name="chk"
+										<li class="checkBtn"><input type="checkbox" name="chk" id="check01"
 											class="chk"></li>
 									</ul> <textarea name="" id="">여러분을 환영합니다. 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
                </textarea>
@@ -469,7 +473,7 @@ button {
 								<li class="checkBox check03">
 									<ul class="clearfix">
 										<li>개인정보 수집 및 이용에 대한 안내(필수)</li>
-										<li class="checkBtn"><input type="checkbox" name="chk"
+										<li class="checkBtn"><input type="checkbox" name="chk" id="check02"
 											class="chk"></li>
 									</ul> <textarea name="" id="">여러분을 환영합니다. 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
                </textarea>
@@ -503,6 +507,9 @@ button {
 
 
 					</div>
+
+					<input type="hidden" name="checked_id" value="">
+
 				</form>
 			</div>
 
@@ -514,7 +521,7 @@ button {
 	</div>
 
 	
-                 <!--  -->
+                 <!-- 주소  -->
 
 				 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 						<!-- 주소 api -->
@@ -573,23 +580,37 @@ button {
 								}).open();
 							}
 						</script>
-						
-						<!-- 아이디, 비밀번호 정규표현식  -->
+
+
+						<!-- 아이디 중복확인 클릭 여부 -->
+						<script>
+							$("#idCheckBtn").click(function(){
+
+								$("input[name=checked_id]").val('y');
+
+							})
+							
+						</script>
+
+						<!-- 비밀번호 정규표현식  -->
 						<script>
 							function userEnroll() {
-								const idInputf = document.getElementById("idInput");
+								
 								const pwdInputf = document.getElementById("pwdInput");
 								const pwdInputCheckf = document.querySelector("#pwdInputCheck");
-						
-						
-								// id : 소문자,숫자로 5~12글자
-								let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-						
-								if (!regExp.test(idInputf.value)) {
-									alert('유효하지 않은 id를 입력하셨습니다.');
-									idInput.select();
+								const check01= document.getElementById("check01");
+								const check02 = document.getElementById("check02");
+
+								const check01_checked = check01.checked;
+								const check02_checked = check02.checked;
+
+								if($("input[name='checked_id']").val()==''){
+									alert('아이디중복 확인을 해주세요.');
+									$("input[name='checked_id']").eq(0).focus();
 									return false;
-								}
+									}
+						
+								
 						
 								// 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
 								let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
@@ -609,51 +630,16 @@ button {
 									return false;
 						
 								}
-						
+
+								if ((check01.checked && check02.checked) != true ) {
+									alert("이용약관에 동의하지 않으셧습니다.");
+									return false;
+								}
+
 							}
 						</script>
-				
-                
-                
-			
 
-	<!-- 아이디, 비밀번호 정규표현식  -->
-	<script>
-        function userEnroll() {
-            const idInputf = document.getElementById("idInput");
-            const pwdInputf = document.getElementById("pwdInput");
-            const pwdInputCheckf = document.querySelector("#pwdInputCheck");
-
-
-            // id : 소문자,숫자로 5~12글자
-            let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-
-            if (!regExp.test(idInputf.value)) {
-                alert('유효하지 않은 id를 입력하셨습니다.');
-                idInput.select();
-                return false;
-            }
-
-            // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
-            let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
-
-            if (!regExp1.test(pwdInput.value)) {
-                alert('유효하지 않은 비밀번호를 입력하셨습니다');
-                pwdInput.value = "";
-                pwdInput.focus();
-                return false;
-            }
-
-            // 비밀번호 확인
-            if (pwdInput.value != pwdInputCheck.value) {
-                alert("비밀번호 확인이 일치하지 않습니다.");
-                pwdInputCheck.value = "";
-                pwdInputCheck.focus();
-                return false;
-
-            }
-
-        
+<script>
         
         // 생일 유효성 검사
     	var birthJ = false;
@@ -718,35 +704,29 @@ button {
     				alert('유효하지 않은 생년월일을 입력하셨습니다');
     			}
     	    
-    	    
-    	  	
-    	    
-    	    
-    	    
-    	    
-    	    
-    	    
-    		};
+    
+    		;
     </script>
     
     <!-- ------------------------------------------------------------------------------------------------- -->
     
     <Script>
-		function readonlyFalse(){
-			const $idInput = $("#enroll-form input[name=userId]");
-			$idInput.removeAttr("readonly").focus();
-			$idInput.css("backgroundColor", "")
-		}
 	
 		function idCheck(){
-			// 사용자가 중복확인 버튼 클릭시 사용자가 입력한 아이디값을 넘겨서 조회요청(존재하는지 안하는지) => 응답데이터 돌려받기
-			// 1) 사용불가능(NNNNN)일 경우 => alert로 메시지 출력, 다시 입력할 수 있도록 유도
-			// 2) 사용가능(NNNNY)일 경우 => 진짜 사용할껀지 의사를 물어볼꺼임(Confirm 메소드)
- 			//						 => 사용하겠다는 경우 => 더 이상 아이디 수정못하게끔 픽스, 회원가입버튼 활성화
- 			//						 => 사용안하겠다는 경우 => 다시 입력할 수 있도록 유도
  			
- 			// 입력한 아이디 input 요소 객체
- 			const $idInput = $("#enroll-form input[name=userId]");
+ 			const idInputf = document.getElementById("idInput");
+
+			// id : 소문자,숫자로 5~12글자
+			let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
+	
+			if (!regExp.test(idInputf.value)) {
+				alert('유효하지 않은 id를 입력하셨습니다.');
+				idInput.select();
+				return false;
+			}
+			
+			
+ 			const $idInput = $("#enroll-form input[name=memId]");
  			
  			$.ajax({
  				url:"idCheck.me",
@@ -762,9 +742,9 @@ button {
  		 				if($idInput.val() != null){
 	 		 				if(confirm("이 아이디를 사용하시겠습니까?")){
 	 		 					$idInput.attr("readonly", true)
-	 		 					//$("#enroll-form :submit").attr("disabled", false);
+	 		 					$("#enroll-form :submit").attr("disabled", false);
 	 		 					$("#enroll-form :submit").removeAttr("disabled");
-	 		 					$idInput.css("backgroundColor", "gray")
+	 		 					$idInput.css("backgroundColor", "lightblue")
 	 		 				}else { // 취소
 	 		 					$idInput.val("")
 	 	                        $idInput.focus()
@@ -773,20 +753,17 @@ button {
 	 		 				}
  		 					
  		 				}
- 		                //confirm("이 아이디를 사용하시겠습니까?")
-                        // 확인 누르면 readonly 옵션 달아주기 그러면서 회원가입버튼 enable 처리
+ 		                
  		            }
  				},
- 				error:function(){
- 					console.log("아이디 중복체크용 ajax 통신 실패!");
- 				}
+ 				
  			});
  			
  			
             
 		}
 	</Script>
-    
+
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
 </body>

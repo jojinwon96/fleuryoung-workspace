@@ -254,7 +254,7 @@ span {
                     
                         <input type="text" id="nameInputId" name="member_name" placeholder="이름을 입력해주세요">
                         <input type="email" id="emailInputId" name="member_email" placeholder="가입시 사용하신 이메일을 입력해주세요">
-                        <button type="submit"  class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;" onClick="id_search()"><b>아이디 찾기</b></button>
+                        <button type="submit"  class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;" onClick="return id_search()"><b>아이디 찾기</b></button>
                     </form>
                     
                      <script>
@@ -262,12 +262,12 @@ span {
           var frm = document.idfindscreen;
 
           if (frm.member_name.value.length < 1) {
-            alert("이름 입력해주세요");
-            return;
+            alert("이름을 입력해주세요");
+            return false;
           }
           if (frm.member_email.value.length < 1) {
             alert("이메일을 입력해주세요");
-            return;
+            return false;
           }
         //frm.method = "post";
         //frm.action = "/views/main/FindIdResult.jsp"; 

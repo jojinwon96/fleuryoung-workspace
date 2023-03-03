@@ -66,5 +66,16 @@
 	FROM TB_MEMBER
 	WHERE MEM_NAME = ? AND MEM_EMAIL = ?
 	</entry>
+	
+	
+	
+	<!-- 아이디 중복확인 -->
+	<entry key="idCheck">
+	SELECT
+        COUNT (*) "COUNT"
+    FROM TB_MEMBER
+    WHERE MEM_ID = ?
+	
+	</entry>
 </properties>
 

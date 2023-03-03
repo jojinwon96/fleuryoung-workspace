@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import java.text.DateFormat;
@@ -73,11 +74,34 @@ public class JoinPageController extends HttpServlet {
 				int result = new MemberService().insertMember(m);
 				
 				if(result>0) {
-					HttpSession session = request.getSession();
 					
-					response.sendRedirect(request.getContextPath());
+					/*
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('회원가입에 성공하였습니다. 로그인하고 많은 혜택 누리세요!');  </script>"); 
+					out.flush();
+					*/
+					//
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter writer = response.getWriter();
+					writer.println("<script>alert('회원가입에 성공하였습니다, 로그인하고 많은 혜택 누리세요!'); location.href='"+"http://localhost:8888/fleuryoungProject/mainPage.jsp"+"';</script>"); 
+					writer.close();
+					
+					
+					//HttpSession session = request.getSession();
+					//session.setAttribute("alertMsg", "성공적으로 회원가입이 되었습니다");
+					//response.sendRedirect(request.getContextPath() );
+					
 					
 				}else {
+					  //response.setContentType("text/html; charset=UTF-8");
+
+			            PrintWriter out = response.getWriter();
+
+			            out.println("<script>alert('회원가입에 실패하였습니다. 다시 시도해 주세요.'); history.go(-1); </script>"); 
+			            
+
+			            out.flush(); 
 					RequestDispatcher view = request.getRequestDispatcher("/views/main/joinPage.jsp");
 					view.forward(request, response);
 				}

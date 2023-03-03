@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,17 +38,25 @@ public class FindIdController extends HttpServlet {
 			String userName = request.getParameter("member_name");
 			String userEmail = request.getParameter("member_email");
 			System.out.println(userName);
+			System.out.println(userEmail);
 			Member idFind = new MemberService().findId(userName, userEmail);
 			
+			
 			if (idFind == null) {
-				System.out.println("결과도 안나옴");
-				request.setAttribute("alertMsg", "이름과 이메일을 다시 확인해주세요.");
+				//System.out.println("결과도 안나옴");
 				
-				RequestDispatcher view = request.getRequestDispatcher("/findIdPage.me");
-				view.forward(request, response);
+				if (userName != null && userEmail != null) {
+				  response.setContentType("text/html; charset=UTF-8");
+
+		            PrintWriter out = response.getWriter();
+
+		            out.println("<script>alert('존재하지 않는 회원정보입니다. 다시 입력해 주세요.'); history.go(-1); </script>"); 
+
+		            out.flush(); 
+				}
 				
 			} else {
-				System.out.println("일단 결과는 나옴");
+				//ystem.out.println("일단 결과는 나옴");
 				HttpSession session = request.getSession();
 				session.setAttribute("idFind", idFind);
 				response.sendRedirect(request.getContextPath() + "/views/main/FindIdResult.jsp");
