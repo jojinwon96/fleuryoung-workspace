@@ -85,8 +85,9 @@
     max-width: 100%;
 }
 
-.cart-content-header span {
+.cart-content-header span {	
     display: inline-block;
+    margin-top:5px;
     width: 1px;
     height: 20px;
     background: rgb(221, 221, 221);
@@ -95,6 +96,7 @@
 }
 
 .cart-content-header button {
+	margin-top: 3px;
     margin-left: -9px;
     font-weight: bold;
 }
@@ -136,10 +138,13 @@
     display: flex;
     flex-direction: column;
     width: 345px;
-    margin-right: 20px;
     overflow: hidden;
     white-space: nowrap;
     word-break: break-all;
+}
+
+.cart-content-title>div{
+	margin-left: 5px;
 }
 
 .cart-content-title>span, p{

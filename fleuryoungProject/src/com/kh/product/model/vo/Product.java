@@ -15,11 +15,18 @@ public class Product {
 	private int saleCount; // 판매량
 	private String pDayDelivery; // 당일배송여부
 	private String pGift; // 선물여부
-	private String selNo; // 판매자 번호 
+	private int selNo; // 판매자 번호 
 	private String categoryNO; // 카테고리 번호
-	
 	private int reviewRating; // 별점 1 ~ 5
+	private String mainImg; // 메인 이미지
+	private int reviewCount; // 조회수
+	private String images;
+	private String storeName;
 	
+
+	public Product() {}
+
+
 	public Product(int pId, String pName, int reviewRating, int reviewCount,  String pNetPrice,  String mainImg, String pDayDelivery
 			) {
 		super();
@@ -32,13 +39,8 @@ public class Product {
 		this.reviewCount = reviewCount;
 	}
 
-	private String mainImg; // 메인 이미지
-	private int reviewCount; // 조회수
-	
-	public Product() {}
-
 	public Product(int pId, String pName, String pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
-			String pTagYN, int saleCount, String pDayDelivery, String pGift, String selNo, String categoryNO) {
+			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, String categoryNO) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -55,6 +57,41 @@ public class Product {
 		this.categoryNO = categoryNO;
 	}
 
+	
+	
+	public Product(int pId, int selNo, String storeName, String pName, int pStock, int reviewRating, int reviewCount, String pNetPrice, String pDayDelivery,
+			  String images) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pNetPrice = pNetPrice;
+		this.pStock = pStock;
+		this.pDayDelivery = pDayDelivery;
+		this.selNo = selNo;
+		this.reviewRating = reviewRating;
+		this.reviewCount = reviewCount;
+		this.images = images;
+		this.storeName = storeName;
+	}
+
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
+	}
+	
+	public String getImages() {
+		return images;
+	}
+
+
+	public void setImages(String images) {
+		this.images = images;
+	}
 	
 	public int getReviewRating() {
 		return reviewRating;
@@ -168,11 +205,11 @@ public class Product {
 		this.pGift = pGift;
 	}
 
-	public String getSelNo() {
+	public int getSelNo() {
 		return selNo;
 	}
 
-	public void setSelNo(String selNo) {
+	public void setSelNo(int selNo) {
 		this.selNo = selNo;
 	}
 

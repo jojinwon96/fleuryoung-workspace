@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Logout</title>
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward(); 
+    }
+      
+    setTimeout("preventBack()", 0);
+      
+    window.onunload = function () { null };
+</script>
+</head>
+<body>
+	<script>
+	    window.onload = function(){
+	       location.href = "/logout.se";
+	  	}
+    </script>
+</body>
+</html>

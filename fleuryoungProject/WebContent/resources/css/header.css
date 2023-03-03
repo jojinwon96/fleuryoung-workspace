@@ -165,7 +165,7 @@ button {
     width: 20px;
     height: 20px;
     background-size: 363px 300px;
-    content: "";
+    content: url(../../resources/image/smallSearch.png);
 }
 
 .real-time-list a{
@@ -283,6 +283,7 @@ button {
     height: 40px;
     cursor: pointer;
     content: url("../../resources/image/cart.png");
+    margin-bottom: 10px;
 }
 
 .myPage-panel {

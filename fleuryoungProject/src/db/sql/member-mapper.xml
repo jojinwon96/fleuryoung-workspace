@@ -22,5 +22,12 @@
 		FROM TB_MEMBER
 		WHERE MEM_ID = ? AND MEM_PW = ?
 	</entry>
+	
+	<entry key="checkMember">
+		SELECT MEM_ID
+		FROM TB_MEMBER
+		WHERE MEM_ID = ?
+	</entry>
+	
 </properties>
 

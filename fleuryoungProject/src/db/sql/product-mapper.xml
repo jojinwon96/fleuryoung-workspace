@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="selectLatestProduct">
+		SELECT B.*
+				FROM (SELECT ROWNUM RNUM, A.*
+				FROM(SELECT P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
+				COUNT(REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_ENROLL_DATE, P_DAY_DELIVERY
+				FROM TB_REVIEW
+				RIGHT JOIN TB_PRODUCT USING (P_ID)
+				LEFT JOIN TB_PRODUCT_IMG USING (P_ID)
+				GROUP BY P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, P_ENROLL_DATE, P_DAY_DELIVERY
+				ORDER BY P_ENROLL_DATE DESC) A ) B
+				WHERE RNUM BETWEEN 1 AND 20
+	</entry>
+
+	<entry key="selectSaleOrderProduct">
+		SELECT B.*
+		FROM (SELECT ROWNUM RNUM, A.*
+		FROM (SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+		COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+		FROM TB_MEM_PAYMENT P
+		RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+		FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+		GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+		ORDER BY P_SALES DESC)A)B
+		WHERE RNUM BETWEEN 1 AND 20
+	</entry>
+
+	<entry key="selectReviewOrderProduct">
+		SELECT B.*
+				FROM (SELECT ROWNUM RNUM, A.*
+				FROM (SELECT O.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
+				COUNT(REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_DAY_DELIVERY
+				FROM TB_MEM_PAYMENT P
+		        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+				FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+				LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+				LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+				GROUP BY O.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
+				ORDER BY COUNT DESC)A)B
+		WHERE RNUM BETWEEN 1 AND 20
+	</entry>
+
+	<entry key="selectProductDetail">
+		SELECT 
+		    P.P_ID AS "P_ID"
+		  , (SELECT SEL_NO FROM TB_SELLER S WHERE S.SEL_NO = P.SEL_NO) AS "SEL_NO"
+		  , (SELECT SEL_STORE_NAME FROM TB_SELLER S WHERE S.SEL_NO = P.SEL_NO) AS "STORE_NAME"
+		  , P_NAME
+		  , P_STOCK
+		  , NVL(REVIEW_RATING, 0) AS "REVIEW_RATING"
+		  , (SELECT COUNT(REVIEW_RATING) FROM TB_REVIEW R WHERE R.P_ID = P.P_ID) AS "COUNT"
+		  , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+		  , P_Day_Delivery
+		  , P_IMG1 || ',' || P_IMG2 || ','  || P_IMG3 || ','  || P_IMG4 || ','  || P_IMG5 || ','  || P_IMG6 || ','  || P_IMG7 || ','  || P_IMG8 || ','  || P_IMG9 || ',' || P_IMG10 AS "IMAGES"
+		FROM TB_PRODUCT_IMG I
+		JOIN TB_PRODUCT P ON (I.P_ID = P.P_ID)
+		LEFT JOIN TB_REVIEW R ON (P.P_ID = R.P_ID)
+		WHERE P.P_ID = ?
+	</entry>
+	
+	<entry key="selectProductOption">
+		SELECT OPTION_1ND_NO, OPTION_2ND_NO ,OPTION_TITLE, OPTION_2ND_CONTENT, OPTION_2ND_PRICE, OPTION_2ND_STOCK
+		FROM TB_PRODUCT
+		JOIN TB_1ST_OPTION USING (P_ID)
+		JOIN TB_2ND_OPTION USING (OPTION_1ND_NO)
+		WHERE P_ID = ?
+	</entry>
+	
+	<entry key="selectProductReview">
+		SELECT R.P_ID AS "P_ID"
+		     , REVIEW_ID
+		     , REVIEW_RATING
+		     , REVIEW_DETAIL AS "CONTENT"
+		     , (SELECT MEM_ID FROM TB_MEM_ORDER_DETAIL M WHERE R.OD_ID = M.OD_ID) AS "MEM_ID"
+		     , TO_CHAR(REVIEW_ADD_DATE, 'YYYY-MM-DD') AS "DATE"
+		FROM TB_REVIEW R
+		JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
+		WHERE R.P_ID = ?
+	</entry>
+	
+	<entry key="selectProductInquiry">
+		SELECT P_ID, MEM_ID, MEM_NAME, INQUIRY_ID, INQUIRY_TYPE, INQUIRY_TITLE, INQUIRY_COMMENT   
+		FROM TB_INQUIRY
+		JOIN TB_MEMBER USING (MEM_ID)
+		WHERE P_ID = ?
+	</entry>
+	
+	<entry key="insertMemberCart">
+		INSERT INTO 
+		    TB_CART 
+		        (
+		         CART_ID
+		       , OPTION_1ND_NO
+		       , OPTION_2ND_NO
+		       , OPTION_2ND_TITLE
+		       , OPTION_STOCK
+		       , OPTION_PRICE
+		       , NON_OPTION_STOCK
+		       , CART_ADD_DATE
+		       , P_ID
+		       , MEM_ID
+		       , NON_MEM_ID
+		       )
+		       VALUES
+		      (
+		       SEQ_CART.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key="selectOptCart">
+		SELECT OPTION_2ND_NO, OPTION_STOCK, P_ID
+		FROM TB_CART
+		WHERE MEM_ID = ? AND P_ID = ? AND OPTION_2ND_NO = ?
+	</entry>
+	
+	<entry key="selectDefaultCart">
+		SELECT NON_OPTION_STOCK, P_ID
+		FROM TB_CART
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="updateOptCart">
+		UPDATE TB_CART
+		SET OPTION_STOCK = ?
+		WHERE MEM_ID = ? AND OPTION_2ND_NO = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="updateDefaultCart">
+		UPDATE TB_CART
+		SET NON_OPTION_STOCK = ?
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="selectCart">
+		SELECT  
+		        P.SEL_NO AS "SEL_NO"
+		      , C.P_ID AS "P_ID"
+		      , C.MEM_ID AS "MEM_ID"
+		      , P.P_NAME AS "P_NAME"
+		      , S.SEL_STORE_NAME AS "SEL_STORE_NAME"
+		      , C.OPTION_1ND_NO AS "OPTION_1ND_NO"
+		      , O.OPTION_TITLE AS "OPTION_TITLE"
+		      , C.OPTION_2ND_TITLE AS "OPTION_CONTENT"
+		      , C.OPTION_2ND_NO AS "OPTION_2ND_NO"
+		      , C.OPTION_PRICE AS "OPTION_PRICE"
+		      , C.OPTION_STOCK AS "OPTION_STOCK"
+		      , C.NON_OPTION_STOCK AS "NON_OPTION_STOCK"
+		      , P.P_NETPRICE  AS "P_NETPRICE"
+		      , (SELECT P_IMG1 FROM TB_PRODUCT_IMG G WHERE G.P_ID = P.P_ID) AS "IMG"
+		FROM TB_CART C
+		LEFT JOIN TB_PRODUCT P ON (C.P_ID = P.P_ID)
+		LEFT JOIN TB_SELLER S ON (P.SEL_NO = S.SEL_NO)
+		LEFT JOIN TB_1ST_OPTION O ON (C.OPTION_1ND_NO = O.OPTION_1ND_NO)
+		WHERE MEM_ID = ?
+		ORDER BY SEL_NO ASC
+	</entry>
+	
+	<entry key="ajaxSelectOptionPrice">
+		SELECT  
+	        OPTION_PRICE
+	      , OPTION_STOCK
+	      , P_NETPRICE
+		FROM TB_CART
+		JOIN TB_PRODUCT USING (P_ID)
+		WHERE MEM_ID = ? AND OPTION_2ND_NO = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="ajaxSelectPrice">
+		SELECT  
+	        NON_OPTION_STOCK
+	      , P_NETPRICE
+		FROM TB_CART
+		JOIN TB_PRODUCT USING (P_ID)
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="ajaxOptDelete">
+		DELETE 
+		FROM TB_CART
+		WHERE OPTION_2ND_NO = ? AND P_ID = ? AND MEM_ID = ?
+	</entry>
+	
+	<entry key="ajaxDelete">
+		DELETE
+		FROM TB_CART
+		WHERE P_ID = ? AND MEM_ID = ?
+	</entry>
+</properties>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
