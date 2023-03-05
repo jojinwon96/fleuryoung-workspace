@@ -43,6 +43,21 @@ public class Member {
 		this.status = status;
 	}
 
+	
+	
+	public Member(String memId, String memName, String email, String phone, int postal, String street, String address,
+			int mileage) {
+		super();
+		this.memId = memId;
+		this.email = email;
+		this.memName = memName;
+		this.phone = phone;
+		this.postal = postal;
+		this.street = street;
+		this.address = address;
+		this.mileage = mileage;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

@@ -29,5 +29,11 @@
 		WHERE MEM_ID = ?
 	</entry>
 	
+	<entry key="selectMemberOrderInfo">
+		SELECT MEM_ID, MEM_NAME, MEM_EMAIL, MEM_PHONE, MEM_POSTAL, MEM_STREET, MEM_ADDRESS, MEM_MILEAGE
+		FROM TB_MEMBER
+		WHERE MEM_ID = ?
+	</entry>
+	
 </properties>
 

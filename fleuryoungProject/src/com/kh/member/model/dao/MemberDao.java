@@ -102,6 +102,43 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public Member selectMemberOrderInfo(Connection conn, String memId) {
+
+		Member m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectMemberOrderInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				m = new Member(rs.getString("MEM_ID")
+						     , rs.getString("MEM_NAME")
+						     , rs.getString("MEM_EMAIL")
+						     , rs.getString("MEM_PHONE")
+						     , rs.getInt("MEM_POSTAL")
+						     , rs.getString("MEM_STREET")
+						     , rs.getString("MEM_ADDRESS")
+						     , rs.getInt("MEM_MILEAGE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return m;
+	}
 	
 	
 	

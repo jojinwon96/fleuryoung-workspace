@@ -5,7 +5,6 @@
 
 <% 
 	ArrayList<Cart> list = (ArrayList<Cart>)request.getAttribute("list"); 
-
 %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +44,6 @@
             </div>
         </div>
 
-        <form action="<%=contextPath%>/orderPage.p" method="post">
             <div class="cart-content">
                 <div class="cart-content-panel">
                     <div class="cart-content-header">
@@ -147,13 +145,13 @@
                         <div class="cart-contents">
                             <div class="price-field">
                                 <span class="ptitle">상품금액</span>
-                                <span class="pprice">30,000
+                                <span class="pprice">
                                     <span class="won">원</span>
                                 </span>
                             </div>
 
                             <div class="discount-field">
-                                <span class="ptitle">배송비</span>+
+                                <span class="ptitle">배송비</span>
                                 <span class="pprice">0
                                     <span class="won">원</span>
                                 </span>
@@ -162,7 +160,7 @@
                             <div class="result-field">
                                 <span class="result-title">결제 예정금액</span>
                                 <span class="result-price">
-                                    <strong>30,000</strong>
+                                    <strong></strong>
                                     <span class="won">원</span>
                                 </span>
                             </div>
@@ -170,19 +168,19 @@
                         </div>
 
                         <div class="result-button-panel">
-                            <button type="submit" class="cart-access-button">
+                            <button type="button" class="cart-access-button">
                                 <b>주문하러가기</b>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 
     </div>
-
+	
 	<script>
+	
 		let delList = [];
 		let indexList = [];
 		let active = "";
@@ -313,7 +311,7 @@
 					
 					if ($(this).attr("checked")){
 						$('.cart-access-button').css("backgroundColor", "lightgray");
-			            $('.cart-access-button').attr("disabled", false);
+			            $('.cart-access-button').attr("disabled", true);
 						
 						$(this).next().attr("src", unChkImg);
 						$(this).attr("checked", false);
@@ -332,7 +330,7 @@
 
 					} else {
 						$('.cart-access-button').css("backgroundColor", "rgb(248, 178, 188)");
-			            $('.cart-access-button').attr("disabled", true);
+			            $('.cart-access-button').attr("disabled", false);
 						
 						$(this).next().attr("src", chkImg);
 						$(this).attr("checked", true);
@@ -354,26 +352,7 @@
                 	
 					
 				} else if ($(this).hasClass("subCheck")) {
-					if ($('input:checkbox[name^="subCheck"]:checked').length == 0){
-						$('.cart-access-button').css("backgroundColor", "lightgray");
-			            $('.cart-access-button').attr("disabled", false);
-			         	
-					} else {
-						$('.cart-access-button').css("backgroundColor", "rgb(248, 178, 188)");
-			            $('.cart-access-button').attr("disabled", true);
-					}
-					
-					if (($('input:checkbox[name^="subCheck"]:checked').length == $('input:checkbox[name^="subCheck"]').length)) {
-						$(".allCheck").next().attr("src", chkImg);
-						$(".allCheck").attr("checked", true);
-						
-					} else {
-						$(".allCheck").next().attr("src", unChkImg);
-						$(".allCheck").attr("checked", false);
-						
-					} 
-					
-					
+										
 					let subPrice = Number($(this).parent().siblings(".cart-price-panel").children('p').html());
 					
 					if ($(this).attr("checked")){ // 가격빼기
@@ -389,9 +368,31 @@
 						
 						chkResult(subPrice, "+");
 					}
+					
+					if ($('input:checkbox[name^="subCheck"]:checked').length == 0){
+						$('.cart-access-button').css("backgroundColor", "lightgray");
+			            $('.cart-access-button').attr("disabled", true);
+			         	
+					} else {
+						$('.cart-access-button').css("backgroundColor", "rgb(248, 178, 188)");
+			            $('.cart-access-button').attr("disabled", false);
+					}
+					
+					if (($('input:checkbox[name^="subCheck"]:checked').length == $('input:checkbox[name^="subCheck"]').length)) {
+						$(".allCheck").next().attr("src", chkImg);
+						$(".allCheck").attr("checked", true);
+						
+					} else {
+						$(".allCheck").next().attr("src", unChkImg);
+						$(".allCheck").attr("checked", false);
+						
+					} 
 						
 						getDeliveryPrice();	
+						console.log("체크된길이-------------" + $('input:checkbox[name^="subCheck"]:checked').length);
 				} 
+				
+
 				
 			})
 			
@@ -559,6 +560,21 @@
 					
 			})
 		 })
+		 
+		 
+		
+				 
+		$(document).ready(function(){
+				$(".cart-access-button").click(function(){
+					 let memId = '<%=loginUser.getMemId()%>';
+					 let delivery = onlyNo($(".discount-field").children(".pprice").html());
+
+					if($('input:checkbox[name^="subCheck"]:checked').length != 0){
+				 		location.href = "<%=contextPath%>/orderPage.p?memId=" + memId + "&delivery=" + delivery;	
+				 	} 
+
+				})
+		  }) 
 	</script>
 	 
 

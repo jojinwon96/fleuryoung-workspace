@@ -102,10 +102,12 @@
 				</div>
 				<div class="header-top-bottom-right">
 					<div class="cartMyPage-panel">
-						<div class="cart-panel">
-							<!-- <button class="cart-btn"><a href="/main/cartPage.html"></a></button> -->
-							<img src="" class="cart-btn"></a>
-						</div>
+						<button type="button" class="cart-panel btn position-relative">
+					        <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					            91+
+					            <span class="visually-hidden">unread messages</span>
+					          </span>
+					    </button>
 						<div class="myPage-panel">
 							<button class="mypage-btn"></button>
 						</div>

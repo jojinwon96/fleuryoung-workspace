@@ -601,10 +601,12 @@
     line-height: 17px;
     color: rgb(41, 41, 41);
     font-weight: bold;
+    width: 120px;
 }
 
 .non-product-price+div{
     margin: 0px 8px;
+    margin-left: -20px;
     height: 12px;
     border-right: 1px solid rgb(234, 235, 239);
 }
@@ -613,6 +615,7 @@
     font-size: 13px;
     line-height: 16px;
     color: rgb(117, 117, 117);
+    width: 50px;
 }
 
 
