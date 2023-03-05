@@ -1,13 +1,13 @@
+<%@page import="com.kh.member.model.vo.Coupon"%>
 <%@page import="com.kh.product.model.vo.Cart"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	Member m = (Member)request.getAttribute("member");
-	
 	int deliveryPrice = (int)request.getAttribute("delivery");
-
 	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+	ArrayList<Coupon> couponList = (ArrayList<Coupon>)request.getAttribute("couponList");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,16 @@
 <style>
 	.btn-danger {
 	  	background-color: rgb(248, 178, 188);
+	}
+	
+	.delete-btn{
+		    width: 30px;
+		    height: 30px;
+		    display: inline-block;
+		    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMSA5Ljc2MiAyMC4yMzggOSAxNSAxNC4yMzggOS43NjIgOSA5IDkuNzYyIDE0LjIzOCAxNSA5IDIwLjIzOGwuNzYyLjc2MkwxNSAxNS43NjIgMjAuMjM4IDIxbC43NjItLjc2MkwxNS43NjIgMTV6IiBmaWxsPSIjQ0NDIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+Cg==);
+		    background-size: cover;
+		    background-position: center center;
+		    cursor: pointer;
 	}
 </style>
 </head>
@@ -322,17 +332,40 @@
 						    </div>
 						    <div class="col-2"></div>
 						    <div class="col-8">
-						    	<select class="form-select" aria-label="Default select example">
-								  <option selected>쿠폰을 선택해 주세요</option>
-								  <option value="1">One</option>
-								  <option value="2">Two</option>
-								  <option value="3">Three</option>
+						    	<select class="coupon-select form-select" name="coupon-select" aria-label="Default select example">
+								  <option value="0">쿠폰을 선택해 주세요</option>
+								  <% for (Coupon c : couponList) { %>
+								  	<option value="<%= c.getCouId()%>"><%= c.getCouName() %></option>
+								  	<input type="hidden" name="couDetail" value="<%=c.getCouDetail() %>">
+								  	<input type="hidden" name="couRegDate" value="<%=c.getCouRegDate() %>">
+								  	<input type="hidden" name="couExpire" value="<%=c.getCouExpire() %>">
+								  	<input type="hidden" name="couDiscount" value="<%=c.getCouDiscount() %>">
+								  <% } %>
 								</select>
 						    </div>
 						  </div>
 						</div>
+						<br class="coupon-connet">
+						
+						<div class="coupon-panel container text-left shadow" style="display:none; border: 1px solid lightgray; width: 460px; height: 130px; margin-left: 260px;">
+							<div class="row row-cols-auto">
+								<div class="col-10 coupon-Name m-1" style="font-size: 14px; font-weight: bold; margin-left: 3px;">
+								</div>
+								<div class="col-1 delete-btn" style="margin-left: 30px">
+									
+								</div>
+								
+							</div>
+							<div class="coupon-Detail row m-1" style="font-size: 12px">
+								12월을 맞이해 회원님들께 드리는 특별한 화이트 세일! 눈내린 크리스마트 트리 어때요? 해당 상품들중 1 구매시 해당 값 50% 세일!
+							</div>
+							
+							<div class="coupon-Disount row m-1" style="color: red; font-size: 14px; font-weight: bolder;">[15,000원 할인]</div>
+							<div class="coupon-date row m-1" style="font-size: 14px; font-weight: bolder;">2020-01-01 ~ 2011-01-01</div>
+						</div>
+						
 						<br>
-						<br class="coupon-connect">
+						<br>
 						
 						<div class="container text-center">
 						  <div class="row row-cols-auto">
@@ -357,7 +390,7 @@
 						  		사용가능한 마일리지 
 						  	</div>
 						  	<div class="m-panel col" style="margin-left: -20px; font-weight: bolder">
-						  		11111111111111원
+						  		<%=m.getMileage()%>원
 						  	</div>
 						  </div>
 						</div>
@@ -385,8 +418,15 @@
                             </span>
                         </div>
 
-                        <div class="dprice-field">
-                            <span class="ptitle">할인금액</span>
+                        <div class="discount-field2">
+                            <span class="ptitle">쿠폰할인</span>
+                            <span class="pprice" style="color: red;">-&nbsp;0
+                                <span class="won">원</span>
+                            </span>
+                        </div>
+                        
+                        <div class="discount-field3">
+                            <span class="ptitle">마일리지사용</span>
                             <span class="pprice" style="color: red;">-&nbsp;0
                                 <span class="won">원</span>
                             </span>
@@ -533,6 +573,41 @@
     		
     		let total = $(".result-price").children("strong");
 			total.html(comma(Number(onlyNo(price.html())) + Number(onlyNo(dPrice.html())) + "")); 
+			
+			// 쿠폰 적용
+			$(".coupon-select").on("change", function(){
+				if ($(this).val() != '0'){
+					let couponVal = $(this).val();
+					let couponDetail = $(this).next().val();
+					let couponRegDate = $(this).next().next().val();
+					let couponExpire = $(this).next().next().next().val();
+					if (couponExpire == "null"){
+						couponExpire = " ";
+					}
+					let couponDiscount = "[" + $(this).next().next().next().next().val() + "원 할인]";
+					
+					$(".coupon-panel").show();
+					
+					$(".coupon-Name").html($("select[name=coupon-select] option:selected").text());
+					$(".coupon-Detail").html(couponDetail);
+					$(".coupon-Disount").html(couponDiscount);
+					$(".coupon-date").html(couponRegDate + " ~ " + couponExpire);
+					
+					console.log("제목 : " + $("select[name=coupon-select] option:selected").text());
+					console.log("선택한 쿠폰 내용 : " + couponDetail);
+					console.log("선택한 쿠폰 등록일 : " + couponRegDate);
+					console.log("선택한 쿠폰 만료일 : " + couponExpire);
+					console.log("선택한 쿠폰 할인 : " + couponDiscount);
+					//$('.coupon-select').val('0').trigger('change');
+				}
+				
+			});
+			
+			$(".delete-btn").click(function(){
+				$(this).parents(".coupon-panel").hide();
+				$('.coupon-select').val('0').trigger('change');
+			})
+			
 			
 			// 마일리지 적용
 			$(".m-btn").click(function(){

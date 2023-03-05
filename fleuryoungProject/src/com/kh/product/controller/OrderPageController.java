@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Coupon;
 import com.kh.member.model.vo.Member;
 import com.kh.product.model.service.CartService;
 import com.kh.product.model.vo.Cart;
@@ -40,12 +41,19 @@ public class OrderPageController extends HttpServlet {
 		System.out.println(delivery);
 		
 		Member m = new MemberService().selectMemberOrderInfo(memId);
-		
 		ArrayList<Cart> cartList = new CartService().selectCart(memId);
+		
+		System.out.println("회원 아이디 : " + memId);
+		
+		ArrayList<Coupon> couponList = new MemberService().selectMemberCoupon(memId);
+		
+		
+		System.out.println(couponList.get(0).getCouName());
 		
 		request.setAttribute("member", m);
 		request.setAttribute("delivery", delivery);
 		request.setAttribute("cartList", cartList);
+		request.setAttribute("couponList", couponList);
 		request.getRequestDispatcher("views/main/orderPage.jsp").forward(request, response);
 	}
 

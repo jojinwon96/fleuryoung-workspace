@@ -658,7 +658,9 @@
 
 .price-field,
 .dprice-field,
-.discount-field{
+.discount-field,
+.discount-field2,
+.discount-field3{
     display: flex;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;

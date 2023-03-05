@@ -2,8 +2,10 @@ package com.kh.member.model.service;
 
 import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Coupon;
 import com.kh.member.model.vo.Member;
 
 public class MemberService {
@@ -40,6 +42,17 @@ public class MemberService {
 
 		return member;
 
+	}
+
+	public ArrayList<Coupon> selectMemberCoupon(String memId) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Coupon> couponList = new MemberDao().selectMemberCoupon(conn, memId);
+		
+		close(conn);
+		
+		return couponList;
 	}
 
 }

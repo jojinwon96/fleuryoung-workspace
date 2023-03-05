@@ -35,5 +35,12 @@
 		WHERE MEM_ID = ?
 	</entry>
 	
+	<entry key="selectMemberCoupon">
+		SELECT COU_ID, COU_NAME, COU_DETAIL, COU_REGDATE, COU_EXPIRE, COU_DISCOUNT
+		FROM TB_OWNED_COUPON
+		JOIN TB_COUPON USING (COU_ID)
+		WHERE MEM_ID = ? AND COU_USED_YN = 'N'
+	</entry>
+	
 </properties>
 
