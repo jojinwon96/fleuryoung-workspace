@@ -15,6 +15,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nonOrder.css">
+
+<style>
+	.btn-danger {
+	  	background-color: rgb(248, 178, 188);
+	}
+</style>
 </head>
 <body>
 	<div class="wrap">
@@ -295,6 +301,69 @@
                     <% } %>
                 </section>
                 
+                <br>
+                <br>
+                <!-- 쿠폰 -->
+                <section class="discount-panel">
+                	<section>
+                        <div class="non-order-title">쿠폰/마일리지</div>
+                        <div></div>
+                    </section>
+                    <hr>
+                    
+                    <section>
+                    	<div class="container text-center">
+						  <div class="row row-cols-auto">
+						    <div class="col">
+						      <img src="${pageContext.request.contextPath}/resources/image/icon/coupon.png" style="width: 30px; height: 30px">
+						    </div>
+						    <div class="col" style="margin-left: -15px; margin-top: 5px; font-weight: bold; font-size: 14px">
+						      쿠폰 적용
+						    </div>
+						    <div class="col-2"></div>
+						    <div class="col-8">
+						    	<select class="form-select" aria-label="Default select example">
+								  <option selected>쿠폰을 선택해 주세요</option>
+								  <option value="1">One</option>
+								  <option value="2">Two</option>
+								  <option value="3">Three</option>
+								</select>
+						    </div>
+						  </div>
+						</div>
+						<br>
+						<br class="coupon-connect">
+						
+						<div class="container text-center">
+						  <div class="row row-cols-auto">
+						    <div class="col">
+						      <img src="${pageContext.request.contextPath}/resources/image/icon/m.png" style="width: 20px; height: 20px; margin-left: 10px;">
+						    </div>
+						    <div class="col" style="margin-left: -15px; margin-top: 3px; font-weight: bold; font-size: 14px">
+						      마일리지 적용
+						    </div>
+						    <div class="col-1" style="margin-left: 32px"></div>
+						    <div class="col-5">
+								<input class="m-input py-1" type="number" min="0">
+								<button type="button" class="m-btn btn btn-danger" style="background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188); margin-bottom: 4px">모두사용</button>
+						    </div>
+						  </div>
+						</div>
+						
+						<div class="container text-center">
+						  <div class="row row-cols-auto" style="font-size:14px";>
+						  	<div class="col-6 col-md-4"></div>
+						  	<div class="col" style="">
+						  		사용가능한 마일리지 
+						  	</div>
+						  	<div class="m-panel col" style="margin-left: -20px; font-weight: bolder">
+						  		11111111111111원
+						  	</div>
+						  </div>
+						</div>
+                    </section>
+                </section>
+                
                 
             </div>
 
@@ -463,9 +532,18 @@
     		dPrice.html(comma(dPrice.html()));
     		
     		let total = $(".result-price").children("strong");
-			total.html(comma(Number(onlyNo(price.html())) + Number(onlyNo(dPrice.html())) + ""));    		
-    	})
-    </script>
+			total.html(comma(Number(onlyNo(price.html())) + Number(onlyNo(dPrice.html())) + "")); 
+			
+			// 마일리지 적용
+			$(".m-btn").click(function(){
+				console.log("m 클릭");	
+				let mPanel = onlyNo($(".m-panel").html());
+				$(".m-input").val(mPanel);
+			})	
+			
+			
+		})
+    	</script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

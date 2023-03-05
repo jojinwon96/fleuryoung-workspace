@@ -6528,18 +6528,28 @@ DELETE
 FROM TB_CART
 WHERE P_ID = ? AND MEM_ID = ?;
 
+SELECT * FROM TB
+
 ----------------------------------------------------------------- 주문서작성 ----------------------------------------------------------------------
 -- 주문자 정보
 SELECT * FROM TB_MEMBER;
 SELECT MEM_ID, MEM_NAME, MEM_EMAIL, MEM_PHONE, MEM_POSTAL, MEM_STREET, MEM_ADDRESS, MEM_MILEAGE
 FROM TB_MEMBER
-WHERE MEM_ID = ?
+WHERE MEM_ID = ?;
 
 -- 주문 상품
+-- MAPPER -> SELECTCART
 
 -- 쿠폰
+SELECT COU_NAME
 
 -- 마일리지
+
+SELECT * FROM TB_COUPON;
+
+SELECT * FROM TB_OWNED_COUPON;
+
+INSERT INTO TB_OWNED_COUPON VALUES('USER01', 5, 'N');
 
 SELECT * FROM TB_MEM_CARD;
 

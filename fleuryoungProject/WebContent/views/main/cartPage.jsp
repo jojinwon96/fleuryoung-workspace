@@ -274,10 +274,6 @@
 			// 결제 예정금액
 			$(".result-price").children("strong").html(comma((result+delCalc) + ""));
 			
-			console.log("sNo : " + dPrice[0].sNo);
-			console.log("price : " + dPrice[0].price);
-			console.log("sNo : " + dPrice[1].sNo);
-			console.log("price : " + dPrice[1].price);
 			console.log(dPrice);
 			console.log("배송비 : " + delCalc);
 			console.log(result);

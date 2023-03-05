@@ -118,7 +118,7 @@
 		
 		<script>
 			$(function() {
-				$(".cart-btn").click(function() {
+				$(".cart-panel").click(function() {
 					<% if (loginUser != null && !loginUser.equals("")) {%>
 						location.href = '<%=contextPath%>/cartpage.me?memId=<%=loginUser.getMemId()%>';
 					<% } %>
