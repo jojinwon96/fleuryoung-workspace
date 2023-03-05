@@ -1,5 +1,7 @@
 package com.kh.product.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,12 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.product.model.vo.Category;
 import com.kh.product.model.vo.Inquiry;
 import com.kh.product.model.vo.Product;
 import com.kh.product.model.vo.ProductOption;
 import com.kh.product.model.vo.Review;
-
-import static com.kh.common.JDBCTemplate.*;
 
 public class ProductDao {
 
@@ -251,7 +252,286 @@ public class ProductDao {
 		return inquiryList;
 	}
 
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Category> selectCategory(Connection conn) {
+		
+		
+		ArrayList<Category> categoryList = new ArrayList<Category>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		
+		String sql = prop.getProperty("selectCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				categoryList.add(new Category(
+						
+						
+						rset.getInt("CATEGORY_NO")
+						, rset.getString("CATEGORY_DETAIL")
+						, rset.getString("CATEGORY_NAME")
+						
+						));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return categoryList;
+	}
+
+	public ArrayList<Product> selectProductType(Connection conn, String pCategory) {
+		
+		
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectProductType");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, pCategory);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+		
+	
+	}
+
+	public ArrayList<Product> selectProductAll(Connection conn) {
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectProductAll");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+
+	public ArrayList<Product> selectPriceOver(Connection conn, int amountValue) {
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectPriceOver");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, amountValue);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Product> selectPriceLess(Connection conn, int amountValue) {
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectPriceLess");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, amountValue);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Product> selectDeliveryAll(Connection conn) {
+		
+		
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectDeliveryAll");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Product> selectDeliveryCategory(Connection conn, String categoryName) {
+	
+		
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectDeliveryCategory");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, categoryName);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+}// productDao End
 
 
 

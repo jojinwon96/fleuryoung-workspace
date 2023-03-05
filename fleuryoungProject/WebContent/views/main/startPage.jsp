@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Core theme CSS (includes Bootstrap)-->
+
 <link
 	href="${pageContext.request.contextPath}/resources/css/main_product_mini.css"
 	rel="stylesheet" />
@@ -47,6 +47,9 @@ h5 {
 .productbox{
 	cursor: pointer;
 }
+
+
+
 </style>
 </head>
 
@@ -63,7 +66,7 @@ h5 {
 								console.log("null임");
 								alert("로그인이 필요한 기능입니다.");
 						<%} else {%>
-								console.log("로그인한거임");
+								console.log("로그인한거임"); 
 								if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
 								    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
 								} else {

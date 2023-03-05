@@ -10,9 +10,10 @@
 
 
 
-
-
 /* gpt 체크박스 시작 */
+
+
+
 
 
 
@@ -32,6 +33,26 @@
     margin: 0 auto;
     /* 수평 중앙 정렬 */
 }
+
+
+
+
+
+.bestReviewBtn {
+  border-radius: 8px;
+  /* padding: 20px; */
+  max-width: 1200px;
+  display: flex;
+  /* 수평 및 수직 중앙 정렬을 위해 flexbox 사용 */
+  align-items: center;
+  justify-content: center;
+  /* max-width: 600px; */
+  /* 원하는 최대 너비로 조절 */
+  margin: 0 auto;
+  margin-top: 30px;
+  /* 수평 중앙 정렬 */
+}
+
 
 .ck_table_op {
     /* 테이블 */
@@ -72,7 +93,7 @@ label:hover {
 
 .ck_table_op label {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 8px 10px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -130,11 +151,21 @@ a {
 
 }
 
-.mini_like {
-    cursor: pointer;
-}
+ .mini_like {
+     cursor: pointer;
+ }
 
 
+ .bestbtn {
+     margin-top: 50px;
+ }
+
+
+ svg {
+     width: 100px;
+     height: 100px;
+     color: limegreen;
+ }
 
 /* 베스트 버튼 */
 
@@ -297,8 +328,8 @@ body.dark {
     /* 사이즈가 문제였다!!!!!!!!!!!! */
     /* height: 47px; */
     list-style: none;
-    display: flex;
-    /* display: block; */
+    display: block;
+    /* display: flex; */
     align-items: center;
     margin-top: 10px;
 }
@@ -422,6 +453,7 @@ body.dark .sidebar header .toggle {
     border-radius: 6px;
     text-decoration: none;
     transition: var(--tran-03);
+    text-align: center;
 }
 
 /* 큰 카테고리 호버시 색 변함 */
@@ -570,6 +602,8 @@ body.dark .home .text {
 
 .togright {
     margin-top: 60px;
+    display: flex;
+        justify-content: center;
 }
 
 /* 사이드바 끝 */

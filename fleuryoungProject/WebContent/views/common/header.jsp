@@ -11,9 +11,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/header.css">
+	
+	
+	<!-- 혜민이 css -->
+	
+	<link
+	href="${pageContext.request.contextPath}/resources/css/mini_plz.css?after"
+	rel="stylesheet">
+	 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/btn5.css?after">
+	
+  
+  <!-- 부트스트랩 아이콘 출력 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  
+  
+<!-- 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styless-mini.css">
+이게 사이드바 색상 짙은 남색으로 변화시킴
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/why.scss">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+
+이게 내꺼 css를 이상하게 만든다
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ -->
+
+
+	<!-- 여기까지 혜민이꺼 -->
+
+	
+	
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -23,6 +55,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	
 </head>
 <body>
 	<div>
@@ -110,10 +143,10 @@
 		<header>
 			<div class="header-nav-panel">
 				<ul class="header-nav-ul">
-					<li class="best-li"><span class="best-span">베스트</span></li>
-					<li class="type-li"><span class="type-span">종류별</span></li>
-					<li class="present-li"><span class="present-span">선물</span></li>
-					<li class="delivery-li"><span class="delivery-span">당일배송</span>
+					<li class="best-li"><a href="<%=contextPath%>/bestPage.mi"><span class="best-span">베스트</span></a></li>
+					<li class="type-li"><a href="<%=contextPath%>/typePage.mi"><span class="type-span">종류별</span></a></li>
+					<li class="present-li"><a href="<%=contextPath%>/presentPage.mi"><span class="present-span">선물</span></a></li>
+					<li class="delivery-li"><a href="<%=contextPath%>/delivery.de"><span class="delivery-span">당일배송</span></a>
 					</li>
 					<li class="props-li"><span class="props-span">소품</span></li>
 					<div class="rank-panel">

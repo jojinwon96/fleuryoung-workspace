@@ -681,13 +681,14 @@ $(document).ready(function () {
         if ($('.sidebar').hasClass('close')) {
             // 사이드바가 닫힌 상태이면 열림
             $('.sidebar').removeClass('close').addClass('open');
-            $('.minitoggle').attr("class", "bi-toggle-on");
         } else {
             // 사이드바가 열린 상태이면 닫힘
             $('.sidebar').removeClass('open').addClass('close');
-            $('.minitoggle').attr("class", "bi-toggle-off");
             $('.sub-menu').addClass('closed'); // 서브 메뉴를 닫음
         }
+
+
+
     });
 
     $('.minitoggle').click(function () {
@@ -715,36 +716,6 @@ $(document).ready(function () {
 
 
 
-
-// 몇초만큼 부드럽게 열리고 닫히는 코드
-$(document).ready(function () {
-    var toggle = $(".minitoggle");
-    var sidebar = $(".sidebar");
-
-    toggle.on("click", function () {
-        if (sidebar.hasClass("close")) {
-            sidebar.animate(
-                {
-                    width: "200px"
-                },
-                300,
-                function () {
-                    $(this).removeClass("close");
-                }
-            );
-        } else {
-            sidebar.animate(
-                {
-                    width: "85px"
-                },
-                300,
-                function () {
-                    $(this).addClass("close");
-                }
-            );
-        }
-    });
-});
 
 
 
@@ -777,6 +748,54 @@ $(document).ready(function () {
 
 
 // ----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

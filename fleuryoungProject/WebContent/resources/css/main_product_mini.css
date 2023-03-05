@@ -17,13 +17,14 @@
   font-style: normal;
 }
 
-
+* body {
+  text-align: center;
+}
 
 
 .header-top-bottom-left a {
  display: block;
 }
-
 /* gpt 체크박스 시작 */
 
 
@@ -45,10 +46,34 @@
   /* 수평 중앙 정렬 */
 }
 
+
+
+
+
+.bestReviewBtn {
+  border-radius: 8px;
+  /* padding: 20px; */
+  max-width: 1200px;
+  display: flex;
+  /* 수평 및 수직 중앙 정렬을 위해 flexbox 사용 */
+  align-items: center;
+  justify-content: center;
+  /* max-width: 600px; */
+  /* 원하는 최대 너비로 조절 */
+  margin: 0 auto;
+  margin-top: 30px;
+  /* 수평 중앙 정렬 */
+}
+
+
+
+
+
+
 .ck_table_op {
   /* 테이블 */
   border-collapse: collapse;
-    border: 1px solid #fce8e8;
+  border: 1px solid #fce8e8;
   width: 100%;
   margin: 15px;
   border-radius: 5px;
@@ -110,21 +135,14 @@ label:hover {
 
 
 
-
-
-
-
-
-
-
 /* a 태그 밑줄 없애고 검은색 먼저 적용 */
 
 a {
   text-decoration: none !important;
-color: rgb(68, 59, 59) !important;
-    width: 100%;
-      height: 100%;
-        /* display: block; */
+  color: rgb(68, 59, 59) !important;
+  width: 100%;
+  height: 100%;
+  /* display: block; */
 }
 
 
@@ -154,6 +172,16 @@ color: rgb(68, 59, 59) !important;
 }
 
 
+.bestbtn {
+  margin-top: 50px;
+}
+
+
+svg {
+  width: 100px;
+  height: 100px;
+  color: limegreen;
+}
 
 /* 베스트 버튼 */
 
@@ -164,7 +192,6 @@ color: rgb(68, 59, 59) !important;
   /* display: block; */
   /* background-color: #000; */
 }
-
 
 /* gpt 사이드바 시작 */
 
@@ -209,7 +236,6 @@ color: rgb(68, 59, 59) !important;
 
 
 /* gpt 사이드바 끝 */
-
 
 /* 사이드바 시작 */
 
@@ -264,6 +290,7 @@ body.dark {
 }
 
 /* ===== Sidebar ===== */
+
 .sidebar {
   position: fixed;
   /* fixed로 해야 사이드바가 스크롤을 따라다님.. */
@@ -282,28 +309,32 @@ body.dark {
 
 }
 
-
-
 .sidebar.close {
   width: 85px;
   /* 88 */
 }
 
 /* ===== Reusable code - Here ===== */
-.sidebar li {
-  height: 42px;
-  list-style: none;
-  /* display: flex; */
-  display: block;
-  align-items: center;
-  margin-top: 10px;
-}
+
 
 .sidebar header .image,
 .sidebar .icon {
   min-width: 60px;
   border-radius: 6px;
-  
+
+}
+
+
+.sidebar li {
+
+  /* 사이즈가 문제였다!!!!!!!!!!!! */
+  /* height: 47px; */
+  list-style: none;
+  /* display: flex; */
+  /* block이여야 아래로 붙음 */
+  display: block;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .sidebar .icon {
@@ -427,9 +458,15 @@ body.dark .sidebar header .toggle {
   transition: var(--tran-03);
 }
 
-/* 호버시 색 변함 */
+/* 큰 카테고리 호버시 색 변함 */
 .sidebar li a:hover {
-  background-color: rgb(250, 200, 208);
+  background-color: rgb(255, 218, 224);
+  /* var(--primary-color) */
+}
+
+/* 작은 카테고리 호버시 색 변함 */
+.sub-menu li a:hover {
+  background-color: rgb(248, 178, 188);
   /* var(--primary-color) */
 }
 
@@ -570,8 +607,6 @@ body.dark .home .text {
 }
 
 /* 사이드바 끝 */
-
-
 
 
 

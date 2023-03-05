@@ -12,48 +12,34 @@
 
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../../resources/css/main_product_mini.css" rel="stylesheet" />
+  <!-- <link href="../../resources/css/mini_plz.css" rel="stylesheet" /> -->
 
 
 
-  <link rel="stylesheet" href="../../resources/hyemin/side/css/styles.css">
-
-  <link rel="stylesheet" href="../../resources/css/why.scss">
-
-
-
-
-
+  <!-- <link rel="stylesheet" href="../../resources/css/why.scss"> -->
+  
+  
+  
+  
+  
   <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
   <link rel="stylesheet" href="../../resources/css/styless-mini.css">
   <!-- Boxiocns CDN Link -->
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  
+  
   <!-- 이게 있어야지 별이 나온다 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-
-
+  
+  
+  
   <!-- 버튼 css -->
-  <link rel="stylesheet" href="../../resources/css/hyemin - btn/btn5.css">
+  <!-- 이걸 죽이니 사이드바 글씨가 옆으로 붙음 -->
+  <link rel="stylesheet" href="../../resources/css/btn5.css">
 
   <style>
-    .mini_like {
-      cursor: pointer;
-    }
-
-
-    .bestbtn {
-      margin-top: 50px;
-    }
-
-
-    svg {
-      width: 100px;
-      height: 100px;
-      color: limegreen;
-    }
+   
   </style>
 
 
@@ -223,159 +209,94 @@
   <!-- 사이드바 시작 -->
 
 
+<nav class="sidebar close">
+  <div class="togright">
+    <i class='bi bi-toggle-off toggle minitoggle'></i>
+  </div>
+  <div class="menu-bar hero__categories hero__categories__all">
+    <div class="menu search-box">
+      <ul class="menu-links" style="padding: 5px; ">
+        <li class="menu">
+          <a href="#">
 
 
+            <span class="text nav-text">꽃바구니</span>
+          </a>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">꽃다발</span>
+          </a>
+        </li>
 
+        <li class="clickmenu dropdown-trigger">
+          <a href="#">
+            <span class="text nav-text">화환 Ｖ</span>
 
-  <nav class="sidebar close">
-    <header>
+          </a>
 
+          <ul class="hide sub-menu">
+            <li><a href="#">근조화환</a></li>
+            <li><a href="#">축하화환</a></li>
+          </ul>
 
-    </header>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">분재</span>
+          </a>
 
+        </li>
 
+        <li class="clickmenu">
+          <a href="#">
 
-    <div class="togright">
-      <i class='bi bi-toggle-off toggle minitoggle'> </i>
+            <span class="text nav-text">공기정화</span>
+          </a>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">동양란</span>
+          </a>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">서양란</span>
+          </a>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">수경식물</span>
+          </a>
+        </li>
+        <li class="clickmenu">
+          <a href="#">
+            <span class="text nav-text">생화다발</span>
+          </a>
+        </li>
+        <li class="clickmenu dropdown-trigger">
+          <a href="#">
+            <i class="bi bi-plant"></i>
+            <span class="text nav-text">반려식물 Ｖ</span>
+          </a>
+          <ul class="hide sub-menu">
+            <li><a href="#">미니다육</a></li>
+            <li><a href="#">조화</a></li>
+          </ul>
+        </li>
+        <li class="clickmenu dropdown-trigger">
+          <a href="#">
+            <span class="text nav-text">소품 Ｖ</span>
+          </a>
+          <ul class="hide sub-menu">
+            <li><a href="#">원예가위</a></li>
+            <li><a href="#">화분</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-
-
-
-    <div class="menu-bar">
-      <div class="menu search-box">
-
-
-
-        <ul class="menu-links" style="padding: 5px; ">
-
-
-
-          <!-- 씁 div로 감싸도 똑같.. -->
-          <div class="bigBox">
-            <li class="nav-link">
-              <a href="#">
-                <i class='bx bx-home-alt icon'></i>
-                <span class="text nav-text">꽃바구니</span>
-              </a>
-
-            </li>
-          </div>
-
-          <div class="smellBox" style="display: none;">
-            <!-- style="border: 3px solid red; width: 10px; height: 10px;" -->
-            <li class="nav-link">
-              <a href="#">
-                <i class='bx bx-home-alt icon'></i>
-                <span class="text nav-text">장미꽃@@@</span>
-              </a>
-
-            </li>
-
-          </div>
-
-
-
-
-
-
-
-
-          <li class="nav-link">
-            <a href="#">
-
-              <i class='bx bx-bar-chart-alt-2 icon'></i>
-              <span class="text nav-text">꽃다발</span>
-            </a>
-          </li>
-
-
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-pie-chart-alt icon'></i>
-              <span class="text nav-text">화환</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-heart icon'></i>
-              <span class="text nav-text">분재</span>
-            </a>
-          </li>
-
-
-          <!-- 여기서 부터 내가 추가한거!! -->
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">공기정화</span>
-            </a>
-          </li>
-
-          <li class="nav-link ">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text ">동양란</span>
-            </a>
-
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">서양란</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">수경식물</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">생화</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">반려식물</span>
-            </a>
-          </li>
-
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-wallet icon'></i>
-              <span class="text nav-text">소품</span>
-            </a>
-          </li>
-
-          <li class="">
-            <a href="#">
-              <i class='bx bx-log-out icon'></i>
-              <span class="text nav-text">Logout</span>
-            </a>
-          </li>
-
-        </ul>
-      </div>
-
-
-    </div>
-    </div>
-
-  </nav>
-
-  <section class="home">
-    <div class="text"></div>
-  </section>
+  </div>
+</nav>
 
 
 
@@ -412,10 +333,114 @@
 
   <!-- 사이드바 끝 -->
 
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+  <label class="form-check-success" for="exampleRadios1">
+    Option 1
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    Option 2
+  </label>
+</div>
+<div class="form-check disabled">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
+  <label class="form-check-label" for="exampleRadios3">
+    Disabled radio
+  </label>
+</div>
 
 
 
+<div class="container_check">
+  <table class="ck_table_op">
 
+
+
+    <tr>
+
+      <th>금액대별</th>
+      <td>
+        <input type="checkbox" name="amount" class="total" id="amount_total" value="ck_amount_total" checked>
+        <label for="amount_total">전체</label>
+      </td>
+      <td>
+        <input type="checkbox" name="amount" id="amount_3less" value="ck_amount_3less">
+        <label for="amount_3less">3만원 이하</label>
+      </td>
+      <td>
+        <input type="checkbox" name="amount" id="amount_5less" value="ck_amount_5less">
+        <label for="amount_5less">3만원 ~ 5만원</label>
+      </td>
+      <td>
+        <input type="checkbox" name="amount" id="amount_8less" value="ck_amount_8less">
+        <label for="amount_8less">5만원 ~ 8만원</label>
+      </td>
+      <td>
+        <input type="checkbox" name="amount" id="amount_8over" value="ck_amount_8over">
+        <label for="amount_8over">8만원 이상</label>
+      </td>
+
+    </tr>
+    <tr>
+      <th>할인율</th>
+
+      <td>
+        <input type="checkbox" name="discount" class="total" id="discount_total" value="ck_discount_total" checked>
+        <label for="discount_total">전체</label>
+      </td>
+      <td>
+        <input type="checkbox" name="discount" id="discount_10" value="ck_discount_10">
+        <label for="discount_10">10%</label>
+      </td>
+      <td>
+        <input type="checkbox" name="discount" id="discount_20" value="ck_discount_20">
+        <label for="discount_20">20%</label>
+      </td>
+      <td>
+        <input type="checkbox" name="discount" id="discount_30" value="ck_discount_30">
+        <label for="discount_30">30%</label>
+      </td>
+      <td>
+        <input type="checkbox" name="discount" id="discount_50" value="ck_discount_50">
+        <label for="discount_50">40% 이상</label>
+      </td>
+
+
+
+    </tr>
+
+    <tr>
+      <th>당일배송</th>
+
+      <td>
+        <input type="checkbox" name="rocket_delivery" class="total" id="rocket_delivery_total"
+          value="ck_rk_deliverty_total" checked>
+        <label for="rocket_delivery_total">전체</label>
+      </td>
+
+
+      <td>
+        <input type="checkbox" name="rocket_delivery" id="rocket_delivery_yes" value="ck_rk_delivery_y">
+        <label for="rocket_delivery_yes">당일 배송만</label>
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+    </tr>
+
+
+  </table>
+
+</div>
 
 
 
@@ -449,6 +474,34 @@
     </button>
 
   </div>
+
+  
+
+    <script>
+      $(function () {
+        $(".bestBtn").click(function () {
+          let setNum = $(this).val();
+
+// consl
+
+          if ($(this).attr("name") === "saleBestBtn") {
+            let data = {
+              "key": "saleBestBtn",
+              "value": setNum
+            };
+            $.post("<%=contextPath%>/bestPage.mi.p", data);
+          } else {
+            let data = {
+              "key": "reviewBestBtn",
+              "value": setNum
+            };
+            $.post("<%=contextPath%>/bestPage.mi.p", data);
+          }
+        });
+      });
+    </script>
+
+
 
   <!-- 여기서 부터 상품 시작 ~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

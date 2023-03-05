@@ -200,20 +200,290 @@
 		FROM TB_CART
 		WHERE P_ID = ? AND MEM_ID = ?
 	</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<entry key="selectCategory">
+SELECT ( CASE WHEN RANK = 1 THEN CATEGORY_NAME ELSE 'cateNN' END ) AS cATEGORY_NAME
+                                                        ,  COALESCE(CATEGORY_DETAIL, 'cateDetailNN') AS CATEGORY_DETAIL
+                                                        , CATEGORY_NO
+                                                       
+  FROM ( 
+       SELECT DISTINCT 
+             CATEGORY_NAME
+            , CATEGORY_DETAIL
+            , CATEGORY_NO
+        
+            , RANK() OVER ( PARTITION BY CATEGORY_NAME ORDER BY CATEGORY_NO ) AS RANK
+        FROM TB_CATEGORY 
+       )
+order by CATEGORY_NO
+</entry>
+
+
+<entry key="selectProductType">
+select * 
+        from tb_product
+        left join tb_category using (category_no)
+        where category_name = ?
+
+
+</entry>
+
+<entry key="selectProductAll">
+   	      SELECT B.*
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+            COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+        FROM TB_MEM_PAYMENT P
+        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+        FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+        LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+        LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+        GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+        ORDER BY P_SALES , R.REVIEW_RATING  NULLS LAST
+    ) A
+) B
+
+     
+</entry>
+
+
+
+<entry key="selectPriceOver">
+
+  SELECT B.*
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+            COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+        FROM TB_MEM_PAYMENT P
+        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+        FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+        LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+        LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+        WHERE P_NETPRICE >= ?
+        GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+        ORDER BY P_SALES , R.REVIEW_RATING  NULLS LAST
+    ) A
+) B
+
+</entry>
+
+
+<entry key="selectPriceLess">
+
+<![CDATA[ 
+  SELECT B.*
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+            COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+        FROM TB_MEM_PAYMENT P
+        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+        FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+        LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+        LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+        WHERE P_NETPRICE <= ?
+        GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+        ORDER BY P_SALES , R.REVIEW_RATING  NULLS LAST
+    ) A
+) B
+]]>
+
+</entry>
+
+
+
+<entry key="selectDeliveryAll">
+
+               SELECT B.*
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+            COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+        FROM TB_MEM_PAYMENT P
+        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+        FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+        LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+        LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+        LEFT JOIN TB_CATEGORY C ON (G.CATEGORY_NO = C.CATEGORY_NO)
+        WHERE p_day_delivery = 'Y'  
+        GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+        
+        ORDER BY P_SALES DESC, R.REVIEW_RATING DESC NULLS LAST
+    ) A
+) B   
+
+</entry>
+
+
+<entry key="selectDeliveryCategory">
+
+               SELECT B.*
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
+            COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
+        FROM TB_MEM_PAYMENT P
+        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+        FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+        LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+        LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+        LEFT JOIN TB_CATEGORY C ON (G.CATEGORY_NO = C.CATEGORY_NO)
+        WHERE p_day_delivery = 'Y' 
+        and  C.CATEGORY_DETAIL = ?
+        GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+        ORDER BY P_SALES DESC, R.REVIEW_RATING DESC NULLS LAST
+    ) A
+) B 
+
+</entry>
+
+
+<entry key="">
+
+
+
+</entry>
+
+
+
+<entry key="">
+
+
+
+</entry>
+
+
+<entry key="">
+
+
+
+</entry>
+
+
 </properties>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

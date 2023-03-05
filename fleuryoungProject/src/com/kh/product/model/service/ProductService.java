@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.product.model.dao.ProductDao;
+import com.kh.product.model.vo.Category;
 import com.kh.product.model.vo.Inquiry;
 import com.kh.product.model.vo.Product;
 import com.kh.product.model.vo.ProductOption;
@@ -91,5 +92,153 @@ public class ProductService {
 		return inquiryList;
 
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Category> selectCategory() {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Category> categoryList = new ProductDao().selectCategory(conn);
+		
+		close(conn);
+		
+		
+		return categoryList;
+	}
+
+	public ArrayList<Product> selectProductType(String pCategory) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectProductType(conn,pCategory);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectProductAll() {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectProductAll(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectPriceOver(int amountValue) {
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectPriceOver(conn, amountValue);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectPriceLess(int amountValue) {
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectPriceLess(conn, amountValue);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectDeliveryAll() {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectDeliveryAll(conn);
+		
+		close(conn);
+		
+		return list;	
+		
+		
+	}
+
+	public ArrayList<Product> selectDeliveryCategory(String categoryName) {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectDeliveryCategory(conn, categoryName);
+		
+		close(conn);
+		
+		return list;
+	}
+
+
 
 }

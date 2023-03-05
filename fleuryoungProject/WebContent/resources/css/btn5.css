@@ -1,10 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 /* body {
     text-align: center;
@@ -13,6 +9,12 @@
     display: table-cell;
 
 } */
+
+
+.bestbtn{
+    text-align: center;
+    margin: 20px;
+}
 
 
 * body {
@@ -26,7 +28,7 @@ button {
 }
 
 .side {
-    margin: 20px;
+    margin: 30px;
 
 }
 
@@ -38,7 +40,7 @@ button {
     position: relative;
     border: none;
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px 20px;
     border-radius: 15px;
     font-family: "paybooc-Light", sans-serif;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
