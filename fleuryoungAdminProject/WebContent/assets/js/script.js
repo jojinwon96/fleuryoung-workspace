@@ -1,11 +1,10 @@
-	
-	(function($) {
-	    "use strict";
-	    var $wrapper = $('.main-wrapper');
-	    var $pageWrapper = $('.page-wrapper');
-	    var $slimScrolls = $('.slimscroll');
-	    var Sidemenu = function() {
-	        this.$menuItem = $('#sidebar-menu a');
+(function($) {
+    "use strict";
+    var $wrapper = $('.main-wrapper');
+    var $pageWrapper = $('.page-wrapper');
+    var $slimScrolls = $('.slimscroll');
+    var Sidemenu = function() {
+        this.$menuItem = $('#sidebar-menu a');
     };
 
     function init() {

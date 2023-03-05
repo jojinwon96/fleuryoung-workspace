@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="loginUser">
+
+	SELECT
+			SEL_NO
+			,SEL_ID
+			, SEL_PW
+			, SEL_BUSINESS_NO
+			, SEL_STORE_NAME
+			, SEL_NAME
+			, SEL_EMAIL
+			, SEL_PHONE
+			, SEL_TEL
+			, SEL_FAX
+			, SEL_POSTAL
+			, SEL_STREET
+			, SEL_ADDRESS
+			, SEL_IMG
+			, SEL_STATUS
+			, SEL_ENROLL_DATE
+	  FROM  TB_SELLER
+	 WHERE  SEL_ID = ?
+	   AND  SEL_PW = ?
+	   AND  SEL_STATUS = 'Y'
+</entry>
+
+<entry key="insertUser">
+INSERT INTO TB_SELLER 
+           (
+                SEL_NO
+              ,SEL_ID 
+              ,SEL_PW
+              ,SEL_BUSINESS_NO
+              ,SEL_STORE_NAME
+              ,SEL_NAME
+              ,SEL_EMAIL
+              ,SEL_PHONE
+              ,SEL_TEL
+              ,SEL_FAX
+              ,SEL_POSTAL
+              ,SEL_STREET
+              ,SEL_ADDRESS
+              ,SEL_IMG
+              ,SEL_STATUS
+              ,SEL_ENROLL_DATE
+           )
+       VALUES
+           (
+           SEQ_SELLER.NEXTVAL
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,?
+           ,'Y'
+           ,SYSDATE
+           )
+</entry>
+<entry key="updateUser">
+UPDATE    TB_SELLER
+   SET    SEL_BUSINESS_NO = ?
+        , SEL_STORE_NAME = ?
+        , SEL_NAME = ?
+        , SEL_EMAIL = ?
+        , SEL_PHONE = ?
+        , SEL_TEL = ?
+        , SEL_FAX = ?
+        , SEL_POSTAL = ?
+        , SEL_STREET = ?
+        , SEL_ADDRESS = ?
+        , SEL_IMG = ?
+ WHERE    SEL_NO = ?
+
+</entry>
+
+<entry key="selectUser">
+	SELECT
+			SEL_NO
+			, SEL_ID
+			, SEL_PW
+			, SEL_BUSINESS_NO
+			, SEL_STORE_NAME
+			, SEL_NAME
+			, SEL_EMAIL
+			, SEL_PHONE
+			, SEL_TEL
+			, SEL_FAX
+			, SEL_POSTAL
+			, SEL_STREET
+			, SEL_ADDRESS
+			, SEL_IMG
+			, SEL_STATUS
+			, SEL_ENROLL_DATE
+	  FROM  TB_SELLER
+	 WHERE  SEL_NO = ?
+	   AND  SEL_STATUS = 'Y'
+</entry>
+
+<entry key="selectAllSeller">
+	SELECT
+			SEL_NO
+			, SEL_ID
+			, SEL_PW
+			, SEL_BUSINESS_NO
+			, SEL_STORE_NAME
+			, SEL_NAME
+			, SEL_EMAIL
+			, SEL_PHONE
+			, SEL_TEL
+			, SEL_FAX
+			, SEL_POSTAL
+			, SEL_STREET
+			, SEL_ADDRESS
+			, SEL_IMG
+			, SEL_STATUS
+			, SEL_ENROLL_DATE
+	 FROM  TB_SELLER
+</entry>
+</properties>

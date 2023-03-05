@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<%= contextPath %>/assets/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="<%= contextPath %>/assets/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="<%= contextPath %>/assets/css/style.css">
+    <link rel="stylesheet" href="<%= contextPath %>/assets/plugins/datatables/datatables.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script type="text/javascript">
     	window.addEventListener( "pageshow", function ( event ) {
@@ -239,8 +240,8 @@
 		                    <a href="#"><i data-feather="users"></i> <span> 회원관리 </span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="login.html"> 일반계정 </a></li>
-		                        <li><a href="register.html"> 판매자 계정 </a></li>
+		                        <li><a href="<%= contextPath %>/list.me"> 일반계정 </a></li>
+		                        <li><a href="<%= contextPath %>/list.se"> 판매자 계정 </a></li>
 		                    </ul>
 		                </li>
 		                
@@ -258,7 +259,7 @@
 		                    <a href="#"><i data-feather="dollar-sign"></i> <span>판매자센터</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="ribbon.html">정산관리</a></li>
+		                        <li><a href="ribbon.html">상품관리</a></li>
 		                        <li><a href="clipboard.html">판매자요청</a></li>
 		                        <li><a href="drag-drop.html">신고관리</a></li>
 		                    </ul>
@@ -269,7 +270,6 @@
 		                    <a href="#"><i data-feather="monitor"></i> <span>사이트운영</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="invoices.html">카테고리 관리</a></li>
 		                        <li><a href="invoice-grid.html">배너관리</a></li>
 		                        <li><a href="invoice-grid-two.html">쿠폰관리</a></li>
 		                    </ul>
@@ -280,13 +280,7 @@
 		    </div>
 		</div>
 		
-	    <script src="<%= contextPath %>/assets/js/jquery-3.6.0.min.js"></script>
-	    <script src="<%= contextPath %>/assets/js/bootstrap.bundle.min.js"></script>
-	    <script src="<%= contextPath %>/assets/js/feather.min.js"></script>
-	    <script src="<%= contextPath %>/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	    <script src="<%= contextPath %>/assets/plugins/apexchart/apexcharts.min.js"></script>
-	    <script src="<%= contextPath %>/assets/plugins/apexchart/chart-data.js"></script>
-	    <script src="<%= contextPath %>/assets/js/script.js"></script>
+		
     </body>
 
 </html>
