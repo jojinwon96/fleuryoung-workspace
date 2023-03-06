@@ -1,9 +1,9 @@
-<%@page import="com.admin.member.model.vo.Member"%>
+<%@page import="com.admin.inquiry.model.vo.Inquiry"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Member> mList = (ArrayList<Member>)request.getAttribute("mList");
+	ArrayList<Inquiry> iList = (ArrayList<Inquiry>)request.getAttribute("iList");
 %>
 <!DOCTYPE html>
 
@@ -18,11 +18,11 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">일반 계정</h3>
+                            <h3 class="page-title">판매자요청</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"></a>회원관리
+                                <li class="breadcrumb-item"><a href="#"></a>판매자센터
                                 </li>
-                                <li class="breadcrumb-item active">일반 계정</li>
+                                <li class="breadcrumb-item active">판매자요청</li>
                             </ul>
                         </div>
                         <div class="col-auto">
@@ -41,15 +41,15 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>유저</th>
-                                                <th>이메일</th>
-                                                <th>생년월일</th>
-                                                <th>가입일</th>
-                                                <th>활성상태</th>
+                                                <th>제목</th>
+                                                <th>문의종류</th>
+                                                <th>등록일</th>
+                                                <th>답변여부</th>
                                                 <th class="text-end">관리</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<% for(Member m : mList){%>
+                                        	<% for(Inquiry i : iList){%>
                                         		<tr>
 	                                                <td>
 	                                                    <h2 class="table-avatar">
@@ -57,26 +57,41 @@
 	                                                                class="avatar-img rounded-circle"
 	                                                                src="assets/img/profiles/usermain.jpg"
 	                                                                alt="User Image"></a>
-                                                            <a href="profile.html"><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
+                                                            <a href="profile.html"><%= i.getSelId() %><span><%= i.getSelName() %> </span></a>
 	                                                    </h2>
 	                                                </td>
-	                                                <td><a href="#"><%= m.getMemEmail() %></a>
-	                                                </td>
-	                                                <td><%= m.getMemBirthDate() %></td>
-	                                                <td><%= m.getMemEnrollDate() %></td>
-	                                                <% if((m.getMemStatus()).contains("Y")) {%>
-	                                                	<td><span class="badge badge-pill bg-success-light">활성</span></td>     
-	                                                <%}else if((m.getMemStatus()).contains("N")){%>
-	                                                	<td><span class="badge badge-pill bg-danger-light">비활성</span></td>
-	                                                <%} %>
-	                                                <td class="text-end">
-	                                                    <a href="edit-customer.html"
-	                                                        class="btn btn-sm btn-white text-success me-2"><i
-	                                                            class="far fa-edit me-1"></i> 수정</a>
+	                                                <td><%= i.getInqTitle() %></td>
+                                                    <% 
+	                                                    String inqType = null;
+	                                                    switch(i.getInqType()) { 
+		                                                    case 1:
+		                                                    	inqType = "리뷰삭제";
+		                                                    	break;
+		                                                    case 2:
+		                                                    	inqType = "상품등록";
+		                                                    	break;
+		                                                    case 3:
+		                                                    	inqType = "기타";
+		                                                    	break;
+	                                                    }
+                                                    %>
+                                                    <td><%= inqType %></td>
+	                                                <td><%= i.getInqDate() %></td>
+	                                                <% if((i.getInqStatus()).contains("Y")) {%>
+	                                                	<td><span class="badge badge-pill bg-danger-light">미해결</span></td>  
+	                                                	<td class="text-end">
 	                                                    <a href="javascript:void(0);"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
-	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
+	                                                            class="far fa-edit me-1"></i>답변하기</a>
+	                                                </td>   
+	                                                <%}else if((i.getInqStatus()).contains("N")){%>
+	                                                	<td><span class="badge badge-pill bg-success-light">해결</span></td>
+	                                                	<td class="text-end">
+	                                                    <a href="edit-customer.html"
+	                                                        class="btn btn-sm btn-white text-success me-2"><i
+	                                                            class="far fa-check-circle me-1"></i> 답변완료</a>
 	                                                </td>
+	                                                <%} %>
 	                                            </tr>
                                         	<%} %>
                                         </tbody>

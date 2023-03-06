@@ -34,6 +34,7 @@ public class MemberListController extends HttpServlet {
 		
 		ArrayList<Member> mList = new MemberService().selectAllMember();
 		request.setAttribute("mList", mList);
+		request.setAttribute("menuNo", "2");
 		request.getRequestDispatcher("views/member/memberList.jsp").forward(request, response);
 	}
 

@@ -11,6 +11,67 @@
 	// 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구
 %>
 
+<%
+	int menuNo = Integer.parseInt((String)request.getAttribute("menuNo"));
+	String active1 = "";
+	String active2 = "";
+	String active2_1 = "";
+	String active2_2 = "";
+	String active3 = "";
+	String active3_1 = "";
+	String active3_2 = "";
+	String active4 = "";
+	String active4_1 = "";
+	String active4_2 = "";
+	String active4_3 = "";
+	String active5 = "";
+	String active5_1 = "";
+	String active5_2 = "";
+	
+	switch(menuNo){
+	case 1:
+		active1 = "active ";
+		break;
+	case 2:
+		active2 = "active ";
+		active2_1 = "active ";
+		break;
+	case 3:
+		active2 = "active ";
+		active2_2 = "active ";
+		break;
+	case 4:
+		active3 = "active ";
+		active3_1 = "active ";
+		break;
+	case 5:
+		active3 = "active ";
+		active3_2 = "active ";
+		break;
+	case 6:
+		active4 = "active ";
+		active4_1 = "active ";
+		break;
+	case 7:
+		active4 = "active ";
+		active4_2 = "active ";
+		break;
+	case 8:
+		active4 = "active ";
+		active4_3 = "active ";
+		break;
+	case 9:
+		active5 = "active ";
+		active5_1 = "active ";
+		break;
+	case 10:
+		active5 = "active ";
+		active5_2 = "active ";
+		break;
+		
+	}
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -203,13 +264,16 @@
 		
 		        <li class="nav-item dropdown has-arrow main-drop">
 		            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-						<!-- 
+						
 						<span class="user-img">
+							<!-- 
 		                    <img src="assets/img/profiles/usermain.jpg" alt="">
+		                     -->
+		                    <i data-feather="user"></i>
 		                    <span class="status online"></span>
 		                </span>
-						 -->
-		                <span>Admin</span>
+						
+		                <span><%= loginUser.getSelId() %></span>
 		            </a>
 		            <div class="dropdown-menu">
 						<!-- 
@@ -231,47 +295,46 @@
 		            <ul>
 
 		                <!-- <li class="menu-title"><span>메인</span></li> -->
-		                <li class="active">
+		                <li class="<%= active1 %>">
 		                    <a href="<%= contextPath %>/dashboard.da"><i data-feather="home"></i> <span>대시보드</span></a>
 		                </li>
 		                
 		                <!-- <li class="menu-title"><span>유저</span></li> -->
-		                <li class="submenu">
+		                <li class="<%= active2 %>submenu">
 		                    <a href="#"><i data-feather="users"></i> <span> 회원관리 </span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="<%= contextPath %>/list.me"> 일반계정 </a></li>
-		                        <li><a href="<%= contextPath %>/list.se"> 판매자 계정 </a></li>
+		                        <li><a href="<%= contextPath %>/list.me" class="<%= active2_1 %>"> 일반 계정 </a></li>
+		                        <li><a href="<%= contextPath %>/list.se" class="<%= active2_2 %>"> 판매자 계정 </a></li>
 		                    </ul>
 		                </li>
 		                
 		                <!-- <li class="menu-title"><span>지원</span></li> -->
-		                <li class="submenu">
+		                <li class="<%= active3 %>submenu">
 		                    <a href="#"><i data-feather="message-square"></i> <span>고객센터</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="alerts.html">1:1 문의</a></li>
-		                        <li><a href="accordions.html">Q&A</a></li>
-		                        <li><a href="avatar.html">공지사항</a></li>
+		                        <li><a href="accordions.html" class="<%= active3_1 %>">Q&A</a></li>
+		                        <li><a href="avatar.html"  class="<%= active3_2 %>">공지사항</a></li>
 		                    </ul>
 		                </li>
-		                <li class="submenu">
+		                <li class="<%= active4 %>submenu">
 		                    <a href="#"><i data-feather="dollar-sign"></i> <span>판매자센터</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="ribbon.html">상품관리</a></li>
-		                        <li><a href="clipboard.html">판매자요청</a></li>
-		                        <li><a href="drag-drop.html">신고관리</a></li>
+		                        <li><a href="ribbon.html" class="<%= active4_1 %>">상품관리</a></li>
+		                        <li><a href="<%= contextPath %>/list.in" class="<%= active4_2 %>">판매자요청</a></li>
+		                        <li><a href="drag-drop.html" class="<%= active4_3 %>">신고관리</a></li>
 		                    </ul>
 		                </li>
 						
 						<!-- <li class="menu-title"><span>사이트</span></li> -->
-		                <li class="submenu">
+		                <li class="<%= active5 %>submenu">
 		                    <a href="#"><i data-feather="monitor"></i> <span>사이트운영</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="invoice-grid.html">배너관리</a></li>
-		                        <li><a href="invoice-grid-two.html">쿠폰관리</a></li>
+		                        <li class="<%= active5_1 %>"><a href="invoice-grid.html">배너관리</a></li>
+		                        <li class="<%= active5_2 %>"><a href="invoice-grid-two.html">쿠폰관리</a></li>
 		                    </ul>
 		                </li>
 		                <li>

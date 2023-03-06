@@ -18,11 +18,11 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">일반회원</h3>
+                            <h3 class="page-title">판매 계정</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#"></a>회원관리
                                 </li>
-                                <li class="breadcrumb-item active">일반회원</li>
+                                <li class="breadcrumb-item active">판매자 계정</li>
                             </ul>
                         </div>
                         <div class="col-auto">
@@ -57,7 +57,7 @@
 	                                                                class="avatar-img rounded-circle"
 	                                                                src="assets/img/profiles/usermain.jpg"
 	                                                                alt="User Image"></a>
-	                                                        <a href="profile.html"><%= s.getSelStoreName() %> <span><%= s.getSelId() %></span></a>
+	                                                        <a href="profile.html"><%= s.getSelId() %><span><%= s.getSelStoreName() %> </span></a>
 	                                                    </h2>
 	                                                </td>
 	                                                <td><a href="#"><%= s.getSelEmail() %></a>
