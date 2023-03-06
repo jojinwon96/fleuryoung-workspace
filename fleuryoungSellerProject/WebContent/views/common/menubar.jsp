@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="resources/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="resources/plugins/datatables/datatables.min.css">
     <link rel="stylesheet" href="resources/css/style.css">
 
     <script type="text/javascript">

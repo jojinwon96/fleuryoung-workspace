@@ -1,12 +1,16 @@
 package com.kh.product.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Category;
+import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
 
 public class ProductService {
@@ -37,11 +41,11 @@ public class ProductService {
 	public int insertProduct(Product p) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertProduct(conn, p);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
+//		if(result > 0) {
+//			commit(conn);
+//		}else {
+//			rollback(conn);
+//		}
 		close(conn);
 		return result;
 	}
@@ -52,24 +56,33 @@ public class ProductService {
 	public int insertOptionOne(String title) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertOptionOne(conn,title);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
 		close(conn);
 		return result;
 	}
 	
-	public int insertOptionTwo(OptionTwo list) {
+	public int insertOptionTwo(ArrayList<OptionTwo> list) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertOptionTwo(conn,list);
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
 		close(conn);
 		return result;
+	}
+	
+	public int insertProductImg(ArrayList<String> list) {
+		Connection conn = getConnection();
+		int result = new ProductDao().insertProductImg(conn, list);
+		close(conn);
+		return result;
+	}
+	
+	public int insertDiscount(int dc) {
+		Connection conn = getConnection();
+		int result = new ProductDao().insertDiscount(conn, dc);
+		close(conn);
+		return result;
+	}
+	
+	public void transaction() {
+		commit(getConnection());
+		close(getConnection());
 	}
 }

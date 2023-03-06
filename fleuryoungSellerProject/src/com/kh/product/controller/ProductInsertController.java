@@ -1,7 +1,9 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +15,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
-import com.kh.seller.model.service.SellerService;
 import com.kh.seller.model.vo.Seller;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -46,14 +46,11 @@ public class ProductInsertController extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)) {
 				
 				int maxSize = 10 * 1024 * 1024;
-				
-				ArrayList<OptionOne> ot_1_list = new ArrayList<OptionOne>();
-				ArrayList<OptionTwo> ot_2_list = new ArrayList<OptionTwo>();
-				
 				String savePath = request.getSession().getServletContext().getRealPath("resources/img/seller_img/");
-				
 				MultipartRequest multipartRequest = new MultipartRequest(request, savePath, maxSize, "utf-8",new MyFileRenamePolicy());
 				
+				ArrayList<OptionTwo> ot_2_list = new ArrayList<OptionTwo>();
+						
 				int categoryNo =  Integer.parseInt(multipartRequest.getParameter("categoryNo"));
 				String pName = multipartRequest.getParameter("pName");
 				int price = Integer.parseInt(multipartRequest.getParameter("price"));
@@ -61,8 +58,10 @@ public class ProductInsertController extends HttpServlet {
 				String delivery = multipartRequest.getParameter("delivery");
 				String card = multipartRequest.getParameter("card");
 				String gifr = multipartRequest.getParameter("gift");
+				
 				//상품 생성
 				Product p = new Product();
+				
 				//상품 객체에 값 세팅
 				p.setCategoryNo(String.valueOf(categoryNo));
 				p.setpName(pName);
@@ -75,19 +74,30 @@ public class ProductInsertController extends HttpServlet {
 				
 				// 옵션 가져오깅
 				String[] optionTitle = multipartRequest.getParameterValues("optionTitle");
+				optionTitle = Arrays.stream(optionTitle).filter(item -> !item.equals("")).toArray(String[]::new);
 				
 				String[] optionStock1 = multipartRequest.getParameterValues("p2_1_stock");
+				optionStock1 = Arrays.stream(optionStock1).filter(item -> !item.equals("")).toArray(String[]::new);
+				
 				String[] optionStock2 = multipartRequest.getParameterValues("p2_2_stock");
+				optionStock2 = Arrays.stream(optionStock2).filter(item -> !item.equals("")).toArray(String[]::new);
+				
 				String[] optionStock3 = multipartRequest.getParameterValues("p2_3_stock");
-				System.out.println(optionStock1);
+				optionStock3 = Arrays.stream(optionStock3).filter(item -> !item.equals("")).toArray(String[]::new);
 				
 				String[] optionName1 = multipartRequest.getParameterValues("p2_1_name");
+				optionName1 = Arrays.stream(optionName1).filter(item -> !item.equals("")).toArray(String[]::new);
 				String[] optionName2 = multipartRequest.getParameterValues("p2_2_name");
+				optionName2 = Arrays.stream(optionName2).filter(item -> !item.equals("")).toArray(String[]::new);
 				String[] optionName3 = multipartRequest.getParameterValues("p2_3_name");
+				optionName3= Arrays.stream(optionName3).filter(item -> !item.equals("")).toArray(String[]::new);
 				
 				String[] optionPrice1 = multipartRequest.getParameterValues("p2_1_price");
+				optionPrice1= Arrays.stream(optionPrice1).filter(item -> !item.equals("")).toArray(String[]::new);
 				String[] optionPrice2 = multipartRequest.getParameterValues("p2_2_price");
+				optionPrice2= Arrays.stream(optionPrice2).filter(item -> !item.equals("")).toArray(String[]::new);
 				String[] optionPrice3 = multipartRequest.getParameterValues("p2_3_price");
+				optionPrice3= Arrays.stream(optionPrice3).filter(item -> !item.equals("")).toArray(String[]::new);
 				
 				
 				// 옵션있을 시 옵션 재고량 총합이 총 재고량에 기입
@@ -97,17 +107,17 @@ public class ProductInsertController extends HttpServlet {
 					int sum =0;
 					if(optionStock1 != null) {
 						for(int i = 0; i < optionStock1.length; i++) {
-							sum += Integer.parseInt(optionStock1[i]);
+								sum += Integer.parseInt(optionStock1[i]);
 						}
 					}
 					if(optionStock2 != null) {
 						for(int i = 0; i < optionStock2.length; i++) {
-							sum += Integer.parseInt(optionStock2[i]);
+								sum += Integer.parseInt(optionStock2[i]);
 						}
 					}
 					if(optionStock3 != null) {
 						for(int i = 0; i < optionStock3.length; i++) {
-							sum += Integer.parseInt(optionStock3[i]);
+								sum += Integer.parseInt(optionStock3[i]);
 						}
 					}
 					p.setStock(sum);
@@ -121,61 +131,61 @@ public class ProductInsertController extends HttpServlet {
 					request.getSession().setAttribute("alertMsg", "상품에 상세 설명이 없습니다!");
 					response.sendRedirect(request.getContextPath() + "/productList.pr");
 				}
-				
+				//상품 추가 구문
 				int prResult = new ProductService().insertProduct(p);
-				int opOneResult = 0;
-				int opTwoResult = 0;
-				for(int i = 0; i < optionTitle.length;i++) {
-					if(optionTitle[i] != null) {
-						opOneResult *= new ProductService().insertOptionOne(optionTitle[i]);
-						for(int j = 0; j< multipartRequest.getParameterValues("p2_"+i+"_name").length;j++) {
-							ot_2_list.add(new OptionTwo(
-									  multipartRequest.getParameterValues("p2_"+i+"_name")[j]
-									, Integer.parseInt(multipartRequest.getParameterValues("p2_"+i+"_price")[j])
-									, Integer.parseInt(multipartRequest.getParameterValues("p2_"+i+"_stock")[j])
-									));
+				int opOneResult = 1;
+				int opTwoResult = 1;
+				//option 추가 구문
+				if(optionTitle != null) {
+					for(int i = 0; i < optionTitle.length;i++) {
+						if(optionTitle[i] != null) {
+							opOneResult *= new ProductService().insertOptionOne(optionTitle[i]);
+							for(int j = 0; j < Arrays.stream(multipartRequest.getParameterValues("p2_"+(i+1)+"_name")).filter(item -> !item.equals("")).toArray(String[]::new).length;j++) {
+									ot_2_list.add(new OptionTwo(
+											  multipartRequest.getParameterValues("p2_"+(i+1)+"_name")[j]
+											, Integer.parseInt(multipartRequest.getParameterValues("p2_"+(i+1)+"_price")[j])
+											, Integer.parseInt(multipartRequest.getParameterValues("p2_"+(i+1)+"_stock")[j])
+										));
+							}
+							opTwoResult *= new ProductService().insertOptionTwo(ot_2_list);
 						}
-						opTwoResult *= new ProductService().insertOptionTwo(ot_2_list);
 					}
+				}
+				ArrayList<String> piList = new ArrayList<>();
+				for (int i = 1; i <= 10; i++) {
+					String key = "file" + i; 
+					
+					if (multipartRequest.getOriginalFileName(key) != null) {
+						piList.add("resources/img/product/view/" + multipartRequest.getFilesystemName(key));
+						
+					}else{
+						piList.add("");
+					}// if end
+				} // for end
+				
+				int piResult = new ProductService().insertProductImg(piList);
+				
+				
+				int dResult = 1;
+				if(multipartRequest.getParameter("discount").equals("")) {
+					dResult = new ProductService().insertDiscount(
+							Integer.parseInt((multipartRequest.getParameter("discount"))));
 				}
 				
 				
+		
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				if(result > 0) {
+				if(dResult*prResult*opTwoResult*opOneResult*piResult > 0) {
 					// 성공
-					
-					request.getSession().setAttribute("alertMsg", "수정 완료");
-					request.getSession().removeAttribute("loginSeller");
-					
-					Seller loginSeller = new SellerService().selectSeller(selNo);
-					request.getSession().setAttribute("loginSeller", loginSeller);
-					
-					
-					response.sendRedirect(request.getContextPath() + "/myPageForm.se");
-					
+					new ProductService().transaction();
+					request.getSession().setAttribute("alertMsg", "상품등록이 완료되었습니다.");					
+					response.sendRedirect(request.getContextPath() + "/productList.pr");
 				}else {
 					// 실패
-					request.getSession().setAttribute("alertMsg", "판매자 정보수정에 실패했습니다.!");
-					response.sendRedirect(request.getContextPath() + "/myPageForm.se");
+					request.getSession().setAttribute("alertMsg", "상품등록에 실패했습니다.!");
+					response.sendRedirect(request.getContextPath() + "/productList.pr");
 					
 			}
 		}

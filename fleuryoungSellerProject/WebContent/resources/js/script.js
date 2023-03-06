@@ -542,6 +542,7 @@ $(function(){
         }
         if(count <=3){
             $("#option_"+count+">td").attr("style", "display: false");
+            $("#option_"+count+">td").attr("required",true);
             //$("#table_1").append($option_1.clone(true));
             // 위의 코드 두줄 part1 방식
             //$("#clone-result").append($("#item").clone(true));
@@ -550,6 +551,7 @@ $(function(){
             alert("너무 많습니다.");
         }	
         if(count > 0){
+            $("#sumStock").val("");
             $("#sumStock").attr("disabled", true);
         }
         
@@ -563,6 +565,7 @@ $(function(){
             console.log(count);
             $("#option_"+count+">td>input").val("");
             $("#option_"+count+">td").attr("style", "display: none");
+            $("#option_"+count+">td").removeAttr("required");
             count--;
         } else {
             alert("삭제할 옵션이 없습니다.");
@@ -575,10 +578,14 @@ $(function(){
     add_1 = function() {
          
         if ($count_1< 3) { // 2차옵션 개수 
-            $("#option_1 td:eq(0)>li").eq($count_1).attr("style", "display: false");
             $("#option_1 td:eq(1)>li").eq($count_1).attr("style", "display: false");
             $("#option_1 td:eq(2)>li").eq($count_1).attr("style", "display: false");
-           
+            $("#option_1 td:eq(3)>li").eq($count_1).attr("style", "display: false");
+            $("#option_1 td:eq(1)>li:eq(" +$count_1+ ")>input").attr("required",true);
+            $("#option_1 td:eq(2)>li:eq(" +$count_1+ ")>input").attr("required",true);
+            $("#option_1 td:eq(3)>li:eq(" +$count_1+ ")>input").attr("required",true);
+            
+            
             $count_1++
         } else {
             alert("2차옵션이 너무 많습니다.");
@@ -587,9 +594,12 @@ $(function(){
     add_2 = function() {
          
         if ($count_2< 3) { // 2차옵션 개수 
-            $("#option_2 td:eq(0)>li").eq($count_2).attr("style", "display: false");
             $("#option_2 td:eq(1)>li").eq($count_2).attr("style", "display: false");
             $("#option_2 td:eq(2)>li").eq($count_2).attr("style", "display: false");
+            $("#option_2 td:eq(3)>li").eq($count_2).attr("style", "display: false");
+            $("#option_2 td:eq(1)>li:eq(" +$count_2+ ")>input").attr("required",true);
+            $("#option_2 td:eq(2)>li:eq(" +$count_2+ ")>input").attr("required",true);
+            $("#option_2 td:eq(3)>li:eq(" +$count_2+ ")>input").attr("required",true);
            
             $count_2++
         } else {
@@ -610,6 +620,10 @@ $(function(){
             $("#option_3 td:eq(1)>li").eq($count_3).attr("style", "display: false");
             $("#option_3 td:eq(2)>li").eq($count_3).attr("style", "display: false");
             $("#option_3 td:eq(3)>li").eq($count_3).attr("style", "display: false");
+            $("#option_3 td:eq(1)>li:eq(" +$count_3+ ")>input").attr("required",true);
+            $("#option_3 td:eq(2)>li:eq(" +$count_3+ ")>input").attr("required",true);
+            $("#option_3 td:eq(3)>li:eq(" +$count_3+ ")>input").attr("required",true);
+
             $count_3++
         } 
     }
@@ -621,12 +635,15 @@ $(function(){
             alert("삭제할 2차 옵션이 없습니다.")
         }
         if ($count_1 >= 0) {
-            $("#option_3 td:eq(2)>li:eq(" +$count_1+ ")>input").val("");
-            $("#option_3 td:eq(1)>li:eq(" +$count_1+ ")>input").val("");
-            $("#option_3 td:eq(3)>li:eq(" +$count_1+ ")>input").val("");
-            $("#option_3 td:eq(1)>li:eq(" +$count_1+ ")").attr("style", "display: none");
-            $("#option_3 td:eq(2)>li:eq(" +$count_1+ ")").attr("style", "display: none");
-            $("#option_3 td:eq(3)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_1 td:eq(1)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_1 td:eq(2)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_1 td:eq(3)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_1 td:eq(1)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_1 td:eq(2)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_1 td:eq(3)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_1 td:eq(1)>li:eq(" +$count_1+ ")>input").removeAttr("required");
+            $("#option_1 td:eq(2)>li:eq(" +$count_1+ ")>input").removeAttr("required");
+            $("#option_1 td:eq(3)>li:eq(" +$count_1+ ")>input").removeAttr("required");
             $count_1--;
 		} 
 	};
@@ -639,12 +656,17 @@ $(function(){
             alert("삭제할 2차 옵션이 없습니다.")
         }
         if ($count_2 >= 0) {
-            $("#option_3 td:eq(1)>li:eq(" +$count_2+ ")>input").val("");
-            $("#option_3 td:eq(2)>li:eq(" +$count_2+ ")>input").val("");
-            $("#option_3 td:eq(3)>li:eq(" +$count_2+ ")>input").val("");
-            $("#option_3 td:eq(1)>li:eq(" +$count_2+ ")").attr("style", "display: none");
-            $("#option_3 td:eq(2)>li:eq(" +$count_2+ ")").attr("style", "display: none");
-            $("#option_3 td:eq(3)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_2 td:eq(1)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_2 td:eq(2)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_2 td:eq(3)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_2 td:eq(1)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_2 td:eq(2)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_2 td:eq(3)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_2 td:eq(1)>li:eq(" +$count_2+ ")>input").removeAttr("required");
+            $("#option_2 td:eq(2)>li:eq(" +$count_2+ ")>input").removeAttr("required");
+            $("#option_2 td:eq(3)>li:eq(" +$count_2+ ")>input").removeAttr("required");
+
+
             $count_2--;
 		} 
 	};
@@ -663,6 +685,11 @@ $(function(){
             $("#option_3 td:eq(1)>li:eq(" +$count_3+ ")").attr("style", "display: none");
             $("#option_3 td:eq(2)>li:eq(" +$count_3+ ")").attr("style", "display: none");
             $("#option_3 td:eq(3)>li:eq(" +$count_3+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(1)>li:eq(" +$count_3+ ")>input").removeAttr("required");
+            $("#option_3 td:eq(2)>li:eq(" +$count_3+ ")>input").removeAttr("required");
+            $("#option_3 td:eq(3)>li:eq(" +$count_3+ ")>input").removeAttr("required");
+
+
             $count_3--;
 		} 
 	};

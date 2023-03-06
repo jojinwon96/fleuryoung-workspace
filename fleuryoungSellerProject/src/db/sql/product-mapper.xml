@@ -24,7 +24,7 @@ SELECT
 
 <entry key="insertProduct">
 INSERT
-  INTO PRODUCT(
+  INTO TB_PRODUCT(
         P_ID
         , P_NAME
         , P_NETPRICE
@@ -53,6 +53,40 @@ VALUES(SEQ_PRODUCT.NEXTVAL
         , ?
         , ?
         )
+</entry>
+
+<entry key="insertProductImg">
+
+INSERT
+  INTO TB_PRODUCT_IMG
+        ( 
+          P_ID
+        , P_IMG1
+        , P_IMG2
+        , P_IMG3
+        , P_IMG4
+        , P_IMG5
+        , P_IMG6
+        , P_IMG7
+        , P_IMG8
+        , P_IMG9
+        , P_IMG10
+        )
+VALUES
+        (
+        seq_product.CURRVAL
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        )
+
 </entry>
 
 <entry key="insertOptionOne">
@@ -91,5 +125,18 @@ VALUES
         )
 </entry>
 
+<entry key="insertDiscount">
+INSERT 
+  INTO TB_DISCOUNT
+  		(
+  		  P_ID
+		, DISCOUNT_RATE
+  		)
+VALUES
+		(
+		  SEQ_PRODUCT.CURRVAL
+		, ?
+		)
+</entry>
 
 </properties>

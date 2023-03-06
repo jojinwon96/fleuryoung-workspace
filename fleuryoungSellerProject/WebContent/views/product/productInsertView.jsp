@@ -33,6 +33,11 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 
+
+
+
+
+
 		<div class="page-wrapper">
 			<div class="content container-fluid">
 				<div class="page-header">
@@ -69,24 +74,22 @@
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">카테고리</label>
 										<div class="col-md-10">
-											<select class="form-select">
+											<select class="form-select" name="categoryNo">
 												<%for(Category c : clist){ %>
 													<%if(c.getCategoryDetail()==null){ %>
-														<option value="c.getCategoryNo()"
-															name="categoryNo">
+														<option value="<%=c.getCategoryNo()%>">
 															<%= c.getCategoryName()%>
 														</option>
 														<%}else{ %>
-															<option value="c.getCategoryNo()"
-																name="categoryNo">
-																<%= c.getCategoryName()%> -
-																	<%=c.getCategoryDetail() %>
-															</option>
-															<%} }%>
+														<option value="<%=c.getCategoryNo()%>">
+															<%= c.getCategoryName()%> -
+																<%=c.getCategoryDetail() %>
+														</option>
+														<%} }%>
 											</select>
 										</div>
 									</div><!-- 카테고리 -->
-
+									
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">상품이름</label>
 										<div class="col-md-10">
@@ -147,73 +150,73 @@
 													<tr id="option_1">
 													<!-- <tr style="display: none;"> -->
 														<td style="display: none;">
-															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' required>
+															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' >
 															<button type='button' class='btn btn-primary btn-sm' onclick="add_1()">+</button>
-															<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_2();">-</button>
+															<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_1();">-</button>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' required></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' required></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' required></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' required></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' required></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
 														</td>
 													</tr>
 
 													<tr id="option_2">
 														<!-- <tr style="display: none;"> -->
 															<td style="display: none;">
-																<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' required>
+																<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' >
 																<button type='button' class='btn btn-primary btn-sm' onclick="add_2()">+</button>
 																<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_2();">-</button>
 															</td>
 															<td style="display: none;">
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' required></li>
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' required></li>
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' required></li>
+																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
+																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
+																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
 															</td>
 															<td style="display: none;">
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' required></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' required></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' required></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
 															</td>
 															<td style="display: none;">
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' required></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' required></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' required></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
+																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
 															</td>
 														</tr>
-														<tr>
+													<tr>
 
 													<tr id="option_3">
 													<!-- <tr style="display: none;"> -->
 														<td style="display: none;">
-															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' required>
+															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요'>
 															<button type='button' class='btn btn-primary btn-sm' onclick="add_3()">+</button>
 															<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_3();">-</button>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' required></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' required></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' required></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
+															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' required></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
 														</td>
 														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' required></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' required></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
+															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
 														</td>
 													</tr>
 													
@@ -239,7 +242,7 @@
 
 									<div>
 										<label for="file" class="col-form-label col-md-3">서브
-											이미지 (최대 9장까지 가능!)</label>
+											이미지 (최소4장 최대9장)</label>
 											<hr>
 										<div class="wrap-vertical col-md-10">
 											<table>
@@ -305,16 +308,15 @@
 									<input type="file" name="file5" id="file5"
 										style="display: none;" onchange="loadImg(this,5);" required>
 									<input type="file" name="file6" id="file6"
-										style="display: none;" onchange="loadImg(this,6);" required>
+										style="display: none;" onchange="loadImg(this,6);" >
 									<input type="file" name="file7" id="file7"
-										style="display: none;" onchange="loadImg(this,7);" required>
+										style="display: none;" onchange="loadImg(this,7);" >
 									<input type="file" name="file8" id="file8"
-										style="display: none;" onchange="loadImg(this,8);" required>
+										style="display: none;" onchange="loadImg(this,8);" >
 									<input type="file" name="file9" id="file9"
-										style="display: none;" onchange="loadImg(this,9);" required>
+										style="display: none;" onchange="loadImg(this,9);" >
 									<input type="file" name="file10" id="file10"
-										style="display: none;" onchange="loadImg(this,10);"
-										required>
+										style="display: none;" onchange="loadImg(this,10);">
 
 									<br>
 
@@ -322,27 +324,27 @@
 										<label class="col-form-label col-md-2">할인율</label>
 										<div class="col-md-10">
 											<span class="radio">
-												<label> <input type="radio" name="radio">
+												<label> <input type="radio" name="discount" value="null"checked>
 													없음 
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="radio" value="10">
+												<label> <input type="radio" name="discount" value="10">
 													10% 
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="radio" value="20">
+												<label> <input type="radio" name="discount" value="20">
 													20% 
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="radio" value="30">
+												<label> <input type="radio" name="discount" value="30">
 													30% 
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="radio" value="40">
+												<label> <input type="radio" name="discount" value="40">
 													40% 
 												</label>
 											</span>
@@ -358,7 +360,7 @@
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="delivery" value="N">
+												<label> <input type="radio" name="delivery" value="N"checked>
 													일반배송
 												</label>
 											</span>
@@ -375,7 +377,7 @@
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="card" value="N">
+												<label> <input type="radio" name="card" value="N"checked>
 													카드쓰기 거부
 												</label>
 											</span>
@@ -405,7 +407,7 @@
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="gift" value="N">
+												<label> <input type="radio" name="gift" value="N"checked>
 													X
 												</label>
 											</span>
@@ -415,7 +417,7 @@
 									
 									<div align="center">
 										<button type="button" class="btn btn-block" onclick="history.back();">목록가기</button>
-										<button type="submit" class="btn btn-primary btn-block">등록하기</button>
+										<button type="submit" class="btn btn-primary">등록하기</button>
 									</div>
 								</form>
 							</div>
@@ -429,13 +431,14 @@
 
 
 		</div>
- <script src="resources/js/jquery-3.6.0.min.js"></script>
+ 	<script src="resources/js/jquery-3.6.0.min.js"></script>
     <script src="resources/js/bootstrap.bundle.min.js"></script>
     <script src="resources/js/feather.min.js"></script>
     <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
     <script src="resources/plugins/apexchart/chart-data.js"></script>
     <script src="resources/js/script.js"></script>
+
 </body>
 
 </html>

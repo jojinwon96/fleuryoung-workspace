@@ -1,9 +1,6 @@
 package com.kh.product.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -106,7 +103,7 @@ private Properties prop = new Properties();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("selectCategoryList");
+		String sql = prop.getProperty("insertProduct");
 		
 		
 		try {
@@ -123,7 +120,7 @@ private Properties prop = new Properties();
 			pstmt.setInt(10, Integer.parseInt(p.getCategoryNo()));
 			result = pstmt.executeUpdate();
 			
-			
+			System.out.println(result+"!!!");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -155,17 +152,60 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-	public int insertOptionTwo(ArrayList<OptionTwo> list) {
+	public int insertOptionTwo(Connection conn, ArrayList<OptionTwo> list) {
 		int result = 0;
-		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertOptionTwo");
 		
 		
 		try {
+			
+			for(OptionTwo option: list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString (1, option.getOptionContent());
+				pstmt.setInt (2, option.getOptionPrice());
+				pstmt.setInt (3, option.getOptionStock());
+				result = pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertProductImg(Connection conn, ArrayList<String> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProductImg");
+		
+		try {
+			System.out.println(list);
 			pstmt = conn.prepareStatement(sql);
-			
+			for(int i =0; i < list.size();i++) {
+				pstmt.setString(i+1, list.get(i));
+			}
 			result = pstmt.executeUpdate();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertDiscount(Connection conn, int dc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertDiscount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dc);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{

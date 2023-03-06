@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
+import com.kh.seller.model.vo.Seller;
 
 /**
  * Servlet implementation class ProductListController
@@ -32,8 +33,11 @@ public class ProductListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int selNo = Integer.parseInt(request.getParameter("selNo"));
-		
+		Seller sel = (Seller)(request.getSession().getAttribute("loginSeller"));
+		int selNo = sel.getSelNo();
+//		if(request.getSession().getAttribute("list") != null) {
+//			request.getSession().removeAttribute("list");
+//		}
 		ArrayList<Product> list = new ProductService().selectProductList(selNo);
 		
 		request.setAttribute("list",  list);

@@ -1,4 +1,4 @@
-package com.kh.member.controller;
+package com.kh.seller.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
