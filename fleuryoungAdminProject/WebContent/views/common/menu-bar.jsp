@@ -131,12 +131,14 @@
 		    <a href="javascript:void(0);" id="toggle_btn">
 		        <i class="fas fa-bars"></i>
 		    </a>
+		    <!-- 
 		    <div class="top-nav-search">
 		        <form>
 		            <input type="text" class="form-control" placeholder="Search here">
 		            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
 		        </form>
 		    </div>
+		     -->
 		    <a class="mobile_btn" id="mobile_btn">
 		        <i class="fas fa-bars"></i>
 		    </a>
@@ -314,8 +316,8 @@
 		                    <a href="#"><i data-feather="message-square"></i> <span>고객센터</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="accordions.html" class="<%= active3_1 %>">Q&A</a></li>
-		                        <li><a href="avatar.html"  class="<%= active3_2 %>">공지사항</a></li>
+		                        <li><a href="<%= contextPath %>/list.qn" class="<%= active3_1 %>">Q&A</a></li>
+		                        <li><a href="<%= contextPath %>/list.bo"  class="<%= active3_2 %>">공지사항</a></li>
 		                    </ul>
 		                </li>
 		                <li class="<%= active4 %>submenu">

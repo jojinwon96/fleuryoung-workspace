@@ -25,11 +25,11 @@
                                 <li class="breadcrumb-item active">판매자요청</li>
                             </ul>
                         </div>
-                        <div class="col-auto">
+                        <!-- <div class="col-auto">
                             <a href="add-customer.html" class="btn btn-primary me-1">
                                 <i class="fas fa-plus"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="row">
