@@ -343,7 +343,7 @@ public class ProductDao {
 		return categoryList;
 	}
 
-	public ArrayList<Product> selectProductType(Connection conn, String pCategory) {
+	public ArrayList<Product> selectProductType(Connection conn, int categoryNo) {
 		
 		
 		ArrayList<Product> list = new ArrayList<Product>();
@@ -356,7 +356,7 @@ public class ProductDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, pCategory);
+			pstmt.setInt(1, categoryNo);
 			
 			rs = pstmt.executeQuery();
 
@@ -530,6 +530,75 @@ public class ProductDao {
 		}
 		return list;
 	}
+
+	public ArrayList<Product> selectGiftAll(Connection conn) {
+		
+		
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectGiftAll");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+
+	}
+
+	public ArrayList<Product> selectGiftType(Connection conn, String giftName) {
+
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectGiftType");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, giftName);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+
+
 
 }// productDao End
 

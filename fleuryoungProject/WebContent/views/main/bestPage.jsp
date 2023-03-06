@@ -238,7 +238,21 @@ $(function(){
 							})
 						})
 					</script>
-  
+
+
+
+
+				</div>
+			</div>
+		</section>
+	</div>
+    
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<div id="wrap">
+    <a id="back-to-top" style="text-decoration: none;"></a>
+</div>
+
 
 </body>
 </html>

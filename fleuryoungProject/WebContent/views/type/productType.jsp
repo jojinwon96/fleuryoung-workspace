@@ -4,9 +4,7 @@
     <%@page import="com.kh.product.model.vo.Product"%>
     <%@page import="java.util.ArrayList"%>
     <%
-   ArrayList<Category> categoryList = (ArrayList<Category>)request.getAttribute("categoryList");
-    
-    
+  
     ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
     
     
@@ -26,68 +24,127 @@
     <%@ include file = "../common/header.jsp" %>   
     
     
-    
-    <nav class="sidebar close">
-    <div class="togright">
-        <i class='bi bi-toggle-off toggle minitoggle'></i>
-    </div>
-    <div class="menu-bar hero__categories hero__categories__all">
-        <div class="menu search-box">
-            <ul class="menu-links" style="padding: 5px; ">
-            
-            
-            <% for(Category c : categoryList) { %>
-            
-            	<% if(!(c.getCategoryName().equals("cateNN"))) { %>
-            	
-                <% if(c.getCategoryDetail().equals("cateDetailNN")) { %>
-                
-                   <li class="clickmenu">
-                    <a href="#">
-                        <span class="text nav-text cateName"><%=c.getCategoryName() %></span>
-                    </a>
-                </li>
-                
-                
-                <% } else { %>
-            		
-            		 <li class="clickmenu dropdown-trigger">
-                    <a href="#">
-                        <span class="text nav-text cateName"><%=c.getCategoryName()%> Ｖ</span>
+<nav class="sidebar close">
+	<div class="togright">
+		<i class='bi bi-toggle-off toggle minitoggle'></i>
+	</div>
+	<div class="menu-bar hero__categories hero__categories__all">
+		<div class="menu search-box">
+			<ul class="menu-links" style="padding: 5px; ">
+			
+			
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="1">꽃바구니</span>
+					</a>
+				</li>
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="2">꽃다발</span>
+					</a>
+				</li>
 
-                    </a>
+				<li class="clickmenu dropdown-trigger">
+					<a href="#" class="cateName" >
+						<span class="text nav-text cateDetailName">화환 Ｖ</span>
 
-                    <ul class="hide sub-menu ">
-                  
-                    
-                        <li class="cateDetailName"><a href="#"><%=c.getCategoryDetail()%></a></li>
-                      
-                       
-                    </ul>
+					</a>
 
-                </li>
-            		
-            		<%  } %>
-            		
-            	<% } %>
-            
+					<ul class="hide sub-menu">
+						<li class="scateName" value="3"><a href="#" >근조화환</a></li>
+						<li class="scateName" value="4"><a href="#" >축하화환</a></li>
+					</ul>
 
-                <% } %>
-                
-            </ul>
-            
-        </div>
-    </div>
+				</li>
+							<li class="clickmenu">
+					<a href="#" class="cateName" >
+
+						<span class="text nav-text scateName" value="5">분재</span>
+					</a>
+				</li>
+
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+
+						<span class="text nav-text scateName" value="6">공기정화</span>
+					</a>
+				</li>
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="7">동양란</span>
+					</a>
+				</li>
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="8">서양란</span>
+					</a>
+				</li>
+				
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="9">수경식물</span>
+					</a>
+				</li>
+				<li class="clickmenu">
+					<a href="#" class="cateName" >
+						<span class="text nav-text scateName" value="10">생화</span>
+					</a>
+				</li>
+				<li class="clickmenu dropdown-trigger">
+					<a href="#" class="cateName" >
+						
+						<span class="text nav-text cateDetailName">반려식물 Ｖ</span>
+					</a>
+					<ul class="hide sub-menu">
+						<li class="scateName" value="11"><a href="#" >미니다육</a></li>
+						<li class="scateName" value="12"><a href="#" >조화</a></li>
+					</ul>
+				</li>
+				<li class="clickmenu dropdown-trigger">
+					<a href="#" class="cateName">
+						<span class="text nav-text cateDetailName">소품 Ｖ</span>
+					</a>
+					<ul class="hide sub-menu">
+						<li class="scateName" value="13"><a href="#" >원예가위</a></li>
+						<li class="scateName" value="14"><a href="#" >화분</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 </nav>
-
 
 
 <script>
 
-$(".cateName").click(function () {
-   
-    location.href = "<%=contextPath%>/typeDetailPage.mi.p?category="+$(this).html();
-})
+
+
+$(function() {
+  // scateName 클릭 이벤트
+  $('.scateName').click(function() {
+	  var categoryNo = $(this).attr('value').trim();// 클릭한 카테고리명 가져오기
+	  // 
+
+    console.log(categoryNo);
+	  
+	  
+    $.ajax({
+      url: '<%=contextPath%>/typePage.mi',
+      type: 'POST',
+      data: {
+    	  categoryNo: categoryNo
+      },
+      success: function(html) {
+        $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
+        sidebar();
+      },
+      error: function() {
+        alert('에러 발생!');
+      }
+    });
+  });
+  
+});
 
 </script>
 
@@ -167,7 +224,29 @@ $(".cateName").click(function () {
 					%>
 					
 
+	<script>
+						$(function(){
+							// 상품 이미지 클릭시 상품 상세 페이지로 이동
+							$('.card-img-top').click(function(){
+								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
+							})
+						})
+					</script>
 
+
+
+
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  <div id="wrap">
+    <a id="back-to-top" style="text-decoration: none;"></a>
+  </div>
 
 </body>
 </html>

@@ -23,23 +23,11 @@
 	rel="stylesheet">
 	 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/btn5.css?after">
 	
+   <script src="${pageContext.request.contextPath}/resources/js/mini/mini_drop.js"></script>
   
   <!-- 부트스트랩 아이콘 출력 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   
-  
-<!-- 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styless-mini.css">
-이게 사이드바 색상 짙은 남색으로 변화시킴
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/why.scss">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-
-이게 내꺼 css를 이상하게 만든다
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- -->
 
 
 	<!-- 여기까지 혜민이꺼 -->
@@ -145,7 +133,7 @@
 				<ul class="header-nav-ul">
 					<li class="best-li"><a href="<%=contextPath%>/bestPage.mi"><span class="best-span">베스트</span></a></li>
 					<li class="type-li"><a href="<%=contextPath%>/typePage.mi"><span class="type-span">종류별</span></a></li>
-					<li class="present-li"><a href="<%=contextPath%>/presentPage.mi"><span class="present-span">선물</span></a></li>
+					<li class="present-li"><a href="<%=contextPath%>/gift.gi"><span class="present-span">선물</span></a></li>
 					<li class="delivery-li"><a href="<%=contextPath%>/delivery.de"><span class="delivery-span">당일배송</span></a>
 					</li>
 					<li class="props-li"><span class="props-span">소품</span></li>
@@ -176,7 +164,7 @@
 					<ul>
 						<li><img
 							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>바구니</span></a></li>
+							alt=""><a href="<%=contextPath%>/typePage.mi"><span>바구니</span></a></li>
 						<li><img
 							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>꽃다발</span></a></li>

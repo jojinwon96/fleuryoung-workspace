@@ -173,11 +173,11 @@ public class ProductService {
 		return categoryList;
 	}
 
-	public ArrayList<Product> selectProductType(String pCategory) {
+	public ArrayList<Product> selectProductType(int categoryNo) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Product> list = new ProductDao().selectProductType(conn,pCategory);
+		ArrayList<Product> list = new ProductDao().selectProductType(conn,categoryNo);
 		
 		close(conn);
 		
@@ -238,6 +238,31 @@ Connection conn = getConnection();
 		
 		return list;
 	}
+
+	public ArrayList<Product> selectGiftAll() {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectGiftAll(conn);
+		
+		close(conn);
+		
+		return list;	
+	
+	}
+
+	public ArrayList<Product> selectGiftType(String giftName) {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectGiftType(conn, giftName);
+		
+		close(conn);
+		
+		return list;
+	}
+
+
 
 
 

@@ -35,22 +35,29 @@ public class ProductTypeController extends HttpServlet {
 	request.setCharacterEncoding("utf-8");
 	
 	
-	String pCategory = request.getParameter("category");
+	// String pCategory = request.getParameter("category");
 	
 		
-		ArrayList<Category> categoryList;
-		
+		ArrayList<Product> list;
 		
 		ProductService pService = new ProductService();
 		
-		categoryList = pService.selectCategory();
+	
 		
-		ArrayList<Product> typeList = pService.selectProductType(pCategory);
+	    String categoryDetail = request.getParameter("categoryDetail");
+	    
+	    if (request.getParameter("categoryNo") != null) {
+	      // categoryName이 전달된 경우
+			int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+	    	list = pService.selectProductType(categoryNo);
+	    	
+	    } else  {
+	      // 값이 전달되지 않은 경우 처리할 내용
+	    	list = pService.selectDeliveryAll();
+	    }
 		
 		
-		ArrayList<Product> list = pService.selectProductAll();
-		
-		request.setAttribute("categoryList", categoryList);
+	
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/type/productType.jsp").forward(request, response);
 		

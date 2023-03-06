@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@page import="com.kh.product.model.vo.Product"%>
+       <%@page import="com.kh.product.model.vo.Product"%>
     <%@page import="java.util.ArrayList"%>
     <%
-
+   
     ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
     
     %>
@@ -15,72 +15,54 @@
 </head>
 <body>
  <%@ include file = "../common/header.jsp" %>   
-    
-    
-    
-  <br><br>
-
  
+ 
+ 
+    
+ <div class="bestReviewBtn">
 
-  <div align="center" class="butes">
-
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="전체">
-      전체
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side bestBtn" name="saleBestBtn" value="1" type="button">
+      판매 베스트
     </button>
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="꽃">
-      꽃다발
-    </button>
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="화환">
-      화환
-    </button>
-    <!-- 
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button">
-      축하화환
-    </button>
-     -->
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="란">
-      승진/개업
-    </button>
-    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="식물">
-	식물
-    </button>
- <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="소품">
-      소품
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side bestBtn" name="reviewBestBtn" value="2" type="button">
+      리뷰수 베스트
     </button>
 
   </div>
     
     
-    <script >
-    
-    
-    $(function() {
-    	  // 카테고리 버튼 클릭 이벤트
-    	  $('.delivery').click(function() {
-    	    var categoryName = $(this).val().trim(); // 클릭한 버튼의 value를 가져옴
+<script >
 
-    	    console.log(categoryName);
-    	    
-    	    $.ajax({
-    	      url: '<%=contextPath%>/delivery.de',
-    	      type: 'POST',
-    	      data: {
-    	        categoryName: categoryName
-    	      },
-    	      success: function(html) {
-    	        $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
-    	      },
-    	      error: function() {
-    	        alert('에러 발생!');
-    	      }
-    	    });
-    	  });
-    	});
-
-    
-    
-    </script>
+$(function(){
+    $(".bestBtn").click(function(){
+    	
+      let setNum = $(this).val();
       
+    
+      
+      $.ajax({
+	      url: '<%=contextPath%>/props.pr',
+	      type: 'POST',
+	      data: {
+	        value: setNum
+	      },
+	      success: function(html) {
+	        $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
+	      },
+	      error: function() {
+	        alert('에러 발생!');
+	      }
+	    });
+      
+    });
+  });
+
+
+
+</script>
+    
+  
+  
   	<!-- Section-->
 		<section class="py-5">
 			<div class="container px-4 px-lg-5 mt-5">
@@ -155,44 +137,30 @@
 						}
 					%>
   	
-						<script>
-							$(function () {
-								// 상품 이미지 클릭시 상품 상세 페이지로 이동
-								$('.card-img-top').click(function () {
-									location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
-								})
+					<script>
+						$(function(){
+							// 상품 이미지 클릭시 상품 상세 페이지로 이동
+							$('.card-img-top').click(function(){
+								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
 							})
-						</script>
-						
-						
-						
-						
-						</div>
-						</div>
-						</section>
-						</div>
+						})
+					</script>
 
+
+
+
+				</div>
+			</div>
+		</section>
+	</div>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<div id="wrap">
+    <a id="back-to-top" style="text-decoration: none;"></a>
+</div>
+ 
+ 
+ 
 </body>
 </html>

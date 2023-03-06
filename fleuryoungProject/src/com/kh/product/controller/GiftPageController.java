@@ -13,16 +13,16 @@ import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class BestRadioController
+ * Servlet implementation class GiftPageController
  */
-@WebServlet("/bestRadio.mi")
-public class BestRadioController extends HttpServlet {
+@WebServlet("/gift.gi")
+public class GiftPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BestRadioController() {
+    public GiftPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,50 +31,31 @@ public class BestRadioController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		
-		
-		request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 		
 		
 		ArrayList<Product> list;
 		
 		ProductService pService = new ProductService();
 		
+		String giftName = request.getParameter("giftName");
 		
-		 
-		 String amountName = request.getParameter("amountName");
-		 int amountValue = Integer.parseInt(request.getParameter("amountValue"));
-		 
-		 System.out.println(amountName + "@@@@@@@@");
-		 System.out.println(amountValue + "@@@@");
-		 
-		 if(amountName.equals("amount")) {
-			 
-			 
-			 
-			if(amountValue==0 || amountValue == 80001) {
-				list = pService.selectPriceOver(amountValue);
-			}else {
-				list = pService.selectPriceLess(amountValue);
-			}
-			 
-			
-			System.out.println(amountValue);
-			
-			
-		 }else {
-			 list = pService.selectProductAll(); 
-		 }
-		 
+
+		 if (giftName != null) {
+		   
+		    	list = pService.selectGiftType(giftName);
+		    	
+		    } else  {
+		      // 값이 전달되지 않은 경우 처리할 내용
+		    	list = pService.selectGiftAll();
+		    }
 		
-		 request.setAttribute("list", list);
+
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/type/giftPage.jsp").forward(request, response);
 			
-		 request.getRequestDispatcher("views/main/bestPage.jsp").forward(request, response);
-			
-		//response.sendRedirect(request.getContextPath() +"/bestRadio.mi");
-		
-		
 		
 		
 	}
