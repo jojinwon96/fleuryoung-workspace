@@ -571,6 +571,12 @@
 
 				})
 		  }) 
+		  
+		  $(function(){
+			  $(".cart-delete-button, .selectDel").click(function(){
+				  location.reload();
+			  });
+		  });
 	</script>
 	 
 

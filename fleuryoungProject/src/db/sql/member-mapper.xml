@@ -42,5 +42,66 @@
 		WHERE MEM_ID = ? AND COU_USED_YN = 'N'
 	</entry>
 	
+	<entry key="addOrder">
+		INSERT INTO TB_MEM_ORDER(ORD_ID,
+		                         MEM_ID,
+		                         ORD_DATE,
+		                         ORD_POSTAL,
+		                         ORD_STREET,
+		                         ORD_ADDRESS,
+		                         ORD_RECIEVER_NAME,
+		                         ORD_RECIEVER_PHONE,
+		                         ORD_REQUEST)
+		VALUES (
+		         SEQ_MEM_ORDER.NEXTVAL
+		       , ?
+		       , SYSDATE
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ?
+		       , ? 
+		        ) 
+	</entry>
+	
+	<entry key="selectOdId">
+		SELECT ORD_ID
+		FROM 
+		(SELECT ORD_ID FROM TB_MEM_ORDER
+		 WHERE MEM_ID = ?
+		 ORDER BY ORD_ID DESC)
+		WHERE ROWNUM &lt;= 1
+	</entry>
+	
+	<entry key="addOrderDetail">
+		INSERT INTO TB_MEM_ORDER_DETAIL(OD_ID,
+		                                OD_COUNT,
+		                                OD_STATUS,
+		                                ORD_ID,
+		                                MEM_ID,
+		                                OPTION_1ND_NO,
+		                                OPTION_2ND_NO,
+		                                OD_PRICE,
+		                                OPTION_2ND_TITLE,
+		                                OPTION_PRICE,
+		                                P_ID,
+		                                OPTION_2ND_CONTENT)
+		VALUES (
+		          SEQ_MEM_ORDER_DETAIL.NEXTVAL
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        , ?
+		        )
+	</entry>
+	
 </properties>
 

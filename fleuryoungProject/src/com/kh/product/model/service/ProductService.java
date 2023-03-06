@@ -92,4 +92,15 @@ public class ProductService {
 
 	}
 
+	public ArrayList<Product> selectSearchList(String keyword) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Product> list = new ProductDao().selectSearchList(conn, keyword);
+
+		close(conn);
+
+		return list;
+	}
+
 }

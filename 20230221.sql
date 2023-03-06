@@ -595,7 +595,7 @@ COMMENT ON COLUMN TB_MEM_ORDER.ORD_RECIEVER_NAME IS '?占쏙옙?占쏙옙?占쏙
 COMMENT ON COLUMN TB_MEM_ORDER.ORD_RECIEVER_PHONE IS '?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙踰덊샇';
 COMMENT ON COLUMN TB_MEM_ORDER.ORD_REQUEST IS '諛곗넚?占쏙옙占�??占쏙옙?占쏙옙';
 ------------------------------------------------------------------
-
+DROP TABLE TB_MEM_ORDER_DETAIL;
 --?占쏙옙?占쏙옙_二쇰Ц_?占쏙옙?占쏙옙
 CREATE TABLE TB_MEM_ORDER_DETAIL (
 	OD_ID	NUMBER	DEFAULT 0	NOT NULL,
@@ -605,6 +605,21 @@ CREATE TABLE TB_MEM_ORDER_DETAIL (
 	P_ID	NUMBER	DEFAULT 0	NOT NULL,
 	MEM_ID	VARCHAR2(12)	DEFAULT ''	NOT NULL
 );
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_1ND_NO NUMBER;
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_2ND_NO NUMBER;
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_2ND_TITLE VARCHAR2(30);
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OD_PRICE NUMBER;
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_PRICE NUMBER;
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_2ND_CONTENT VARCHAR2(50);
+
+alter table TB_MEM_ORDER_DETAIL
+ add constraint TB_MEM_ORDER_DETAIL_fk_PID foreign key (P_ID) references TB_PRODUCT (P_ID);
+ 
+alter table TB_MEM_ORDER_DETAIL
+ add constraint TB_MEM_ORDER_DETAIL_fk_MID foreign key (MEM_ID) references TB_MEMBER (MEM_ID);
+
+COMMIT;
+
 COMMENT ON COLUMN TB_MEM_ORDER_DETAIL.OD_ID IS '二쇰Ц?占쏙옙?占쏙옙踰덊샇';
 COMMENT ON COLUMN TB_MEM_ORDER_DETAIL.OD_COUNT IS '?占쏙옙?占쏙옙?占쏙옙?占쏙옙';
 COMMENT ON COLUMN TB_MEM_ORDER_DETAIL.OD_STATUS IS '1.占�?占�?/2.諛곗넚占�?/3.?占쏙옙占�?';
@@ -6412,6 +6427,22 @@ SELECT B.*
 		ORDER BY COUNT DESC)A)B
 		WHERE RNUM BETWEEN 1 AND 20;
 
+-- 검색
+SELECT B.*
+     FROM (SELECT G.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING"
+     , COUNT(REVIEW_RATING) AS "COUNT" 
+     , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+     , P_IMG1
+     , P_DAY_DELIVERY
+FROM TB_MEM_PAYMENT P
+RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+GROUP BY G.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
+ORDER BY COUNT DESC ) B
+WHERE B.P_NAME LIKE '%니%';
+
 -- 상세 페이지 상품 + 이미지
 SELECT 
     P.P_ID AS "P_ID"
@@ -6528,6 +6559,9 @@ DELETE
 FROM TB_CART
 WHERE P_ID = ? AND MEM_ID = ?;
 
+SELECT COUNT(CART_ID) AS "COUNT"
+FROM TB_CART
+WHERE MEM_ID = 'USER01';
 
 ----------------------------------------------------------------- 주문서작성 ----------------------------------------------------------------------
 -- 주문자 정보
@@ -6550,40 +6584,90 @@ SELECT COU_ID, COU_NAME, COU_DETAIL, COU_REGDATE, COU_EXPIRE, COU_DISCOUNT
 FROM TB_OWNED_COUPON
 JOIN TB_COUPON USING (COU_ID)
 WHERE MEM_ID = 'USER01' AND COU_USED_YN = 'N';
-
--- 마일리지
-COMMIT;
-
-SELECT * FROM TB_COUPON;
-
-SELECT * FROM TB_OWNED_COUPON;
-
 INSERT INTO TB_OWNED_COUPON VALUES('USER01', 5, 'N');
 
-SELECT * FROM TB_MEM_CARD;
+-- 마일리지
 
-SELECT * FROM TB_PRODUCT_IMG;
-
-SELECT * FROM TB_PRODUCT;
-
-SELECT * FROM TB_CATEGORY;
-
-SELECT * FROM 
-TB_MEM_ORDER_DETAIL;
-
-SELECT *
+-----------------------------------------------------------------------결제쿼리---------------------------------------------------------------------
+-- 장바구니 비우기
+DELETE 
 FROM TB_CART
-WHERE MEM_ID = 'USER01';
+WHERE MEM_ID = ? AND P_ID = ?;
 
-SELECT * 
-FROM TB_MEMBER
-WHERE MEM_ID = 'USER01';
+SELECT * FROM TB_CART;
+
+SELECT *
+FROM TB_MEM_ORDER;
+
+-- 개인회원 주문정보 입력
+INSERT INTO TB_MEM_ORDER(ORD_ID,
+                         MEM_ID,
+                         ORD_DATE,
+                         ORD_POSTAL,
+                         ORD_STREET,
+                         ORD_ADDRESS,
+                         ORD_RECIEVER_NAME,
+                         ORD_RECIEVER_PHONE,
+                         ORD_REQUEST)
+VALUES (
+         SEQ_MEM_ORDER.NEXTVAL
+       , ?
+       , SYSDATE
+       , ?
+       , ?
+       , ?
+       , ?
+       , ?
+       , ? 
+        ); 
+
+-- 개인회원 주문 상세 정보
+INSERT INTO TB_MEM_ORDER_DETAIL(OD_ID,
+                                OD_COUNT,
+                                OD_STATUS,
+                                ORD_ID,
+                                MEM_ID,
+                                OPTION_1ND_NO,
+                                OPTION_2ND_NO,
+                                OD_PRICE,
+                                OPTION_2ND_TITLE
+                                OPTION_PRICE,
+                                P_ID,
+                                OPTION_2ND_CONTENT)
+VALUES (
+          SEQ_MEM_ORDER_DETAIL.NEXTVAL
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        , ?
+        );
+        
+SELECT ORD_ID
+FROM 
+(SELECT ORD_ID FROM TB_MEM_ORDER
+ WHERE MEM_ID = 'USER01'
+ ORDER BY ORD_ID DESC)
+WHERE ROWNUM <= 1;
 
 SELECT * FROM TB_PRODUCT;
 
-SELECT *
-FROM TB_PRODUCT P 
-LEFT JOIN TB_CATEGORY C ON (P.CATEGORY_NO = C.CATEGORY_NO)
-WHERE C.CATEGORY_NO = 6 AND P_NETPRICE <= 30000;
+SELECT * FROM TB_CART;
+
+-- 아이디값 입력받아서 쿠폰갯수 얻어오기
+SELECT COUNT(COU_ID)
+FROM TB_COUPON
+JOIN TB_OWNED_COUPON USING (COU_ID)
+WHERE MEM_ID = 'USER01';
+
+-- 마일리지 얻어오기
+
+
+SELECT * FROM TB_MEM_ORDER_DETAIL;
 
 COMMIT;

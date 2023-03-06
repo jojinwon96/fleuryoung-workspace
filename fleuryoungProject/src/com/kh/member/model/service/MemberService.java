@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Coupon;
 import com.kh.member.model.vo.Member;
+import com.kh.product.model.dao.CartDao;
 
 public class MemberService {
 
@@ -55,4 +56,64 @@ public class MemberService {
 		return couponList;
 	}
 
+	public int addOrder(String memberId, String memName, String memEmail, String memPhone, int postal, String street,
+			String address) {
+
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().addOrder(conn, memberId, memName, memEmail, memPhone, postal, street, address);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+	public int addOrderDetail(String memId, int pId, int opt1No, int opt2No, String opt2Title, String opt2Content,
+			int opt2Price, int pNetPrice, int pCount, int optCount, int odId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().addOrderDetail(conn, memId, pId, opt1No, opt2No, opt2Title, opt2Content, opt2Price, pNetPrice, pCount, optCount, odId);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+		
+	}
+
+	public int selectOdId(String memberId) {
+
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().selectOdId(conn, memberId);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

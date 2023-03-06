@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>orderPage</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nonOrder.css">
 
 <style>
@@ -31,6 +31,7 @@
 		    cursor: pointer;
 	}
 </style>
+
 </head>
 <body>
 	<div class="wrap">
@@ -377,7 +378,7 @@
 						    </div>
 						    <div class="col-1" style="margin-left: 32px"></div>
 						    <div class="col-5">
-								<input class="m-input py-1" type="number" min="0">
+								<input class="m-input py-1" type="text" min="0" max="<%=m.getMileage()%>" style="width:175px; text-align: right">
 								<button type="button" class="m-btn btn btn-danger" style="background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188); margin-bottom: 4px">모두사용</button>
 						    </div>
 						  </div>
@@ -455,6 +456,17 @@
     </div>
     
     <script>
+	
+		// 천단위 콤마 
+	   	function comma(str) {
+	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	    }
+		
+		// 숫자만
+	   	function onlyNo(str) {
+	   		return str.replace(/[^0-9]/g, '');
+	   	}	
+		
     	$(function(){
     		
     		function emailCheck(value){
@@ -500,16 +512,7 @@
         			$(".non-phone-select").val("6").trigger("change");
         		}
     		}
-    		
-    		// 천단위 콤마 
-    	   	function comma(str) {
-    	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-    	    }
-    		
-    		// 숫자만
-    	   	function onlyNo(str) {
-    	   		return str.replace(/[^0-9]/g, '');
-    	   	}	
+
     		
     		emailCheck('<%= email[1] %>');
     		phoneCheck('<%= getPhone.substring(0, 3)%>');
@@ -556,35 +559,46 @@
     			}		
     		});
     		
-    		
-    		let sum = 0;
+				
+		});
+			
+		
+		let sum = 0;
+    	let price = $(".price-field").children(".pprice"); // 상품금액
+    	let dPrice = $(".discount-field").children(".pprice"); // 배송비
+    	let total = $(".result-price").children("strong"); // 결제 예정금액
+    	
+		$(document).ready(function() {
     		// 주문상품
     		$(".non-product-price").each(function(){
     			sum += Number($(this).html());
     			$(this).html(comma(Number($(this).html()) + "") +"원");
     		})
-    		
-    		// 결제 패널
-    		let price = $(".price-field").children(".pprice");
+			// 결제 패널
     		price.html(comma(sum + "") +" 원")
     		
-    		let dPrice = $(".discount-field").children(".pprice");
     		dPrice.html(comma(dPrice.html()));
     		
-    		let total = $(".result-price").children("strong");
 			total.html(comma(Number(onlyNo(price.html())) + Number(onlyNo(dPrice.html())) + "")); 
 			
+			console.log("처음 토탈 : " + total.html());
+			
 			// 쿠폰 적용
+			let rdiscount;
+			let rPrice = Number(onlyNo(total.html()));
+			let couponPanel = $(".discount-field2").children(".pprice");
 			$(".coupon-select").on("change", function(){
 				if ($(this).val() != '0'){
 					let couponVal = $(this).val();
 					let couponDetail = $(this).next().val();
 					let couponRegDate = $(this).next().next().val();
 					let couponExpire = $(this).next().next().next().val();
+					rdiscount = Math.floor($(this).next().next().next().next().val());
+					
 					if (couponExpire == "null"){
 						couponExpire = " ";
 					}
-					let couponDiscount = "[" + $(this).next().next().next().next().val() + "원 할인]";
+					let couponDiscount = "[" + comma(rdiscount+"") + "원 할인]";
 					
 					$(".coupon-panel").show();
 					
@@ -593,32 +607,169 @@
 					$(".coupon-Disount").html(couponDiscount);
 					$(".coupon-date").html(couponRegDate + " ~ " + couponExpire);
 					
-					console.log("제목 : " + $("select[name=coupon-select] option:selected").text());
-					console.log("선택한 쿠폰 내용 : " + couponDetail);
-					console.log("선택한 쿠폰 등록일 : " + couponRegDate);
-					console.log("선택한 쿠폰 만료일 : " + couponExpire);
-					console.log("선택한 쿠폰 할인 : " + couponDiscount);
-					//$('.coupon-select').val('0').trigger('change');
+					console.log("쿠폰 : " + rdiscount);
+					console.log("여기 : " + couponPanel.html());
+					
+					couponPanel.html("- " + comma(rdiscount + "") + " 원");
+					total.html(comma((rPrice-rdiscount) + ""));
+					console.log("쿠폰 적용 토탈 : " + total.html());
+					rPrice = Number(onlyNo(total.html()));
+					
 				}
-				
-			});
+			})
 			
+			
+			// 쿠폰 적용 취소
 			$(".delete-btn").click(function(){
 				$(this).parents(".coupon-panel").hide();
 				$('.coupon-select').val('0').trigger('change');
+				couponPanel.html("- 0 원");
+				total.html(comma((rPrice+rdiscount) + ""));
+				rPrice = Number(onlyNo(total.html()));
 			})
 			
 			
 			// 마일리지 적용
 			$(".m-btn").click(function(){
-				console.log("m 클릭");	
 				let mPanel = onlyNo($(".m-panel").html());
 				$(".m-input").val(mPanel);
 			})	
 			
-			
-		})
+		    $(".m-input").keydown(function (key) {
+		    	//let total = $(".result-price").children("strong");
+		    	//let rPrice = Number(onlyNo(total.html()));
+		    	let iPrice = Number($(this).val());
+		    	let mPanel = Number(onlyNo($(".m-panel").html()));
+		    	
+		        if (key.keyCode == 13) {
+		        	if (iPrice > mPanel){
+		        		alert("보유 금액 이상 사용은 불가능 합니다.");
+		        		$(".m-input").val(mPanel);
+		        	} else {
+		        		$(".m-panel").html(comma((mPanel-iPrice)+"") +" 원");
+		        		total.html(comma((rPrice-iPrice)+""));
+		        		rPrice = Number(onlyNo(total.html()));
+		        		$(".discount-field3").children(".pprice").html("- " + comma(iPrice + "") + " 원")
+		        		
+		        	}
+		        }
+		    });
+		});
     	</script>
+    	
+    	
+    	
+    	
+    	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    	<script>
+			// 숫자만
+		   	function onlyNo(str) {
+		   		return str.replace(/[^0-9]/g, '');
+		   	}	
+    		
+    		$(document).ready(function(){
+    			
+    			$(document).on("click", ".cart-access-button", function(){
+    				// 장바구니 삭제
+    	    		let pidArr = [];
+    	    		let memId = "";
+    	    		let memName = "";
+    	    		let memEmail = "";
+    	    		let memPhone = "";
+    	    		let postal = "";
+    	    		let street = "";
+    	    		let address = "";
+    	    		
+    	    		<% if (m != null) {%>
+	    	    		memId = '<%=m.getMemId()%>';
+	    	    		memName = "<%=m.getMemName()%>";
+	    	    		memEmail = "<%=m.getEmail()%>";
+	    	    		memPhone = "<%=m.getPhone()%>";
+	    	    		postal = "<%=m.getPostal()%>";
+	    	    		street = "<%=m.getStreet()%>";
+	    	    		address = "<%=m.getAddress()%>";
+    	    		<% }%>
+    	    		
+    	    		
+    	    		let i = 0;
+    	    		<% for (Cart c : cartList) {%>
+						pidArr[i] = {memId:'<%=c.getMemId()%>'
+								   , pId:<%=c.getpId()%>
+								   , opt1No:<%=c.getOpt1stNo()%>
+						           , opt2No:<%=c.getOpt2ndNo()%>
+						           , opt2Title:'<%=c.getOpt1Title()%>'
+						           , opt2Content:'<%=c.getOpt2Title()%>'
+						           , opt2Price:<%=c.getOptPrice()%>
+						           , pNetPrice:<%=c.getpNetPrice()%>
+						           , pCount:<%=c.getNoneOptCount()%>
+						           , optCount:<%=c.getOptCount()%>
+						           } 
+						i++;
+					<%}%>
+					
+					// 중복제거
+    				//tmpArr = tmpArr.filter((v, i) => tmpArr.indexOf(v) === i);
+					
+					console.log(memId);
+					console.log(memName);
+					console.log(memEmail);
+					console.log(memPhone);
+					console.log(postal);
+					console.log(street);
+					console.log(address);
+					
+					
+	    			let tPrice = Number(onlyNo($(".result-price").children("strong").html())); // 결제 예정금액
+        			console.log("tPrice : " + tPrice);
+	    			
+ 	    			
+ 	    			var IMP = window.IMP; 
+        		    IMP.init('imp83417313'); 
+        		    IMP.request_pay({
+        		    	pg : "kakaopay", 
+        		        pay_method : 'card',
+        		        merchant_uid : 'merchant_' + new Date().getTime(),
+        		        name : '결제',
+        		        amount : tPrice,
+        		        buyer_email : '구매자 이메일',
+        		        buyer_name : '구매자 이름',
+        		        buyer_tel : '구매자 번호',
+        		        buyer_addr : '구매자 주소',
+        		        buyer_postcode : '구매자 주소',
+        		        m_redirect_url : 'redirect url'
+        		    }, function(rsp) {
+        		        if ( rsp.success ) {
+        		        	let jsonData = JSON.stringify(pidArr);
+     		               $.ajax({
+     		                    // 요청보내기
+     		                    url : "deleteCart.p", // 어느 url로 보낼 건지
+     		                    type : "post", // 요청방식 지정
+     		                    traditional :true,	
+     		                    //dataType : "json",
+     		                    data : {jsonData:jsonData, memberId:memId, memName:memName, memEmail:memEmail, memPhone:memPhone, postal:postal, street:street, address,address}, 
+     		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+     		                        location.href = "<%=contextPath%>/orderSuccessPage.p";
+     		                    },
+
+     		                    error : function(){
+     		                        console.log("ajax 통신 실패");
+     		                    },
+
+     		                    complete : function(){
+     		                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+     		                    }
+     		                    
+     		                }); 
+     		               
+        		        } else {
+        		            alert("결제를 실패하였습니다.");
+        		        }
+        		    }); 
+    			})
+    		})
+    		
+		    
+    </script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

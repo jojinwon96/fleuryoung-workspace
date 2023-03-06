@@ -1,19 +1,12 @@
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%
 	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-	
-	String title = (String)request.getAttribute("title");
-	
-	response.setHeader("cache-control","no-store");
-	response.setHeader("expires","0");
-	response.setHeader("pragma","no-cache");
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -51,7 +44,6 @@ h5 {
 }
 </style>
 </head>
-
 <body>
 
 	<div class="wrap">
@@ -76,78 +68,13 @@ h5 {
 			})
 		</script>
 
-
-		<!-- 배너 시작 -->
-		<div id="carouselExampleAutoplaying" class="carousel slide b"
-			data-bs-ride="carousel" style="z-index: 1;">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img
-						src="${pageContext.request.contextPath}/resources/image/flowerbannwer2.png"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img
-						src="${pageContext.request.contextPath}/resources/image/flowerbanner1.webp"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img
-						src="${pageContext.request.contextPath}/resources/image/flowerbannwer2.png"
-						class="d-block w-100" alt="...">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
-		</div>
-		<!-- 배너 끝 -->
 		<!-- 드롭다운 -->
 
-		<div class="container text-center">
-		  <div class="row">
-		    
-		    <div class="col">
-		      <div align="right" class="container px-4 px-lg-5 mt-5">
-				<select style="width: 200px" class="form-select" 
-				        id="orderSelect" name= orderSelect
-					aria-label="Default select example">
-					<option selected disabled><%=title%></option>
-					<option value="1">최신순</option>
-					<option value="2">판매순</option>
-					<option value="3">리뷰순</option>
-				</select>
-				</div>
-		    </div>
-		  </div>
-		</div>
-		
-		
-		<script>
-			$(function(){
-				$("#orderSelect").on("change", function(){
-					let setNum = $("#orderSelect option:selected").val();
-					location.href = '<%=contextPath%>/startPage.p?num=' + setNum;
-				})
-				
-				
-			})
-		</script>
 		<!--  업버튼 -->
 
 		<div id="wrap">
 			<a id="back-to-top" style="text-decoration: none;"></a>
 		</div>
-
-
-
 		
 		<!-- Section-->
 		<section class="py-5">
@@ -309,6 +236,7 @@ h5 {
 							$('.card-img-top').click(function(){
 								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
 							})
+							
 						})
 					</script>
 
@@ -323,6 +251,4 @@ h5 {
 	
 
 </body>
-
-
 </html>

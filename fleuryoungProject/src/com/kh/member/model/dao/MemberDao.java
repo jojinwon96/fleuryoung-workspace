@@ -163,4 +163,131 @@ public class MemberDao {
 
 	}
 
+	public int addOrder(Connection conn, String memberId, String memName, String memEmail, String memPhone, int postal,
+			String street, String address) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("addOrder");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, postal);
+			pstmt.setString(3, street);
+			pstmt.setString(4, address);
+			pstmt.setString(5, memName);
+			pstmt.setString(6, memPhone);
+			pstmt.setString(7, "");
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int addOrderDetail(Connection conn, String memId, int pId, int opt1No, int opt2No, String opt2Title,
+			String opt2Content, int opt2Price, int pNetPrice, int pCount, int optCount, int odId) {
+		
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("addOrderDetail");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			if (opt1No != 0 ){
+				pstmt.setInt(1, optCount);
+				pstmt.setInt(2, 1);
+				pstmt.setInt(3, odId);
+				pstmt.setString(4, memId);
+				pstmt.setInt(5, opt1No);
+				pstmt.setInt(6, opt2No);
+				pstmt.setInt(7, pNetPrice);
+				pstmt.setString(8, opt2Title);
+				pstmt.setInt(9, opt2Price);
+				pstmt.setInt(10, pId);
+				pstmt.setString(11, opt2Content);
+			} else {
+				pstmt.setInt(1, optCount);
+				pstmt.setInt(2, 1);
+				pstmt.setInt(3, odId);
+				pstmt.setString(4, memId);
+				pstmt.setInt(5, 0);
+				pstmt.setInt(6, 0);
+				pstmt.setInt(7, pNetPrice);
+				pstmt.setString(8, "none");
+				pstmt.setInt(9, 0);
+				pstmt.setInt(10, pId);
+				pstmt.setString(11, "none");
+			}
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+		
+	}
+
+	public int selectOdId(Connection conn, String memberId) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectOdId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberId);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getInt("ORD_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

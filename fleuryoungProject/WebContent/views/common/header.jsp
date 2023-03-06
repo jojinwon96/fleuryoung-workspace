@@ -5,7 +5,7 @@
 	String contextPath = request.getContextPath(); // /jsp
 
 	Member loginUser = (Member) session.getAttribute("loginUser");
-	
+
 	
 %>
 <!DOCTYPE html>
@@ -39,7 +39,12 @@
          }
        });
     </script>
-    
+
+<style>
+	.real-time-list a{
+		cursor: pointer;
+	}
+</style>
 </head>
 <body>
 	<div>
@@ -103,10 +108,12 @@
 				<div class="header-top-bottom-right">
 					<div class="cartMyPage-panel">
 						<button type="button" class="cart-panel btn position-relative">
+							<% if (loginUser != null) { %>
 					        <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-					            91+
+					            
 					            <span class="visually-hidden">unread messages</span>
 					          </span>
+					        <% } %>
 					    </button>
 						<div class="myPage-panel">
 							<button class="mypage-btn"></button>
@@ -191,16 +198,6 @@
 							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
 							alt=""><a href="#"><span>조화</span></a></li>
 
-						<!-- 꽃바구니 -->
-						<!-- 꽃다발 -->
-						<!-- 주문제작 -->
-						<!-- 축하화환 -->
-						<!-- 근조화환 -->
-						<!-- 동/서양란 -->
-						<!-- 수경식물 -->
-						<!-- 생화 -->
-						<!-- 반려식물 -->
-						<!-- 조화 -->
 					</ul>
 				</div>
 			</div>
@@ -234,7 +231,48 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<script>
+		$(function(){
+			<% if (loginUser != null) {%>
+				$.ajax({
+			         url: '<%=contextPath%>/cartCount.p',
+			         type: 'POST',
+			         data: {
+			           memId: '<%=loginUser.getMemId()%>'
+			         },
+			         success: function(count) {
+			        	console.log("성공~~");
+			           $(".cart-count").html(count);
+			         },
+			         error: function() {
+			           alert('에러 발생!');
+			         }
+			     });
+			<% } %>
+			
+		    $(".main-input").keydown(function (key) {
+		        if (key.keyCode == 13) {
+		        	console.log("여기 " + $(this).val());
+		        	location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(this).val();
+		        }
+		    });
+		    
+		    $(".main-input-btn").click(function(){
+		    	location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(".main-input").val();
+		    })
+		    
+		    
+		  });
+		
+		$(document).ready(function() {
+			
+			$(document).on("click",".keywords", function(){
+				location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(this).html();
+			})
+		    	
+		})
+	</script>
 	
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery-3.1.1.min.js"></script>

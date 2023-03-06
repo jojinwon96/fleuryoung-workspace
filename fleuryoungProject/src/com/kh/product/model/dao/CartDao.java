@@ -312,13 +312,13 @@ public class CartDao {
 	}
 
 	public int ajaxSelectDelete(Connection conn, Cart c) {
-		
+
 		int result = 0;
 		int opt1No = c.getOpt1stNo();
 		int opt2No = c.getOpt2ndNo();
 		int pId = c.getpId();
 		String memId = c.getMemId();
-		
+
 		PreparedStatement pstmt = null;
 
 		String sql = "";
@@ -352,4 +352,82 @@ public class CartDao {
 		return result;
 	}
 
+	public int selectCartCount(Connection conn, String memId) {
+
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectCartCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt("COUNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int deleteCart(Connection conn, String memId, int pId) {
+
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("deleteCart");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memId);
+			pstmt.setInt(2, pId);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

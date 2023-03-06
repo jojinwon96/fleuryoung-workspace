@@ -136,6 +136,41 @@ public class CartService {
 		return result;
 	}
 
+
+	public int selectCartCount(String memId) {
+
+		Connection conn = getConnection();
+		
+		int result = new CartDao().selectCartCount(conn, memId);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+
+	public int deleteCart(String memId, int pId) {
+
+		Connection conn = getConnection();
+		
+		int result = new CartDao().deleteCart(conn, memId, pId);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+
+
+
 	
 
 }
