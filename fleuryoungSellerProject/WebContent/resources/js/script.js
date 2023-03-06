@@ -532,43 +532,196 @@
 
 $(function(){
     let count = 1;
-    let reg= /0-9$/
-    let tdArr = [];
+    let $count_1 = 0;
+    let $count_2 = 0;
+    let $count_3 = 0;
 
-    $('#add').click(function(){
-        let $option_1 = "<tr id='option_no"+ count+"'><td>"
-                +"<input type='text' class='form-control-sm' name='pStock' placeholder='1차 옵션을 입력하세요' required>"
-                +"<button type='button' class='btn btn-primary btn-sm' onclick=\"test(\'option_no"+count+"\');\">+</button>"
-                +"<button id='remove' type='button' class='btn btn-primary btn-sm'>-</button></td>"
-                +"<td><ul></ul></td>"
-                +"<td><ul></ul></td>"
-                +"<td><ul></ul></td></tr>"
-            
+    $('#add').click(function(){ 
+        if(count==0){
+            count++;
+        }
         if(count <=3){
-            $("#table_1").append($option_1);
+            $("#option_"+count+">td").attr("style", "display: false");
             //$("#table_1").append($option_1.clone(true));
             // 위의 코드 두줄 part1 방식
             //$("#clone-result").append($("#item").clone(true));
-            count++;
+            count++
         }else {
             alert("너무 많습니다.");
         }	
+        if(count > 0){
+            $("#sumStock").attr("disabled", true);
+        }
         
     });
-    let count_2 = 0;
-    test = function(id){
-            
-            console.log($("#"+id).children().eq(1))
-            let $option_2_title = "<li><input type='text' class='form-control' name='pStock' placeholder='옵션 이름을 입력하세요' required></li>"
-            let $option_2_price = "<li><input type='number' class='form-control' name='pStock' placeholder='가격을 입력하세요' required></li>"
-            let $option_2_stock = "<li><input type='number' class='form-control' name='pStock' placeholder='재고수량을 입력하세요' required></li>"
-            $("#"+id).children().eq(1).append($option_2_title);
-            $("#"+id).children().eq(2).append($option_2_price);
-            $("#"+id).children().eq(3).append($option_2_stock);
-            ++count_2;
-            e
-        }	
-                                        
+    
+    $('#remove').click(function () {
+        if(count == 4){
+            count--;
+        }
+        if (count > 0) {
+            console.log(count);
+            $("#option_"+count+">td>input").val("");
+            $("#option_"+count+">td").attr("style", "display: none");
+            count--;
+        } else {
+            alert("삭제할 옵션이 없습니다.");
+        }
+        if (count == 0) {
+            $("#sumStock").removeAttr("disabled", false);
+        }
+    });
+    
+    add_1 = function() {
+         
+        if ($count_1< 3) { // 2차옵션 개수 
+            $("#option_1 td:eq(0)>li").eq($count_1).attr("style", "display: false");
+            $("#option_1 td:eq(1)>li").eq($count_1).attr("style", "display: false");
+            $("#option_1 td:eq(2)>li").eq($count_1).attr("style", "display: false");
+           
+            $count_1++
+        } else {
+            alert("2차옵션이 너무 많습니다.");
+        }
+    }
+    add_2 = function() {
+         
+        if ($count_2< 3) { // 2차옵션 개수 
+            $("#option_2 td:eq(0)>li").eq($count_2).attr("style", "display: false");
+            $("#option_2 td:eq(1)>li").eq($count_2).attr("style", "display: false");
+            $("#option_2 td:eq(2)>li").eq($count_2).attr("style", "display: false");
+           
+            $count_2++
+        } else {
+            alert("2차옵션이 너무 많습니다.");
+        }
+    }
+    add_3 = function() {
+        if($count_3 == -1){
+            count++;
+        }
 
-    $('#remove').click()
+        if($count_3==3){
+            return alert("2차옵션이 너무 많습니다.");
+            
+        }
+        
+        if ($count_3< 3) { // 2차옵션 개수 
+            $("#option_3 td:eq(1)>li").eq($count_3).attr("style", "display: false");
+            $("#option_3 td:eq(2)>li").eq($count_3).attr("style", "display: false");
+            $("#option_3 td:eq(3)>li").eq($count_3).attr("style", "display: false");
+            $count_3++
+        } 
+    }
+    remove_1 = function() {
+        if($count_1 == 3){
+            $count_1--;
+        }
+        if($count_1 == -1){
+            alert("삭제할 2차 옵션이 없습니다.")
+        }
+        if ($count_1 >= 0) {
+            $("#option_3 td:eq(2)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_3 td:eq(1)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_3 td:eq(3)>li:eq(" +$count_1+ ")>input").val("");
+            $("#option_3 td:eq(1)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(2)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(3)>li:eq(" +$count_1+ ")").attr("style", "display: none");
+            $count_1--;
+		} 
+	};
+
+    remove_2 = function() {
+        if($count_2 == 3){
+            $count_2--;
+        }
+        if($count_2 == -1){
+            alert("삭제할 2차 옵션이 없습니다.")
+        }
+        if ($count_2 >= 0) {
+            $("#option_3 td:eq(1)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_3 td:eq(2)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_3 td:eq(3)>li:eq(" +$count_2+ ")>input").val("");
+            $("#option_3 td:eq(1)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(2)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(3)>li:eq(" +$count_2+ ")").attr("style", "display: none");
+            $count_2--;
+		} 
+	};
+    
+    remove_3 = function() {
+        if($count_3 == 3){
+            $count_3--;
+        }
+        if($count_3 == -1){
+            alert("삭제할 2차 옵션이 없습니다.")
+        }
+        if ($count_3 >= 0) {
+            $("#option_3 td:eq(1)>li:eq(" +$count_3+ ")>input").val("");
+            $("#option_3 td:eq(2)>li:eq(" +$count_3+ ")>input").val("");
+            $("#option_3 td:eq(3)>li:eq(" +$count_3+ ")>input").val("");
+            $("#option_3 td:eq(1)>li:eq(" +$count_3+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(2)>li:eq(" +$count_3+ ")").attr("style", "display: none");
+            $("#option_3 td:eq(3)>li:eq(" +$count_3+ ")").attr("style", "display: none");
+            $count_3--;
+		} 
+	};
+
+                                        
+	
+    chooseFile = function(num){
+        $("#file"+num).click();
+    }
+    
+    loadImg = function(inputFile ,num){
+        // inputFile : 현재 변화가 생긴 input type = "file" 요소 객체
+        // num : 몇번째 input 요소 확인 후 해당 그 영역에 미리보기 하기 위해 전달받아
+
+
+        // 선택된 파일이 있다면 inputFile.files[0] 에 선택된 파일이 담겨있음
+        //                    => inputFiles.files.length 또한 1이 될꺼임
+
+        if(inputFile.files.length ==1){ // 파일 선택된 경우 => 파일 읽어들임
+            
+            // 파일을 읽어들일 FileReader 객체 생성
+            const reader = new FileReader();
+
+            // 파일을 읽어들이는 메소드 호출
+            reader.readAsDataURL(inputFile.files[0]);
+            // 해당 파일을 읽어들이는 순간 해당 이 파일만이 고유한 url부
+
+            //파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
+            reader.onload = function(e){
+                // e.target.result => 읽어들인 파일의 고유한 url
+
+                switch(num){
+                    case 1: $("#titleImg").attr("src", e.target.result); break;
+                    case 2: $("#contentImg1").attr("src", e.target.result); break;
+                    case 3: $("#contentImg2").attr("src", e.target.result); break;
+                    case 4: $("#contentImg3").attr("src", e.target.result); break;
+                    case 5: $("#contentImg4").attr("src", e.target.result); break;
+                    case 6: $("#contentImg5").attr("src", e.target.result); break;
+                    case 7: $("#contentImg6").attr("src", e.target.result); break;
+                    case 8: $("#contentImg7").attr("src", e.target.result); break;
+                    case 9: $("#contentImg8").attr("src", e.target.result); break;
+                    case 10: $("#contentImg9").attr("src", e.target.result); break;
+                   
+                     }
+                }
+                
+            } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
+            switch(num){
+                    case 1: $("#titleImg").attr("src", null); break;
+                    case 2: $("#contentImg1").attr("src", null); break;
+                    case 3: $("#contentImg2").attr("src", null); break;
+                    case 4: $("#contentImg3").attr("src", null); break;
+                    case 5: $("#contentImg4").attr("src", null); break;
+                    case 6: $("#contentImg5").attr("src", null); break;
+                    case 7: $("#contentImg6").attr("src", null); break;
+                    case 8: $("#contentImg7").attr("src", null); break;
+                    case 9: $("#contentImg8").attr("src", null); break;
+                    case 10: $("#contentImg9").attr("src", null); break;
+            }
+        }
+    }
 })

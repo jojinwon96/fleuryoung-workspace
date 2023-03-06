@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.EncryptionUtils;
 import com.kh.common.RanNumUtils;
+import com.kh.common.SendService;
 import com.kh.seller.model.service.SellerService;
 import com.kh.seller.model.vo.Seller;
 
@@ -72,7 +73,7 @@ public class EmailController extends HttpServlet {
 			// 무작위 임시 패스워드 생성
 			String tempPw = RanNumUtils.getTempPassword();  // RanNumUtils 클래스에 있는 무작위 번호 생성 e.g) 암호화 클래스, 랜덤 번호 클래스, 메일 보내는 클래스는 패키지를 하나 만들어서 import 해서 쓰세요. ex) kh.minsoo.com.util 패키지 생성후 클래스 생성해서 넣어서 사용
 			// 이메일 발송 서비스 호출
-			new SellerService().sendEmail(userEmail, tempPw);	// MemberService 에 있는 메서드 호출
+			new SendService().sendEmail(userEmail, tempPw);	// MemberService 에 있는 메서드 호출
 			// 패스워드 암호화
 			tempPw = EncryptionUtils.getSHA512(tempPw);		// Password 암호화 EncryptionUtils 클래스에 getSHA512 메서드 호출
 			try { 											// DB에 저장 & 홈이동 try/catch문으로 Exception(예외 설정 안해주면 에러 남)

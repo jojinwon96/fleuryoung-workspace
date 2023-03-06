@@ -21,4 +21,75 @@ SELECT
   FROM 
   		TB_CATEGORY
 </entry>
+
+<entry key="insertProduct">
+INSERT
+  INTO PRODUCT(
+        P_ID
+        , P_NAME
+        , P_NETPRICE
+        , P_DETAIL
+        , P_STOCK
+        , P_ENROLL_DATE
+        , P_RETURN_YN
+        , P_TAG_YN
+        , P_SALES
+        , P_DAY_DELIVERY
+        , P_GIFT
+        , SEL_NO
+        , CATEGORY_NO
+      ) 
+VALUES(SEQ_PRODUCT.NEXTVAL
+        , ?
+        , ?
+        , ?
+        , ?
+        , SYSDATE
+        , ?
+        , ?
+        , 0
+        , ?
+        , ?
+        , ?
+        , ?
+        )
+</entry>
+
+<entry key="insertOptionOne">
+INSERT 
+  INTO TB_1ST_OPTION
+       (
+          OPTION_1ND_NO
+        , OPTION_TITLE
+        , P_ID
+       )
+VALUES
+        (
+          SEQ_1ST_OPTION.NEXTVAL
+        , ?
+        , SEQ_PRODUCT.CURRVAL
+        )
+        
+</entry>
+
+<entry key="insertOptionTwo">
+INSERT
+  INTO TB_2ND_OPTION
+        ( OPTION_2ND_NO
+        , OPTION_2ND_CONTENT
+        , OPTION_2ND_PRICE
+        , OPTION_2ND_STOCK
+        , OPTION_1ND_NO
+        )
+VALUES
+        (
+        SEQ_2ST_OPTION.NEXTVAL
+        , ?
+        , ?
+        , ?
+        , SEQ_1ST_OPTION.CURRVAL
+        )
+</entry>
+
+
 </properties>

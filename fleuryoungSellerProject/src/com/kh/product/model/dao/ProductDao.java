@@ -1,6 +1,9 @@
 package com.kh.product.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.product.model.vo.Category;
+import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
 import com.kh.seller.model.dao.SellerDao;
 
@@ -96,5 +100,78 @@ private Properties prop = new Properties();
 		
 		
 		return list;
+	}
+	
+	public int insertProduct(Connection conn, Product p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectCategoryList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getpName());
+			pstmt.setInt(2, p.getNetPrice());
+			pstmt.setString(3, p.getDetail());
+			pstmt.setInt(4, p.getStock());
+			pstmt.setString(5, p.getpReturn());
+			pstmt.setString(6, p.getpTag());
+			pstmt.setString(7,p.getpDayDelivery());
+			pstmt.setString(8,p.getpGift());
+			pstmt.setInt(9, p.getSellerNo());
+			pstmt.setInt(10, Integer.parseInt(p.getCategoryNo()));
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertOptionOne(Connection conn, String title) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertOptionOne");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertOptionTwo(ArrayList<OptionTwo> list) {
+		int result = 0;
+		Connection conn = getConnection();
+		String sql = prop.getProperty("insertOptionTwo");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

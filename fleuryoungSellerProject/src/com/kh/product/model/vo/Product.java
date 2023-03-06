@@ -13,6 +13,16 @@ public class Product {
 	private String pTag; // 상품 카드여부
 	private int pSales; // 판매량
 	private String pDayDelivery; // 당일배송여부
+	private String pGift; 
+	private int sellerNo;
+
+
+
+
+
+
+
+
 	private String categoryNo; // 카테고리번호
 	
 	public Product() {}
@@ -54,7 +64,27 @@ public class Product {
 	}
 
 
+	public int getSellerNo() {
+		return sellerNo;
+	}
+	
+	
+	
+	
+	public void setSellerNo(int sellerNo) {
+		this.sellerNo = sellerNo;
+	}
 
+	public String getpGift() {
+		return pGift;
+	}
+	
+	
+	
+	
+	public void setpGift(String pGift) {
+		this.pGift = pGift;
+	}
 
 	public String getpPicture() {
 		return pPicture;

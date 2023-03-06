@@ -64,13 +64,6 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
 </div>
 
         <!-- js 호출 -->
-        <script src="resources/js/jquery-3.6.0.min.js"></script>
-        <script src="resources/js/bootstrap.bundle.min.js"></script>
-        <script src="resources/js/feather.min.js"></script>
-        <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
-        <script src="resources/plugins/apexchart/chart-data.js"></script>
-        <script src="resources/js/script.js"></script>
 
         <script>
             $(function(){
@@ -128,7 +121,13 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
         })
         
         </script>
-
+	<script src="resources/js/jquery-3.6.0.min.js"></script>
+    <script src="resources/js/bootstrap.bundle.min.js"></script>
+    <script src="resources/js/feather.min.js"></script>
+    <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
+    <script src="resources/plugins/apexchart/chart-data.js"></script>
+    <script src="resources/js/script.js"></script>
 </body>
 
 </html>
