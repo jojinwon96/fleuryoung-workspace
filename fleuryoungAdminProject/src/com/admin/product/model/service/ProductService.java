@@ -1,15 +1,14 @@
-package com.kh.product.model.service;
+package com.admin.product.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.admin.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.product.model.dao.ProductDao;
-import com.kh.product.model.vo.Inquiry;
-import com.kh.product.model.vo.Product;
-import com.kh.product.model.vo.ProductOption;
-import com.kh.product.model.vo.Review;
+import com.admin.product.model.dao.ProductDao;
+import com.admin.product.model.vo.Product;
+import com.admin.product.model.vo.ProductOption;
+import com.admin.product.model.vo.Review;
 
 public class ProductService {
 
@@ -80,16 +79,12 @@ public class ProductService {
 		return reviewList;
 	}
 
-	public ArrayList<Inquiry> selectProductInquiry(int pid) {
-
+	public ArrayList<Product> selectAllProduct() {
 		Connection conn = getConnection();
-
-		ArrayList<Inquiry> inquiryList = new ProductDao().selectProductInquiry(conn, pid);
+		ArrayList<Product> pList = new ProductDao().selectAllProduct(conn);
 
 		close(conn);
-
-		return inquiryList;
-
+		return pList;
 	}
 
 }

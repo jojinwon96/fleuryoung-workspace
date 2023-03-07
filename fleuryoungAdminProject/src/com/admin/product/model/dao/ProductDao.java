@@ -1,4 +1,4 @@
-package com.kh.product.model.dao;
+package com.admin.product.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,12 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.product.model.vo.Inquiry;
-import com.kh.product.model.vo.Product;
-import com.kh.product.model.vo.ProductOption;
-import com.kh.product.model.vo.Review;
+import com.admin.product.model.vo.Product;
+import com.admin.product.model.vo.ProductOption;
+import com.admin.product.model.vo.Review;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.admin.common.JDBCTemplate.*;
 
 public class ProductDao {
 
@@ -48,7 +47,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -74,7 +73,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -101,7 +100,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
-						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+						rs.getInt("COUNT"), rs.getInt("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
 			}
 
 		} catch (SQLException e) {
@@ -136,7 +135,7 @@ public class ProductDao {
 						      , rs.getInt("P_STOCK")
 						      , rs.getInt("REVIEW_RATING")
 						      , rs.getInt("COUNT")
-						      , rs.getString("P_NETPRICE")
+						      , rs.getInt("P_NETPRICE")
 						      , rs.getString("P_Day_Delivery")
 						      , rs.getString("IMAGES"));
 			}
@@ -217,38 +216,44 @@ public class ProductDao {
 		return reviewList;
 	}
 
-	public ArrayList<Inquiry> selectProductInquiry(Connection conn, int pid) {
-		
-		ArrayList<Inquiry> inquiryList = new ArrayList<Inquiry>();
-		
+	public ArrayList<Product> selectAllProduct(Connection conn) {
+		ArrayList<Product> pList = new ArrayList<Product>();
+		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		String sql = prop.getProperty("selectProductInquiry");
 		
+		String sql = prop.getProperty("selectAllProduct");
+
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pid);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				inquiryList.add(new Inquiry(rs.getInt("P_ID")
-						  , rs.getString("MEM_ID")
-						  , rs.getString("MEM_NAME")
-						  , rs.getInt("INQUIRY_ID")
-					      , rs.getInt("INQUIRY_TYPE")
-					      , rs.getString("INQUIRY_TITLE")
-					      , rs.getString("INQUIRY_COMMENT")));
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				pList.add(new Product(rset.getInt("P_ID")
+									,rset.getString("P_NAME")
+									,rset.getInt("P_NETPRICE")
+									,rset.getString("P_DETAIL")
+									,rset.getInt("P_STOCK")
+									,rset.getDate("P_ENROLL_DATE")
+									,rset.getString("P_RETURN_YN")
+									,rset.getString("P_TAG_YN")
+									,rset.getInt("P_SALES")
+									,rset.getString("P_DAY_DELIVERY")
+									,rset.getString("P_GIFT")
+									,rset.getInt("SEL_NO")
+									,rset.getInt("CATEGORY_NO")
+									,rset.getString("SEL_STORE_NAME")
+									,rset.getString("SEL_IMG")
+									)
+						 );
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(rs);
+		}finally {
+			close(rset);
 			close(pstmt);
 		}
-		
-		return inquiryList;
+		return pList;
 	}
 
 }

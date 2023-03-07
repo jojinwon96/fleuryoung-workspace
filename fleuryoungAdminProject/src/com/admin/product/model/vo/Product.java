@@ -6,8 +6,8 @@ public class Product {
 
 	private int pId; // 상품번호
 	private String pName; // 상품명
-	private String pNetPrice; // 가격
-	private int pDetail; // 상세설명
+	private int pNetPrice; // 가격
+	private String pDetail; // 상세설명
 	private int pStock; // 총수량
 	private Date enrollDate; // 등록일 
 	private String returnYN; // 환불여부
@@ -16,18 +16,18 @@ public class Product {
 	private String pDayDelivery; // 당일배송여부
 	private String pGift; // 선물여부
 	private int selNo; // 판매자 번호 
-	private String categoryNO; // 카테고리 번호
+	private int categoryNO; // 카테고리 번호
 	private int reviewRating; // 별점 1 ~ 5
 	private String mainImg; // 메인 이미지
 	private int reviewCount; // 조회수
 	private String images;
 	private String storeName;
-	
+	private String selImg;
 
 	public Product() {}
 
 
-	public Product(int pId, String pName, int reviewRating, int reviewCount,  String pNetPrice,  String mainImg, String pDayDelivery
+	public Product(int pId, String pName, int reviewRating, int reviewCount,  int pNetPrice,  String mainImg, String pDayDelivery
 			) {
 		super();
 		this.pId = pId;
@@ -39,8 +39,8 @@ public class Product {
 		this.reviewCount = reviewCount;
 	}
 
-	public Product(int pId, String pName, String pNetPrice, int pDetail, int pStock, Date enrollDate, String returnYN,
-			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, String categoryNO) {
+	public Product(int pId, String pName, int pNetPrice, String pDetail, int pStock, Date enrollDate, String returnYN,
+			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, int categoryNO) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -59,7 +59,7 @@ public class Product {
 
 	
 	
-	public Product(int pId, int selNo, String storeName, String pName, int pStock, int reviewRating, int reviewCount, String pNetPrice, String pDayDelivery,
+	public Product(int pId, int selNo, String storeName, String pName, int pStock, int reviewRating, int reviewCount, int pNetPrice, String pDayDelivery,
 			  String images) {
 		super();
 		this.pId = pId;
@@ -72,6 +72,36 @@ public class Product {
 		this.reviewCount = reviewCount;
 		this.images = images;
 		this.storeName = storeName;
+	}
+
+	public Product(int pId, String pName, int pNetPrice, String pDetail, int pStock, Date enrollDate, String returnYN,
+			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, int categoryNO,
+			String storeName, String selImg) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pNetPrice = pNetPrice;
+		this.pDetail = pDetail;
+		this.pStock = pStock;
+		this.enrollDate = enrollDate;
+		this.returnYN = returnYN;
+		this.pTagYN = pTagYN;
+		this.saleCount = saleCount;
+		this.pDayDelivery = pDayDelivery;
+		this.pGift = pGift;
+		this.selNo = selNo;
+		this.categoryNO = categoryNO;
+		this.storeName = storeName;
+		this.selImg = selImg;
+	}
+
+	public String getSelImg() {
+		return selImg;
+	}
+
+
+	public void setSelImg(String selImg) {
+		this.selImg = selImg;
 	}
 
 
@@ -133,19 +163,19 @@ public class Product {
 		this.pName = pName;
 	}
 
-	public String getpNetPrice() {
+	public int getpNetPrice() {
 		return pNetPrice;
 	}
 
-	public void setpNetPrice(String pNetPrice) {
+	public void setpNetPrice(int pNetPrice) {
 		this.pNetPrice = pNetPrice;
 	}
 
-	public int getpDetail() {
+	public String getpDetail() {
 		return pDetail;
 	}
 
-	public void setpDetail(int pDetail) {
+	public void setpDetail(String pDetail) {
 		this.pDetail = pDetail;
 	}
 
@@ -213,11 +243,11 @@ public class Product {
 		this.selNo = selNo;
 	}
 
-	public String getCategoryNO() {
+	public int getCategoryNO() {
 		return categoryNO;
 	}
 
-	public void setCategoryNO(String categoryNO) {
+	public void setCategoryNO(int categoryNO) {
 		this.categoryNO = categoryNO;
 	}
 

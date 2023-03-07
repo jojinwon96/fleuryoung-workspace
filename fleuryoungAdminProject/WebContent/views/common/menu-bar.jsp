@@ -324,9 +324,9 @@
 		                    <a href="#"><i data-feather="dollar-sign"></i> <span>판매자센터</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li><a href="ribbon.html" class="<%= active4_1 %>">상품관리</a></li>
+		                        <li><a href="<%= contextPath %>/list.pr" class="<%= active4_1 %>">상품관리</a></li>
 		                        <li><a href="<%= contextPath %>/list.in" class="<%= active4_2 %>">판매자요청</a></li>
-		                        <li><a href="drag-drop.html" class="<%= active4_3 %>">신고관리</a></li>
+		                        <li><a href="<%= contextPath %>/list.re" class="<%= active4_3 %>">신고관리</a></li>
 		                    </ul>
 		                </li>
 						

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+
 <entry key="selectProductList">
 SELECT
       	  (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
@@ -13,6 +14,7 @@ SELECT
   FROM 	TB_PRODUCT P
  WHERE 	SEL_NO = ?
 </entry>
+
 <entry key="selectCategoryList">
 SELECT
 		CATEGORY_NO
@@ -21,4 +23,26 @@ SELECT
   FROM 
   		TB_CATEGORY
 </entry>
+
+<entry key="selectAllProduct">
+	SELECT 
+	    P_ID
+	    ,P_NAME
+	    ,P_NETPRICE
+	    ,P_DETAIL
+	    ,P_STOCK
+	    ,P_ENROLL_DATE
+	    ,P_RETURN_YN
+	    ,P_TAG_YN
+	    ,P_SALES
+	    ,P_DAY_DELIVERY
+	    ,P_GIFT
+	    ,SEL_NO
+	    ,CATEGORY_NO
+	    ,SEL_STORE_NAME
+	    ,SEL_IMG
+	FROM TB_PRODUCT
+	JOIN TB_SELLER USING(SEL_NO)
+</entry>
+
 </properties>
