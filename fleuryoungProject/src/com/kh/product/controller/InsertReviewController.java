@@ -1,9 +1,6 @@
-
 package com.kh.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class SearchPageController
+ * Servlet implementation class InsertReviewController
  */
-@WebServlet("/searchPage.p")
-public class SearchPageController extends HttpServlet {
+@WebServlet("/insertReivew.p")
+public class InsertReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPageController() {
+    public InsertReviewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +28,26 @@ public class SearchPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("utf-8");
 		
-		String keyword = request.getParameter("keyword");
+		String memId = request.getParameter("memId");
+		int pId = Integer.parseInt(request.getParameter("pId"));
+		int rating = Integer.parseInt(request.getParameter("rating"));
+		String textBox = request.getParameter("textBox");
 		
-		System.out.println("keyowrd : " + keyword);
+		ProductService pService = new ProductService();
 		
-		ArrayList<Product> list = new ProductService().selectSearchList(keyword);
+		int odId = pService.selectOrderId(memId, pId);
 		
-		if (list.isEmpty()) {
-			request.setAttribute("keyword", keyword);
-			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
-		} else {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/main/searchPage.jsp").forward(request, response);
+		int result  = 0;
+		
+		if (odId > 0) {
+			result = pService.insertReview(pId, rating, textBox, odId);
+			
+			response.setContentType("text/html; charset=UTF-8"); // 한글이 있다면 인코딩 처리
+			response.getWriter().print(result);
 		}
+		
+		
 		
 	}
 

@@ -1,5 +1,4 @@
-
-package com.kh.product.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
+import com.google.gson.Gson;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Search;
 
 /**
- * Servlet implementation class SearchPageController
+ * Servlet implementation class SelectRealTimeSearch
  */
-@WebServlet("/searchPage.p")
-public class SearchPageController extends HttpServlet {
+@WebServlet("/selectRealTimeSearch.p")
+public class SelectRealTimeSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPageController() {
+    public SelectRealTimeSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +32,11 @@ public class SearchPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("utf-8");
 		
-		String keyword = request.getParameter("keyword");
+		ArrayList<Search> list = new MemberService().selectRealTimeSearch();
 		
-		System.out.println("keyowrd : " + keyword);
-		
-		ArrayList<Product> list = new ProductService().selectSearchList(keyword);
-		
-		if (list.isEmpty()) {
-			request.setAttribute("keyword", keyword);
-			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
-		} else {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/main/searchPage.jsp").forward(request, response);
-		}
-		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

@@ -1,29 +1,25 @@
-
-package com.kh.product.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
+import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class SearchPageController
+ * Servlet implementation class InsertKeywordController
  */
-@WebServlet("/searchPage.p")
-public class SearchPageController extends HttpServlet {
+@WebServlet("/insertKeyword.p")
+public class InsertKeywordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPageController() {
+    public InsertKeywordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +29,10 @@ public class SearchPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
+		String memId = request.getParameter("memId");
+		String keyWord = request.getParameter("keyword");
 		
-		String keyword = request.getParameter("keyword");
-		
-		System.out.println("keyowrd : " + keyword);
-		
-		ArrayList<Product> list = new ProductService().selectSearchList(keyword);
-		
-		if (list.isEmpty()) {
-			request.setAttribute("keyword", keyword);
-			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
-		} else {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/main/searchPage.jsp").forward(request, response);
-		}
+		int result = new MemberService().insertkeyword(memId, keyWord);
 		
 	}
 

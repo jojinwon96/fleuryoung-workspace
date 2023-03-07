@@ -2,11 +2,13 @@ package com.kh.member.model.service;
 
 import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Coupon;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.Search;
 import com.kh.product.model.dao.CartDao;
 
 public class MemberService {
@@ -101,6 +103,92 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int updateMileage(String memberId, int mileage) {
+
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updateMileage(conn, memberId, mileage);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertWishList(String memId, int pId) {
+
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		result = new MemberDao().insertWishList(conn, memId, pId);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteWishList(String memId, int pId) {
+		
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		result = new MemberDao().deleteWishList(conn, memId, pId);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertkeyword(String memId, String keyWord) {
+
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		result = new MemberDao().insertkeyword(conn, memId, keyWord);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+	public ArrayList<Search> selectRealTimeSearch() {
+		
+		Connection conn = getConnection();
+
+		ArrayList<Search> list = new MemberDao().selectRealTimeSearch(conn);
+
+		close(conn);
+
+		return list;
 	}
 	
 }

@@ -42,23 +42,33 @@ public class ProductDetailController extends HttpServlet {
 		
 		// 상품(가게이름, 상품이름, 별점, 리뷰수, 가격, 옵션 ,상세이미지들)
 		Product p = pService.selectProductDetail(pid);
+		
 		//옵션
 		ArrayList<ProductOption> optList = pService.selectProductOption(pid);
 		
 		// 리뷰
 		ArrayList<Review> reviewList = pService.selectProductReview(pid); 
 		
-		int check = 1;
+		int check = 0;
+		
 		// 주문 체크
 		int reviewChk = pService.selectReivewCheck(memId, pid);
+		
 		// 리뷰 체크
 		int orderChk = pService.selectOrderCheck(memId, pid);
+		
+		// 리뷰 카운트
+		int reviewCount = pService.selectReviewCount(pid);
 		
 		check = reviewChk * orderChk;
 		
 		if (reviewChk == 0 && orderChk == 0) {
 			check = 0;
- 		} 
+ 		} else if (reviewChk == 0 && orderChk > 0) {
+ 			check = 1;
+ 		} else if (reviewChk > 0 && orderChk > 0) {
+ 			check = 0;
+ 		}
 		
 		
 		
@@ -75,7 +85,8 @@ public class ProductDetailController extends HttpServlet {
 		request.setAttribute("product", p);
 		request.setAttribute("optList", optList);
 		request.setAttribute("reviewList", reviewList);
-		request.setAttribute("reviewChk", reviewChk);
+		request.setAttribute("reviewCount", reviewCount);
+		request.setAttribute("check", check);
 		request.setAttribute("inquiryList", inquiryList);
 		request.getRequestDispatcher("views/main/productDetailPage.jsp").forward(request, response);
 	}

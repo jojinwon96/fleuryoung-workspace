@@ -11,7 +11,8 @@
 
 	ArrayList<ProductOption> optList = (ArrayList<ProductOption>) request.getAttribute("optList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) request.getAttribute("reviewList");
-	int reviewChk = (int)request.getAttribute("reviewChk");
+	int check = (int)request.getAttribute("check");
+	int reviewCount = (int)request.getAttribute("reviewCount");
 	ArrayList<Inquiry> inquiryList = (ArrayList<Inquiry>) request.getAttribute("inquiryList");
 	
 	request.setCharacterEncoding("utf-8");
@@ -560,27 +561,19 @@
 				<%
 					String[] tmp = p.getImages().split(",");
 				%>
-				<%
-					for (int i = 0; i < tmp.length; i++) {
-				%>
-				<%
-					if (!tmp[i].equals(" ")) {
-				%>
-				<img style="margin-top: 20px; widtsh: 500px; height: 500px"
-					src="${pageContext.request.contextPath}<%= tmp[i] %>"
-					class="rounded mx-auto d-block" alt="...">
-				<%
-					}
-				%>
-				<%
-					}
-				%>
+				<% for (int i = 0; i < tmp.length; i++) { %>
+					<%if (!tmp[i].equals("")) {%>
+					<img style="margin-top: 20px; widtsh: 500px; height: 500px"
+						src="${pageContext.request.contextPath}<%= tmp[i] %>"
+						class="rounded mx-auto d-block" alt="...">
+					<% } %>
+				<% }%>
 			</div>
 
 			<div class="t2"></div>
 			<div class="pd-info-review" style="margin-top: 100px;">
 				<div align="left"
-					style="font-size: 30px; font-weight: bolder; margin-top: 50px;">리뷰(15)</div>
+					style="font-size: 30px; font-weight: bolder; margin-top: 50px;">리뷰(<%= reviewCount %>)</div>
 				<div style="margin-left: -20px;" class="container text-center">
 					<hr>
 					<div style="margin-left: -15px;" class="d-flex mb-3">
@@ -588,8 +581,8 @@
 						<button class="reivew-sort mx-3 p-2">최신순</button>
 						<button class="reivew-sort mx-3 p-2">평점 높은 순</button>
 						<button class="reivew-sort mx-3 p-2">평점 낮은 순</button>
-						<% if (reviewChk > 0 || loginUser == null) { %>
-							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo" disabled>댓글작성하기</button>		
+						<% if (check == 0 || loginUser == null) { %>
+							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo" disabled>리뷰작성</button>		
 						<% } else { %>
 							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo">댓글작성하기</button>
 						<% } %>
@@ -614,12 +607,11 @@
 								</select>
 						      	</div>
 						      </div>
-						        <form>
 						          <div class="mb-3" style="margin-top: -3px;">
 						            <label for="message-text" class="col-form-label"></label>
 						            <textarea class="textBox form-control" id="message-text" maxlength="100"></textarea>
 						          </div>
-						        </form>
+						        
 						        
 						        <div style="margin-left: 350px">
 						        	<label class="textCount">0자</label>
@@ -629,7 +621,7 @@
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="close-btn btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						        <button type="button" class="btn btn-primary">작성하기</button>
+						        <button type="button" class="review-btn btn btn-primary">작성하기</button>
 						      </div>
 						    </div>
 						  </div>
@@ -664,7 +656,7 @@
 
 								<div style="text-align: left; width: 250px;" class="col"><%=maskingId%></div>
 								<div style="font-size: 13px; margin-left: -150px;" class="col"><%=r.getDate()%></div>
-								<!-- <div style="font-size: 13px; margin-left: -60px;" class="col">옵션[빨강]</div> -->
+								
 							</div>
 						</div>
 						<div class="p-2">
@@ -678,7 +670,6 @@
 							</div>
 						</div>
 
-						<button type="button" class="mx-2 btn btn-outline-primary">좋아요</button>
 					</div>
 					<hr>
 					<br>
@@ -769,7 +760,6 @@
 		$(document).ready(function(){
 			$('.textBox').keyup(function (e) {
 				let content = $(this).val();
-			    console.log("ok");
 			    // 글자수 세기
 			    if (content.length == 0 || content == '') {
 			    	$('.textCount').text('0자');
@@ -793,27 +783,52 @@
 			})
 			
 			
-			// 리뷰 작성하기
-			$.ajax({
-                 // 요청보내기
-                 url : "insertReivew.p", // 어느 url로 보낼 건지
-                 type : "post", // 요청방식 지정
-                 traditional :true,	
-                 //dataType : "json",
-                 data : {jsonData:jsonData, memberId:memId, memName:memName, memEmail:memEmail, memPhone:memPhone, postal:postal, street:street, address,address}, 
-                 success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
-                     location.href = "<%=contextPath%>/orderSuccessPage.p";
-                 },
+			$(".review-btn").click(function(){
+				console.log("리뷰 버튼 클릭");
+				let memId = "";
+				
+				<% if (loginUser != null && !loginUser.getMemId().equals("")){ %>
+					memId = "<%=loginUser.getMemId()%>";
+				<% } %>
+				
+				let pId = "<%=p.getpId()%>";
+				let rating = $(".review-select option:selected").val();
+				let textBox = $(".textBox").val();
+				
+				console.log("아이디 : " + memId);
+				console.log("상품 : " + pId);
+				console.log("평점 : " + rating);
+				console.log("내용 : " + textBox);
+				
+				// 리뷰 작성하기
+ 				$.ajax({
+	                 // 요청보내기
+	                 url : "insertReivew.p", // 어느 url로 보낼 건지
+	                 type : "post", // 요청방식 지정
+	                 traditional :true,	
+	                 //dataType : "json",
+	                 data : {memId:memId, pId:pId, rating:rating, textBox:textBox}, 
+	                 success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+	                	 if (result > 0){
+	                		 location.reload();	 
+	                	 } else {
+	                		 alert("리뷰작성실패");
+	                	 }
+	                	 
+	                 },
 
-                 error : function(){
-                     console.log("ajax 통신 실패");
-                 },
+	                 error : function(){
+	                     console.log("ajax 통신 실패");
+	                 },
 
-                 complete : function(){
-                     console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
-                 }
-                 
-             }); 
+	                 complete : function(){
+	                     console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+	                 }
+	                 
+	             });   
+				
+			})
+			
 		})
 		
 		

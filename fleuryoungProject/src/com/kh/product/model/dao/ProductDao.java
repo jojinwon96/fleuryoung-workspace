@@ -193,7 +193,7 @@ public class ProductDao {
 
 			while (rs.next()) {
 				reviewList.add(new Review(rs.getInt("P_ID"), rs.getInt("REVIEW_ID"), rs.getInt("REVIEW_RATING"),
-						rs.getString("CONTENT"), rs.getString("MEM_ID"), rs.getString("DATE")));
+						rs.getString("CONTENT"), rs.getString("MEM_ID"), rs.getString("DATE"), rs.getInt("OD_ID")));
 			}
 
 		} catch (SQLException e) {
@@ -237,7 +237,7 @@ public class ProductDao {
 	}
 
 	public ArrayList<Product> selectSearchList(Connection conn, String keyword) {
-		
+
 		ArrayList<Product> list = new ArrayList<Product>();
 
 		PreparedStatement pstmt = null;
@@ -247,9 +247,9 @@ public class ProductDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, keyword);
-			
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -270,64 +270,166 @@ public class ProductDao {
 	public int selectReivewCheck(Connection conn, String memId, int pid) {
 
 		int result = 0;
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = prop.getProperty("selectReivewCheck");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, memId);
 			pstmt.setInt(2, pid);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				result = rs.getInt("COUNT");
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
 	public int selectOrderCheck(Connection conn, String memId, int pid) {
 		int result = 0;
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = prop.getProperty("selectOrderCheck");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, memId);
 			pstmt.setInt(2, pid);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				result = rs.getInt("COUNT");
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
+
+		return result;
+	}
+
+	public int selectOrderId(Connection conn, String memId, int pId) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectOrderId");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memId);
+			pstmt.setInt(2, pId);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt("OD_ID");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int insertReview(Connection conn, int pId, int rating, String textBox, int odId) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pId);
+			pstmt.setInt(2, rating);
+			pstmt.setString(3, textBox);
+			pstmt.setString(4, "none");
+			pstmt.setString(5, "none");
+			pstmt.setInt(6, odId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}
 
+	public int selectReviewCount(Connection conn, int pid) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("selectReviewCount");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, pid);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt("COUNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

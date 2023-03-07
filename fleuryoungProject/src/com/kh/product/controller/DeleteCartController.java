@@ -44,6 +44,7 @@ public class DeleteCartController extends HttpServlet {
 		int postal = Integer.parseInt(request.getParameter("postal"));
 		String street = request.getParameter("street");
 		String address = request.getParameter("address");
+		int Mileage = Integer.parseInt(request.getParameter("Mileage"));
 		
 		System.out.println(memberId);
 		System.out.println(memName);
@@ -51,6 +52,7 @@ public class DeleteCartController extends HttpServlet {
 		System.out.println(postal);
 		System.out.println(street);
 		System.out.println(address);
+		System.out.println(Mileage);
 		
 		int addOrder = new MemberService().addOrder(memberId, memName, memEmail, memPhone, postal, street, address);
 		
@@ -92,7 +94,8 @@ public class DeleteCartController extends HttpServlet {
 			System.out.println((i+1) + "번째 삭제 성공");
 			successCount+=1;
 		}
-
+		
+		int result = mService.updateMileage(memberId, Mileage);
 	
 	}
 

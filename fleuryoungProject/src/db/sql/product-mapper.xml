@@ -4,44 +4,64 @@
 <properties>
 	<entry key="selectLatestProduct">
 		SELECT B.*
-				FROM (SELECT ROWNUM RNUM, A.*
-				FROM(SELECT P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
-				COUNT(REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_ENROLL_DATE, P_DAY_DELIVERY
-				FROM TB_REVIEW
-				RIGHT JOIN TB_PRODUCT USING (P_ID)
-				LEFT JOIN TB_PRODUCT_IMG USING (P_ID)
-				GROUP BY P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, P_ENROLL_DATE, P_DAY_DELIVERY
-				ORDER BY P_ENROLL_DATE DESC) A ) B
-				WHERE RNUM BETWEEN 1 AND 20
+		        FROM (SELECT ROWNUM RNUM, A.*
+		            FROM(SELECT 
+		                     P.P_ID
+		                   , P.P_NAME
+		                   , FLOOR(AVG(NVL(R.REVIEW_RATING, 0))) AS "REVIEW_RATING"
+		                   , COUNT(R.REVIEW_RATING) AS "COUNT" 
+		                   , TO_CHAR( P.P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+		                   , I.P_IMG1
+		                   , P.P_ENROLL_DATE
+		                   , P.P_DAY_DELIVERY
+						FROM TB_REVIEW R
+						RIGHT JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
+						JOIN TB_PRODUCT_IMG I ON (I.P_ID = P.P_ID)
+						GROUP BY P.P_ID, P.P_NAME, P.P_NETPRICE, I.P_IMG1, P.P_ENROLL_DATE, P.P_DAY_DELIVERY
+						ORDER BY P_ENROLL_DATE DESC) A ) B
+		WHERE RNUM BETWEEN 1 AND 20
 	</entry>
 
 	<entry key="selectSaleOrderProduct">
 		SELECT B.*
-		FROM (SELECT ROWNUM RNUM, A.*
-		FROM (SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
-		COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
-		FROM TB_MEM_PAYMENT P
-		JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
-		RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
-		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
-		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
-		GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
-		ORDER BY P_SALES DESC)A)B
+		       FROM (SELECT ROWNUM RNUM, A.*
+		           FROM (SELECT 
+		                  G.P_ID
+		                , P_NAME
+		                , FLOOR(AVG(NVL(R.REVIEW_RATING, 0))) AS "REVIEW_RATING"
+		                , COUNT(R.REVIEW_RATING) AS "COUNT" 
+		                , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+		                , P_IMG1
+		                , P_SALES
+		                , P_DAY_DELIVERY
+		            FROM TB_MEM_PAYMENT P
+		            JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+		            RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		            LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+		            LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+		            GROUP BY G.P_ID, P_NAME, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
+		            ORDER BY P_SALES DESC)A)B
 		WHERE RNUM BETWEEN 1 AND 20
 	</entry>
 
 	<entry key="selectReviewOrderProduct">
 		SELECT B.*
-		FROM (SELECT ROWNUM RNUM, A.*
-		FROM (SELECT G.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
-		COUNT(REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_DAY_DELIVERY
-		FROM TB_MEM_PAYMENT P
-        RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
-		RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
-		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
-		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
-		GROUP BY G.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
-		ORDER BY COUNT DESC)A)B
+				FROM (SELECT ROWNUM RNUM, A.*
+				     FROM (SELECT 
+		                    G.P_ID
+		                  , P_NAME
+		                  , FLOOR(AVG(NVL(R.REVIEW_RATING, 0))) AS "REVIEW_RATING"
+				          , COUNT(REVIEW_RATING) AS "COUNT" 
+		                  , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+		                  , P_IMG1
+		                  , P_DAY_DELIVERY
+		            FROM TB_MEM_PAYMENT P
+		            RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+		            RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		            LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+		            LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+		            GROUP BY G.P_ID, P_NAME, P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
+		            ORDER BY REVIEW_RATING DESC)A)B
 		WHERE RNUM BETWEEN 1 AND 20
 	</entry>
 
@@ -52,7 +72,7 @@
 		  , (SELECT SEL_STORE_NAME FROM TB_SELLER S WHERE S.SEL_NO = P.SEL_NO) AS "STORE_NAME"
 		  , P_NAME
 		  , P_STOCK
-		  , NVL(REVIEW_RATING, 0) AS "REVIEW_RATING"
+		  , FLOOR(AVG(NVL(R.REVIEW_RATING, 0))) AS "REVIEW_RATING"
 		  , (SELECT COUNT(REVIEW_RATING) FROM TB_REVIEW R WHERE R.P_ID = P.P_ID) AS "COUNT"
 		  , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
 		  , P_Day_Delivery
@@ -61,6 +81,7 @@
 		JOIN TB_PRODUCT P ON (I.P_ID = P.P_ID)
 		LEFT JOIN TB_REVIEW R ON (P.P_ID = R.P_ID)
 		WHERE P.P_ID = ?
+		GROUP BY P.P_ID, SEL_NO, P_NAME, P_STOCK, P_NETPRICE, P_Day_Delivery, P_IMG1 || ',' || P_IMG2 || ','  || P_IMG3 || ','  || P_IMG4 || ','  || P_IMG5 || ','  || P_IMG6 || ','  || P_IMG7 || ','  || P_IMG8 || ','  || P_IMG9 || ',' || P_IMG10
 	</entry>
 	
 	<entry key="selectProductOption">
@@ -78,9 +99,16 @@
 		     , REVIEW_DETAIL AS "CONTENT"
 		     , (SELECT MEM_ID FROM TB_MEM_ORDER_DETAIL M WHERE R.OD_ID = M.OD_ID) AS "MEM_ID"
 		     , TO_CHAR(REVIEW_ADD_DATE, 'YYYY-MM-DD') AS "DATE"
+		     , OD_ID
 		FROM TB_REVIEW R
 		JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
 		WHERE R.P_ID = ?
+	</entry>
+	
+	<entry key="selectReviewCount">
+		SELECT COUNT(REVIEW_RATING) AS "COUNT"
+		FROM TB_REVIEW
+		WHERE P_ID = ?
 	</entry>
 	
 	<entry key="selectReivewCheck">
@@ -96,6 +124,38 @@
 		WHERE MEM_ID = ? AND P_ID = ?
 	</entry>
 	
+	<entry key="selectOrderId">
+		SELECT OD_ID
+		FROM TB_MEM_ORDER_DETAIL
+		WHERE MEM_ID = ? AND P_ID = ? AND ROWNUM &lt;= 1
+	</entry>
+	
+	<!-- 리뷰 작성 하기 -->
+	<entry key="insertReview">
+		INSERT INTO TB_REVIEW
+            (
+              REVIEW_ID
+             ,P_ID
+             ,REVIEW_RATING
+             ,REVIEW_DETAIL
+             ,REVIEW_IMG
+             ,REVIEW_REPLY
+             ,REVIEW_ADD_DATE
+             ,OD_ID
+             
+             )
+        VALUES
+            (
+              SEQ_REVIEW.NEXTVAL
+            , ?
+            , ?
+            , ?
+            , ?
+            , ?
+            , SYSDATE
+            , ?
+            )
+	</entry>
 	
 	<entry key="selectProductInquiry">
 		SELECT P_ID, MEM_ID, MEM_NAME, INQUIRY_ID, INQUIRY_TYPE, INQUIRY_TITLE, INQUIRY_COMMENT   
@@ -223,18 +283,21 @@
 	
 	<entry key="selectSearchList">
 		SELECT B.*
-		     FROM (SELECT G.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING"
-		     , COUNT(REVIEW_RATING) AS "COUNT" 
-		     , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
-		     , P_IMG1
-		     , P_DAY_DELIVERY
-		FROM TB_MEM_PAYMENT P
-		RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
-		FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
-		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
-		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
-		GROUP BY G.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
-		ORDER BY COUNT DESC ) B
+		     FROM (SELECT 
+		            G.P_ID
+		          , P_NAME
+		          , FLOOR(AVG(NVL(R.REVIEW_RATING, 0))) AS "REVIEW_RATING"
+		          , COUNT(REVIEW_RATING) AS "COUNT" 
+		          , TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE"
+		          , P_IMG1
+		          , P_DAY_DELIVERY
+		    FROM TB_MEM_PAYMENT P
+		    RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+		    FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		    LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
+		    LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
+		    GROUP BY G.P_ID, P_NAME, P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
+		    ORDER BY COUNT DESC ) B
 		WHERE B.P_NAME LIKE '%'||?||'%'  
 	</entry>
 	

@@ -103,5 +103,67 @@
 		        )
 	</entry>
 	
+	<entry key="updateMileage">
+		UPDATE TB_MEMBER
+		SET MEM_MILEAGE = ?
+		WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="insertWishList">
+		INSERT INTO 
+		    TB_WISHLIST
+		            (
+		               MEM_ID
+		             , P_ID
+		             , WISHLIST_DATE
+		             )
+		             VALUES
+		                  (
+		                    ?
+		                  , ?
+		                  , SYSDATE
+		                  )
+	</entry>
+	
+	<entry key="deleteWishList">
+		DELETE 
+		FROM TB_WISHLIST
+		WHERE MEM_ID = ? AND P_ID = ?
+	</entry>
+	
+	<entry key="insertkeyword">
+		INSERT INTO
+		    TB_SEARCH
+			      (
+			       MEM_ID
+			     , SEARCH_KEYWORD
+			     , SEARCH_DATE
+			      )
+			      VALUES
+			      (
+			        ?
+			      , ?
+			      , SYSDATE
+			      )
+	</entry>
+	
+	<entry key="selectRealTimeSearch">
+		SELECT SEARCH_KEYWORD, COUNT(SEARCH_KEYWORD) AS "COUNT"
+		FROM TB_SEARCH
+		WHERE REGEXP_LIKE(SEARCH_KEYWORD, '[가-힝]') AND ROWNUM &lt;= 10
+		GROUP BY SEARCH_KEYWORD
+		ORDER BY COUNT DESC
+	</entry>
+	
 </properties>
+
+
+
+
+
+
+
+
+
+
 

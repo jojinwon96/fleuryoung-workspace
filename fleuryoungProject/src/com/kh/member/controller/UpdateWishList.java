@@ -1,29 +1,25 @@
-
-package com.kh.product.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
+import com.kh.member.model.service.MemberService;
 
 /**
- * Servlet implementation class SearchPageController
+ * Servlet implementation class UpdateWishList
  */
-@WebServlet("/searchPage.p")
-public class SearchPageController extends HttpServlet {
+@WebServlet("/updateWishList.m")
+public class UpdateWishList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPageController() {
+    public UpdateWishList() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +28,29 @@ public class SearchPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.setCharacterEncoding("utf-8");
 		
-		String keyword = request.getParameter("keyword");
+		String memId = request.getParameter("memId");
+		int pId = Integer.parseInt(request.getParameter("pId"));
+		int check = Integer.parseInt(request.getParameter("check"));
 		
-		System.out.println("keyowrd : " + keyword);
+		System.out.println("체크값 : "  + check);
 		
-		ArrayList<Product> list = new ProductService().selectSearchList(keyword);
-		
-		if (list.isEmpty()) {
-			request.setAttribute("keyword", keyword);
-			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
+		int result = 0;
+		if (check > 0) {
+			int chk = new MemberService().insertWishList(memId, pId);
+			
+			if (chk > 0) {
+				result = 1;
+			}
 		} else {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/main/searchPage.jsp").forward(request, response);
+			int chk = new MemberService().deleteWishList(memId, pId);
+			if (chk > 0) {
+				result = 0;
+			}
 		}
 		
+		response.setContentType("application/json; charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

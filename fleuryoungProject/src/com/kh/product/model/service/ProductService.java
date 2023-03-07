@@ -3,6 +3,7 @@ package com.kh.product.model.service;
 import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.kh.product.model.dao.ProductDao;
@@ -124,5 +125,67 @@ public class ProductService {
 		return result;
 	}
 
+	public int selectOrderId(String memId, int pId) {
+
+		Connection conn = getConnection();
+
+		int result = new ProductDao().selectOrderId(conn, memId, pId);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int insertReview(int pId, int rating, String textBox, int odId) {
+		
+		Connection conn = getConnection();
+
+		int result = new ProductDao().insertReview(conn, pId, rating, textBox, odId);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
+
+	public int selectReviewCount(int pid) {
+		
+		Connection conn = getConnection();
+
+		int result = new ProductDao().selectReviewCount(conn, pid);
+
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

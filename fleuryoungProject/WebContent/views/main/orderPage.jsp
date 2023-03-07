@@ -456,7 +456,7 @@
     </div>
     
     <script>
-	
+    	let updateMileage = 0;
 		// 천단위 콤마 
 	   	function comma(str) {
 	        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -638,7 +638,7 @@
 		    $(".m-input").keydown(function (key) {
 		    	//let total = $(".result-price").children("strong");
 		    	//let rPrice = Number(onlyNo(total.html()));
-		    	let iPrice = Number($(this).val());
+		    	iPrice = Number($(this).val());
 		    	let mPanel = Number(onlyNo($(".m-panel").html()));
 		    	
 		        if (key.keyCode == 13) {
@@ -653,6 +653,13 @@
 		        		
 		        	}
 		        }
+		        let usedMileage = Number(onlyNo($(".m-panel").html()));
+		        
+		        console.log("원래 마일리지 : " + <%=m.getMileage()%>);
+		        console.log("사용한 마일리지 " + usedMileage);
+		        console.log("적립할 마일리지 : " + (rPrice * 0.05));
+		        updateMileage = Math.floor((usedMileage + (rPrice * 0.05)));
+		        console.log("업데이트할 마일리지 : " + updateMileage);
 		    });
 		});
     	</script>
@@ -746,7 +753,7 @@
      		                    type : "post", // 요청방식 지정
      		                    traditional :true,	
      		                    //dataType : "json",
-     		                    data : {jsonData:jsonData, memberId:memId, memName:memName, memEmail:memEmail, memPhone:memPhone, postal:postal, street:street, address,address}, 
+     		                    data : {jsonData:jsonData, memberId:memId, memName:memName, memEmail:memEmail, memPhone:memPhone, postal:postal, street:street, address:address, Mileage:updateMileage}, 
      		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
      		                        location.href = "<%=contextPath%>/orderSuccessPage.p";
      		                    },

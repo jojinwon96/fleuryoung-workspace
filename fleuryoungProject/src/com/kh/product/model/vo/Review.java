@@ -7,10 +7,11 @@ public class Review {
 	private String content;
 	private String memId;
 	private String date;
+	private int odId;
 	
 	public Review () {}
 
-	public Review(int pId, int reviewId, int reviewRating, String content, String memId, String date) {
+	public Review(int pId, int reviewId, int reviewRating, String content, String memId, String date, int odId) {
 		super();
 		this.pId = pId;
 		this.reviewId = reviewId;
@@ -18,6 +19,15 @@ public class Review {
 		this.content = content;
 		this.memId = memId;
 		this.date = date;
+		this.odId = odId;
+	}
+	
+	public int getOdId() {
+		return odId;
+	}
+
+	public void setOdId(int odId) {
+		this.odId = odId;
 	}
 
 	public int getpId() {
@@ -71,8 +81,10 @@ public class Review {
 	@Override
 	public String toString() {
 		return "Review [pId=" + pId + ", reviewId=" + reviewId + ", reviewRating=" + reviewRating + ", content="
-				+ content + ", memId=" + memId + ", date=" + date + "]";
+				+ content + ", memId=" + memId + ", date=" + date + ", odId=" + odId + "]";
 	}
+
+
 	
 	
 }

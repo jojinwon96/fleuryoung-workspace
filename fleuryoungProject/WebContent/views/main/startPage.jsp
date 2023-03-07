@@ -61,16 +61,49 @@ h5 {
 		<script>
 			$(function () {
 					$(document).on('click', '.mini_like', function () {
+						let chk = 0;
+						let memId = ""
+						let pId = $(this).parents(".productbox").find(".pid").html();
+						<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
+							memId = '<%= loginUser.getMemId() %>';
+						<% } %>
+						
 						<%if (loginUser == null) {%>
 								console.log("null임");
 								alert("로그인이 필요한 기능입니다.");
 						<%} else {%>
-								console.log("로그인한거임");
 								if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
 								    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
+								    chk = 1;
 								} else {
 									$(this).attr("src", "<%=contextPath%>/resources/image/icon/like.png")
+									chk = 0;
 								}
+								
+								 $.ajax({
+		     		                    // 요청보내기
+		     		                    url : "updateWishList.m", // 어느 url로 보낼 건지
+		     		                    type : "post", // 요청방식 지정
+		     		                    traditional :true,	
+		     		                    //dataType : "json",
+		     		                    data : {memId:memId, pId:pId, check:chk}, 
+		     		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+		     		                        if (result > 0){
+		     		                        	alert("찜콩~");
+		     		                        } else {
+		     		                        	alert("안찜콩~");
+		     		                        }
+		     		                    },
+
+		     		                    error : function(){
+		     		                        console.log("ajax 통신 실패");
+		     		                    },
+
+		     		                    complete : function(){
+		     		                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+		     		                    }
+		     		                    
+		     		               }); 
 		   			    <%}%>
 					})
 			})

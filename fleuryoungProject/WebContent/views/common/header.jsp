@@ -144,17 +144,6 @@
 					<li class="props-li"><span class="props-span">소품</span></li>
 					<div class="rank-panel">
 						<ul class="rank-ul">
-							<!-- 자바에서 -->
-							<li><a href="#"><span>1</span>장미꽃</a></li>
-							<li><a href="#"><span>2</span>나팔꽃</a></li>
-							<li><a href="#"><span>3</span>무궁화</a></li>
-							<li><a href="#"><span>4</span>튤립</a></li>
-							<li><a href="#"><span>5</span>안개꽃</a></li>
-							<li><a href="#"><span>6</span>꽃다발</a></li>
-							<li><a href="#"><span>7</span>카네이션</a></li>
-							<li><a href="#"><span>8</span>들꽃</a></li>
-							<li><a href="#"><span>9</span>국화꽃</a></li>
-							<li><a href="#"><span>10</span>목화</a></li>
 						</ul>
 					</div>
 					<span class="downButton"> <img
@@ -210,18 +199,8 @@
 		<div class="rank-list-title">
 			<h3 class="rank-title">실시간 인기 검색어</h3>
 			<div class="rank-list">
-				<ul>
-					<!-- 자바에서 -->
-					<li><a href="#"><span class="number">1</span><span>장미꽃</span></a></li>
-					<li><a href="#"><span class="number">2</span><span>나팔꽃</span></a></li>
-					<li><a href="#"><span class="number">3</span><span>무궁화</span></a></li>
-					<li><a href="#"><span class="number">4</span><span>튤립</span></a></li>
-					<li><a href="#"><span class="number">5</span><span>안개꽃</span></a></li>
-					<li><a href="#"><span class="number">6</span><span>꽃다발</span></a></li>
-					<li><a href="#"><span class="number">7</span><span>카네이션</span></a></li>
-					<li><a href="#"><span class="number">8</span><span>들꽃</span></a></li>
-					<li><a href="#"><span class="number">9</span><span>국화꽃</span></a></li>
-					<li><a href="#"><span class="number">10</span><span>목화</span></a></li>
+				<ul class="real-ul">
+
 				</ul>
 			</div>
 			<div class="rank-close-panel">
@@ -251,17 +230,75 @@
 			     });
 			<% } %>
 			
-		    $(".main-input").keydown(function (key) {
-		        if (key.keyCode == 13) {
-		        	console.log("여기 " + $(this).val());
-		        	location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(this).val();
-		        }
-		    });
+			
+			let memId = "";
+			<% if (loginUser != null && !loginUser.getMemId().equals("")){ %>
+				memId = "<%=loginUser.getMemId()%>";
+			<% } %>
+			
 		    
-		    $(".main-input-btn").click(function(){
-		    	location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(".main-input").val();
-		    })
+ 		    $(".main-input-btn").click(function(){
+		    	$.ajax({
+	                 // 요청보내기
+	                 url : "insertKeyword.p", // 어느 url로 보낼 건지
+	                 type : "post", // 요청방식 지정
+	                 traditional :true,	
+	                 //dataType : "json",
+	                 data : {memId:memId, keyword:$(".main-input").val()}, 
+	                 success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+	                 },
+
+	                 error : function(){
+	                     console.log("ajax 통신 실패");
+	                 },
+
+	                 complete : function(){
+	                     console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+	                 }
+	             });   
+			    location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(".main-input").val();
+		    }) 
 		    
+		    
+		    // 실시간 검색어
+		    function realTimeSearh(){
+ 		    	let realUl = $(".real-ul");
+ 		    	let rankUl = $(".rank-ul");
+ 		    	$.ajax({
+	                 // 요청보내기
+	                 url : "selectRealTimeSearch.p", // 어느 url로 보낼 건지
+	                 type : "post", // 요청방식 지정
+	                 traditional :true,	
+	                 data : {}, 
+	                 success : function(list) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+	                	 $(".real-ul").children("li").each(function(){
+	                		 $(this).remove();
+	                	 })
+	                	 
+	                	 $(".rank-ul").children("li").each(function(){
+	                		 $(this).remove();
+	                	 })
+	                	 
+	                	 for (let i in list){
+	                		 realUl.append("<li><a href=\"\"><span class=\"number\">" + (Number(i)+1) + "</span><span class=\"search-li\"></span><span>"+ list[i].keyWord +"</span></a></li>");
+	                		 rankUl.append("<li><a href=\"\"><span>" + (Number(i)+1) + "</span>" + list[i].keyWord + "</a></li>");
+	                	 }
+	                	 
+	                 },
+
+	                 error : function(){
+	                     console.log("ajax 통신 실패");
+	                 },
+
+	                 complete : function(){
+	                     console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+	                 }
+	             });   
+ 		    }
+ 		    
+ 		   	 realTimeSearh();   
+ 		    
+ 	   		 setInterval(realTimeSearh, 10000);
 		    
 		  });
 		
