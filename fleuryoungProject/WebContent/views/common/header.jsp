@@ -280,8 +280,8 @@
 	                	 })
 	                	 
 	                	 for (let i in list){
-	                		 realUl.append("<li><a href=\"\"><span class=\"number\">" + (Number(i)+1) + "</span><span class=\"search-li\"></span><span>"+ list[i].keyWord +"</span></a></li>");
-	                		 rankUl.append("<li><a href=\"\"><span>" + (Number(i)+1) + "</span>" + list[i].keyWord + "</a></li>");
+	                		 realUl.append("<li><a class=\"keyword\"><span class=\"number\">" + (Number(i)+1) + "</span><span class=\"search-li\"></span><span class=\"keywords\">"+ list[i].keyWord +"</span></a></li>");
+	                		 rankUl.append("<li><a class=\"keywords\"><span>" + (Number(i)+1) + "</span>" + list[i].keyWord + "</a></li>");
 	                	 }
 	                	 
 	                 },
@@ -298,7 +298,7 @@
  		    
  		   	 realTimeSearh();   
  		    
- 	   		 setInterval(realTimeSearh, 10000);
+ 	   		 setInterval(realTimeSearh, 30000);
 		    
 		  });
 		
@@ -307,7 +307,8 @@
 			$(document).on("click",".keywords", function(){
 				location.href = '<%=contextPath%>/searchPage.p?keyword=' + $(this).html();
 			})
-		    	
+		    
+			
 		})
 	</script>
 	
