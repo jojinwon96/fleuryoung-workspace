@@ -6498,13 +6498,15 @@ INSERT INTO
                     ?
                   , ?
                   , SYSDATE
-                  )
+                  );
 
 -- 찜하기 삭제
 DELETE 
 FROM TB_WISHLIST
-WHERE MEM_ID = ? AND P_ID = ?
+WHERE MEM_ID = 'USER01' AND P_ID = 103;
 
+SELECT * FROM TB_PRODUCT
+ORDER BY P_NAME;
 
 -- 상세 페이지 상품 + 이미지
 SELECT 
@@ -6791,6 +6793,28 @@ INSERT INTO TB_REVIEW
             , ?
             );
 
+-- 최근 검색어
+SELECT * FROM TB_SEARCH;
+INSERT INTO
+    TB_SEARCH
+      (
+       MEM_ID
+     , SEARCH_KEYWORD
+     , SEARCH_DATE
+      )
+      VALUES
+      (
+        ?
+      , ?
+      , SYSDATE
+      );
+
+-- 실시간 인기 검색어
+SELECT SEARCH_KEYWORD, COUNT(SEARCH_KEYWORD) AS "COUNT"
+FROM TB_SEARCH
+WHERE REGEXP_LIKE(SEARCH_KEYWORD, '[가-힝]') AND ROWNUM <= 10
+GROUP BY SEARCH_KEYWORD
+ORDER BY COUNT DESC;
 
 
 
