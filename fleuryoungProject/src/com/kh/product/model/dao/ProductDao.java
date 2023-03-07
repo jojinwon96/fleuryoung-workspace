@@ -531,16 +531,26 @@ public class ProductDao {
 		return list;
 	}
 
-	public ArrayList<Product> selectGiftAll(Connection conn) {
+	public ArrayList<Product> selectGiftAll(Connection conn, int orderSelect) {
 		
-		
+		String SQL = "";
 
 		ArrayList<Product> list = new ArrayList<Product>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		System.out.println("------------------------" + orderSelect + "--------------------------------");
+		
+		if(orderSelect==2) { // 판매순
+			SQL = "selectGiftAllSale";
+		}else if(orderSelect==3) { //  리뷰순
+			SQL = "selectGiftAllReview";
+		}else { // 최신순
+			SQL = "selectGiftAllEnroll";
+		}
 
-		String sql = prop.getProperty("selectGiftAll");
+		String sql = prop.getProperty(SQL);
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -596,6 +606,48 @@ public class ProductDao {
 		}
 		return list;
 		
+	}
+
+	public ArrayList<Product> selectGiftTypeOption(Connection conn, String giftName, int orderSelect) {
+		
+		String SQL = "";
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+
+		if(orderSelect==2) { // 판매순
+			SQL = "selectGiftSaleOption";
+		}else if(orderSelect==3) { //  리뷰순
+			SQL = "selectGiftReviewOption";
+		}else { // 최신순
+			SQL = "selectGiftEnrollOption";
+		}
+
+		String sql = prop.getProperty(SQL);
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, giftName);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 
 

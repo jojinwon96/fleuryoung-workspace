@@ -925,27 +925,30 @@ $(document).ready(function () {
 
 
 
+
 $(document).ready(function () {
-    $(".gift").click(function () {
-        var giftName = $(this).val();
-
-        console.log(giftName);
-
-        $.ajax({
-            url: '<%=contextPath%>/gift.gi',
-            type: "POST",
-            data: {
-                giftName: giftName
-            },
-            success: function (response) {
-                $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
-            },
-             error: function () {
-               console.log('gift 에러!!!!!!!!!')
-            }
-        });
+    $(".clickmenu").hover(function () {
+        var $ul = $(this).find("ul");
+        if ($ul.hasClass("hide")) {
+            $(".clickmenu > ul:not(.hide)").slideUp(300, function () {
+                $(this).addClass("hide");
+            });
+            $ul.removeClass("hide");
+            $ul.slideDown(300);
+        }
+    }, function () {
+        var $ul = $(this).find("ul");
+        if (!$ul.hasClass("hide")) {
+            $ul.slideUp(300, function () {
+                $(this).addClass("hide");
+            });
+        }
     });
 });
+
+
+
+
 
 
 

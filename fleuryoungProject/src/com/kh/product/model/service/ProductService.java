@@ -239,11 +239,11 @@ Connection conn = getConnection();
 		return list;
 	}
 
-	public ArrayList<Product> selectGiftAll() {
+	public ArrayList<Product> selectGiftAll(int orderSelect) {
 		
 Connection conn = getConnection();
 		
-		ArrayList<Product> list = new ProductDao().selectGiftAll(conn);
+		ArrayList<Product> list = new ProductDao().selectGiftAll(conn,orderSelect);
 		
 		close(conn);
 		
@@ -256,6 +256,16 @@ Connection conn = getConnection();
 Connection conn = getConnection();
 		
 		ArrayList<Product> list = new ProductDao().selectGiftType(conn, giftName);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectGiftTypeOption(String giftName, int orderSelect) {
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectGiftTypeOption(conn,giftName,orderSelect);
 		
 		close(conn);
 		

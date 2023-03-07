@@ -37,22 +37,82 @@ request.setCharacterEncoding("utf-8");
 		
 		
 		ArrayList<Product> list;
+		String title = "최신순";
 		
 		ProductService pService = new ProductService();
 		
 		String giftName = request.getParameter("giftName");
+		int orderSelect  = 1;
+	
+				
 		
-
-		 if (giftName != null) {
-		   
-		    	list = pService.selectGiftType(giftName);
-		    	
-		    } else  {
-		      // 값이 전달되지 않은 경우 처리할 내용
-		    	list = pService.selectGiftAll();
-		    }
+		 if((giftName == null || giftName.equals("전체")) && request.getParameter("orderSelect") == null) {
+			 // 버튼 선택x, 전체 선택했을 경우 &&  최신순인 경우
+			
+			list = pService.selectGiftAll(orderSelect);
+			 
+				
+		 }else if(giftName == null && request.getParameter("orderSelect") != null){
+			 // 버튼 선택x && 최신순,판매순,리뷰순 선택한 경우
+			 System.out.println("@@@@@@@@@@@@@@" + orderSelect);
+			 
+			 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
+			 
+			 list = pService.selectGiftAll(orderSelect);
+			 
+			 if (orderSelect == 1) {
+					title = "최신순";
+				} else if(orderSelect == 2) {
+					title = "판매순";
+				} else {
+					title = "리뷰순";
+				}
+			 
+			 
+			 
+			 
+		 } else if(giftName != null && request.getParameter("orderSelect") == null){
+			 // 버튼 선택 && 최신순,판매순,리뷰순은 선택x
+			 
+			 if(giftName.equals("전체")) {
+				 list = pService.selectGiftAll(orderSelect);
+			 }
+			 
+			 list = pService.selectGiftType(giftName);
+			
+		 }else{
+			 // 버튼 + 옵션 선택o
+			 
+			 
+			 if(giftName.equals("전체")) {
+				 list = pService.selectGiftAll(orderSelect);
+				 
+				 
+			 }else {
+				 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
+				 list = pService.selectGiftTypeOption(giftName,orderSelect);
+				 
+				 if (orderSelect == 1) {
+						title = "최신순";
+					} else if(orderSelect == 2) {
+						title = "판매순";
+					} else {
+						title = "리뷰순";
+					}
+				 
+			 }
+			 
+			
+			 
+			 
+		 }
+		 
+		 
+		 
 		
-
+		 
+		 
+		 	request.setAttribute("title", title);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/type/giftPage.jsp").forward(request, response);
 			
