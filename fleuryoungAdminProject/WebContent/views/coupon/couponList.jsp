@@ -1,9 +1,9 @@
-<%@page import="com.admin.board.model.vo.Board"%>
+<%@page import="com.admin.coupon.model.vo.Coupon"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Board> bList = (ArrayList<Board>)request.getAttribute("bList");
+	ArrayList<Coupon> cList = (ArrayList<Coupon>)request.getAttribute("cList");
 %>
 <!DOCTYPE html>
 
@@ -18,11 +18,11 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">공지사항</h3>
+                            <h3 class="page-title">쿠폰</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"></a>고객센터
+                                <li class="breadcrumb-item"><a href="#"></a>사이트운영
                                 </li>
-                                <li class="breadcrumb-item active">공지사항</li>
+                                <li class="breadcrumb-item active">쿠폰</li>
                             </ul>
                         </div>
                         <div class="col-auto">
@@ -40,18 +40,36 @@
                                     <table class="table table-center table-hover datatable">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>번호</th>
-                                                <th>제목</th>
+                                                <th>쿠폰번호</th>
+                                                <th>쿠폰 이름</th>
                                                 <th>등록일</th>
+                                                <th>수정일</th>
+                                                <th>만료일</th>
+                                                <th>할인액</th>                                                
                                                 <th class="text-end">관리</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<% for(Board b : bList){%>
+                                        	<% for(Coupon c : cList){%>
                                         		<tr>
-	                                                <td><%= b.getBoardNumber() %></td>
-	                                                <td><%= b.getBoardTitle() %></td>
-                                                    <td><%= b.getBoardAddDate() %></td>	                                               
+	                                                <td><%= c.getCouId() %></td>                                             
+	                                                <td><%= c.getCouName() %></td>                                             
+	                                                <% if(c.getCouAddDate() != null) {%>
+	                                                	<td><%= c.getCouAddDate() %></td>                                             
+	                                                <%} else{%>
+	                                                	<td>--</td>
+	                                                <%} %>                                             
+	                                                <% if(c.getCouEditDate() != null) {%>
+	                                                	<td><%= c.getCouEditDate() %></td>                                             
+	                                                <%} else{%>
+	                                                	<td>--</td>
+	                                                <%} %> 
+	                                                <% if(c.getCouExpDate() != null) {%>
+	                                                	<td><%= c.getCouExpDate() %></td>                                             
+	                                                <%} else{%>
+	                                                	<td>--</td>
+	                                                <%} %>                                            
+	                                                <td><%= c.getDiscount() %></td>                                             
 	                                                <td class="text-end">
 	                                                    <a href="edit-customer.html"
 	                                                        class="btn btn-sm btn-white text-success me-2"><i

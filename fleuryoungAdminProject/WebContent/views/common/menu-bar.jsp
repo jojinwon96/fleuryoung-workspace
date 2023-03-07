@@ -86,6 +86,14 @@
     <link rel="stylesheet" href="<%= contextPath %>/assets/css/style.css">
     <link rel="stylesheet" href="<%= contextPath %>/assets/plugins/datatables/datatables.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <!-- Popper JS -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script type="text/javascript">
     	window.addEventListener( "pageshow", function ( event ) {
     	  var historyTraversal = event.persisted || 
@@ -335,8 +343,8 @@
 		                    <a href="#"><i data-feather="monitor"></i> <span>사이트운영</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
-		                        <li class="<%= active5_1 %>"><a href="invoice-grid.html">배너관리</a></li>
-		                        <li class="<%= active5_2 %>"><a href="invoice-grid-two.html">쿠폰관리</a></li>
+		                        <li><a href="<%= contextPath %>/list.ba" class="<%= active5_1 %>">배너관리</a></li>
+		                        <li><a href="<%= contextPath %>/list.co" class="<%= active5_2 %>">쿠폰관리</a></li>
 		                    </ul>
 		                </li>
 		                <li>

@@ -18,11 +18,11 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">판매자요청</h3>
+                            <h3 class="page-title">신고관리</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#"></a>판매자센터
                                 </li>
-                                <li class="breadcrumb-item active">판매자요청</li>
+                                <li class="breadcrumb-item active">신고관리</li>
                             </ul>
                         </div>
                         <!-- <div class="col-auto">
@@ -62,7 +62,7 @@
 						                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
 						                                        <div class="modal-content">
 						                                            <div class="modal-header">
-						                                                <h5 class="modal-title" id="scrollableModalTitle">신고자 : <%= r.getmId() %></h5>
+						                                                <h5 class="modal-title" id="scrollableModalTitle">신고내용 : </h5>
 						                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
 						                                                    aria-label="Close"></button>
 						                                            </div>

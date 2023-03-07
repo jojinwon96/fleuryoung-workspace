@@ -1,9 +1,9 @@
-<%@page import="com.admin.board.model.vo.Board"%>
+<%@page import="com.admin.banner.model.vo.Banner"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Board> bList = (ArrayList<Board>)request.getAttribute("bList");
+	ArrayList<Banner> bList = (ArrayList<Banner>)request.getAttribute("bList");
 %>
 <!DOCTYPE html>
 
@@ -18,11 +18,11 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">공지사항</h3>
+                            <h3 class="page-title">배너관리</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"></a>고객센터
+                                <li class="breadcrumb-item"><a href="#"></a>사이트운영
                                 </li>
-                                <li class="breadcrumb-item active">공지사항</li>
+                                <li class="breadcrumb-item active">배너관리</li>
                             </ul>
                         </div>
                         <div class="col-auto">
@@ -40,18 +40,20 @@
                                     <table class="table table-center table-hover datatable">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>번호</th>
+                                                <th>배너번호</th>
                                                 <th>제목</th>
                                                 <th>등록일</th>
+                                                <th>수정일</th>
                                                 <th class="text-end">관리</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<% for(Board b : bList){%>
+                                        	<% for(Banner b : bList){%>
                                         		<tr>
-	                                                <td><%= b.getBoardNumber() %></td>
-	                                                <td><%= b.getBoardTitle() %></td>
-                                                    <td><%= b.getBoardAddDate() %></td>	                                               
+	                                                <td><%= b.getBanId() %></td>
+	                                                <td><%= b.getBanName() %></td>
+                                                    <td><%= b.getBanAddDate() %></td>	                                               
+                                                    <td><%= b.getBanEditDate() %></td>	                                               
 	                                                <td class="text-end">
 	                                                    <a href="edit-customer.html"
 	                                                        class="btn btn-sm btn-white text-success me-2"><i

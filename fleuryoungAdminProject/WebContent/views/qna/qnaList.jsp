@@ -20,16 +20,16 @@
                         <div class="col">
                             <h3 class="page-title">QnA</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"></a>고센터
+                                <li class="breadcrumb-item"><a href="#"></a>고객센터
                                 </li>
                                 <li class="breadcrumb-item active">QnA</li>
                             </ul>
                         </div>
-                        <!-- <div class="col-auto">
+                        <div class="col-auto">
                             <a href="add-customer.html" class="btn btn-primary me-1">
                                 <i class="fas fa-plus"></i>
                             </a>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="row">
