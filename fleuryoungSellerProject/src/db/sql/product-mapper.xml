@@ -3,7 +3,8 @@
 <properties>
 <entry key="selectProductList">
 SELECT
-      	  (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
+		  P_ID
+      	, (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
     	, P_NAME
     	, P_NETPRICE
     	, P_STOCK
@@ -74,7 +75,7 @@ INSERT
         )
 VALUES
         (
-        seq_product.CURRVAL
+       (select Last_number-1 PRODUCT from user_sequences where sequence_name='SEQ_PRODUCT')
         , ?
         , ?
         , ?
@@ -101,7 +102,7 @@ VALUES
         (
           SEQ_1ST_OPTION.NEXTVAL
         , ?
-        , SEQ_PRODUCT.CURRVAL
+        , (select Last_number-1 PRODUCT from user_sequences where sequence_name='SEQ_PRODUCT')
         )
         
 </entry>
@@ -121,7 +122,7 @@ VALUES
         , ?
         , ?
         , ?
-        , SEQ_1ST_OPTION.CURRVAL
+        , (select Last_number-1 OPTION_1ST from user_sequences where sequence_name='SEQ_1ST_OPTION')
         )
 </entry>
 
@@ -134,9 +135,61 @@ INSERT
   		)
 VALUES
 		(
-		  SEQ_PRODUCT.CURRVAL
+		  (select Last_number-1 PRODUCT from user_sequences where sequence_name='SEQ_PRODUCT')
 		, ?
 		)
 </entry>
+
+<entry key="selectProduct">
+SELECT 
+		P.P_ID
+		,P_NAME
+		,P_NETPRICE
+		,P_DETAIL
+		,P_STOCK
+		,P_RETURN_YN
+		,P_TAG_YN
+		,P_DAY_DELIVERY
+		,P_GIFT,SEL_NO
+		,CATEGORY_NO
+        ,(SELECT COUNT(*) FROM TB_1ST_OPTION O WHERE O.P_ID = P.P_ID) optionOne
+        ,P_IMG1
+        ,P_IMG2
+        ,P_IMG3
+        ,P_IMG4
+        ,P_IMG5
+        ,P_IMG6
+        ,P_IMG7
+        ,P_IMG8
+        ,P_IMG9
+        ,P_IMG10
+        ,NVL((SELECT DISCOUNT_RATE FROM TB_DISCOUNT D WHERE P.P_ID = D.P_ID),0) DISCOUNT_RATE
+  FROM 
+  		TB_PRODUCT P
+  JOIN  TB_PRODUCT_IMG I ON(P.P_ID = I.P_ID)
+  WHERE P.P_ID = ?
+</entry>
+
+<entry key="selectOptionOne">
+
+SELECT 
+       OPTION_1ND_NO
+     , OPTION_TITLE
+     , P_ID
+  FROM TB_1ST_OPTION
+ WHERE P_ID =?
+
+</entry>
+
+<entry key="selectOptionTwo">
+SELECT 
+   	 	  OPTION_2ND_NO
+    	, OPTION_2ND_CONTENT
+    	, OPTION_2ND_PRICE
+    	, OPTION_2ND_STOCK
+    	, OPTION_1ND_NO
+  FROM TB_2ND_OPTION
+ WHERE OPTION_1ND_NO = ?
+ </entry>
 
 </properties>

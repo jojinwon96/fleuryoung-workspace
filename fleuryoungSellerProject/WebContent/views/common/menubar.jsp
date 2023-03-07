@@ -9,6 +9,79 @@
     String alertMsg = (String)session.getAttribute("alertMsg");
     int a = 0;
     %>
+
+    <%
+	int menuNo = Integer.parseInt((String)request.getAttribute("menuNo"));
+	String active1 = "";
+	String active2 = "";
+	String active3 = "";
+	String active3_1 = "";
+	String active3_2 = "";
+	String active3_3 = "";
+	String active3_4 = "";
+	String active3_5 = "";
+	String active3_6 = "";
+	String active3_7 = "";
+	String active4 = "";
+	String active4_1 = "";
+	String active4_2 = "";
+	String active4_3 = "";
+	String active5 = "";
+	
+	switch(menuNo){
+	case 1:
+		active1 = "active ";
+		break;
+	case 2:
+		active2 = "active ";
+		break;
+	case 3:
+        active3 = "active ";
+        active3_1 = "active ";
+        break;
+	case 4:
+    active3 = "active ";
+    active3_2 = "active ";
+    break;
+	case 5:
+    active3 = "active ";
+    active3_3 = "active ";
+    break;
+	case 6:
+    active3 = "active ";
+    active3_4 = "active ";
+    break;
+	case 7:
+    active3 = "active ";
+    active3_5 = "active ";
+    break;
+	case 8:
+    active3 = "active ";
+    active3_6 = "active ";
+    break;
+	case 9:
+    active3 = "active ";
+    active3_7 = "active ";
+    break;
+	case 10:
+    active4 = "active ";
+    active4_1 = "active ";
+    break;
+    case 11:
+    active4 = "active ";
+    active4_2 = "active ";
+    break;
+    case 12:
+    active4 = "active ";
+    active4_3 = "active ";
+    break;
+    case 13:
+    active5 = "active ";
+    break;
+    
+		
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,42 +198,39 @@
                 <div class="sidebar-inner slimscroll">
                     <div id="sidebar-menu" class="sidebar-menu">
                         <ul>
-                            <li class="active">
+                            <li class="<%=active1%>">
                                 <a href="<%= contextPath %>"><i data-feather="home"></i> <span>대시보드</span></a>
                             </li>
-                            <li class="submenu">
+                            <li class="<%=active2%>">
                                 <a href="<%=contextPath%>/productList.pr?selNo=<%= loginSeller.getSelNo() %>"><i data-feather="clipboard"></i> <span> 상품관리</span></a>
                             </li>
-                            <li class="submenu">
+                            <li class="<%=active3%>submenu">
                                 <a href="#"><i data-feather="airplay"></i> <span> 판매관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="#">송장 등록</a></li>
-                                    <li><a href="#">송장 관리</a></li>
-                                    <li><a href="#">미결제 확인</a></li>
-                                    <li><a href="#">구매확정 내역</a></li>
-                                    <li><a href="#">취소관리 </a></li>
-                                    <li><a href="#">반품관리 </a></li>
-                                    <li><a href="#">교환관리 </a></li>
+                                    <li><a href="#"class="<%=active3_1%>">송장 등록</a></li>
+                                    <li><a href="#"class="<%=active3_2%>">송장 관리</a></li>
+                                    <li><a href="#"class="<%=active3_3%>">미결제 확인</a></li>
+                                    <li><a href="#"class="<%=active3_4%>">구매확정 내역</a></li>
+                                    <li><a href="#"class="<%=active3_5%>">취소관리 </a></li>
+                                    <li><a href="#"class="<%=active3_6%>">반품관리 </a></li>
+                                    <li><a href="#"class="<%=active3_7%>">교환관리 </a></li>
                                 </ul>
                             </li>
     
-                            <li class="submenu">
-                                <a href="#"><i data-feather="clipboard"></i> <span>정산관리</span></a>
-                            </li>
-                            <li class="submenu">
+                            
+                            <li class="<%=active4%>submenu">
                                 <a href="#"><i data-feather="clipboard"></i> <span>Q&A관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="#">문의 관리</a></li>
-                                    <li><a href="#">리뷰 관리</a></li>
-                                    <li><a href="#">관리자 문의</a></li>
+                                    <li><a href="#" class="<%=active4_1%>">문의 관리</a></li>
+                                    <li><a href="#" class="<%=active4_2%>">리뷰 관리</a></li>
+                                    <li><a href="#" class="<%=active4_3%>">관리자 문의</a></li>
                                 </ul>
                             </li>
-                            <li class="submenu">
+                            <li class="<%=active5%>">
                                 <a href="#"><i data-feather="clipboard"></i> <span>통계</span></a>
                             </li>
-                            <li class="submenu">
                         </ul>
                     </div>
                 </div>

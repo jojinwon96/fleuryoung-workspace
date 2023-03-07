@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -148,6 +150,7 @@ public class ProductInsertController extends HttpServlet {
 										));
 							}
 							opTwoResult *= new ProductService().insertOptionTwo(ot_2_list);
+							ot_2_list.clear();
 						}
 					}
 				}
@@ -179,7 +182,6 @@ public class ProductInsertController extends HttpServlet {
 				
 				if(dResult*prResult*opTwoResult*opOneResult*piResult > 0) {
 					// 성공
-					new ProductService().transaction();
 					request.getSession().setAttribute("alertMsg", "상품등록이 완료되었습니다.");					
 					response.sendRedirect(request.getContextPath() + "/productList.pr");
 				}else {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.product.model.dao.ProductDao;
 import com.kh.product.model.vo.Category;
+import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
 
@@ -41,11 +42,11 @@ public class ProductService {
 	public int insertProduct(Product p) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertProduct(conn, p);
-//		if(result > 0) {
-//			commit(conn);
-//		}else {
-//			rollback(conn);
-//		}
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -56,6 +57,11 @@ public class ProductService {
 	public int insertOptionOne(String title) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertOptionOne(conn,title);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -63,6 +69,11 @@ public class ProductService {
 	public int insertOptionTwo(ArrayList<OptionTwo> list) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertOptionTwo(conn,list);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -70,6 +81,11 @@ public class ProductService {
 	public int insertProductImg(ArrayList<String> list) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertProductImg(conn, list);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
@@ -77,12 +93,37 @@ public class ProductService {
 	public int insertDiscount(int dc) {
 		Connection conn = getConnection();
 		int result = new ProductDao().insertDiscount(conn, dc);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
+
+	public Product selectProduct(int pno) {
+		
+		Connection conn = getConnection();
+		Product p = new ProductDao().selectProduct(conn, pno);
+		close(conn);
+		
+		return p;
+	}
+	public ArrayList<OptionOne> selectOptionOne(int pno) {
+		
+		Connection conn = getConnection();
+		ArrayList<OptionOne> list = new ProductDao().selectOptionOne(conn, pno);
+		close(conn);
+		
+		return list;
+	}
+	public ArrayList<OptionTwo> selectOptionTwo(int[] pno) {
 	
-	public void transaction() {
-		commit(getConnection());
-		close(getConnection());
+	Connection conn = getConnection();
+	ArrayList<OptionTwo> list = new ProductDao().selectOptionTwo(conn, pno);
+	close(conn);
+	
+	return list;
 	}
 }

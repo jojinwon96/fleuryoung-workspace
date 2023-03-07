@@ -32,7 +32,7 @@ public class ProductListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setAttribute("menuNo", "2");
 		Seller sel = (Seller)(request.getSession().getAttribute("loginSeller"));
 		int selNo = sel.getSelNo();
 //		if(request.getSession().getAttribute("list") != null) {

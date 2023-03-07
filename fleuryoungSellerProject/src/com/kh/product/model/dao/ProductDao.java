@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.product.model.vo.Category;
+import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
 import com.kh.seller.model.dao.SellerDao;
@@ -45,7 +46,8 @@ private Properties prop = new Properties();
 			pstmt.setInt(1, selNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				list.add(new Product(rset.getString("P_PICTURE")
+				list.add(new Product(rset.getInt("P_ID")
+									,rset.getString("P_PICTURE")
 									,rset.getString("P_NAME")
 									,rset.getInt("P_NETPRICE")
 									,rset.getInt("P_STOCK")
@@ -214,4 +216,119 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+	
+	public Product selectProduct(Connection conn, int pno) {
+		Product p = new Product();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectProduct");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Product(rset.getInt("P_ID")
+									, rset.getString("P_NAME")
+									, rset.getInt("P_NETPRICE")
+									, rset.getString("P_DETAIL")
+									, rset.getInt("P_STOCK")
+									, rset.getString("P_ENROLL_DATE")
+									, rset.getString("P_RETURN_YN")
+									, rset.getString("P_TAG_YN")
+									, rset.getInt("P_SALES")
+									, rset.getString("P_DAY_DELIVERY")
+									, rset.getString("P_GIFT")
+									, rset.getInt("SEL_NO")
+									, rset.getInt("optionOne")
+									, rset.getString("CATEGORY_NO")
+									, rset.getString("P_IMG1")
+									, rset.getString("P_IMG2")
+									, rset.getString("P_IMG3")
+									, rset.getString("P_IMG4")
+									, rset.getString("P_IMG5")
+									, rset.getString("P_IMG6")
+									, rset.getString("P_IMG7")
+									, rset.getString("P_IMG8")
+									, rset.getString("P_IMG9")
+									, rset.getString("P_IMG10")
+									, rset.getInt("DISCOUNT_RATE"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return p;
+	}
+	
+	public ArrayList<OptionOne> selectOptionOne(Connection conn, int pno) {
+		ArrayList<OptionOne> list = new ArrayList<OptionOne>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectOptionOne");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new OptionOne(rset.getInt("OPTION_1ND_NO")
+									 , rset.getString("OPTION_TITLE")
+									 , rset.getInt("P_ID")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+	
+	public ArrayList<OptionTwo> selectOptionTwo(Connection conn, int[] pno) {
+		ArrayList<OptionTwo> list = new ArrayList<OptionTwo>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectOptionTwo");
+		
+		try {
+			for(int i = 0; i < pno.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pno[i]);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new OptionTwo(rset.getInt("OPTION_1ND_NO")
+							, rset.getString("OPTION_TITLE")
+							, rset.getInt("P_ID")
+							, rset.getInt("OPTION_1ND_NO")
+							, rset.getInt("OPTION_1ND_NO")));
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+	
 }

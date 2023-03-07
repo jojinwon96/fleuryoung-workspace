@@ -27,7 +27,7 @@ public class MyPageFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setAttribute("menuNo", "0");
 		request.getRequestDispatcher("views/seller/myPage.jsp").forward(request, response);
 	}
 

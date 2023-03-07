@@ -64,9 +64,17 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
 </div>
 
         <!-- js 호출 -->
+        <script src="resources/js/jquery-3.6.0.min.js"></script>
+        <script src="resources/js/bootstrap.bundle.min.js"></script>
+        <script src="resources/js/feather.min.js"></script>
+        <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
+        <script src="resources/plugins/apexchart/chart-data.js"></script>
+        <script src="resources/js/script.js"></script>
 
         <script>
             $(function(){
+                // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
                 let user_id = ""; 
                 document.getElementById("btnSendEmail").addEventListener("click", function () {
                     console.log("옹ㅇ");
@@ -121,13 +129,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
         })
         
         </script>
-	<script src="resources/js/jquery-3.6.0.min.js"></script>
-    <script src="resources/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/feather.min.js"></script>
-    <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="resources/plugins/apexchart/chart-data.js"></script>
-    <script src="resources/js/script.js"></script>
+
 </body>
 
 </html>

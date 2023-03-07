@@ -26,10 +26,10 @@
                     <input type="hidden" value="<%=loginSeller.getSelImg()%>" name="imgSrc">
                     <input type="hidden" value="<%=loginSeller.getSelNo()%>" name="selNo">
                     <div class="row form-group">
-                        <label for="file" class="col-sm-3 col-form-label input-label">프로필사진</label>
+                        <label for="#" class="col-sm-3 col-form-label input-label">프로필사진</label>
                         <div class="col-sm-9">
                             <div class="d-flex align-items-center">
-                                <label class="avatar avatar-xxl profile-cover-avatar m-0" for="file"
+                                <label class="avatar avatar-xxl profile-cover-avatar m-0" for="fileInput"
                                     onclick="chooseFile();">
                                     <img id="file1" class="avatar-img"
                                         src="<%=contextPath %>/<%=loginSeller.getSelImg() %>"
@@ -162,7 +162,7 @@ chooseFile = function () {
     $("#fileInput").click();
 }
 
-loadImg = function (inputFile, num) {
+function loadImg(inputFile, num) {
 
     if (inputFile.files.length == 1) { // 파일 선택된 경우 => 파일 읽어들임
 
@@ -188,7 +188,7 @@ loadImg = function (inputFile, num) {
     } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
         switch (num) {
             case 1:
-                $("#file1").attr("src", "re"); break;
+                $("#file1").attr("src", "resources/img/seller_img/userImg.png"); break;
         }
     }
 } //loadImg end

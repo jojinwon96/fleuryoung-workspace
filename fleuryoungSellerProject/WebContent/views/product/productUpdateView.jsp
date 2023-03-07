@@ -1,8 +1,12 @@
-<%@page import="com.kh.product.model.vo.Category" %>
+<%@page import="com.kh.product.model.vo.*" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<% ArrayList<Category> clist = (ArrayList<Category>)request.getAttribute("clist");
+<% 
+ArrayList<Category> clist = (ArrayList<Category>)request.getAttribute("clist");
+Product p = (Product)request.getAttribute("p");
+ArrayList<OptionOne> oneList = (ArrayList<OptionOne>)request.getAttribute("oneList");
+ArrayList<OptionTwo> twoList = (ArrayList<OptionTwo>)request.getAttribute("twoList");
 %>
 <!DOCTYPE html>
 <html>
@@ -66,11 +70,21 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="card-title">상품등록</h5>
+								<h5 class="card-title">상세조회 및 수정</h5>
 							</div>
 							<div class="card-body">
-								<form action="<%=contextPath %>/insert.pr" method="post"
+								<form action="<%=contextPath %>/update.pr" method="post"
 									enctype="multipart/form-data"> <!-- 입력 폼 -->
+									
+									<div class="form-group row">
+										<label class="col-form-label col-md-2">등록일</label>
+										<div class="col-md-10">
+											<input id="sumStock" type="number" class="form-control"
+												name="pStock" 
+												required>
+										</div>
+									</div><!-- 등록일 -->
+									
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">카테고리</label>
 										<div class="col-md-10">
@@ -105,12 +119,24 @@
 										</div>
 									</div><!-- 가격 -->
 									<div class="form-group row">
+										<label class="col-form-label col-md-2">상품 총수량</label>
+										<div class="col-md-10">
+											<input id="sumStock" type="number" class="form-control"
+												name="pStock" placeholder="상품 총수량 입력(옵션 입력시 미입력) "
+												required>
+										</div>
+									</div><!-- 판매량 -->
+									
+									<div class="form-group row">
 										<label class="col-form-label col-md-2">상세설명</label>
 										<div class="col-md-10">
 											<input class="form-control" type="file"
 												name="pDetailFile">
 										</div>
 									</div><!-- 상세설명 -->
+
+
+
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">상품 총수량</label>
 										<div class="col-md-10">
@@ -144,82 +170,9 @@
 															옵션별 재고
 														</td>
 													</tr>
-
+													
 												</thead>
 												<tbody id="table_1">
-													<tr id="option_1">
-													<!-- <tr style="display: none;"> -->
-														<td style="display: none;">
-															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' >
-															<button type='button' class='btn btn-primary btn-sm' onclick="add_1()">+</button>
-															<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_1();">-</button>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_1_name' placeholder='옵션 이름을 입력하세요' ></li>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_price' placeholder='추가 비용 입력' ></li>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_1_stock' placeholder='재고수량을 입력하세요' ></li>
-														</td>
-													</tr>
-
-													<tr id="option_2">
-														<!-- <tr style="display: none;"> -->
-															<td style="display: none;">
-																<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요' >
-																<button type='button' class='btn btn-primary btn-sm' onclick="add_2()">+</button>
-																<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_2();">-</button>
-															</td>
-															<td style="display: none;">
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
-																<li style="display: none;"><input type='text' class='form-control' name='p2_2_name' placeholder='옵션 이름을 입력하세요' ></li>
-															</td>
-															<td style="display: none;">
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_price' placeholder='추가 비용 입력' ></li>
-															</td>
-															<td style="display: none;">
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
-																<li style="display: none;"><input type='number' class='form-control' name='p2_2_stock' placeholder='재고수량을 입력하세요' ></li>
-															</td>
-														</tr>
-													<tr>
-
-													<tr id="option_3">
-													<!-- <tr style="display: none;"> -->
-														<td style="display: none;">
-															<input type='text' class='form-control-sm' name='optionTitle' placeholder='1차 옵션을 입력하세요'>
-															<button type='button' class='btn btn-primary btn-sm' onclick="add_3()">+</button>
-															<button id='remove' type='button' class='btn btn-primary btn-sm' onclick="remove_3();">-</button>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
-															<li style="display: none;"><input type='text' class='form-control' name='p2_3_name' placeholder='옵션 이름을 입력하세요' ></li>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_price' placeholder='추가 비용 입력' ></li>
-														</td>
-														<td style="display: none;">
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
-															<li style="display: none;"><input type='number' class='form-control' name='p2_3_stock' placeholder='재고수량을 입력하세요' ></li>
-														</td>
-													</tr>
-													
 													
 													
 
@@ -324,7 +277,7 @@
 										<label class="col-form-label col-md-2">할인율</label>
 										<div class="col-md-10">
 											<span class="radio">
-												<label> <input type="radio" name="discount" value="0"checked>
+												<label> <input type="radio" name="discount" value="null"checked>
 													없음 
 												</label>
 											</span>

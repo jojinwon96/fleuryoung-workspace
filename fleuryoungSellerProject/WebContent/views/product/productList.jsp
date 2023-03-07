@@ -145,7 +145,7 @@
                     </div>
                     <div class="col-auto">
                         <a href="<%=contextPath%>/productInsertForm.pr" class="btn btn-primary me-1">
-                            상폼등록
+                            상품등록
                         </a>
                     </div>
                 </div>
@@ -191,10 +191,8 @@
 	                                                        data-bs-toggle="dropdown" aria-expanded="false"><i
 	                                                            class="fas fa-ellipsis-v"></i></a>
 	                                                    <div class="dropdown-menu dropdown-menu-end">
-	                                                        <a class="dropdown-item" href="edit-invoice.html"><i
-	                                                                class="far fa-edit me-2"></i>상품수정</a>
-	                                                        <a class="dropdown-item" href="view-invoice.html"><i
-	                                                                class="far fa-eye me-2"></i>상품상세조회</a>
+	                                                        <a class="dropdown-item" href="<%=contextPath%>/productUpdateForm.pr?pno=<%=p.getpId()%>"><i
+	                                                                class="far fa-edit me-2"></i>상세조회 및 수정</a>
 	                                                        <a class="dropdown-item" href="javascript:void(0);"><i
 	                                                                class="far fa-trash-alt me-2"></i>상품삭제</a>
 	                                                    </div>

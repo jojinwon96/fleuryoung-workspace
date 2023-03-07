@@ -14,6 +14,7 @@ public class OptionOne {
 		this.optionTitle = optionTitle;
 		this.productNo = productNo;
 	}
+	
 	public int getOptionOneNo() {
 		return optionOneNo;
 	}
