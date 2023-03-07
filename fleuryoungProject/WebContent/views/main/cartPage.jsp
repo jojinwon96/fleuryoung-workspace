@@ -12,7 +12,8 @@
 <head>
     <meta charset="utf-8">
     <title>Fleuryoung</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
+    
+    1<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css">
     <style>
     	.store-name{
     		text-overflow: ellipsis;

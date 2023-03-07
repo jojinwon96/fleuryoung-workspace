@@ -7,7 +7,7 @@ public class Product {
 	private int pId; // 상품번호
 	private String pName; // 상품명
 	private String pNetPrice; // 가격
-	private int pDetail; // 상세설명
+	private int pDetail; // 상세설명	
 	private int pStock; // 총수량
 	private Date enrollDate; // 등록일 
 	private String returnYN; // 환불여부
@@ -22,6 +22,9 @@ public class Product {
 	private int reviewCount; // 조회수
 	private String images;
 	private String storeName;
+	private int discountRate;
+	private int total;
+	
 	
 
 	public Product() {}
@@ -72,6 +75,38 @@ public class Product {
 		this.reviewCount = reviewCount;
 		this.images = images;
 		this.storeName = storeName;
+	}
+	
+	
+
+
+	public Product(String pName, String pNetPrice, String mainImg, int discountRate, int total) {
+		super();
+		this.pName = pName;
+		this.pNetPrice = pNetPrice;
+		this.mainImg = mainImg;
+		this.discountRate = discountRate;
+		this.total = total;
+	}
+
+
+	public int getDiscountRate() {
+		return discountRate;
+	}
+
+
+	public void setDiscountRate(int discountRate) {
+		this.discountRate = discountRate;
+	}
+
+
+	public int getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 

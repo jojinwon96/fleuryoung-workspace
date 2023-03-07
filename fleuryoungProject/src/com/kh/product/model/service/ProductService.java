@@ -92,4 +92,14 @@ public class ProductService {
 
 	}
 
+	public ArrayList<Product> wishList(String mId) {
+		Connection conn = getConnection();
+
+		ArrayList<Product> list = new ProductDao(). wishList(conn, mId);
+
+		close(conn);
+
+		return list;
+	}
+
 }

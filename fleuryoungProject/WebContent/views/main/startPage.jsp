@@ -6,8 +6,6 @@
 	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
 	
 	String title = (String)request.getAttribute("title");
-	
-	
 %>
 <!DOCTYPE html>
 <html>

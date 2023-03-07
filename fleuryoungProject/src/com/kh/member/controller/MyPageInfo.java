@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.CouponService;
-import com.kh.member.model.vo.Coupon;
-
 /**
- * Servlet implementation class MyPageMainController
+ * Servlet implementation class MyPageInfo
  */
-@WebServlet("/myPageMain.my")
-public class MyPageMainController extends HttpServlet {
+@WebServlet("/myPageInfo.my")
+public class MyPageInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageMainController() {
+    public MyPageInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +29,17 @@ public class MyPageMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Coupon coupon = new CouponService().countCoupon("userId");
-//		HttpSession session = request.getSession();
-//		session.setAttribute("coupon", coupon);
+		HttpSession session = request.getSession();
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageMain.jsp");
-		view.forward(request, response);
+		if(session.getAttribute("loginUser") == null) { // 로그인 전
+			session.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		} else { // 로그인 후
+			// 포워딩 방식
+			RequestDispatcher view = request.getRequestDispatcher("views/main/myPageInfo.jsp");
+			view.forward(request, response);
+		}
 	}
 
 	/**

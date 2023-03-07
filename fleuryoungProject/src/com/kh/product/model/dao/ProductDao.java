@@ -251,6 +251,37 @@ public class ProductDao {
 		return inquiryList;
 	}
 
+	public ArrayList<Product> wishList(Connection conn, String mId) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("wishList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(new Product(rs.getString("P_NAME")
+								   , (rs.getInt("P_NETPRICE") + "") 
+								   , rs.getString("P_IMG1")
+							 	   , rs.getInt("DISCOUNT")
+							       , rs.getInt("TOTAL")
+							         ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 }
 
 

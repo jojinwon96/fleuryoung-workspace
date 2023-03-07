@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.CouponService;
-import com.kh.member.model.vo.Coupon;
-
 /**
- * Servlet implementation class MyPageMainController
+ * Servlet implementation class MyPageReviewWriteController
  */
-@WebServlet("/myPageMain.my")
-public class MyPageMainController extends HttpServlet {
+@WebServlet("/myPageReviewWrite.my")
+public class MyPageReviewWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageMainController() {
+    public MyPageReviewWriteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +29,7 @@ public class MyPageMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Coupon coupon = new CouponService().countCoupon("userId");
-//		HttpSession session = request.getSession();
-//		session.setAttribute("coupon", coupon);
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageMain.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageReviewWrite.jsp");
 		view.forward(request, response);
 	}
 

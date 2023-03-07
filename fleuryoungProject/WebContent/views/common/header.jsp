@@ -1,3 +1,4 @@
+<%@page import="com.kh.member.model.vo.Coupon"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.kh.member.model.vo.Member"%>
@@ -91,7 +92,7 @@
 						</div>
 						<form action="<%= contextPath %>/myPageMain.my" method="post">
 						<div class="myPage-panel">
-							<button type="button" class="mypage-btn"></button>
+							<button type="submit" class="mypage-btn"></button>
 						</div>
 						</form>
 					</div>
