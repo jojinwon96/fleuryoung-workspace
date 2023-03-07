@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="findOrderNo">
+	SELECT 
+	ORD_ID
+	FROM TB_NON_MEMBER_ORDER
+	WHERE ORD_RECEIVER_NAME = ? AND ORD_RECEIVER_PHONE = ?
+	</entry>
+
+
+
+
+</properties>

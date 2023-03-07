@@ -12,7 +12,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
@@ -31,11 +31,11 @@
 	<% } %>
 
 	<div class="section pb-5 pt-5 pt-sm-2 text-center">
-		<h6 class="mb-0 pb-3">
+		<h6 class="mb-0 pb-3" style="margin-left:50px">
 			<span>회원로그인 </span> <span>비회원 주문조회</span>
 		</h6>
 		<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-		<label for="reg-log"></label>
+		<label for="reg-log" ></label>
 		<div class="card-3d-wrap mx-auto">
 			<div class="card-3d-wrapper">
 				<div class="card-front">

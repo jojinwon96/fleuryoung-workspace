@@ -107,13 +107,13 @@ a{
         <!-- 철현이형 여기서부터 하시면 되요~ -->
 
         <div id="body">
-            <div id="header" style=" margin-right: 650px;">
+            <div id="header" >
                 <h1 align="center"><b> 아이디 조회 결과</b>  </h1>
                 <hr class="separator separator--line"  align="center">
             </div>
            
 
-            <div id="contentBody" style=" margin-right: 540px;">
+            <div id="contentBody" >
                 <br>
                 <div id="message">
                     <h5 align="center" style="display: inline-block;"><b>고객님의 아이디는</b></h5>

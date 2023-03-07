@@ -124,16 +124,16 @@ public class MemberDao {
 		ResultSet rs = null;
 		
 		String sql = prop.getProperty("findId");
-		System.out.println("다오");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userName);
 			pstmt.setString(2, userEmail);
 			
 			rs = pstmt.executeQuery();
+			System.out.println(rs);
 			
 			if (rs.next()) {
+				
 				member = new Member(rs.getString("MEM_ID"));
 			}
 		} catch (SQLException e) {
@@ -142,7 +142,6 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(member);
 		return member;
 
 	}

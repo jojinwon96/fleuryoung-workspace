@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문번호 찾기</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -47,7 +47,7 @@
   -moz-transition: -moz-transform 300ms, box-shadow 300ms;
   transition: transform 300ms, box-shadow 300ms;
   box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
-  margin-top: 0px;
+  margin-top: 30px;
 }
 .login1::before, .login1::after {
   content: "";
@@ -148,11 +148,12 @@ input::placeholder {
 #headerLetter{
     color: rgb(126, 120, 120);
     font-weight: bolder;
-    font-size: 50px
+    font-size: 40px
 }
 #orderNoHeader{
-    padding-top: 80px;
+    padding-top: 30px;
     text-align: center;
+    margin-bottom:30px
 }
 /*
 a {
@@ -175,18 +176,35 @@ a {
 <div id="contentBox">
 
             <div id="orderNoHeader">
-                <h1 id="headerLetter">주문번호 찾기</h1>
+                <h2 id="headerLetter">주문번호 찾기</h2>
             </div>
 
 
-            <form action="/fleuryoungProject/FindOrderNo.me" class="login1">
+            <form action="/fleuryoungProject/FindOrderNo.me" class="login1" name="orderNoFind">
                 <input type="text" placeholder="수령자 이름을 입력해주세요" name="receiverName">
-                <input type="password" placeholder="수령자 전화번호를 입력해주세요" name="receiverPhone">
-                <button type="submit" id="">주문번호 찾기</button>
+                <input type="text" placeholder="수령자 전화번호를 -없이 숫자만 입력해주세요" name="receiverPhone">
+                <button type="submit" id="findOrderNoBtn" onClick="return orderNo_search()">주문번호 찾기</button>
               </form> 
+              
+               <script>
+          function orderNo_search(){ 
+          var frm = document.orderNoFind;
+
+          if (frm.receiverName.value.length < 1) {
+            alert("이름을 입력해주세요");
+            return false;
+          }
+          if (frm.receiverPhone.value.length < 1) {
+            alert("이메일을 입력해주세요");
+            return false;
+          }
+          }
+          </script>
         </div>
         
       </div>
+      
+      
         
 
 </body>

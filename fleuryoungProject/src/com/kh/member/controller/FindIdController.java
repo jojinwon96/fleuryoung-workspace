@@ -43,7 +43,6 @@ public class FindIdController extends HttpServlet {
 			
 			
 			if (idFind == null) {
-				//System.out.println("결과도 안나옴");
 				
 				if (userName != null && userEmail != null) {
 				  response.setContentType("text/html; charset=UTF-8");
@@ -56,7 +55,6 @@ public class FindIdController extends HttpServlet {
 				}
 				
 			} else {
-				//ystem.out.println("일단 결과는 나옴");
 				HttpSession session = request.getSession();
 				session.setAttribute("idFind", idFind);
 				response.sendRedirect(request.getContextPath() + "/views/main/FindIdResult.jsp");
