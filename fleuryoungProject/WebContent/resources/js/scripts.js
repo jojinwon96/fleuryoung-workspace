@@ -948,8 +948,20 @@ $(document).ready(function () {
 
 
 
+// $('.type-link').on('click', function (event) {
+//     event.preventDefault();
+//     var value = $(this).attr('data-value');
+//     location.href = "<%=contextPath%>/typePage.mi?value=" + value;
+// });
 
 
+$('a.type-link').on('click', function (event) {
+    event.preventDefault();
+    var form = $('#myForm');
+    var value = $(this).find('input[name="value"]').val();
+    form.find('input[name="value"]').val(value);
+    form.submit();
+});
 
 
 

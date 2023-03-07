@@ -23,7 +23,10 @@
 	rel="stylesheet">
 	 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/btn5.css?after">
 	
+	<!-- 
    <script src="${pageContext.request.contextPath}/resources/js/mini/mini_drop.js"></script>
+	
+	 -->
   
   <!-- 부트스트랩 아이콘 출력 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -132,7 +135,7 @@
 			<div class="header-nav-panel">
 				<ul class="header-nav-ul">
 					<li class="best-li"><a href="<%=contextPath%>/bestPage.mi"><span class="best-span">베스트</span></a></li>
-					<li class="type-li"><a href="<%=contextPath%>/typePage.mi"><span class="type-span">종류별</span></a></li>
+					<li class="type-li"><a href="#"><span class="type-span">종류별</span></a></li>
 					<li class="present-li"><a href="<%=contextPath%>/gift.gi"><span class="present-span">선물</span></a></li>
 					<li class="delivery-li"><a href="<%=contextPath%>/delivery.de"><span class="delivery-span">당일배송</span></a>
 					</li>
@@ -140,7 +143,7 @@
 					<div class="rank-panel">
 						<ul class="rank-ul">
 							<!-- 자바에서 -->
-							<li><a href="#"><span>1</span>장미꽃</a></li>
+							<li><a href=""><span>1</span>장미꽃</a></li>
 							<li><a href="#"><span>2</span>나팔꽃</a></li>
 							<li><a href="#"><span>3</span>무궁화</a></li>
 							<li><a href="#"><span>4</span>튤립</a></li>
@@ -159,40 +162,72 @@
 
 				</ul>
 			</div>
-			<div class="header-nav-hidden-panel" style="display: none;">
+			
+			<div class="header-nav-hidden-panel"  style="display: none;">
+			
+			<form id="myForm" action="<%=contextPath%>/typePage.mi" method="post" >
+			
 				<div class="header-type-panel">
 					<ul>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="<%=contextPath%>/typePage.mi"><span>바구니</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>꽃다발</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>주문제작</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>축하화환</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>근조화환</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>동/서양란</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>수경식물</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>생화</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>반려식물</span></a></li>
-						<li><img
-							src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png"
-							alt=""><a href="#"><span>조화</span></a></li>
-
+					
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>꽃바구니</span>
+    <input type="hidden" name="value" value="1">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>꽃다발</span>
+     <input type="hidden" name="value" value="2">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>축하화환</span>
+     <input type="hidden" name="value" value="3">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>근조화환</span>
+     <input type="hidden" name="value" value="4">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>동양란</span>
+     <input type="hidden" name="value" value="7">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>서양란</span>
+     <input type="hidden" name="value" value="8">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>수경식물</span>
+     <input type="hidden" name="value" value="9">
+  </a>
+</li>
+<li>
+  <a href="<%=contextPath%>/typePage.mi" class="type-link">
+    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <span>조화</span>
+     <input type="hidden" name="value" value="12">
+  </a>
+</li>
+					
+		
 						<!-- 꽃바구니 -->
 						<!-- 꽃다발 -->
 						<!-- 주문제작 -->
@@ -205,10 +240,25 @@
 						<!-- 조화 -->
 					</ul>
 				</div>
+				<button type="submit" style="display: none"></button>
+</form>
+				
 			</div>
 	</div>
 	</header>
+	
 	</div>
+
+
+
+
+
+
+
+
+
+
+
 
 	<div class="rank-list-panel default-rank-list-panel"
 		style="display: none;">

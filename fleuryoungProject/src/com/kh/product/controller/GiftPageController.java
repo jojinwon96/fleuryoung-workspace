@@ -38,6 +38,7 @@ request.setCharacterEncoding("utf-8");
 		
 		ArrayList<Product> list;
 		String title = "최신순";
+		int titleValue = 1;
 		
 		ProductService pService = new ProductService();
 		
@@ -49,12 +50,19 @@ request.setCharacterEncoding("utf-8");
 		 if((giftName == null || giftName.equals("전체")) && request.getParameter("orderSelect") == null) {
 			 // 버튼 선택x, 전체 선택했을 경우 &&  최신순인 경우
 			
+			
 			list = pService.selectGiftAll(orderSelect);
 			 
+			System.out.println("버튼x  최신순 -------- 최소 로드");
+			
+			
 				
 		 }else if(giftName == null && request.getParameter("orderSelect") != null){
 			 // 버튼 선택x && 최신순,판매순,리뷰순 선택한 경우
-			 System.out.println("@@@@@@@@@@@@@@" + orderSelect);
+			
+			 System.out.println("버튼선택 xx " + giftName + " select는 oo   " + orderSelect);
+
+			
 			 
 			 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
 			 
@@ -62,10 +70,13 @@ request.setCharacterEncoding("utf-8");
 			 
 			 if (orderSelect == 1) {
 					title = "최신순";
+					
 				} else if(orderSelect == 2) {
 					title = "판매순";
+					titleValue = 2;
 				} else {
 					title = "리뷰순";
+					titleValue = 3;
 				}
 			 
 			 
@@ -73,6 +84,10 @@ request.setCharacterEncoding("utf-8");
 			 
 		 } else if(giftName != null && request.getParameter("orderSelect") == null){
 			 // 버튼 선택 && 최신순,판매순,리뷰순은 선택x
+			 
+			 
+			 System.out.println("버튼선택 oo " + giftName + " select는 xx   " + orderSelect);
+			 
 			 
 			 if(giftName.equals("전체")) {
 				 list = pService.selectGiftAll(orderSelect);
@@ -84,20 +99,25 @@ request.setCharacterEncoding("utf-8");
 			 // 버튼 + 옵션 선택o
 			 
 			 
+			 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
+			 System.out.println("버튼선택 oo " + giftName + " select는 oo   " + orderSelect);
+			 
 			 if(giftName.equals("전체")) {
 				 list = pService.selectGiftAll(orderSelect);
 				 
 				 
 			 }else {
-				 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
 				 list = pService.selectGiftTypeOption(giftName,orderSelect);
-				 
+				
 				 if (orderSelect == 1) {
 						title = "최신순";
+						
 					} else if(orderSelect == 2) {
 						title = "판매순";
+						titleValue = 2;
 					} else {
 						title = "리뷰순";
+						titleValue = 3;
 					}
 				 
 			 }
@@ -108,10 +128,8 @@ request.setCharacterEncoding("utf-8");
 		 }
 		 
 		 
-		 
-		
-		 
-		 
+
+		 request.setAttribute("orderSelect", orderSelect);
 		 	request.setAttribute("title", title);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/type/giftPage.jsp").forward(request, response);

@@ -272,6 +272,17 @@ Connection conn = getConnection();
 		return list;
 	}
 
+	public ArrayList<Product> selectProductTypeOrderBy(int value, int orderSelect) {
+	
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectProductTypeOrderBy(conn,value,orderSelect);
+		
+		close(conn);
+		
+		return list;
+	}
+
 
 
 

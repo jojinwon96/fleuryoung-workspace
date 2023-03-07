@@ -540,7 +540,6 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		System.out.println("------------------------" + orderSelect + "--------------------------------");
 		
 		if(orderSelect==2) { // 판매순
 			SQL = "selectGiftAllSale";
@@ -632,6 +631,48 @@ public class ProductDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, giftName);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(new Product(rs.getInt("P_ID"), rs.getString("P_NAME"), rs.getInt("REVIEW_RATING"),
+						rs.getInt("COUNT"), rs.getString("P_NETPRICE"), rs.getString("P_IMG1"), rs.getString("P_DAY_DELIVERY")));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Product> selectProductTypeOrderBy(Connection conn, int value, int orderSelect) {
+		
+		String SQL = "";
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+
+		if(orderSelect==2) { // 판매순
+			SQL = "selectProductTypeSale";
+		}else if(orderSelect==3) { //  리뷰순
+			SQL = "selectProductTypeReview";
+		}else { // 최신순
+			SQL = "selectProductType";
+		}
+
+		String sql = prop.getProperty(SQL);
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, value);
 			
 			rs = pstmt.executeQuery();
 

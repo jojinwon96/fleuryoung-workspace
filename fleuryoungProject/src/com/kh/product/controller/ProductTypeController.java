@@ -42,22 +42,53 @@ public class ProductTypeController extends HttpServlet {
 		
 		ProductService pService = new ProductService();
 		
-	
 		
-	    String categoryDetail = request.getParameter("categoryDetail");
+		String title = "최신순";
+		
+	
+		int value = Integer.parseInt(request.getParameter("value"));
+		int orderSelect  = 1;
+		
+		
+		// 아직 최신순등 선택안했을때
+	    if (request.getParameter("orderSelect") == null) {
+	   
 	    
-	    if (request.getParameter("categoryNo") != null) {
-	      // categoryName이 전달된 경우
-			int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
-	    	list = pService.selectProductType(categoryNo);
-	    	
+	  
+	    	list = pService.selectProductType(value);
+	    
+	    	 
+	    	 
+	    	 
 	    } else  {
-	      // 값이 전달되지 않은 경우 처리할 내용
-	    	list = pService.selectDeliveryAll();
+	      
+	    	
+	    	 orderSelect  = Integer.parseInt(request.getParameter("orderSelect"));
+	 	    
+	    	
+	    		
+	    	 list = pService.selectProductTypeOrderBy(value,orderSelect);
+			 
+			 if (orderSelect == 1) {
+					title = "최신순";
+				} else if(orderSelect == 2) {
+					title = "판매순";
+				} else {
+					title = "리뷰순";
+				}
+	    	
+		
+	    	
 	    }
 		
-		
-	
+	    
+	    
+	    
+	    
+	    
+	    request.setAttribute("orderSelect", orderSelect);
+	 	request.setAttribute("title", title);
+	 	 request.setAttribute("value", value);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/type/productType.jsp").forward(request, response);
 		
