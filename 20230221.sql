@@ -218,7 +218,6 @@ NOCACHE;
 --2占�?_?占쏙옙?占쏙옙
 CREATE SEQUENCE SEQ_2ST_OPTION
 NOCACHE;
-
 --?占쏙옙?占쏙옙?占쏙옙占�?
 CREATE SEQUENCE SEQ_PRODUCT_REPORT
 NOCACHE;
@@ -313,7 +312,7 @@ COMMENT ON COLUMN TB_BANNER.BANNER_SHORTCUT IS '諛붾줈占�?占�? 留곹�
 COMMENT ON COLUMN TB_BANNER.BANNER_REGDATE IS '?占쏙옙濡앹씪';
 COMMENT ON COLUMN TB_BANNER.BANNER_UPDATE IS '?占쏙옙?占쏙옙?占쏙옙';
 --------------------------------------------------------------
-
+DROP TABLE TB_SELLER;
 -- ?占쏙옙留ㅼ옄
 CREATE TABLE TB_SELLER (
 	SEL_NO NUMBER  NOT NULL,
@@ -479,6 +478,8 @@ COMMENT ON COLUMN TB_ADM_INQ.ADM_INQ_STATUS_YN IS 'Y/N';
 COMMENT ON COLUMN TB_ADM_INQ.SEL_NO IS '?占쏙옙留ㅼ옄ID';
 ------------------------------------------------------------------
 
+DROP TABLE TB_PRODUCT;
+
 -- ?占쏙옙?占쏙옙
 CREATE TABLE TB_PRODUCT (
 	P_ID	NUMBER	DEFAULT 0	NOT NULL,
@@ -495,6 +496,8 @@ CREATE TABLE TB_PRODUCT (
 	SEL_NO	VARCHAR2(12)	DEFAULT 0	NOT NULL,
 	CATEGORY_NO	NUMBER	DEFAULT 0	NOT NULL
 );
+
+alter table TB_PRODUCT add primary key (P_ID);
 COMMENT ON COLUMN TB_PRODUCT.P_ID IS '?占쏙옙?占쏙옙踰덊샇';
 COMMENT ON COLUMN TB_PRODUCT.P_NAME IS '?占쏙옙?占쏙옙占�?';
 COMMENT ON COLUMN TB_PRODUCT.P_NETPRICE IS '占�?占�?';
@@ -611,6 +614,10 @@ ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_2ND_TITLE VARCHAR2(30);
 ALTER TABLE TB_MEM_ORDER_DETAIL ADD OD_PRICE NUMBER;
 ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_PRICE NUMBER;
 ALTER TABLE TB_MEM_ORDER_DETAIL ADD OPTION_2ND_CONTENT VARCHAR2(50);
+ALTER TABLE TB_MEM_ORDER_DETAIL ADD P_ID NUMBER(30);
+
+ALTER TABLE TB_MEM_ORDER_DETAIL DROP COLUMN P_ID;
+COMMIT;
 
 alter table TB_MEM_ORDER_DETAIL
  add constraint TB_MEM_ORDER_DETAIL_fk_PID foreign key (P_ID) references TB_PRODUCT (P_ID);
@@ -706,6 +713,7 @@ COMMENT ON COLUMN TB_PRODUCT_IMG.P_IMG10 IS '?占쏙옙誘몌옙?寃쎈줈10';
 ------------------------------------------------------------------
 
 --?占쏙옙?占쏙옙_1李⑥샃?占쏙옙
+DROP TABLE TB_1ST_OPTION;
 CREATE TABLE TB_1ST_OPTION (
 	OPTION_1ND_NO NUMBER NOT NULL PRIMARY KEY,
 	OPTION_TITLE VARCHAR2(1000)	DEFAULT ''	NOT NULL,
@@ -713,7 +721,7 @@ CREATE TABLE TB_1ST_OPTION (
 );
 
 ALTER TABLE TB_1ST_OPTION
-ADD CONSTRAINT FK_TB_PRODUCT FOREIGN KEY(P_ID) REFERENCES TB_PRODUCT (P_ID);
+    ADD CONSTRAINT FK_TB_PRODUCT FOREIGN KEY(P_ID) REFERENCES TB_PRODUCT (P_ID);
 
 COMMENT ON COLUMN TB_1ST_OPTION.OPTION_ID IS '?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙';
 COMMENT ON COLUMN TB_1ST_OPTION.OPTION_MAIN IS '?占쏙옙?占쏙옙';
@@ -757,7 +765,7 @@ COMMENT ON COLUMN TB_NON_MEMBER_ORDER_DETAIL.OD_STATUS IS '1.占�?鍮꾩쨷/2.
 COMMENT ON COLUMN TB_NON_MEMBER_ORDER_DETAIL.P_ID IS '?占쏙옙?占쏙옙踰덊샇';
 COMMENT ON COLUMN TB_NON_MEMBER_ORDER_DETAIL.ORD_ID IS '二쇰Ц踰덊샇';
 ------------------------------------------------------------------
-DROP TABLE TB_CART;
+SELECT * FROM TB_CART;
 -- 장바구니 테이블 생성
 CREATE TABLE TB_CART (
 	CART_ID NUMBER DEFAULT 0 NOT NULL  PRIMARY KEY,
@@ -774,7 +782,7 @@ CREATE TABLE TB_CART (
     CONSTRAINT FK_P_ID foreign key(P_ID) references TB_PRODUCT (P_ID),
     CONSTRAINT FK_MEM_ID foreign key(MEM_ID) references TB_MEMBER (MEM_ID)
 );
-COMMIT;
+COMMIT;'
 INSERT INTO 
     TB_CART 
         (
@@ -969,6 +977,8 @@ CREATE TABLE TB_2ND_OPTION (
     OPTION_2ND_STOCK NUMBER DEFAULT 0 NOT NULL,
 	OPTION_1ND_NO	NUMBER	DEFAULT 0	NOT NULL
 );
+
+
 COMMENT ON COLUMN TB_2ND_OPTION.OPTION_CON IS '?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙';
 COMMENT ON COLUMN TB_2ND_OPTION.OPTION_2ND_ID IS '?占쏙옙?占쏙옙?占쏙옙?占쏙옙?占쏙옙';
 COMMENT ON COLUMN TB_2ND_OPTION.OPTION_2ND_CONTENT IS '?占쏙옙?占쏙옙';
@@ -1295,15 +1305,15 @@ INSERT INTO TB_SELLER
             ,'admin'
             ,'1234'
             ,'798-45-10995'
-            ,'KH苑껋쭛'
-            ,'理쒙옙?占쎌닔'
+            ,'KH꽃집'
+            ,'최민수'
             ,'sge123@gmail.com'
             ,'010-4514-3001'
             ,'031-320-1065'
             ,'02-106-3468'
             ,17825
-            ,'寃쎄린?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ???占쏙옙怨좑옙?占�? 175-11'
-            ,'?占쏙옙紐ы븯?占쏙옙?占쏙옙 305?占쏙옙'
+            ,'경기도 평택시 은실고가길 175-11'
+            ,'레몬하우스 305호'
             ,'semi\resources\SELLER01'
             ,'Y'
             ,SYSDATE
@@ -1335,15 +1345,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_01'
             ,'SEL_PW1'
             ,'798-45-10995'
-            ,'KH苑껋쭛'
-            ,'?占쏙옙洹쇱슧'
+            ,'KH꽃집'
+            ,'송근욱'
             ,'sge123@gmail.com'
             ,'010-4514-3001'
             ,'031-320-1065'
             ,'02-106-3468'
             ,17825
-            ,'寃쎄린?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙 ???占쏙옙怨좑옙?占�? 175-11'
-            ,'?占쏙옙紐ы븯?占쏙옙?占쏙옙 305?占쏙옙'
+            ,'경기도 평택시 은실고가길 175-11'
+            ,'레몬하우스 305호'
             ,'semi\resources\SELLER01'
             ,'Y'
             ,SYSDATE
@@ -1375,15 +1385,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_02'
             ,'SEL_PW2'
             ,'798-67-10345'
-            ,'?占쏙옙?占쏙옙苑껋쿇占�?'
-            ,'理쒖슂?占쏙옙'
+            ,'역삼꽃천국'
+            ,'최요한'
             ,'johanchoi@gmail.com'
             ,'010-3672-3003'
             ,'02-320-1059'
             ,'02-103-1539'
             ,06220
-            ,'?占쏙옙?占쏙옙 媛뺣궓占�? ?占쏙옙?占쏙옙??占�? 34占�? 6'
-            ,'?占쏙옙愿묕옙??占쏙옙 904?占쏙옙'
+            ,'서울 강남구 테헤란로 34길 6'
+            ,'태광타워 904호'
             ,'semi\resources\SELLER02'
             ,'Y'
             ,SYSDATE
@@ -1416,15 +1426,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_03'
             ,'SEL_PW3'
             ,'451-91-14525'
-            ,'占�??占쏙옙苑껋쭛'
-            ,'占�?愿묐옒'
+            ,'청년꽃집'
+            ,'김광래'
             ,'lightcomes@gmail.com'
             ,'010-9131-0328'
             ,'031-320-0192'
             ,'02-103-0921'
             ,16704
-            ,'寃쎄린 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙占�? 占�?紐낅궓占�? 25'
-            ,'?占쏙옙?占쏙옙?占쏙옙?占쏙옙 501?占쏙옙'
+            ,'경기 수원시 영통구 청명남로 25'
+            ,'클래시아 501호'
             ,'semi\resources\SELLER03'
             ,'Y'
             ,SYSDATE
@@ -1457,15 +1467,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_04'
             ,'SEL_PW4'
             ,'357-18-92606'
-            ,'諛붾Ⅸ苑껋쭛'
-            ,'占�?湲고썕'
+            ,'바른꽃집'
+            ,'부기훈'
             ,'boogieonandon@gmail.com'
             ,'010-6149-9137'
             ,'02-320-0184'
             ,'02-163-5016'
             ,04048
-            ,'?占쏙옙?占쏙옙 留덊룷占�? ???占쏙옙?占쏙옙占�?13占�? 49-10'
-            ,'?占쏙옙移댁냼鍮뚮뵫 404?占쏙옙'
+            ,'서울 마포구 와우산로13길 49-10'
+            ,'피카소빌딩 404호'
             ,'semi\resources\SELLER04'
             ,'Y'
             ,SYSDATE
@@ -1498,15 +1508,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_05'
             ,'SEL_PW5'
             ,'337-19-26834'
-            ,'苑껋쿇占�?'
-            ,'?占쏙옙湲곕큺'
+            ,'꽃천지'
+            ,'이기봉'
             ,'barefootbong@gmail.com'
             ,'010-2549-1379'
             ,'02-257-0151'
             ,'02-162-0194'
             ,16488
-            ,'寃쎄린 ?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙?占쏙옙占�? 沅뚭킅占�?196踰덇만 17-5'
-            ,'?占쏙옙怨꾬옙?占쎈（占�? 901?占쏙옙'
+            ,'경기 수원시 팔달구 권광로196번길 17-5'
+            ,'인계미루빌 901호'
             ,'semi\resources\SELLER05'
             ,'Y'
             ,SYSDATE
@@ -1538,15 +1548,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_06'
             ,'SEL_PW6'
             ,'337-19-26834'
-            ,'?占쏙옙湲곗뿉痍⑦븯?占쏙옙'
-            ,'?占쏙옙?占쏙옙?占쏙옙'
+            ,'향기에취하다'
+            ,'장영학'
             ,'hotspring@gmail.com'
             ,'010-2121-1780'
             ,'051-257-0451'
             ,'02-678-2965'
             ,46306
-            ,'占�??占쏙옙 湲덉젙占�? ?占쏙옙?占쏙옙寃뚮줈 48-1'
-            ,'?占쏙옙?占쏙옙瑜몄삤?占쏙옙?占쏙옙?占쏙옙 707?占쏙옙'
+            ,'부산 금정구 오시게로 48-1'
+            ,'늘푸른오피스텔 707호'
             ,'semi\resources\SELLER06'
             ,'Y'
             ,SYSDATE
@@ -1579,15 +1589,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_07'
             ,'SEL_PW7'
             ,'194-19-29495'
-            ,'苑껋쓣java占�?'
-            ,'?占쏙옙?占쏙옙?占쏙옙'
+            ,'꽃을java줘'
+            ,'오정태'
             ,'ships@gmail.com'
             ,'010-1083-1774'
             ,'054-105-2949'
             ,'02-612-1977'
             ,51199
-            ,'寃쎈궓 李쎌썝?占쏙옙 ?占쏙옙李쎄뎄 ?占쏙옙?占쏙옙占�?2踰덇만 17-1'
-            ,'占�??占쏙옙?占쏙옙占�? 208?占쏙옙'
+            ,'경남 창원시 의창구 의안로2번길 17-1'
+            ,'청송상가 208호'
             ,'semi\resources\SELLER07'
             ,'Y'
             ,SYSDATE
@@ -1620,15 +1630,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_08'
             ,'SEL_PW8'
             ,'193-92-01847'
-            ,'泥쒖궗?占쏙옙苑껋쭛'
-            ,'占�??占쏙옙占�?'
+            ,'천사네꽃집'
+            ,'김성진'
             ,'twostar@gmail.com'
             ,'010-9171-0093'
             ,'054-184-0987'
             ,'02-243-2945'
             ,24885
-            ,'媛뺤썝 ?占쏙옙珥덉떆 占�??占쏙옙占�?1占�? 21-5'
-            ,'?占쏙옙?占쏙옙鍮뚮뵫 104?占쏙옙'
+            ,'강원 속초시 청호로1길 21-5'
+            ,'자유빌딩 104호'
             ,'semi\resources\SELLER08'
             ,'Y'
             ,SYSDATE
@@ -1660,15 +1670,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_09'
             ,'SEL_PW9'
             ,'294-91-23336'
-            ,'?占쏙옙由꾨떎?占쏙옙苑껓옙?占�?'
-            ,'?占쏙옙?占쏙옙?占쏙옙'
+            ,'아름다운꽃가게'
+            ,'손성익'
             ,'cooktheflower@gmail.com'
             ,'010-3454-4532'
             ,'032-343-1994'
             ,'02-394-4939'
             ,28641
-            ,'異⑸턿 占�?二쇱떆 ?占쏙옙?占쏙옙占�? 異⑼옙?占�? 1'
-            ,'?占쏙옙?占쏙옙鍮뚮뵫 112?占쏙옙'
+            ,'충북 청주시 흥덕구 충대로 1'
+            ,'흥덕빌딩 112호'
             ,'semi\resources\SELLER09'
             ,'Y'
             ,SYSDATE
@@ -1701,15 +1711,15 @@ INSERT INTO TB_SELLER
             ,'SEL_FLO_10'
             ,'SEL_PW10'
             ,'234-93-98132'
-            ,'苑껋쓣?占쏙옙媛쒕컻?占쏙옙'
-            ,'占�??占쏙옙?占쏙옙'
+            ,'꽃을든개발자'
+            ,'김한나'
             ,'nurse@gmail.com'
             ,'010-9834-0933'
             ,'067-923-9283'
             ,'02-092-9384'
             ,25518
-            ,'媛뺤썝 媛뺣쫱?占쏙옙 ?占쏙옙?占쏙옙?占쏙옙占�? 40'
-            ,'?占쏙옙?占쏙옙???占쏙옙 802?占쏙옙'
+            ,'강원 강릉시 하슬라로 40'
+            ,'홍제타워 802호'
             ,'semi\resources\SELLER10'
             ,'Y'
             ,SYSDATE
@@ -6382,6 +6392,8 @@ FROM TB_PRODUCT
 JOIN TB_PRODUCT_IMG USING (P_ID)
 ORDER BY P_ID ASC;
 
+SELECT * FROM TB_PRODUCT_IMG;
+
 SELECT * FROM TB_REVIEW;
 
 SELECT * FROM TB_PRODUCT;
@@ -6405,8 +6417,8 @@ SELECT B.*
 		FROM (SELECT G.P_ID, P_NAME, NVL(R.REVIEW_RATING, 0) AS "REVIEW_RATING",
 		COUNT(R.REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_SALES, P_DAY_DELIVERY
 		FROM TB_MEM_PAYMENT P
-		RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
-		FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
+		RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
 		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
 		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
 		GROUP BY G.P_ID, P_NAME, R.REVIEW_RATING, P_NETPRICE, P_IMG1, P_SALES, P_DAY_DELIVERY
@@ -6416,14 +6428,14 @@ SELECT B.*
 -- 리뷰순
 		SELECT B.*
 		FROM (SELECT ROWNUM RNUM, A.*
-		FROM (SELECT O.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
+		FROM (SELECT G.P_ID, P_NAME, NVL(REVIEW_RATING, 0) AS "REVIEW_RATING",
 		COUNT(REVIEW_RATING) AS "COUNT" ,TO_CHAR( P_NETPRICE, '999,999,999,999,999') AS "P_NETPRICE", P_IMG1, P_DAY_DELIVERY
 		FROM TB_MEM_PAYMENT P
         RIGHT JOIN TB_MEM_ORDER_DETAIL O ON (P.OD_ID = O.OD_ID)
-		FULL JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
+		RIGHT JOIN TB_PRODUCT G ON (O.P_ID = G.P_ID)
 		LEFT JOIN TB_PRODUCT_IMG M ON (M.P_ID = G.P_ID)
 		LEFT JOIN TB_REVIEW R ON (R.P_ID = G.P_ID)
-		GROUP BY O.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
+		GROUP BY G.P_ID, P_NAME, REVIEW_RATING,P_NETPRICE, P_IMG1, O.P_ID, P_DAY_DELIVERY
 		ORDER BY COUNT DESC)A)B
 		WHERE RNUM BETWEEN 1 AND 20;
 
@@ -6656,8 +6668,11 @@ FROM
 WHERE ROWNUM <= 1;
 
 SELECT * FROM TB_PRODUCT;
-
+SELECT * FROM TB_MEMBER;
 SELECT * FROM TB_CART;
+UPDATE TB_MEMBER
+SET MEM_MILEAGE = 10000
+WHERE MEM_ID = 'USER01';
 
 -- 아이디값 입력받아서 쿠폰갯수 얻어오기
 SELECT COUNT(COU_ID)
@@ -6667,7 +6682,44 @@ WHERE MEM_ID = 'USER01';
 
 -- 마일리지 얻어오기
 
-
 SELECT * FROM TB_MEM_ORDER_DETAIL;
+
+-- 리뷰를 썻는가?
+SELECT COUNT(REVIEW_ID) AS "COUNT"
+FROM TB_REVIEW R 
+LEFT JOIN TB_MEM_ORDER_DETAIL D ON (R.OD_ID = D.OD_ID)
+WHERE D.MEM_ID = 'USER01' AND R.P_ID = 6;
+
+-- 주문 했는가?
+SELECT COUNT(OD_ID) AS "COUNT"
+FROM TB_MEM_ORDER_DETAIL
+WHERE MEM_ID = 'USER01' AND P_ID = 6;
+
+-- 리뷰작성하기
+INSERT INTO TB_REVIEW
+            (
+              REVIEW_ID
+             ,P_ID
+             ,REVIEW_RATING
+             ,REVIEW_DETAIL
+             ,REVIEW_IMG
+             ,REVIEW_REPLY
+             ,REVIEW_ADD_DATE
+             ,OD_ID
+             
+             )
+        VALUES
+            (
+             SEQ_REVIEW.NEXTVAL
+            ,4
+            ,'?占쏙옙 諛쏆븯?占쏙옙?占쏙옙?占쏙옙~'
+            ,'semi\resources\REVIEW01'
+            ,'2023-02-05'
+            ,1
+            ,1
+            );
+
+
+
 
 COMMIT;

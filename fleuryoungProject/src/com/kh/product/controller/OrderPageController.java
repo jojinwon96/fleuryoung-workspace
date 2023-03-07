@@ -48,8 +48,6 @@ public class OrderPageController extends HttpServlet {
 		ArrayList<Coupon> couponList = new MemberService().selectMemberCoupon(memId);
 		
 		
-		System.out.println(couponList.get(0).getCouName());
-		
 		request.setAttribute("member", m);
 		request.setAttribute("delivery", delivery);
 		request.setAttribute("cartList", cartList);

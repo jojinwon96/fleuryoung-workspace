@@ -35,6 +35,7 @@ public class ProductDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String memId = request.getParameter("memId");
 		int pid = Integer.parseInt(request.getParameter("pid"));
 		
 		ProductService pService = new ProductService();
@@ -46,6 +47,20 @@ public class ProductDetailController extends HttpServlet {
 		
 		// 리뷰
 		ArrayList<Review> reviewList = pService.selectProductReview(pid); 
+		
+		int check = 1;
+		// 주문 체크
+		int reviewChk = pService.selectReivewCheck(memId, pid);
+		// 리뷰 체크
+		int orderChk = pService.selectOrderCheck(memId, pid);
+		
+		check = reviewChk * orderChk;
+		
+		if (reviewChk == 0 && orderChk == 0) {
+			check = 0;
+ 		} 
+		
+		
 		
 		// 문의
 		ArrayList<Inquiry> inquiryList = pService.selectProductInquiry(pid);
@@ -60,6 +75,7 @@ public class ProductDetailController extends HttpServlet {
 		request.setAttribute("product", p);
 		request.setAttribute("optList", optList);
 		request.setAttribute("reviewList", reviewList);
+		request.setAttribute("reviewChk", reviewChk);
 		request.setAttribute("inquiryList", inquiryList);
 		request.getRequestDispatcher("views/main/productDetailPage.jsp").forward(request, response);
 	}

@@ -28,7 +28,7 @@
                     <table>
                         <tr>
                             <td>
-                                <img src="images/check.png" alt="">
+                                <img src="${pageContext.request.contextPath}/resources/image/check.png" alt="">
                             </td>
                             <td class="text-content">
                                 <div>

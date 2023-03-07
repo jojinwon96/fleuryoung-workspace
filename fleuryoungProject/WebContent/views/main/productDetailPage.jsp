@@ -11,6 +11,7 @@
 
 	ArrayList<ProductOption> optList = (ArrayList<ProductOption>) request.getAttribute("optList");
 	ArrayList<Review> reviewList = (ArrayList<Review>) request.getAttribute("reviewList");
+	int reviewChk = (int)request.getAttribute("reviewChk");
 	ArrayList<Inquiry> inquiryList = (ArrayList<Inquiry>) request.getAttribute("inquiryList");
 	
 	request.setCharacterEncoding("utf-8");
@@ -587,7 +588,54 @@
 						<button class="reivew-sort mx-3 p-2">최신순</button>
 						<button class="reivew-sort mx-3 p-2">평점 높은 순</button>
 						<button class="reivew-sort mx-3 p-2">평점 낮은 순</button>
+						<% if (reviewChk > 0 || loginUser == null) { %>
+							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo" disabled>댓글작성하기</button>		
+						<% } else { %>
+							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo">댓글작성하기</button>
+						<% } %>
+						<div class="modal fade" id="addReivew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true;">
+						  <!-- 댓글작성 모달 -->
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h1 class="modal-title fs-5" id="exampleModalLabel">댓글작성하기</h1>
+						        <button type="button" class="close-btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						      <div class="d-flex mb-3" style="justify-content: flex-end">
+						      	<div class="p-1" style="font-weight: bolder; margin-top: 7px; font-size: 16px;">평점</div>
+						      	<div class="p-1">
+						      	<select class="review-select form-select " aria-label="Default select example">
+								  <option value="1">1</option>
+								  <option value="2">2</option>
+								  <option value="3">3</option>
+								  <option value="4">4</option>
+								  <option value="5">5</option>
+								</select>
+						      	</div>
+						      </div>
+						        <form>
+						          <div class="mb-3" style="margin-top: -3px;">
+						            <label for="message-text" class="col-form-label"></label>
+						            <textarea class="textBox form-control" id="message-text" maxlength="100"></textarea>
+						          </div>
+						        </form>
+						        
+						        <div style="margin-left: 350px">
+						        	<label class="textCount">0자</label>
+    								<label class="textTotal">/100자</label>
+						        </div>
+						        
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="close-btn btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						        <button type="button" class="btn btn-primary">작성하기</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 					</div>
+					
 
 					<hr>
 
@@ -714,6 +762,72 @@
 				class="rounded mx-auto d-block" alt="..."> <br>
 		</div>
 	</div>
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$('.textBox').keyup(function (e) {
+				let content = $(this).val();
+			    console.log("ok");
+			    // 글자수 세기
+			    if (content.length == 0 || content == '') {
+			    	$('.textCount').text('0자');
+			    } else {
+			    	$('.textCount').text(content.length + '자');
+			    }
+			    
+			    // 글자수 제한
+			    if (content.length > 100) {
+			    	// 200자 부터는 타이핑 되지 않도록
+			        $(this).val($(this).val().substring(0, 100));
+			        // 200자 넘으면 알림창 뜨도록
+			        alert('글자수는 100자까지 입력 가능합니다.');
+			    };
+			});		
+			
+			$(".close-btn").click(function(){
+				$(".textBox").val("");
+				$('.textCount').text('0자');
+				$('.review-select').val('1').trigger('change');
+			})
+			
+			
+			// 리뷰 작성하기
+			$.ajax({
+                 // 요청보내기
+                 url : "insertReivew.p", // 어느 url로 보낼 건지
+                 type : "post", // 요청방식 지정
+                 traditional :true,	
+                 //dataType : "json",
+                 data : {jsonData:jsonData, memberId:memId, memName:memName, memEmail:memEmail, memPhone:memPhone, postal:postal, street:street, address,address}, 
+                 success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+                     location.href = "<%=contextPath%>/orderSuccessPage.p";
+                 },
+
+                 error : function(){
+                     console.log("ajax 통신 실패");
+                 },
+
+                 complete : function(){
+                     console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+                 }
+                 
+             }); 
+		})
+		
+		
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

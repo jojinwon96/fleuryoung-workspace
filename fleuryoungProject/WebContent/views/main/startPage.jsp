@@ -307,7 +307,13 @@ h5 {
 						$(function(){
 							// 상품 이미지 클릭시 상품 상세 페이지로 이동
 							$('.card-img-top').click(function(){
-								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
+								let memId = "";
+								
+								<% if (loginUser != null && !loginUser.getMemId().equals("")) {%>
+									memId = '<%= loginUser.getMemId()%>';
+								<% }%>
+								
+								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html() + "&memId=" + memId;
 							})
 						})
 					</script>

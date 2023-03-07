@@ -103,4 +103,26 @@ public class ProductService {
 		return list;
 	}
 
+	public int selectReivewCheck(String memId, int pid) {
+
+		Connection conn = getConnection();
+
+		int result = new ProductDao().selectReivewCheck(conn, memId, pid);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int selectOrderCheck(String memId, int pid) {
+		Connection conn = getConnection();
+
+		int result = new ProductDao().selectOrderCheck(conn, memId, pid);
+
+		close(conn);
+
+		return result;
+	}
+
+
 }
