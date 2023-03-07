@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-
 <body>
 
 <%@ include file="../common/menubar.jsp" %>
@@ -39,14 +38,13 @@
                             </div>
                         </div>
                     </div>
-                    <input type="file" name="upfile" id="fileInput" style="display: none;"
-                        onchange="loadImg(this,1);">
+                    <input type="file" name="upfile" id="fileInput" style="display: none;" onchange="loadImg(this);">
                     <div class="row form-group">
                         <label for="name" class="col-sm-3 col-form-label input-label">이름</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="name"
-                                placeholder="이름을 입력하세요!" value="<%=loginSeller.getSelName() %>"
-                                name="selName" required>
+                            placeholder="이름을 입력하세요!" value="<%=loginSeller.getSelName() %>"
+                            name="selName" required>
                         </div>
                     </div>
 
@@ -55,8 +53,8 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="addressline1"
-                                placeholder="스토어 이름을 입력해주세요."
-                                value="<%=loginSeller.getSelStoreName() %>" name="storeName">
+                            placeholder="스토어 이름을 입력해주세요."
+                            value="<%=loginSeller.getSelStoreName() %>" name="storeName">
                         </div>
                     </div>
 
@@ -141,9 +139,70 @@
 
                     <div class="text-end">
                         <button type="button" onclick="history.back()"
-                            class="btn btn-primary">뒤로가기</button>
+                        class="btn btn-primary">뒤로가기</button>
                         <button type="submit" class="btn btn-primary">저장</button>
                     </div>
+                        <script>
+                            
+                            
+                                
+                                chooseFile = function() {
+                                    $("#fileInput").click();
+                                }
+                                
+                                function loadImg(inputFile) {
+                                    console.log("inputFile");
+                                    if (inputFile.files.length == 1) { // 파일 선택된 경우 => 파일 읽어들임
+                                
+                                        // 파일을 읽어들일 FileReader 객체 생성
+                                        const reader = new FileReader();
+                                
+                                        // 파일을 읽어들이는 메소드 호출
+                                        reader.readAsDataURL(inputFile.files[0]);
+                                        // 해당 파일을 읽어들이는 순간 해당 이 파일만이 고유한 url부
+                                
+                                        //파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
+                                        reader.onload = function (e) {
+                                            // e.target.result => 읽어들인 파일의 고유한 url
+                                
+                                            
+                                        console.log(e.target.result);
+                                        $("#file1").removeAttr("src");
+                                        $("#file1").attr("src", e.target.result); 
+                                        }
+                                
+                                    } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
+                                        
+                                                $("#file1").attr("src", "resources/img/seller_img/userImg.png");
+                                        
+                                    }
+                                } //loadImg end
+                                
+                                juso = function() {
+                                    new daum.Postcode({
+                                        oncomplete: function (data) {
+                                            var addr = ''; // 주소 변수
+                                
+                                            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                addr = data.roadAddress;
+                                            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                addr = data.jibunAddress;
+                                            }
+                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                            document.getElementById('address1').value = data.zonecode;
+                                            document.getElementById("address2").value = addr;
+                                            // 커서를 상세주소 필드로 이동한다.
+                                            document.getElementById("address3").focus();
+                                        }
+                                    }).open()
+                                }
+                            
+                            
+                            
+                            
+                            
+                            </script>
                 </form>
 
             </div>
@@ -153,68 +212,7 @@
 </div>
 </div>
 
-<script>
 
-
-
-
-chooseFile = function () {
-    $("#fileInput").click();
-}
-
-function loadImg(inputFile, num) {
-
-    if (inputFile.files.length == 1) { // 파일 선택된 경우 => 파일 읽어들임
-
-        // 파일을 읽어들일 FileReader 객체 생성
-        const reader = new FileReader();
-
-        // 파일을 읽어들이는 메소드 호출
-        reader.readAsDataURL(inputFile.files[0]);
-        // 해당 파일을 읽어들이는 순간 해당 이 파일만이 고유한 url부
-
-        //파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
-        reader.onload = function (e) {
-            // e.target.result => 읽어들인 파일의 고유한 url
-
-            switch (num) {
-                case 1:
-                    $("#file1").removeAttr("src");
-                    $("#file1").attr("src", e.target.result); break;
-
-            }
-        }
-
-    } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
-        switch (num) {
-            case 1:
-                $("#file1").attr("src", "resources/img/seller_img/userImg.png"); break;
-        }
-    }
-} //loadImg end
-
-juso = function() {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            var addr = ''; // 주소 변수
-
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                addr = data.roadAddress;
-            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                addr = data.jibunAddress;
-            }
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('address1').value = data.zonecode;
-            document.getElementById("address2").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("address3").focus();
-        }
-    }).open()
-}
-
-
-</script>
 <script src="resources/js/jquery-3.6.0.min.js"></script>
 <script src="resources/js/bootstrap.bundle.min.js"></script>
 <script src="resources/js/feather.min.js"></script>

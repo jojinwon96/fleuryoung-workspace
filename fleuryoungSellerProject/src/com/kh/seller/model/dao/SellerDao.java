@@ -252,4 +252,48 @@ public class SellerDao {
 		return result;
 	}
 	
+	public String selectById(Connection conn, String email) {
+		
+		String selId = null;
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectById");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				selId = rset.getString("SEL_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return selId;
+	}
+	
+	public int updateSellerByPwd(Connection conn, String id, String pwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePw");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

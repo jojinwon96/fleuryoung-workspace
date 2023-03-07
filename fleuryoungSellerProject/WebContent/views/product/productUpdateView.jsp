@@ -277,7 +277,7 @@ ArrayList<OptionTwo> twoList = (ArrayList<OptionTwo>)request.getAttribute("twoLi
 										<label class="col-form-label col-md-2">할인율</label>
 										<div class="col-md-10">
 											<span class="radio">
-												<label> <input type="radio" name="discount" value="null"checked>
+												<label> <input type="radio" name="discount" value="0"checked>
 													없음 
 												</label>
 											</span>

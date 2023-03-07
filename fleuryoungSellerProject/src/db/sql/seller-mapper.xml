@@ -137,4 +137,14 @@ UPDATE    TB_SELLER
  WHERE    SEL_ID = ?
 
 </entry>
+
+<entry key="selectById">
+SELECT
+		SEL_ID
+  FROM 
+  		TB_SELLER
+ WHERE  SEL_EMAIL = ?
+</entry>
+
+
 </properties>

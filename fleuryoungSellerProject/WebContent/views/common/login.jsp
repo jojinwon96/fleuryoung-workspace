@@ -26,7 +26,7 @@
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
    
   
-<% if(loginSeller ==null){ %>
+<% if(loginSeller == null){ %>
   <div class="main-wrapper login-body">
         <div class="login-wrapper">
             <div class="container">
@@ -58,8 +58,8 @@
                                             </div>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <a class="forgot-link"href="<%= contextPath %>/idSelect.se">아이디 찾기</a>/
-                                            <a class="forgot-link"href="pwdSelect.jsp">비밀번호 찾기</a>
+                                            <small><a class="forgot-link"href="<%= contextPath %>/idSelect.se">아이디 찾기</a></small>/
+                                            <small><a class="forgot-link"href="<%= contextPath %>/pwdSelect.se">비밀번호 찾기</a></small>
                                         </div>
                                     </div>
                                 </div>
