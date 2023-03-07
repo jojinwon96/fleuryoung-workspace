@@ -58,6 +58,17 @@ public Member findId(String userName, String userEmail) {
 	}
 
 
+public Member findPw(String member_id, String member_email ) {
+	
+			Connection conn = getConnection();
+			
+			Member member = new MemberDao().findPw(conn, member_id, member_email);
+			close(conn);
+			return member;
+	
+}
+
+
 public int idCheck(String checkId) {
 	Connection conn = getConnection();
 	
@@ -77,6 +88,10 @@ public int idCheck(String checkId) {
 	return count;
 
 }
+
+
+
+
 
 
 

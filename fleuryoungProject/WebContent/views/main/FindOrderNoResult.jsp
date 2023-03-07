@@ -4,7 +4,7 @@
 <%
 	//String contextPath = request.getContextPath(); 
 	
-NonMemberOrder orderNoFind = (NonMemberOrder)session.getAttribute("orderNoFind");	
+NonMemberOrder orderNoFind = (NonMemberOrder)session.getAttribute("findOrderNo");	
 %>
 <%
 	String alertMsg = (String)request.getAttribute("alertMsg");	
@@ -44,7 +44,7 @@ NonMemberOrder orderNoFind = (NonMemberOrder)session.getAttribute("orderNoFind")
 
 .separator {
   margin-top: 25px;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   border: 0;
 }
 
@@ -116,14 +116,15 @@ a{
             <div id="contentBody" >
                 <br>
                 <div id="message">
-                    <h5 align="center" style="display: inline-block;"><b>고객님의 주문번호는</b></h5>
-                    <label for="idResult" align="center" style="display: inline-block; color: blue; font-size: larger;"><b><%= orderNoFind %></b></label><!-- --------------------------------------------------- -->
-                 <h5 align="center" style="display: inline-block;"><b>입니다</b></h5>
+                    <h4 align="center" style="display: inline-block;"><b>고객님의 주문번호는</b></h4>
+                    <label for="idResult" align="center" style="display: inline-block; color: blue; font-size: 30px;"><b><%= orderNoFind.getOrd_id() %></b></label><!-- --------------------------------------------------- -->
+                 <h4 align="center" style="display: inline-block;"><b>입니다</b></h4> <br><br><br>
+                    <a  align="center" href="<%= contextPath %>/loginpage.me" style="text-decoration-line: none; color: rgb(32, 152, 118)">주문조회하기</a>
                 </div>
                
     
                
-                    <a href="<%= contextPath %>/loginpage.me" style="text-decoration-line: none;">주문조회하기</a>
+                 
                 </div>
                 
             </div>

@@ -3,8 +3,7 @@
 
 <properties>
 	<entry key="findOrderNo">
-	SELECT 
-	ORD_ID
+	SELECT ORD_ID
 	FROM TB_NON_MEMBER_ORDER
 	WHERE ORD_RECEIVER_NAME = ? AND ORD_RECEIVER_PHONE = ?
 	</entry>

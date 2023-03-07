@@ -15,6 +15,7 @@ import com.kh.nonMember.model.vo.NonMemberOrder;
 public class NonMemberDao {
 	Properties prop = new Properties();
 	
+	
 	public NonMemberDao() {
 		
 		try {
@@ -47,21 +48,19 @@ public class NonMemberDao {
 			pstmt.setString(1, receiverName);
 			pstmt.setString(2, receiverPhone);
 			
-			System.out.println(receiverName);
-			System.out.println(receiverPhone);
+			
 			
 			rs = pstmt.executeQuery();
 			
 			
 			
-			System.out.println("다오 IF문 직전");
+			
 			
 			if(rs.next()) {
 				System.out.println("다오 if문 탐");
 				
 				nonMemberOrder = new NonMemberOrder(rs.getInt("ORD_ID"));
 				
-				System.out.println("아래는 다오");
 				System.out.println(nonMemberOrder);
 				
 			}

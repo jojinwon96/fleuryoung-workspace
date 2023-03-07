@@ -146,6 +146,35 @@ public class MemberDao {
 
 	}
 	
+	public Member findPw(Connection conn, String member_id, String member_email) {
+		Member member = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("findPw");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			pstmt.setString(2, member_email);
+			System.out.println(sql);
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+				member = new Member(rs.getString("MEM_PW"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return member;
+	}
+	
 	
 	public int idCheck(Connection conn, String checkId) {
 		// select문 =>  rset필요, int리턴

@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,7 +43,13 @@ public class LoginController extends HttpServlet {
 		
 		
 		if (loginUser == null) {
-			request.setAttribute("alertMsg", "아이디와 비밀번호를 다시 확인해주세요.");
+			 response.setContentType("text/html; charset=UTF-8");
+
+	            PrintWriter out = response.getWriter();
+
+	            out.println("<script>alert('존재하지 않는 회원정보입니다. 다시 입력해 주세요.'); history.go(-1); </script>"); 
+
+	            out.flush(); 
 			
 			RequestDispatcher view = request.getRequestDispatcher("/loginpage.me");
 			view.forward(request, response);

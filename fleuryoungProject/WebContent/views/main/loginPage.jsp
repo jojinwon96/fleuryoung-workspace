@@ -42,7 +42,7 @@
 					<div class="center-wrap">
 						<div class="section text-center">
 						<!-- -------------------------------------- -->
-							<form action="/fleuryoungProject/login.me" method="post">
+							<form action="/fleuryoungProject/login.me" method="post" name="logInScreen">
 								<h4 class="mb-4 pb-3" id="loginLetter">회원로그인</h4>
 								<div class="form-group">
 									<input type="text" name="userId" class="form-style inputId"
@@ -55,10 +55,25 @@
 									<i class="input-icon uil uil-lock-alt"></i>
 								</div>
 								<!-- <a href="#" class="btn mt-4">로그인</a> <br> -->
-								<button type="submit" id="logInButton" class="btn mt-4">로그인</button>
+								<button type="submit" id="logInButton" class="btn mt-4" onClick="return logIn()">로그인</button>
 								<br>
 
 							</form>
+							<script>
+	          function logIn() { 
+	          var frm = document.logInScreen;
+	
+	          if (frm.userId.value.length < 1) {
+	            alert("아이디를 입력해주세요");
+	            return false;
+	          }
+	          if (frm.userPwd.value.length < 1) {
+	            alert("비밀번호를 입력해주세요");
+	            return false;
+	          }
+	          
+	        }
+        </script>
 							<p class="mb-0 mt-4 text-center">
 								<a href="<%= contextPath %>/findIdPage.me" class="link" style="text-decoration: none;">아이디찾기 | 비밀번호찾기</a>
 							</p>

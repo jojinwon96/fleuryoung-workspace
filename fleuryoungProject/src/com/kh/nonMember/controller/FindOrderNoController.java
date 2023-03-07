@@ -39,12 +39,12 @@ public class FindOrderNoController extends HttpServlet {
 		System.out.println(receiverName);
 		System.out.println(receiverPhone);
 		
-		NonMemberOrder findOrderNo = new NonMemberService().findOrderNo(receiverName, receiverPhone );
+		NonMemberOrder findOrderNo = new NonMemberService().findOrderNo(receiverName, receiverPhone);
 		
-		//System.out.println("ORD_ID ;" + findOrderNo.getOrd_id());
 		
-		if(findOrderNo.getOrd_id() != 0) {
-			/*
+		
+		if(findOrderNo == null) {
+			
 			if (receiverName != null && receiverPhone != null) {
 				  response.setContentType("text/html; charset=UTF-8");
 
@@ -54,7 +54,7 @@ public class FindOrderNoController extends HttpServlet {
 
 		            out.flush(); 
 			}
-			*/
+			
 		
 			
 		}else {

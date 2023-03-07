@@ -1,5 +1,6 @@
 package com.kh.nonMember.model.service;
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 
@@ -15,11 +16,6 @@ public class NonMemberService {
 		NonMemberOrder nonMemberOrder = new NonMemberDao().findOrderNo(conn, receiverName, receiverPhone );
 		
 		close(conn);
-		
-		System.out.println("아래는 서비스");
-		System.out.println(nonMemberOrder);
-		
-		
 		return nonMemberOrder;
 		
 		

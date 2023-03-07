@@ -237,11 +237,11 @@ span {
             <div class="wrapper">
                 <div class="container" style="max-width: 850px; margin-bottom:200px; margin-right:50px">
                   <div class="sign-up-container">
-                    <form>
+                    <form action="/fleuryoungProject/FindPwController" name="pwfindscreen" method="post" >
                       <h3 id="h3Pwd"><b>비밀번호 찾기</b>  </h3>
-                       <input type="text" id="idInputPwd" placeholder="아이디를 입력해주세요">
-                       <input type="email" id="emailInputPwd" placeholder="가입시 사용하신 이메일을 입력해주세요">
-                      <button class="form_btn" id="findPwdButton" style="margin-top: 15px; border-radius: 20px;"><b> 비밀번호 찾기</b></button>
+                       <input type="text" id="idInputPwd" placeholder="아이디를 입력해주세요" name="member_id">
+                       <input type="email" id="emailInputPwd" placeholder="가입시 사용하신 이메일을 입력해주세요" name="member_email">
+                      <button class="form_btn" id="findPwdButton" style="margin-top: 15px; border-radius: 20px;" onClick="return pw_search()"><b> 비밀번호 찾기</b></button>
                     </form>
                   </div>
                   <div class="sign-in-container">
@@ -257,21 +257,33 @@ span {
                         <button type="submit"  class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;" onClick="return id_search()"><b>아이디 찾기</b></button>
                     </form>
                     
-                     <script>
-          function id_search() { 
-          var frm = document.idfindscreen;
+           <script>
+	          function id_search() { 
+	          var frm = document.idfindscreen;
+	
+	          if (frm.member_name.value.length < 1) {
+	            alert("이름을 입력해주세요");
+	            return false;
+	          }
+	          if (frm.member_email.value.length < 1) {
+	            alert("이메일을 입력해주세요");
+	            return false;
+	          }
+	        }
+        </script>
+        
+         <script>
+          function pw_search() { 
+          var frm = document.pwfindscreen;
 
-          if (frm.member_name.value.length < 1) {
-            alert("이름을 입력해주세요");
+          if (frm.member_id.value.length < 1) {
+            alert("아이디를 입력해주세요");
             return false;
           }
           if (frm.member_email.value.length < 1) {
             alert("이메일을 입력해주세요");
             return false;
           }
-        //frm.method = "post";
-        //frm.action = "/views/main/FindIdResult.jsp"; 
-        //frm.submit();  
         }
         </script>
                   
