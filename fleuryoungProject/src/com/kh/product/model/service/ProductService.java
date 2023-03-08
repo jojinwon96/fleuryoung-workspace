@@ -170,6 +170,39 @@ public class ProductService {
 		return result;
 	}
 
+	
+	// 마이 페이지
+	public ArrayList<Product> wishList(String mId) {
+		Connection conn = getConnection();
+
+		ArrayList<Product> list = new ProductDao(). wishList(conn, mId);
+
+		close(conn);
+
+		return list;
+	}
+
+	public ArrayList<Product> orderList(String memId) {
+		Connection conn = getConnection();
+
+		ArrayList<Product> list = new ProductDao(). orderList(conn, memId);
+
+		close(conn);
+
+		return list;
+	}
+
+	public ArrayList<Product> myPageReview(String memId) {
+		Connection conn = getConnection();
+
+		ArrayList<Product> list = new ProductDao(). myPageReview(conn, memId);
+
+		close(conn);
+
+		return list;
+	}
+
+
 }
 
 

@@ -1,28 +1,31 @@
-package com.kh.product.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.member.model.vo.Member;
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class StartPageController
+ * Servlet implementation class MyPageReviewWriteController
  */
-@WebServlet("/startPage.p")
-public class StartPageController extends HttpServlet {
+@WebServlet("/myPageReviewWrite.my")
+public class MyPageReviewWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StartPageController() {
+    public MyPageReviewWriteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,31 +34,14 @@ public class StartPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String memId = request.getParameter("memberId");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
-		int num = Integer.parseInt(request.getParameter("num"));
-		String title = "최신순";
+		ArrayList<Product> list = new ProductService().myPageReview(m.getMemId());
 		
-		ArrayList<Product> list;
-		ProductService pService = new ProductService();
-		
-		if (num == 1) {
-			list = pService.selectLatestProduct();
-			title = "최신순";
-		} else if(num == 2) {
-			list = pService.selectSaleOrderProduct();
-			title = "판매순";
-		} else {
-			list = pService.selectReviewOrderProduct();
-			title = "리뷰순";
-		}
-
-		request.setAttribute("title", title);
-		request.setAttribute("optNo", num);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
 		
+		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageReviewWrite.jsp");
+		view.forward(request, response);
 	}
 
 	/**

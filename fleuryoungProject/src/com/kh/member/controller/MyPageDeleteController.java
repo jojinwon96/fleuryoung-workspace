@@ -1,8 +1,6 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-import com.kh.product.model.service.CartService;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MyPageDeleteController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/myPageDelete.my")
+public class MyPageDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MyPageDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +29,22 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		// 장바구니 객체
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		System.out.println(loginUser);
+		int result = new MemberService().deleteMember(userId, userPwd);
 		
-		
-		if (loginUser == null) {
-			request.setAttribute("alertMsg", "아이디와 비밀번호를 다시 확인해주세요.");
+		HttpSession session = request.getSession();
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다. 그동안 이용해주셔서 감사합니다.");
 			
-			RequestDispatcher view = request.getRequestDispatcher("/loginpage.me");
-			view.forward(request, response);
-			
+			session.removeAttribute("loginUser");
+			response.sendRedirect(request.getContextPath());
 		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "회원탈퇴 실패");
 			
-			response.sendRedirect(request.getContextPath() + "/mainPage.jsp");
+			response.sendRedirect(request.getContextPath() + "/myPageInfo.my");
 		}
-		
-		
 	}
 
 	/**

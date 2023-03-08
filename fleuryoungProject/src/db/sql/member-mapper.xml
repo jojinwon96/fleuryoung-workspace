@@ -155,6 +155,69 @@
 		ORDER BY COUNT DESC
 	</entry>
 	
+	
+	
+	
+	<!-- 마이페이지 관련 -->
+	<entry key="updateMember">
+		UPDATE TB_MEMBER
+	   	   SET MEM_EMAIL = ?
+	     	 , MEM_NAME = ?
+	         , MEM_PHONE = ?
+	         , MEM_STREET = ?
+	         , MEM_ADDRESS = ?
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="selectMember">
+    		SELECT 
+			  MEM_ID
+			, MEM_PW
+			, MEM_EMAIL
+			, MEM_NAME
+			, MEM_PHONE
+			, MEM_POSTAL
+			, MEM_STREET
+			, MEM_ADDRESS
+			, MEM_ENROLL_DATE
+			, MEM_MILEAGE
+			, MEM_IMG
+			, MEM_GET_PHONE
+			, MEM_BIRTHDATE
+			, MEM_GENDER
+			, MEM_STATUS
+		 FROM TB_MEMBER
+		WHERE MEM_ID = ?
+    </entry>
+	
+	<entry key="updatePwd">
+	    UPDATE TB_MEMBER
+	       SET MEM_PW = ?
+	     WHERE MEM_ID = ?
+	       AND MEM_PW = ?
+    </entry>
+	
+	<entry key="deleteMember">
+	    UPDATE TB_MEMBER
+	       SET MEM_STATUS = 'Y'
+	     WHERE MEM_ID = ?
+	       AND MEM_PW = ?
+    </entry>
+	
+	<entry key="selectLikeCount">
+		SELECT COUNT(P_ID) AS "COUNT"
+		FROM TB_WISHLIST
+		WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="selectLikeArr">
+		SELECT P_ID 
+		FROM TB_WISHLIST
+		WHERE MEM_ID = ?
+	</entry>
+	
+	
+		
 </properties>
 
 

@@ -5,6 +5,8 @@
 <%
 	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
 	
+	ArrayList<Product> updateList = (ArrayList<Product>) request.getAttribute("updateList"); 	
+
 	String title = (String)request.getAttribute("title");
 	
 	response.setHeader("cache-control","no-store");
@@ -59,7 +61,45 @@ h5 {
 		<%@ include file="../../views/common/header.jsp"%>
 
 		<script>
+			$(document).ready(function(){
+				updateLike();
+			})
+		
+			function updateLike(){
+					<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
+						let memberId = "";
+						memberId = '<%= loginUser.getMemId()%>';
+							$.ajax({
+			                    url : "updateLike.p", // 어느 url로 보낼 건지
+			                    type : "post", // 요청방식 지정
+			                    traditional :true,	
+			                    data : {memId:memberId}, 
+			                    success : function(list) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+			                    	console.log("성공입니다~");
+			                    	$(".hPid").each(function(){
+			                    		console.log($(this).val());
+				                    	for (let i in list){
+				                    		if (list[i].pId == Number($(this).val())){
+				                    			console.log("같다~");
+				                    			$(this).parents(".productbox").find("#mini-like").attr("src", "${pageContext.request.contextPath}/resources/image/icon/love_full.png");
+				                    		}
+				                    	}		
+			                    	})
+			                    },
+			
+			                    error : function(){
+			                        console.log("ajax 통신 실패");
+			                    },
+			
+			                    complete : function(){
+			                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+			                    }
+			                    
+			               });  
+					<% } %> 
+			 }
 			$(function () {
+				
 					$(document).on('click', '.mini_like', function () {
 						let chk = 0;
 						let memId = ""
@@ -106,6 +146,8 @@ h5 {
 		     		               }); 
 		   			    <%}%>
 					})
+					
+						
 			})
 		</script>
 
@@ -201,6 +243,7 @@ h5 {
 							<%} %>
 							<!-- Product image-->
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
+							<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
 
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"
@@ -238,7 +281,7 @@ h5 {
 										<div class="col">
 
 											<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-											<img class="mini_like"
+											<img class="mini_like" id="mini-like"
 												src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 												alt="">
 
@@ -348,6 +391,10 @@ h5 {
 								
 								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html() + "&memId=" + memId;
 							})
+							
+							
+							
+
 						})
 					</script>
 

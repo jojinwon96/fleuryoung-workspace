@@ -115,9 +115,17 @@
 					          </span>
 					        <% } %>
 					    </button>
-						<div class="myPage-panel">
-							<button class="mypage-btn"></button>
-						</div>
+					    <% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
+						<form action="<%= contextPath %>/myPageMain.my" method="post">
+	                  <div class="myPage-panel">
+	                     <button type="submit" class="mypage-btn"></button>
+	                  </div>
+	                  </form>
+	                  <% } else { %>
+		                  <div class="myPage-panel">
+		                     <button type="submit" class="mypage-btn"></button>
+		                  </div>
+	                  <% } %>
 					</div>
 				</div>
 			</div>

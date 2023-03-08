@@ -23,6 +23,11 @@ public class Product {
 	private String images;
 	private String storeName;
 	
+	private int discountRate; // 할인율
+	private int total; // 정가 - (정가*할인율)
+	private int ordId; // 주문번호
+	private String memOrderDetail; // 리뷰내용 
+	private String optTitle;
 
 	public Product() {}
 
@@ -73,12 +78,102 @@ public class Product {
 		this.images = images;
 		this.storeName = storeName;
 	}
+	
+	
+	public Product(String pName, String pNetPrice, String mainImg, int discountRate, int total) {
+		super();
+		this.pName = pName;
+		this.pNetPrice = pNetPrice;
+		this.mainImg = mainImg;
+		this.discountRate = discountRate;
+		this.total = total;
+	}
+	
+
+	public Product(String pName, String mainImg, int total, int ordId, String optTitle) {
+		super();
+		this.pName = pName;
+		this.mainImg = mainImg;
+		this.total = total;
+		this.ordId = ordId;
+		this.optTitle = optTitle;
+	}
+
+	
+
+	public Product(String pName, int ordId, String memOrderDetail) {
+		super();
+		this.pName = pName;
+		this.ordId = ordId;
+		this.memOrderDetail = memOrderDetail;
+	}
+
+
+	public Product(int pId) {
+		super();
+		this.pId = pId;
+	}
+
+
+	public Product(String memOrderDetail) {
+		super();
+		this.memOrderDetail = memOrderDetail;
+	}
+
+
+	public String getOptTitle() {
+		return optTitle;
+	}
+
+
+	public void setOptTitle(String optTitle) {
+		this.optTitle = optTitle;
+	}
+
+
+	public int getDiscountRate() {
+		return discountRate;
+	}
+
+
+	public void setDiscountRate(int discountRate) {
+		this.discountRate = discountRate;
+	}
+
+
+	public int getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+
+	public int getOrdId() {
+		return ordId;
+	}
+
+
+	public void setOrdId(int ordId) {
+		this.ordId = ordId;
+	}
+
+
+	public String getMemOrderDetail() {
+		return memOrderDetail;
+	}
+
+
+	public void setMemOrderDetail(String memOrderDetail) {
+		this.memOrderDetail = memOrderDetail;
+	}
 
 
 	public String getStoreName() {
 		return storeName;
 	}
-
 
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;

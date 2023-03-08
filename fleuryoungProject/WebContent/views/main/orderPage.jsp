@@ -68,29 +68,6 @@
                     </section>
                     <br>
                     <div class="row">
-                    	<div class="col-md-auto">
-                    		<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#deliveryModal">
-							  배송지 목록
-							</button>
-                    	</div>
-						<!-- 배송지목록 -->
-						<div class="modal fade" id="deliveryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h1 class="modal-title fs-5" id="exampleModalLabel">배송지 목록</h1>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						      </div>
-						      <div class="modal-body">
-						      	
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						        <button type="button" class="btn btn-primary">Save changes</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
                     	<div class="col-md-auto py-2" style="">
                     		<div class="form-check">
 							  <input class="form-check-input" type="radio" name="addressRadio" id="exampleRadios1" value="default" checked>
@@ -261,9 +238,7 @@
                                                 <span class="non-product-count"><%= c.getNoneOptCount() %>개</span>
 										    <% } %>
                                                 <!-- 카드쓰기 버튼 시작 -->
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                                    style="background-color: rgb(248, 178, 188); border-color: rgb(248, 178, 188); margin-left:350px;  margin-top: -70px;">카드쓰기</button>
+                                                
                                                 <div class="modal fade" id="exampleModal" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">

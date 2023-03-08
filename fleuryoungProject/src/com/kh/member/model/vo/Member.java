@@ -58,6 +58,18 @@ public class Member {
 		this.mileage = mileage;
 	}
 
+	
+	
+	public Member(String memId, String email, String memName, String phone, String street, String address) {
+		super();
+		this.memId = memId;
+		this.email = email;
+		this.memName = memName;
+		this.phone = phone;
+		this.street = street;
+		this.address = address;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

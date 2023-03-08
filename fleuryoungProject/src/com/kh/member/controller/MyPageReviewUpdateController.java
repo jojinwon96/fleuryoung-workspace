@@ -12,19 +12,20 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
-import com.kh.product.model.service.CartService;
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MyPageReviewUpdateController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/updateReview.my")
+public class MyPageReviewUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MyPageReviewUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +34,32 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		// 장바구니 객체
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+request.setCharacterEncoding("UTF-8");
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		System.out.println(loginUser);
+		// 요청 시 전달 값 뽑아서 변수 및 객체에 담기
+		String reviewDetail = request.getParameter("reviewDetail");
 		
+		Product p = new Product(reviewDetail);
 		
-		if (loginUser == null) {
-			request.setAttribute("alertMsg", "아이디와 비밀번호를 다시 확인해주세요.");
+		Product updateP = new ProductService().updateReview(p);
+		
+		if(updateP == null) { // 실패
+			// 에러문구 담아서 에러페이지 포워딩
+			request.setAttribute("errorMsg", "리뷰 수정에 실패했습니다.");
 			
-			RequestDispatcher view = request.getRequestDispatcher("/loginpage.me");
+			RequestDispatcher view = request.getRequestDispatcher("/views/common/error.jsp");
 			view.forward(request, response);
-			
-		} else {
+		} else { // 성공
+			// 성공했다는 alert => 마이페이지 url 재요청
+			// session에 담겨있는 loginUser 바꾸는 작업
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("reviewDetail", reviewDetail);
 			
-			response.sendRedirect(request.getContextPath() + "/mainPage.jsp");
+			session.setAttribute("alertMsg", "성공적으로 리뷰를 수정했습니다.");
+			
+			// 마이페이지 => /jsp/myPage.me로 url 재요청
+			response.sendRedirect(request.getContextPath() + "/myPageReviewChange.my");
 		}
-		
-		
 	}
 
 	/**

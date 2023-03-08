@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
+import com.google.gson.Gson;
+import com.kh.member.model.service.MemberService;
 import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class StartPageController
+ * Servlet implementation class UpdateLikeController
  */
-@WebServlet("/startPage.p")
-public class StartPageController extends HttpServlet {
+@WebServlet("/updateLike.p")
+public class UpdateLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StartPageController() {
+    public UpdateLikeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,31 +32,15 @@ public class StartPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String memId = request.getParameter("memberId");
 		
-		int num = Integer.parseInt(request.getParameter("num"));
-		String title = "최신순";
+		String memId = request.getParameter("memId");
 		
-		ArrayList<Product> list;
-		ProductService pService = new ProductService();
+		MemberService mService = new MemberService();
 		
-		if (num == 1) {
-			list = pService.selectLatestProduct();
-			title = "최신순";
-		} else if(num == 2) {
-			list = pService.selectSaleOrderProduct();
-			title = "판매순";
-		} else {
-			list = pService.selectReviewOrderProduct();
-			title = "리뷰순";
-		}
-
-		request.setAttribute("title", title);
-		request.setAttribute("optNo", num);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/main/startPage.jsp").forward(request, response);
+		ArrayList<Product> list = mService.selectLikeArr(memId);
 		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

@@ -415,6 +415,96 @@ public class ProductDao {
 		return result;
 	}
 
+	public ArrayList<Product> wishList(Connection conn, String mId) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("wishList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(new Product(rs.getString("P_NAME")
+								   , (rs.getInt("P_NETPRICE") + "") 
+								   , rs.getString("P_IMG1")
+							 	   , rs.getInt("DISCOUNT")
+							       , rs.getInt("TOTAL")
+							         ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Product> orderList(Connection conn, String memId) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("orderList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(new Product(rs.getString("P_NAME")
+								   , rs.getString("P_IMG1") 
+								   , rs.getInt("TOTAL")
+							 	   , rs.getInt("ORD_ID")
+							 	   , rs.getString("OPTION_2ND_CONTENT")
+							         ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Product> myPageReview(Connection conn, String memId) {
+		ArrayList<Product> list = new ArrayList<Product>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("myPageReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(new Product(rs.getString("P_NAME")
+								   , rs.getInt("ORD_ID") 
+								   , rs.getString("REVIEW_DETAIL")
+							         ));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }
 
 
