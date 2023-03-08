@@ -368,21 +368,7 @@
 										</div>
 									</div>
 
-									<div class="form-group row">
-										<label class="col-form-label col-md-2">카드여부</label>
-										<div class="col-md-10">
-											<span class="radio">
-												<label> <input type="radio" name="card" value="Y">
-													카드쓰기 승인
-												</label>
-											</span>
-											<span class="radio">
-												<label> <input type="radio" name="card" value="N"checked>
-													카드쓰기 거부
-												</label>
-											</span>
-										</div>
-									</div>
+									
 									<div class="form-group row">
 										<label class="col-form-label col-md-2">상품환불여부</label>
 										<div class="col-md-10">
@@ -392,7 +378,7 @@
 												</label>
 											</span>
 											<span class="radio">
-												<label> <input type="radio" name="return" value="N">
+												<label> <input type="radio" name="return" value="N"checked>
 													상품환불 거부
 												</label>
 											</span>

@@ -126,4 +126,23 @@ public class ProductService {
 	
 	return list;
 	}
+	
+	public int selectDiscount(int pno) {
+		Connection conn = getConnection();
+		int result = new ProductDao().selectDiscount(conn, pno);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteProduct(int pno) {
+		Connection conn = getConnection();
+		int result = new ProductDao().deleteProduct(conn, pno);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

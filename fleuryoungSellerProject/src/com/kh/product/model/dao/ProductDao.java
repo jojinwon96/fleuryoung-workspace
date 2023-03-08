@@ -115,11 +115,10 @@ private Properties prop = new Properties();
 			pstmt.setString(3, p.getDetail());
 			pstmt.setInt(4, p.getStock());
 			pstmt.setString(5, p.getpReturn());
-			pstmt.setString(6, p.getpTag());
-			pstmt.setString(7,p.getpDayDelivery());
-			pstmt.setString(8,p.getpGift());
-			pstmt.setInt(9, p.getSellerNo());
-			pstmt.setInt(10, Integer.parseInt(p.getCategoryNo()));
+			pstmt.setString(6,p.getpDayDelivery());
+			pstmt.setString(7,p.getpGift());
+			pstmt.setInt(8, p.getSellerNo());
+			pstmt.setInt(9, Integer.parseInt(p.getCategoryNo()));
 			result = pstmt.executeUpdate();
 			
 			System.out.println(result+"!!!");
@@ -331,4 +330,49 @@ private Properties prop = new Properties();
 		return list;
 	}
 	
+	public int selectDiscount(Connection conn ,int pno) {
+		int result= 0;
+		ArrayList<OptionTwo> list = new ArrayList<OptionTwo>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectDiscount");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pno);
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					result = rset.getInt("DISCOUNT_RATE");
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteProduct(Connection conn ,int pno) {
+		int result= 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteProduct");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pno);
+				result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
 }
+	
+

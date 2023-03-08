@@ -170,10 +170,9 @@ public class ProductInsertController extends HttpServlet {
 				
 				
 				int dResult = 1;
-				if(multipartRequest.getParameter("discount").equals("")) {
+				
 					dResult = new ProductService().insertDiscount(
 							Integer.parseInt((multipartRequest.getParameter("discount"))));
-				}
 				
 				
 		

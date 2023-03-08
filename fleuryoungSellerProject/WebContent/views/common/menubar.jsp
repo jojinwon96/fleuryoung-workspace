@@ -19,9 +19,6 @@
 	String active3_2 = "";
 	String active3_3 = "";
 	String active3_4 = "";
-	String active3_5 = "";
-	String active3_6 = "";
-	String active3_7 = "";
 	String active4 = "";
 	String active4_1 = "";
 	String active4_2 = "";
@@ -40,44 +37,32 @@
         active3_1 = "active ";
         break;
 	case 4:
-    active3 = "active ";
-    active3_2 = "active ";
-    break;
+	    active3 = "active ";
+	    active3_2 = "active ";
+	    break;
 	case 5:
-    active3 = "active ";
-    active3_3 = "active ";
-    break;
+	    active3 = "active ";
+	    active3_3 = "active ";
+	    break;
 	case 6:
-    active3 = "active ";
-    active3_4 = "active ";
-    break;
+	    active3 = "active ";
+	    active3_4 = "active ";
+	    break;
 	case 7:
-    active3 = "active ";
-    active3_5 = "active ";
-    break;
-	case 8:
-    active3 = "active ";
-    active3_6 = "active ";
-    break;
-	case 9:
-    active3 = "active ";
-    active3_7 = "active ";
-    break;
-	case 10:
-    active4 = "active ";
-    active4_1 = "active ";
-    break;
-    case 11:
-    active4 = "active ";
-    active4_2 = "active ";
-    break;
-    case 12:
-    active4 = "active ";
-    active4_3 = "active ";
-    break;
-    case 13:
-    active5 = "active ";
-    break;
+	    active4 = "active ";
+	    active4_1 = "active ";
+	    break;
+    case 8:
+	    active4 = "active ";
+	    active4_2 = "active ";
+	    break;
+    case 9:
+	    active4 = "active ";
+	    active4_3 = "active ";
+	    break;
+    case 10:
+	    active5 = "active ";
+	    break;
     
 		
 	}
@@ -205,16 +190,13 @@
                                 <a href="<%=contextPath%>/productList.pr?selNo=<%= loginSeller.getSelNo() %>"><i data-feather="clipboard"></i> <span> 상품관리</span></a>
                             </li>
                             <li class="<%=active3%>submenu">
-                                <a href="#"><i data-feather="airplay"></i> <span> 판매관리</span> <span
+                                <a href="#"><i data-feather="airplay"></i> <span>판매관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="#"class="<%=active3_1%>">송장 등록</a></li>
-                                    <li><a href="#"class="<%=active3_2%>">송장 관리</a></li>
-                                    <li><a href="#"class="<%=active3_3%>">미결제 확인</a></li>
-                                    <li><a href="#"class="<%=active3_4%>">구매확정 내역</a></li>
-                                    <li><a href="#"class="<%=active3_5%>">취소관리 </a></li>
-                                    <li><a href="#"class="<%=active3_6%>">반품관리 </a></li>
-                                    <li><a href="#"class="<%=active3_7%>">교환관리 </a></li>
+                                    <li><a href="#"class="<%=active3_1%>">송장관리</a></li>
+                                    <li><a href="#"class="<%=active3_2%>">취소관리 </a></li>
+                                    <li><a href="#"class="<%=active3_3%>">반품관리 </a></li>
+                                    <li><a href="#"class="<%=active3_4%>">교환관리 </a></li>
                                 </ul>
                             </li>
     
@@ -228,9 +210,9 @@
                                     <li><a href="#" class="<%=active4_3%>">관리자 문의</a></li>
                                 </ul>
                             </li>
-                            <li class="<%=active5%>">
+                            <%-- <li class="<%=active5%>">
                                 <a href="#"><i data-feather="clipboard"></i> <span>통계</span></a>
-                            </li>
+                            </li> --%>
                         </ul>
                     </div>
                 </div>

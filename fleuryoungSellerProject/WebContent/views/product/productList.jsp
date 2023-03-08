@@ -193,7 +193,7 @@
 	                                                    <div class="dropdown-menu dropdown-menu-end">
 	                                                        <a class="dropdown-item" href="<%=contextPath%>/productUpdateForm.pr?pno=<%=p.getpId()%>"><i
 	                                                                class="far fa-edit me-2"></i>상세조회 및 수정</a>
-	                                                        <a class="dropdown-item" href="javascript:void(0);"><i
+	                                                        <a class="dropdown-item" onclick="pdel('<%= p.getpName()%>');"><i
 	                                                                class="far fa-trash-alt me-2"></i>상품삭제</a>
 	                                                    </div>
 	                                                </div>
@@ -212,18 +212,33 @@
     </div>
 </div>
 
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
-    <script src="resources/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/feather.min.js"></script>
-    <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="resources/plugins/apexchart/chart-data.js"></script>
-    <script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="resources/plugins/datatables/datatables.min.js"></script>
-    <script src="resources/js/script.js"></script>
+<script>
+    // function pdel(s){
+    //     let pid = ""
+    //     <% if ( p != null && !p.getpId().equals("")){%>
+    //     pid= '<%=p.getpId()%>';
+    //     <% } %>
+           
+    //     if(confirm("정말 "+ s +"를(을) 삭제하시겠습니까?")){
+    //         console.log("오에");
+
+    //         location.href ="<%=contextPath%>/productDelete.pr?pno="+pid;
+
+    //     }
+    // }
+</script>
+
+<script src="resources/js/jquery-3.6.0.min.js"></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/js/feather.min.js"></script>
+<script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="resources/plugins/apexchart/apexcharts.min.js"></script>
+<script src="resources/plugins/apexchart/chart-data.js"></script>
+<script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/plugins/datatables/datatables.min.js"></script>
+<script src="resources/js/script.js"></script>
 
 
 
 </body>
-
 </html>

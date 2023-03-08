@@ -18,9 +18,9 @@ public class EmailService {
 	public String sendEmail(HttpServletRequest request, HttpServletResponse response,
 			String title, String user_email, String AuthenticationKey) {
 		String host = "smtp.gmail.com";
-		String port = "587";
+		String port = "465";
 		String id ="chlalstn0123@gmail.com";
-    	String pwd = "kyhhjktbhzdqdftm";
+    	String pwd = "kddgaxxvnlnsipkr";
     	String text = "Flower의 인증번호는 ";
 		
     	
@@ -43,13 +43,13 @@ public class EmailService {
 			Properties props = new Properties();
 			props.put("mail.transport.protocol", "smtp");
 		    props.put("mail.smtp.host", "smtp.gmail.com");
-		    props.put("mail.smtp.port", "465");
+		    props.put("mail.smtp.port", port);
 		    props.put("mail.smtp.starttls.enable", "true");
-		    props.put("mail.smtp.socketFactory.port", "465");
+		    props.put("mail.smtp.socketFactory.port", port);
 		    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		    props.put("mail.smtp.socketFactory.fallback", "false");
 		    props.put("mail.smtp.auth", "true");
-			
+		    props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 			
 //			props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 //			props.put("mail.smtp.ssl.enable", "true");

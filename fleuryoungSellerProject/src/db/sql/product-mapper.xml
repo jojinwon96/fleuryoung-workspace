@@ -13,7 +13,9 @@ SELECT
     	, (SELECT CATEGORY_NAME FROM TB_CATEGORY C WHERE C.CATEGORY_NO = P.CATEGORY_NO) "CATEGORY_NAME"
   FROM 	TB_PRODUCT P
  WHERE 	SEL_NO = ?
+   AND  P_TAG_YN = 'Y'
 </entry>
+
 <entry key="selectCategoryList">
 SELECT
 		CATEGORY_NO
@@ -33,7 +35,7 @@ INSERT
         , P_STOCK
         , P_ENROLL_DATE
         , P_RETURN_YN
-        , P_TAG_YN
+        , P_TAG_YN <!-- 이게 STATUS -->
         , P_SALES
         , P_DAY_DELIVERY
         , P_GIFT
@@ -47,7 +49,7 @@ VALUES(SEQ_PRODUCT.NEXTVAL
         , ?
         , SYSDATE
         , ?
-        , ?
+        , 'Y'
         , 0
         , ?
         , ?
@@ -168,6 +170,7 @@ SELECT
   		TB_PRODUCT P
   JOIN  TB_PRODUCT_IMG I ON(P.P_ID = I.P_ID)
   WHERE P.P_ID = ?
+   AND  P_TAG_YN = 'Y'
 </entry>
 
 <entry key="selectOptionOne">
@@ -191,5 +194,18 @@ SELECT
   FROM TB_2ND_OPTION
  WHERE OPTION_1ND_NO = ?
  </entry>
+<entry key="selectDiscount">
+SELECT DISCOUNT_RATE
+  FROM TB_DISCOUNT
+ WHERE P_ID = ?
+</entry>
 
+<entry key="deleteProduct">
+UPDATE 
+  FROM TB_PRODUCT
+   SET 
+ WHERE P_ID = ?
+   AND P_TAG_YN = 'Y'
+
+</entry>
 </properties>

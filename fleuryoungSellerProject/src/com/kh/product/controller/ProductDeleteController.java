@@ -1,7 +1,6 @@
-package com.kh.seller.controller;
+package com.kh.product.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.seller.model.service.SellerService;
+import com.kh.product.model.service.ProductService;
 
 /**
- * Servlet implementation class NewPwdController
+ * Servlet implementation class ProductDelete
  */
-@WebServlet("/newPwd.eml")
-public class NewPwdController extends HttpServlet {
+@WebServlet("/productDelete.pr")
+public class ProductDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewPwdController() {
+    public ProductDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,16 @@ public class NewPwdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("selId");
-		String pwd = request.getParameter("pass");
-		PrintWriter out = response.getWriter();
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		int result = new ProductService().deleteProduct(pno);
 		
-		System.out.println(id);
-		System.out.println(pwd);
-		int result = new SellerService().updateSellerByPwd(id,pwd);
-		System.out.println(result);
-		out.print(result);
+		if(result > 0) {
+			request.setAttribute("alertMsg", "삭제완료");
+			response.sendRedirect(request.getContextPath() + "/productList.pr");
+		}else {
+			request.setAttribute("alertMsg", "삭제실패");
+			response.sendRedirect(request.getContextPath() + "/productList.pr");
+		}
 		
 	}
 
@@ -46,7 +46,7 @@ public class NewPwdController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("qwejh");
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

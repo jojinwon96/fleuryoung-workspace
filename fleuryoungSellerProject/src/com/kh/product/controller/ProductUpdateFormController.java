@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Category;
+import com.kh.product.model.vo.Discount;
 import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
@@ -40,7 +41,7 @@ public class ProductUpdateFormController extends HttpServlet {
 		ArrayList<OptionTwo> twoList = new ArrayList<OptionTwo>();
 		ArrayList<Category> clist = new ProductService().selectCategoryList();
 		Product p = new ProductService().selectProduct(Integer.parseInt(request.getParameter("pno")));
-		
+		int dlist = new ProductService().selectDiscount(p.getpId());
 		if(p.getOptionOne() > 0) {
 			oneList  = new ProductService().selectOptionOne(p.getpId());
 			
@@ -53,12 +54,19 @@ public class ProductUpdateFormController extends HttpServlet {
 			twoList  = new ProductService().selectOptionTwo(oneNo);
 		}
 		
+		
+		ArrayList<Object> sList = new ArrayList<>();
+		for(int i=0 ; i < 5 ; i++) {
+			sList.add(i*10);
+		}
+		
 		request.setAttribute("clist",  clist);
 		request.setAttribute("p",  p);
 		request.setAttribute("oneList",  oneList);
 		request.setAttribute("twoList",  twoList);
+		request.setAttribute("sale", sList);
 		request.getRequestDispatcher("views/product/productUpdateView.jsp").forward(request, response);		
-	}
+	 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
