@@ -117,4 +117,20 @@ UPDATE    TB_SELLER
 	    ,BANNER_UPDATE
 	FROM TB_BANNER
 </entry>
+
+<entry key="selectAvailCoupon">
+	SELECT
+	    COU_ID
+	    ,COU_NAME
+	    ,COU_DETAIL
+	    ,COU_IMG
+	    ,COU_EXPIRE
+	    ,COU_CONDITION_1
+	    ,COU_CONDITION_2
+	    ,COU_CONDITION_3
+	    ,COU_REGDATE
+	    ,COU_EDIT_DATE
+	    ,COU_DISCOUNT
+	FROM TB_COUPON
+</entry>
 </properties>

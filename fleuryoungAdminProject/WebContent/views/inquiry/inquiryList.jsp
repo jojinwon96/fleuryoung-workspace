@@ -25,11 +25,7 @@
                                 <li class="breadcrumb-item active">판매자요청</li>
                             </ul>
                         </div>
-                        <!-- <div class="col-auto">
-                            <a href="add-customer.html" class="btn btn-primary me-1">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -81,7 +77,8 @@
 	                                                	<td><span class="badge badge-pill bg-danger-light">미해결</span></td>  
 	                                                	<td class="text-end">
 	                                                    <a href="javascript:void(0);"
-	                                                        class="btn btn-sm btn-white text-danger me-2"><i
+	                                                        class="btn btn-sm btn-white text-danger me-2" data-bs-toggle="modal"
+                                                            data-bs-target="#bs-example-modal-lg<%= i.getInqNumber() %>"><i
 	                                                            class="far fa-edit me-1"></i>답변하기</a>
 	                                                </td>   
 	                                                <%}else if((i.getInqStatus()).contains("N")){%>
@@ -93,6 +90,69 @@
 	                                                </td>
 	                                                <%} %>
 	                                            </tr>
+                                                <div class="modal fade" id="bs-example-modal-lg<%= i.getInqNumber() %>" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myLargeModalLabel">판매자 요청 답변</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="#">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">제목</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control" name="title" value="<%= i.getInqTitle() %>" readonly="readonly">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">카테고리</label>
+                                                                        <div class="col-md-10">
+                                                                            <select class="form-select" name="category" disabled="disabled">
+                                                                            	<% if(i.getInqType() == 1) {%>
+	                                                                                <option value="1" selected>리뷰삭제</option>
+	                                                                                <option value="2">상품등록</option>
+																					<option value="3">기타</option>
+																				<%} else if(i.getInqType() == 2) {%>
+																					<option value="1">리뷰삭제</option>
+	                                                                                <option value="2" selected>상품등록</option>
+	                                                                                <option value="3">기타</option>
+																				<%} else if(i.getInqType() == 3) {%>
+	                                                                                <option value="1">리뷰삭제</option>
+	                                                                                <option value="2">상품등록</option>
+																					<option value="3" selected>기타</option>
+																				<%} %>	
+                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">내용</label>
+                                                                        <div class="col-md-10">
+                                                                            <textarea rows="10" cols="5" class="form-control"
+                                                                                placeholder="내용을 입력하세요" name="content" readonly="readonly"><%= i.getInqDetail() %></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">답변</label>
+                                                                        <div class="col-md-10">
+                                                                            <textarea rows="15" cols="5" class="form-control"
+                                                                                placeholder="내용을 입력하세요" name="reply"></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="text-end">
+                                                                        <button type="submit" class="btn btn-primary">저장</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         	<%} %>
                                         </tbody>
                                     </table>

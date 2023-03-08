@@ -183,38 +183,7 @@ public class ProductDao {
 		return optList;
 	}
 
-	public ArrayList<Review> selectProductReview(Connection conn, int pid) {
-
-		ArrayList<Review> reviewList = new ArrayList<Review>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		String sql = prop.getProperty("selectProductReview");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pid);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				reviewList.add(new Review(rs.getInt("P_ID")
-					      , rs.getInt("REVIEW_ID")
-					      , rs.getInt("REVIEW_RATING")
-					      , rs.getString("CONTENT")
-					      , rs.getString("MEM_ID")
-					      , rs.getString("DATE")));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return reviewList;
-	}
+	
 
 	public ArrayList<Product> selectAllProduct(Connection conn) {
 		ArrayList<Product> pList = new ArrayList<Product>();
@@ -243,6 +212,8 @@ public class ProductDao {
 									,rset.getInt("CATEGORY_NO")
 									,rset.getString("SEL_STORE_NAME")
 									,rset.getString("SEL_IMG")
+									,rset.getString("P_IMG1")
+									,rset.getString("CATEGORY_NAME")
 									)
 						 );
 			}
@@ -254,6 +225,38 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return pList;
+	}
+
+	public ArrayList<Review> selectAllReview(Connection conn) {
+		ArrayList<Review> rList = new ArrayList<Review>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectAllReview");
+
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				rList.add(new Review(rset.getInt("P_ID")
+									,rset.getInt("REVIEW_ID")
+									,rset.getInt("REVIEW_RATING")
+									,rset.getString("REVIEW_DETAIL")
+									,rset.getString("MEM_ID")
+									,rset.getDate("REVIEW_ADD_DATE")
+									,rset.getString("REVIEW_IMG")
+									)
+						 );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rList;
 	}
 
 }

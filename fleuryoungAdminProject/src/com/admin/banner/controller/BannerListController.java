@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.admin.banner.model.service.BannerService;
 import com.admin.banner.model.vo.Banner;
+import com.admin.coupon.model.vo.Coupon;
 
 /**
  * Servlet implementation class BannerListController
@@ -32,7 +33,10 @@ public class BannerListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Banner> bList = new BannerService().selectAllBanner();
+		ArrayList<Coupon> cList = new BannerService().selectAvailCoupon();
 		request.setAttribute("bList", bList);
+		request.setAttribute("cList", cList);
+		
 		request.setAttribute("menuNo", "9");
 		request.getRequestDispatcher("views/banner/bannerList.jsp").forward(request, response);
 	}

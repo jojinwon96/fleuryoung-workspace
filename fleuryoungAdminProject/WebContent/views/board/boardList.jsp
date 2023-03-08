@@ -26,9 +26,45 @@
                             </ul>
                         </div>
                         <div class="col-auto">
-                            <a href="add-customer.html" class="btn btn-primary me-1">
+                            <a class="btn btn-primary me-1" data-bs-toggle="modal"
+                            data-bs-target="#bs-example-modal-lg">
                                 <i class="fas fa-plus"></i>
                             </a>
+                        </div>
+
+                        <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
+                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myLargeModalLabel">QnA 추가</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="#">
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-md-2">제목</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" name="title" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-form-label col-md-2">내용</label>
+                                                <div class="col-md-10">
+                                                    <textarea rows="15" cols="5" class="form-control"
+                                                        placeholder="내용을 입력하세요" name="content"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-end">
+                                                <button type="submit" class="btn btn-primary">저장</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,14 +89,48 @@
 	                                                <td><%= b.getBoardTitle() %></td>
                                                     <td><%= b.getBoardAddDate() %></td>	                                               
 	                                                <td class="text-end">
-	                                                    <a href="edit-customer.html"
-	                                                        class="btn btn-sm btn-white text-success me-2"><i
+	                                                    <a href="" class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal"
+                                                            data-bs-target="#bs-example-modal-lg<%= b.getBoardNumber() %>"><i
 	                                                            class="far fa-edit me-1"></i> 수정</a>
 	                                                    <a href="javascript:void(0);"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
 	                                                </td>
 	                                            </tr>
+                                                <div class="modal fade" id="bs-example-modal-lg<%= b.getBoardNumber() %>" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title" id="myLargeModalLabel">QnA 추가</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="#">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">제목</label>
+                                                                        <div class="col-md-10">
+                                                                            <input type="text" class="form-control" name="title" value="<%= b.getBoardTitle() %>" required>
+                                                                        </div>
+                                                                    </div>
+                                                                                                                                        
+                                                                    <div class="form-group row">
+                                                                        <label class="col-form-label col-md-2">내용</label>
+                                                                        <div class="col-md-10">
+                                                                            <textarea rows="15" cols="5" class="form-control"
+                                                                                placeholder="내용을 입력하세요" name="content"><%= b.getBoardDetail() %></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="text-end">
+                                                                        <button type="submit" class="btn btn-primary">저장</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                         	<%} %>
                                         </tbody>
                                     </table>

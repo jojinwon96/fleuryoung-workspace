@@ -186,96 +186,96 @@
                                                     }else{ // 선택된 파일이 취소된 경우 => 미리보기 된 것도 사라지게
                                                         $("#avatarImg").attr("src", null);
                                                     }
-
-                                                    function sample6_execDaumPostcode() {
-                                                        new daum.Postcode({
-                                                            oncomplete: function(data) {
-                                                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                                                
-                                                                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                                                                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                                                                var addr = ''; // 주소 변수
-                                                                var extraAddr = ''; // 참고항목 변수
-                                                
-                                                                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                                                                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                                                    addr = data.roadAddress;
-                                                                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                                                    addr = data.jibunAddress;
-                                                                }
-                                                
-                                                
-                                                                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                                                                //if(data.userSelectedType === 'R'){
-                                                                    if( !(data.userSelectedType == 'R' )){
-                                                                    /*
-                                                                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                                                                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                                                                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                                                        extraAddr += data.bname;
-                                                                    }
-                                                                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                                                                    
-                                                                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                                                                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                                                    }
-                                                                        //표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                                                    if(extraAddr !== ''){
-                                                                            extraAddr = ' (' + extraAddr + ')';
-                                                                    }
-                                                                        //조합된 참고항목을 해당 필드에 넣는다.
-                                                                        document.getElementById("address3").value = extraAddr;
-                                                                        */
-                                                                
-                                                                //} else {
-                                                                document.getElementById("address3").value = '';
-                                                                }
-                                                
-                                                                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                                                                document.getElementById('address1').value = data.zonecode;
-                                                                document.getElementById("address2").value = addr;
-                                                                // 커서를 상세주소 필드로 이동한다.
-                                                                document.getElementById("address3").focus();
-                                                            }
-                                                        }).open();
-                                                    }
-                                                    
-                                                    function userEnroll() {
-                                                        
-                                                        const pwdInputf = document.getElementById("pwdInput");
-                                                        const pwdInputCheckf = document.querySelector("#pwdInputCheck");
-                                                        const idInputf = document.getElementById("idInput");
-                                                        
-                                                        // id : 소문자,숫자로 5~12글자
-                                                        let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-                                                
-                                                        if (!regExp.test(idInputf.value)) {
-                                                            alert('유효하지 않은 id를 입력하셨습니다.');
-                                                            idInput.select();
-                                                            return false;
-                                                        }
-                                                
-                                                        // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
-                                                        let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
-                                                
-                                                        if (!regExp1.test(pwdInput.value)) {
-                                                            alert('유효하지 않은 비밀번호를 입력하셨습니다');
-                                                            pwdInput.value = "";
-                                                            pwdInput.focus();
-                                                            return false;
-                                                        }
-                                                
-                                                        // 비밀번호 확인
-                                                        if (pwdInput.value != pwdInputCheck.value) {
-                                                            alert("비밀번호 확인이 일치하지 않습니다.");
-                                                            pwdInputCheck.value = "";
-                                                            pwdInputCheck.focus();
-                                                            return false;
-                                                
-                                                        }
-
-                                                    }
                                                 }
+                                                function sample6_execDaumPostcode() {
+                                                    new daum.Postcode({
+                                                        oncomplete: function(data) {
+                                                            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                                            
+                                                            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                                            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                                            var addr = ''; // 주소 변수
+                                                            var extraAddr = ''; // 참고항목 변수
+                                            
+                                                            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                                            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                                addr = data.roadAddress;
+                                                            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                                addr = data.jibunAddress;
+                                                            }
+                                            
+                                            
+                                                            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                                            //if(data.userSelectedType === 'R'){
+                                                                if( !(data.userSelectedType == 'R' )){
+                                                                /*
+                                                                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                                    extraAddr += data.bname;
+                                                                }
+                                                                // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                                
+                                                                if(data.buildingName !== '' && data.apartment === 'Y'){
+                                                                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                                                }
+                                                                    //표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                                if(extraAddr !== ''){
+                                                                        extraAddr = ' (' + extraAddr + ')';
+                                                                }
+                                                                    //조합된 참고항목을 해당 필드에 넣는다.
+                                                                    document.getElementById("address3").value = extraAddr;
+                                                                    */
+                                                            
+                                                            //} else {
+                                                            document.getElementById("address3").value = '';
+                                                            }
+                                            
+                                                            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                                            document.getElementById('address1').value = data.zonecode;
+                                                            document.getElementById("address2").value = addr;
+                                                            // 커서를 상세주소 필드로 이동한다.
+                                                            document.getElementById("address3").focus();
+                                                        }
+                                                    }).open();
+                                                }
+                                                    
+                                                function userEnroll() {
+                                                    
+                                                    const pwdInputf = document.getElementById("pwdInput");
+                                                    const pwdInputCheckf = document.querySelector("#pwdInputCheck");
+                                                    const idInputf = document.getElementById("idInput");
+                                                    
+                                                    // id : 소문자,숫자로 5~12글자
+                                                    let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
+                                            
+                                                    if (!regExp.test(idInputf.value)) {
+                                                        alert('유효하지 않은 id를 입력하셨습니다.');
+                                                        idInput.select();
+                                                        return false;
+                                                    }
+                                            
+                                                    // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
+                                                    let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
+                                            
+                                                    if (!regExp1.test(pwdInput.value)) {
+                                                        alert('유효하지 않은 비밀번호를 입력하셨습니다');
+                                                        pwdInput.value = "";
+                                                        pwdInput.focus();
+                                                        return false;
+                                                    }
+                                            
+                                                    // 비밀번호 확인
+                                                    if (pwdInput.value != pwdInputCheck.value) {
+                                                        alert("비밀번호 확인이 일치하지 않습니다.");
+                                                        pwdInputCheck.value = "";
+                                                        pwdInputCheck.focus();
+                                                        return false;
+                                            
+                                                    }
+
+                                                }
+                                                
                                             </script>
                                         </form>
                                     </div>
@@ -449,7 +449,7 @@
                                                     
                                                                         <div id="addressDiv2" class="col-sm-6"> 
                                                                             <input type="number" id="address1<%= s.getSelId() %>" placeholder="주소번호" name="postal" value="<%= s.getSelPostal()%>" required >
-                                                                            <button id="btn-address" onclick="sample6_execDaumPostcode<%= s.getSelId() %>()" type="button" >주소검색</button>  <br>
+                                                                            <button id="btn-address" onclick="sample6_execDaumPostcode<%= s.getSelId() %>();" type="button" >주소검색</button>  <br>
                                                                             <input type="text"  class="form-control" id="address2<%= s.getSelId() %>" placeholder="도로명주소" name="street" value="<%= s.getSelStreet()%>" required>
                                                                         <input type="text" class="form-control" id="address3<%= s.getSelId() %>" placeholder="상세주소를 입력해주세요" name="address" value="<%= s.getSelAddress()%>" required> 
                                                                         
@@ -486,96 +486,96 @@
                                                                             }else{ // 선택된 파일이 취소된 경우 => 미리보기 된 것도 사라지게
                                                                                 $("#avatarImg<%= s.getSelId() %>").attr("src", null);
                                                                             }
-
-                                                                            function sample6_execDaumPostcode<%= s.getSelId() %>() {
-                                                                                new daum.Postcode({
-                                                                                    oncomplete: function(data) {
-                                                                                        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-                                                                        
-                                                                                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                                                                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                                                                                        var addr = ''; // 주소 변수
-                                                                                        var extraAddr = ''; // 참고항목 변수
-                                                                        
-                                                                                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                                                                                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                                                                                            addr = data.roadAddress;
-                                                                                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                                                                                            addr = data.jibunAddress;
-                                                                                        }
-                                                                        
-                                                                        
-                                                                                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                                                                                        //if(data.userSelectedType === 'R'){
-                                                                                            if( !(data.userSelectedType == 'R' )){
-                                                                                            /*
-                                                                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                                                                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                                                                                            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                                                                                                extraAddr += data.bname;
-                                                                                            }
-                                                                                            // 건물명이 있고, 공동주택일 경우 추가한다.
-                                                                                            
-                                                                                            if(data.buildingName !== '' && data.apartment === 'Y'){
-                                                                                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                                                                                            }
-                                                                                                //표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                                                                                            if(extraAddr !== ''){
-                                                                                                    extraAddr = ' (' + extraAddr + ')';
-                                                                                            }
-                                                                                                //조합된 참고항목을 해당 필드에 넣는다.
-                                                                                                document.getElementById("address3").value = extraAddr;
-                                                                                                */
-                                                                                        
-                                                                                        //} else {
-                                                                                        document.getElementById("address3<%= s.getSelId() %>").value = '';
-                                                                                        }
-                                                                        
-                                                                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                                                                                        document.getElementById('address1<%= s.getSelId() %>').value = data.zonecode;
-                                                                                        document.getElementById("address2<%= s.getSelId() %>").value = addr;
-                                                                                        // 커서를 상세주소 필드로 이동한다.
-                                                                                        document.getElementById("address3<%= s.getSelId() %>").focus();
-                                                                                    }
-                                                                                }).open();
-                                                                            }
-                                                                            
-                                                                            function userEnroll<%= s.getSelId() %>() {
-                                                                                
-                                                                                const pwdInputf = document.getElementById("pwdInput<%= s.getSelId() %>");
-                                                                                const pwdInputCheckf = document.querySelector("#pwdInputCheck<%= s.getSelId() %>");
-                                                                                const idInputf = document.getElementById("idInput<%= s.getSelId() %>");
-                                                                                
-                                                                                // id : 소문자,숫자로 5~12글자
-                                                                                let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-                                                                        
-                                                                                if (!regExp.test(idInputf.value)) {
-                                                                                    alert('유효하지 않은 id를 입력하셨습니다.');
-                                                                                    idInput.select();
-                                                                                    return false;
-                                                                                }
-                                                                        
-                                                                                // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
-                                                                                let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
-                                                                        
-                                                                                if (!regExp1.test(pwdInput.value)) {
-                                                                                    alert('유효하지 않은 비밀번호를 입력하셨습니다');
-                                                                                    pwdInput.value = "";
-                                                                                    pwdInput.focus();
-                                                                                    return false;
-                                                                                }
-                                                                        
-                                                                                // 비밀번호 확인
-                                                                                if (pwdInput.value != pwdInputCheck.value) {
-                                                                                    alert("비밀번호 확인이 일치하지 않습니다.");
-                                                                                    pwdInputCheck.value = "";
-                                                                                    pwdInputCheck.focus();
-                                                                                    return false;
-                                                                        
-                                                                                }
-
-                                                                            }
                                                                         }
+                                                                        function sample6_execDaumPostcode<%= s.getSelId() %>() {
+                                                                            new daum.Postcode({
+                                                                                oncomplete: function(data) {
+                                                                                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                                                                    
+                                                                                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                                                                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                                                                    var addr = ''; // 주소 변수
+                                                                                    var extraAddr = ''; // 참고항목 변수
+                                                                    
+                                                                                    //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                                                                    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                                                        addr = data.roadAddress;
+                                                                                    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                                                        addr = data.jibunAddress;
+                                                                                    }
+                                                                    
+                                                                    
+                                                                                    // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                                                                    //if(data.userSelectedType === 'R'){
+                                                                                        if( !(data.userSelectedType == 'R' )){
+                                                                                        /*
+                                                                                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                                                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                                                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                                                            extraAddr += data.bname;
+                                                                                        }
+                                                                                        // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                                                        
+                                                                                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                                                                                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                                                                        }
+                                                                                            //표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                                                        if(extraAddr !== ''){
+                                                                                                extraAddr = ' (' + extraAddr + ')';
+                                                                                        }
+                                                                                            //조합된 참고항목을 해당 필드에 넣는다.
+                                                                                            document.getElementById("address3").value = extraAddr;
+                                                                                            */
+                                                                                    
+                                                                                    //} else {
+                                                                                    document.getElementById("address3<%= s.getSelId() %>").value = '';
+                                                                                    }
+                                                                    
+                                                                                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                                                                    document.getElementById('address1<%= s.getSelId() %>').value = data.zonecode;
+                                                                                    document.getElementById("address2<%= s.getSelId() %>").value = addr;
+                                                                                    // 커서를 상세주소 필드로 이동한다.
+                                                                                    document.getElementById("address3<%= s.getSelId() %>").focus();
+                                                                                }
+                                                                            }).open();
+                                                                        }
+                                                                        
+                                                                        function userEnroll<%= s.getSelId() %>() {
+                                                                            
+                                                                            const pwdInputf = document.getElementById("pwdInput<%= s.getSelId() %>");
+                                                                            const pwdInputCheckf = document.querySelector("#pwdInputCheck<%= s.getSelId() %>");
+                                                                            const idInputf = document.getElementById("idInput<%= s.getSelId() %>");
+                                                                            
+                                                                            // id : 소문자,숫자로 5~12글자
+                                                                            let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
+                                                                    
+                                                                            if (!regExp.test(idInputf.value)) {
+                                                                                alert('유효하지 않은 id를 입력하셨습니다.');
+                                                                                idInput.select();
+                                                                                return false;
+                                                                            }
+                                                                    
+                                                                            // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
+                                                                            let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
+                                                                    
+                                                                            if (!regExp1.test(pwdInput.value)) {
+                                                                                alert('유효하지 않은 비밀번호를 입력하셨습니다');
+                                                                                pwdInput.value = "";
+                                                                                pwdInput.focus();
+                                                                                return false;
+                                                                            }
+                                                                    
+                                                                            // 비밀번호 확인
+                                                                            if (pwdInput.value != pwdInputCheck.value) {
+                                                                                alert("비밀번호 확인이 일치하지 않습니다.");
+                                                                                pwdInputCheck.value = "";
+                                                                                pwdInputCheck.focus();
+                                                                                return false;
+                                                                    
+                                                                            }
+
+                                                                        }
+                                                                        
                                                                     </script>
                                                                 </form>
                                                             </div>

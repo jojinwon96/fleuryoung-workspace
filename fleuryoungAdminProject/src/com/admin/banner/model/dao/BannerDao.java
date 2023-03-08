@@ -12,6 +12,7 @@ import java.util.Properties;
 import static com.admin.common.JDBCTemplate.*;
 
 import com.admin.banner.model.vo.Banner;
+import com.admin.coupon.model.vo.Coupon;
 import com.admin.user.model.vo.User;
 
 public class BannerDao {
@@ -182,5 +183,41 @@ public class BannerDao {
 			close(pstmt);
 		}
 		return bList;
+	}
+
+	public ArrayList<Coupon> selectAvailConn(Connection conn) {
+		ArrayList<Coupon> cList = new ArrayList<Coupon>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectAvailCoupon");
+
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				cList.add(new Coupon(rset.getInt("COU_ID")
+									,rset.getString("COU_NAME")
+									,rset.getString("COU_DETAIL")
+									,rset.getString("COU_IMG")
+									,rset.getDate("COU_EXPIRE")
+									,rset.getString("COU_CONDITION_1")
+									,rset.getString("COU_CONDITION_2")
+									,rset.getString("COU_CONDITION_3")
+									,rset.getDate("COU_REGDATE")
+									,rset.getDate("COU_EDIT_DATE")
+									,rset.getInt("COU_DISCOUNT")
+									)
+						);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cList;
 	}
 }

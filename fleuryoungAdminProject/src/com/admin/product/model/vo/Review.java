@@ -1,16 +1,19 @@
 package com.admin.product.model.vo;
 
+import java.sql.Date;
+
 public class Review {
 	private int pId;
 	private int reviewId;
 	private int reviewRating;
 	private String content;
 	private String memId;
-	private String date;
+	private Date date;
+	private String reviewImg;
 	
 	public Review () {}
 
-	public Review(int pId, int reviewId, int reviewRating, String content, String memId, String date) {
+	public Review(int pId, int reviewId, int reviewRating, String content, String memId, Date date, String reviewImg) {
 		super();
 		this.pId = pId;
 		this.reviewId = reviewId;
@@ -18,6 +21,7 @@ public class Review {
 		this.content = content;
 		this.memId = memId;
 		this.date = date;
+		this.reviewImg = reviewImg;
 	}
 
 	public int getpId() {
@@ -60,12 +64,20 @@ public class Review {
 		this.memId = memId;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getReviewImg() {
+		return reviewImg;
+	}
+
+	public void setReviewImg(String reviewImg) {
+		this.reviewImg = reviewImg;
 	}
 
 	@Override

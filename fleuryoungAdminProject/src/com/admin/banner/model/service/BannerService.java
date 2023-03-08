@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.admin.banner.model.dao.BannerDao;
 import com.admin.banner.model.vo.Banner;
+import com.admin.coupon.model.vo.Coupon;
 import com.admin.user.model.dao.UserDao;
 import com.admin.user.model.vo.User;
 
@@ -61,6 +62,14 @@ public class BannerService {
 
 		close(conn);
 		return bList;
+	}
+
+	public ArrayList<Coupon> selectAvailCoupon() {
+		Connection conn = getConnection();
+		ArrayList<Coupon> cList = new BannerDao().selectAvailConn(conn);
+
+		close(conn);
+		return cList;
 	}
 	
 }

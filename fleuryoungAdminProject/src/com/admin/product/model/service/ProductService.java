@@ -68,16 +68,7 @@ public class ProductService {
 		return optList;
 	}
 
-	public ArrayList<Review> selectProductReview(int pid) {
-
-		Connection conn = getConnection();
-
-		ArrayList<Review> reviewList = new ProductDao().selectProductReview(conn, pid);
-
-		close(conn);
-
-		return reviewList;
-	}
+	
 
 	public ArrayList<Product> selectAllProduct() {
 		Connection conn = getConnection();
@@ -85,6 +76,14 @@ public class ProductService {
 
 		close(conn);
 		return pList;
+	}
+
+	public ArrayList<Review> selectAllReview() {
+		Connection conn = getConnection();
+		ArrayList<Review> rList = new ProductDao().selectAllReview(conn);
+
+		close(conn);
+		return rList;
 	}
 
 }

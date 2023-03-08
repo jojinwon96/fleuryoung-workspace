@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.admin.product.model.service.ProductService;
 import com.admin.product.model.vo.Product;
+import com.admin.product.model.vo.Review;
 
 /**
  * Servlet implementation class ProductListController
@@ -32,7 +33,9 @@ public class ProductListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Product> pList = new ProductService().selectAllProduct();
+		ArrayList<Review> rList = new ProductService().selectAllReview();
 		request.setAttribute("pList", pList);
+		request.setAttribute("rList", rList);
 		request.setAttribute("menuNo", "6");
 		request.getRequestDispatcher("views/product/productList.jsp").forward(request, response);
 	}

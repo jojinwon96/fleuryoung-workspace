@@ -23,6 +23,7 @@ public class Product {
 	private String images;
 	private String storeName;
 	private String selImg;
+	private String categoryName;
 
 	public Product() {}
 
@@ -76,7 +77,7 @@ public class Product {
 
 	public Product(int pId, String pName, int pNetPrice, String pDetail, int pStock, Date enrollDate, String returnYN,
 			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, int categoryNO,
-			String storeName, String selImg) {
+			String storeName, String selImg, String mainImg, String categoryName) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -93,7 +94,21 @@ public class Product {
 		this.categoryNO = categoryNO;
 		this.storeName = storeName;
 		this.selImg = selImg;
+		this.mainImg = mainImg;
+		this.categoryName = categoryName;
 	}
+	
+	
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 
 	public String getSelImg() {
 		return selImg;
