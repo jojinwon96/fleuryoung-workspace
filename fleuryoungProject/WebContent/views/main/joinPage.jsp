@@ -405,33 +405,6 @@ button {
 							var gender = $('input[name=gender]:checked').val();
 						</script>
 
-						
-						<!-- <script>
-							function checkMale(obj) {
-								var chedcked = obj.ckecked;
-								if(checked) {
-									obj.value= 1;
-									console.log('남자 성공')
-								}else{
-									obj.value= null;
-								}
-							};
-						</script>
-
-						<script>
-							function checkFemale(obj) {
-								var chedcked = obj.ckecked;
-								if(checked) {
-									obj.value= 2;
-								}else{
-									obj.value= null;
-								}
-							};
-						</script>
- -->
-
-
-						
 
 						<div id="addressArea">
 							<label for="address" id="addressLabel">주소</label>
@@ -445,12 +418,6 @@ button {
 							</div>
 		
 						</div>
-
-
-						
-						
-
-
 
 						<div id="agreeArea">
 
@@ -596,14 +563,17 @@ button {
 						<script>
 							function userEnroll() {
 								
-								const pwdInputf = document.getElementById("pwdInput");
-								const pwdInputCheckf = document.querySelector("#pwdInputCheck");
+								const pwdInputf = document.getElementById("pwdInput"); //pwdInput -> 비밀번호 
+								const pwdInputCheckf = document.querySelector("#pwdInputCheck"); //pwdInputCheck -> 비밀번호 확인
+
+								//약관동의
 								const check01= document.getElementById("check01");
 								const check02 = document.getElementById("check02");
 
 								const check01_checked = check01.checked;
 								const check02_checked = check02.checked;
 
+								//아이디 중복확인했나 확인
 								if($("input[name='checked_id']").val()==''){
 									alert('아이디중복 확인을 해주세요.');
 									$("input[name='checked_id']").eq(0).focus();
@@ -631,6 +601,7 @@ button {
 						
 								}
 
+								//이용약관 동의 여부 체크
 								if ((check01.checked && check02.checked) != true ) {
 									alert("이용약관에 동의하지 않으셧습니다.");
 									return false;

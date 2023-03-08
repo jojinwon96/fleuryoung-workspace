@@ -6,6 +6,13 @@ import java.sql.Connection;
 import com.kh.common.JDBCTemplate;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class MemberService {
 
@@ -88,6 +95,10 @@ public int idCheck(String checkId) {
 	return count;
 
 }
+
+
+
+
 
 
 

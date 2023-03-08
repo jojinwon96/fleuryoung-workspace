@@ -14,6 +14,7 @@
     
      <script src="../../resources/js/jquery-3.1.1.min.js"></script>
     <script src="../../resources/js/scripts.js"></script>
+    
 
 
     
@@ -237,7 +238,7 @@ span {
             <div class="wrapper">
                 <div class="container" style="max-width: 850px; margin-bottom:200px; margin-right:50px">
                   <div class="sign-up-container">
-                    <form action="/fleuryoungProject/FindPwController" name="pwfindscreen" method="post" >
+                    <form id="findPwForm" action="/fleuryoungProject/CheckEmailController" name="pwfindscreen" method="post" >
                       <h3 id="h3Pwd"><b>비밀번호 찾기</b>  </h3>
                        <input type="text" id="idInputPwd" placeholder="아이디를 입력해주세요" name="member_id">
                        <input type="email" id="emailInputPwd" placeholder="가입시 사용하신 이메일을 입력해주세요" name="member_email">
@@ -245,17 +246,38 @@ span {
                     </form>
                   </div>
                   <div class="sign-in-container">
+
+                    
                   
                   
                   <!-- 아이디찾기 -->
                   <!-- action="/fleuryoungProject/findId.me" -->
-                    <form action="/fleuryoungProject/findId.me"  name="idfindscreen" method="post">
+                    <form  action="/fleuryoungProject/findId.me"  name="idfindscreen" method="post">
                       <h3 id="h3Id"><b> 아이디 찾기</b></h3>
                     
                         <input type="text" id="nameInputId" name="member_name" placeholder="이름을 입력해주세요">
                         <input type="email" id="emailInputId" name="member_email" placeholder="가입시 사용하신 이메일을 입력해주세요">
-                        <button type="submit"  class="form_btn" id="findIdButton" style="margin-top: 15px; border-radius: 20px;" onClick="return id_search()"><b>아이디 찾기</b></button>
+                        <button type="submit"  class="form_btn" id="btnSubmit" style="margin-top: 15px; border-radius: 20px;" onClick="return id_search()"><b>아이디 찾기</b></button>
                     </form>
+
+                    <!-- ============= -->
+                    <div class="form-group" id="sendNum_Wrapper" style="display: none;">
+                      <label class="form-control-label">인증번호</label>
+
+                      <div class="pass-group">
+                          <input type="text" id="num" class="form-control-sm" name="certified"
+                              required>
+                          <button type="button" class="btn btn-primary btn-sm"
+                              id="btnSubmit">인증확인</button>
+                          <input type="hidden" id="modals" data-bs-toggle="modal"
+                              data-bs-target="#signup-modal">
+                      </div>
+                  </div>
+
+                  <button class="btn btn-lg btn-block btn-primary w-100" type="button"
+                      id="btnSendEmail">이메일 인증</button>
+                    <!-- ============= -->
+
                     
            <script>
 	          function id_search() { 
@@ -269,6 +291,11 @@ span {
 	            alert("이메일을 입력해주세요");
 	            return false;
 	          }
+	        
+	          
+	          $.ajax({
+	        	  
+	          })
 	        }
         </script>
         
@@ -284,10 +311,15 @@ span {
             alert("이메일을 입력해주세요");
             return false;
           }
+          
+          var cast = document.getElementById("emailInputPwd");
+
+          localStorage.setItem("cast", JSON.stringify(cast));
+
         }
         </script>
                   
-                  
+                  <!-- ============ -->
                   
                   </div>
                   <div class="overlay-container">
@@ -304,6 +336,48 @@ span {
                   </div>
                 </div>
               </div>
+
+                  <!-- ============ -->
+
+                  <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="text-center mt-2 mb-4">
+                                    <div class="auth-logo">
+                                        <a href="<%=contextPath%>" class="logo logo-dark">
+                                            <span class="logo-lg">
+                                                <img src="resources/img/logo.png" alt="" height="42">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <form class="px-3" action="#">
+                
+                                    <div class="mb-3">
+                                        <label for="emailaddress" class="form-label">새 비밀번호</label>
+                                        <input class="form-control" type="password" id="password" required
+                                            placeholder="john@deo.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">새 비밀번호 확인</label>
+                                        <input class="form-control" type="password" required id="checkpwd"
+                                            placeholder="Enter your password">
+                                    </div>
+                
+                                    <div class="mb-3 text-center">
+                                        <button class="btn btn-primary" id="checked" type="button" >확인</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+
             
 
 
@@ -313,8 +387,8 @@ span {
       
 
 
-        <script>
-            const signUpBtn = document.getElementById("signUp");
+<script>
+const signUpBtn = document.getElementById("signUp");
 const signInBtn = document.getElementById("signIn");
 const container = document.querySelector(".container");
 
@@ -324,7 +398,79 @@ signUpBtn.addEventListener("click", () => {
 signInBtn.addEventListener("click", () => {
   container.classList.remove("right-panel-active");
 });
-        </script>
+ </script>
+   
+   
+   
+  <script>
+    $(function () {
+        // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
+        let user_id = "";
+        let ranNum = "";
+        let check= "";
+        document.getElementById("btnSendEmail").addEventListener("click", function () {
+            $.ajax({
+                type: "post",
+                url: "idSelect.eml",
+                data: {
+                    email: document.getElementById("emailInputPwd").value,
+                    MemId: document.getElementById("idInputPwd").value,
+                    chack: "pwdSelect"
+                }
+            }).done(function (data) {
+                if (data.email == "false") {
+                    alert("존재하지 않는 이메일입니다.");
+                } else {
+                    user_id = data.userId;
+                    ranNum = data.ranNum;
+                    check = prompt("인증번호를 입력하세요");
+                    /*
+                    if(check == ranNum){
+                      alert("아이디는 무엇입니)
+                    }else{
+                      alert("잘못입력했습니다.")
+                    }
+                    */
+                    alert("인증번호를 입력해주세요");
+                    document.getElementById("sendNum_Wrapper").style.display = "block";
+                    document.getElementById("btnSendEmail").disabled = "disabled";
+                }
+            }).fail(function (e) {
+                console.log(e);
+            });
+            document.getElementById("btnSubmit").addEventListener("click", function () {
+                let verification_number = $("#num").val()
+                console.log(verification_number)
+                console.log(ranNum)
+                if (ranNum == verification_number) {
+                    alert("새 비밀번호를 입력하세요.");
+                    $("#modals").trigger('click');
+                } else {
+                    alert("인증번호를 잘못 입력하셨습니다.");
+                }
+            })
+        })
+        document.getElementById("checked").addEventListener("click", function () {
+            $.ajax({
+                type: "post",
+                url: "newPwd.eml",
+                data: {
+                    selId: $("#idInputPwd").val(),
+                    pass: $("#password").val()
+                }
+            }).done(function (result) {
+                if (result > 0) {
+                    alert("비밀번호가 수정되었습니다.");
+                    location.href = "<%=contextPath%>/login.se";
+                } else {
+                    alert("수정 실패");
+                    console.log($("#idInputPwd").val());
+                    console.log($("#password").val());
+                }
+            })
+        })
+    })
+</script>
   
     <!------------------------------------------------------------------------------ 내가 작성한 부분 끝------------------------------------------------>
 

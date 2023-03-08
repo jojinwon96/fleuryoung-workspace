@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.member.model.vo.Member"%>
 <%
-	//String contextPath = request.getContextPath(); 
-	
 	Member idFind = (Member)session.getAttribute("idFind");	
 %>
 <%
