@@ -70,12 +70,12 @@
 								
 								<div class="sName-panel container text-left" style="margin-bottom: -20px">
 									<div class="row">
-										<div class="col-9" style="margin-left:25px; font-weight: bolder"><%= c.getStoreName() %></div>
-										<div class="col">
+										<div class="col-9 my-2" style="margin-left:25px; font-weight: bolder">[<%= c.getStoreName() %>]</div>
+<%-- 										<div class="col">
 											<% if (c.getOpt1stNo() != 0) { %>
 												<button type="button" class="btn btn-light"style="margin-left:-118px">옵션수정</button>
 											<% } %>
-										</div>
+										</div> --%>
 									</div>
 								</div>
 	                            <li class="cart-li">

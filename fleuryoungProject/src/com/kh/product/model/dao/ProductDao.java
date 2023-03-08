@@ -505,6 +505,43 @@ public class ProductDao {
 		
 		return list;
 	}
+
+	public ArrayList<Review> selectSortReview(Connection conn, int pId, String sort) {
+		
+		ArrayList<Review> reviewList = new ArrayList<Review>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "";
+		
+		if (sort.equals("desc")) {
+			 sql = prop.getProperty("reviewSortDesc");
+		} else {
+			 sql = prop.getProperty("reviewSortAsc");
+		}
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pId);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				reviewList.add(new Review(rs.getInt("P_ID"), rs.getInt("REVIEW_ID"), rs.getInt("REVIEW_RATING"),
+						rs.getString("CONTENT"), rs.getString("MEM_ID"), rs.getString("DATE"), rs.getInt("OD_ID")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return reviewList;
+	}
 }
 
 

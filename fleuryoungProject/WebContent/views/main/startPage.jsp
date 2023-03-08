@@ -61,94 +61,7 @@ h5 {
 		<%@ include file="../../views/common/header.jsp"%>
 
 		<script>
-			$(document).ready(function(){
-				updateLike();
-			})
-		
-			function updateLike(){
-					<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
-						let memberId = "";
-						memberId = '<%= loginUser.getMemId()%>';
-							$.ajax({
-			                    url : "updateLike.p", // 어느 url로 보낼 건지
-			                    type : "post", // 요청방식 지정
-			                    traditional :true,	
-			                    data : {memId:memberId}, 
-			                    success : function(list) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
-			                    	console.log("성공입니다~");
-			                    	$(".hPid").each(function(){
-			                    		console.log($(this).val());
-				                    	for (let i in list){
-				                    		if (list[i].pId == Number($(this).val())){
-				                    			console.log("같다~");
-				                    			$(this).parents(".productbox").find("#mini-like").attr("src", "${pageContext.request.contextPath}/resources/image/icon/love_full.png");
-				                    		}
-				                    	}		
-			                    	})
-			                    },
-			
-			                    error : function(){
-			                        console.log("ajax 통신 실패");
-			                    },
-			
-			                    complete : function(){
-			                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
-			                    }
-			                    
-			               });  
-					<% } %> 
-			 }
-			$(function () {
-				
-					$(document).on('click', '.mini_like', function () {
-						let chk = 0;
-						let memId = ""
-						let pId = $(this).parents(".productbox").find(".pid").html();
-						<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
-							memId = '<%= loginUser.getMemId() %>';
-						<% } %>
-						
-						<%if (loginUser == null) {%>
-								console.log("null임");
-								alert("로그인이 필요한 기능입니다.");
-						<%} else {%>
-								if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
-								    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
-								    chk = 1;
-								} else {
-									$(this).attr("src", "<%=contextPath%>/resources/image/icon/like.png")
-									chk = 0;
-								}
-								
-								 $.ajax({
-		     		                    // 요청보내기
-		     		                    url : "updateWishList.m", // 어느 url로 보낼 건지
-		     		                    type : "post", // 요청방식 지정
-		     		                    traditional :true,	
-		     		                    //dataType : "json",
-		     		                    data : {memId:memId, pId:pId, check:chk}, 
-		     		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
-		     		                        if (result > 0){
-		     		                        	alert("찜콩~");
-		     		                        } else {
-		     		                        	alert("안찜콩~");
-		     		                        }
-		     		                    },
 
-		     		                    error : function(){
-		     		                        console.log("ajax 통신 실패");
-		     		                    },
-
-		     		                    complete : function(){
-		     		                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
-		     		                    }
-		     		                    
-		     		               }); 
-		   			    <%}%>
-					})
-					
-						
-			})
 		</script>
 
 
@@ -242,8 +155,8 @@ h5 {
             					</div>
 							<%} %>
 							<!-- Product image-->
-							<h1 class="pid" hidden><%= p.getpId() %></h1>
 							<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
+							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"

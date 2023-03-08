@@ -135,7 +135,7 @@
 						<div class="d-flex flex-column">
 							<div class="mt-2 row" style="margin-bottom: -10px;">
 								<!-- <div class="col-1" style="padding: 0; margin-left: -1px; font-weight: bold;">10%</div>
-                            <div class="col-1" style="text-decoration: line-through;">30,000</div> -->
+                            	<div class="col-1" style="text-decoration: line-through;">30,000</div> -->
 								<div class="col-8"></div>
 							</div>
 							<div class="row fs-3" style="font-weight: bolder;"><%=p.getpNetPrice()%>원
@@ -391,7 +391,7 @@
 						</div>
 
 						<div class="mt-3 row">
-							<button class="add-cart py-3 col-4 rounded" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+							<button class="add-cart rounded py-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
 								style="font-weight: bolder; color: rgb(248, 178, 188); background-color: white; border: 1px solid rgb(248, 178, 188);">장바구니
 							</button>
 							<!-- 장바구니 알림 모달 -->
@@ -425,9 +425,7 @@
 							  </div>
 							</div>
 							
-							<button class="px-3 col-7 rounded"
-								style="margin-left: 36px; font-weight: bolder; color: aliceblue; background-color: rgb(248, 178, 188);">구매하기
-							</button>
+
 						</div>
 					</div>
 				</div>
@@ -533,13 +531,13 @@
 							data-bs-toggle="tab" data-bs-target="#profile" type="button"
 							role="tab" aria-controls="profile" aria-selected="false">리뷰</button>
 					</li>
-					<li class="nav-item" role="presentation">
+<!-- 					<li class="nav-item" role="presentation">
 						<button
 							style="background-color: white; width: 150px; color: black;"
 							class="pd3 pd-mv-btn nav-link" id="messages-tab"
 							data-bs-toggle="tab" data-bs-target="#messages" type="button"
 							role="tab" aria-controls="messages" aria-selected="false">문의</button>
-					</li>
+					</li> -->
 					<li class="nav-item" role="presentation">
 						<button
 							style="background-color: white; width: 160px; color: black;"
@@ -561,7 +559,7 @@
 				<%
 					String[] tmp = p.getImages().split(",");
 				%>
-				<% for (int i = 0; i < tmp.length; i++) { %>
+				<% for (int i = 0; i < 5; i++) { %>
 					<%if (!tmp[i].equals("")) {%>
 					<img style="margin-top: 20px; widtsh: 500px; height: 500px"
 						src="${pageContext.request.contextPath}<%= tmp[i] %>"
@@ -577,10 +575,12 @@
 				<div style="margin-left: -20px;" class="container text-center">
 					<hr>
 					<div style="margin-left: -15px;" class="d-flex mb-3">
-						<button class="reivew-sort mx-3 p-2">베스트 순</button>
-						<button class="reivew-sort mx-3 p-2">최신순</button>
-						<button class="reivew-sort mx-3 p-2">평점 높은 순</button>
-						<button class="reivew-sort mx-3 p-2">평점 낮은 순</button>
+						<button class="review review-high mx-3 p-2">평점 높은 순</button>
+						<input type="hidden" value="decs">
+						<button class="review review-low mx-3 p-2">평점 낮은 순</button>
+						<input type="hidden" value="asc">
+						<button class="reivew-best mx-5 p-2"></button>
+						<button class="reivew-latest mx-5 p-2"></button>
 						<% if (check == 0 || loginUser == null) { %>
 							<button type="button" style="margin-left: 420px;" class="addReview-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReivew" data-bs-whatever="@mdo" disabled>리뷰작성</button>		
 						<% } else { %>
@@ -635,9 +635,10 @@
 					<%
 						for (Review r : reviewList) {
 					%>
-					<div class="d-flex align-items-start flex-column mb-3">
+					<div class="review-wrap d-flex align-items-start flex-column mb-3">
+						<input class="hPid" type="hidden" value="<%= r.getpId()%>">
 						<div style="margin-bottom: -10px;" class="p-2">
-							<div class="row">
+							<div class="reviewRating row">
 								<%
 									for (int i = 0; i < r.getReviewRating(); i++) {
 								%>
@@ -654,14 +655,14 @@
 									String maskingId = r.getMemId().replaceAll("(?<=.{3}).", "*");
 								%>
 
-								<div style="text-align: left; width: 250px;" class="col"><%=maskingId%></div>
-								<div style="font-size: 13px; margin-left: -150px;" class="col"><%=r.getDate()%></div>
+								<div style="text-align: left; width: 250px;" class="userId col"><%=maskingId%></div>
+								<div style="font-size: 13px; margin-left: -150px;" class="date col"><%=r.getDate()%></div>
 								
 							</div>
 						</div>
 						<div class="p-2">
 							<div class="row grid text-center">
-								<div class="g-col-6 .g-col-md-4"
+								<div class="content g-col-6 .g-col-md-4"
 									style="margin: auto; padding: auto">
 									<%=r.getContent()%>
 								</div>
@@ -682,7 +683,7 @@
 			</div>
 
 
-			<div class="t3"></div>
+<%-- 			<div class="t3"></div>
 			<br> <br>
 			<!-- 문의 시작 -->
 			<div align="left"
@@ -738,7 +739,7 @@
 					</tr>
 				<% } %>
 				</tbody>
-			</table>
+			</table> --%>
 
 
 			<div class="t4"></div>
@@ -748,8 +749,7 @@
 				style="font-size: 30px; font-weight: bolder; margin-top: 50px;">교환
 				및 반품안내</div>
 			<img style="margin-top: 20px;"
-				src="http://image.hanflower.com/data/image/view/customer_center.gif
-        "
+				src="http://image.hanflower.com/data/image/view/customer_center.gif"
 				class="rounded mx-auto d-block" alt="..."> <br>
 		</div>
 	</div>
@@ -829,6 +829,53 @@
 				
 			})
 			
+			
+<%--  			// 평점 높은 순, 평점 낮은 순
+			$(".review").click(function(){
+				let tmp = "";
+				let pId = "<%=p.getpId()%>";
+				if ($(this).hasClass("review-high")){
+					tmp = 'desc';
+				} else if ($(this).hasClass("review-low")) {
+					tmp = 'acs';
+				}
+				
+                $.ajax({
+                    url : "reviewSort.p",
+                    type : "post",
+                    traditional :true,	
+                    data : {pId:pId, tmp:tmp}, 
+                    success : function(list) {
+                    		for (let i = 0; i < list.length; i++){
+                    			$(".hPid").each(function(){
+                    				let rating = $(this).parents(".review-wrap").find(".reviewRating");
+                    				let userId = $(this).parents(".review-wrap").find(".userId");
+                    				let date = $(this).parents(".review-wrap").find(".date");
+                    				let content = $(this).parents(".review-wrap").find(".content");
+                    				
+                    				rating.children("span").remove();
+                    				for (let j = 0; j < list[i].reviewRating; j++){
+                    					rating.append("<span class=\"bi bi-star-fill yellow-color\"> </span>");
+                    				}
+                    				userId.html(list[i].memId);
+                    				date.html(list[i].date);
+                    				content.html(list[i].content);
+                    				console.log(list[i].memId);
+  			                  	})
+                       		}
+                    	
+                    },
+
+                    error : function(){
+                        console.log("ajax 통신 실패");
+                    },
+
+                    complete : function(){
+                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+                    }
+                    
+                }); 
+			})  --%>
 		})
 		
 		

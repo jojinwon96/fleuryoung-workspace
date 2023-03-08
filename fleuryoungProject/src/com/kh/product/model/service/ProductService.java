@@ -202,6 +202,17 @@ public class ProductService {
 		return list;
 	}
 
+	public ArrayList<Review> selectSortReview(int pId, String sort) {
+
+		Connection conn = getConnection();
+		
+		ArrayList<Review> list = new ProductDao().selectSortReview(conn, pId, sort);
+		
+		close(conn);
+		
+		return list;
+	}
+
 
 }
 

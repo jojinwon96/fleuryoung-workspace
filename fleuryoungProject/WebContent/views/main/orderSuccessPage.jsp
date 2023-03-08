@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="atag">
                                     <a class="a1" href="#">쇼핑 더하기</a>
-                                    <a class="a2" href="#">주문조회</a>
+                                    <a class="a2" href="<%= contextPath %>/myPageOrderList.my">주문조회</a>
                                 </div>
                             </td>
                         </tr>
@@ -53,5 +53,13 @@
 
     </div>
     </div>
+    
+    <script>
+	    $(function() {
+	    	$(".a1").click(function(){
+				location.href = '<%=contextPath%>/startPage.p?num=1';
+	    	})
+		})
+    </script>
 </body>
 </html>

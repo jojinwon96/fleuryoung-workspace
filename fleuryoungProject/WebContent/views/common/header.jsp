@@ -44,6 +44,12 @@
 	.real-time-list a{
 		cursor: pointer;
 	}
+	
+	.keywords,
+	.keyword{
+		color: black;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -57,7 +63,7 @@
 				<div class="bar"></div>
 				<a href="<%=contextPath%>/loginpage.me" class="login">로그인</a>
 				<div class="bar"></div>
-				<a href="${pageContext.request.contextPath}/views/board/notice.jsp"
+				<a
 					class="board">고객센터</a>
 				<%
 					} else {
@@ -66,7 +72,7 @@
 				<div class="bar"></div>
 				<a class="logout" onclick="location.replace('<%=contextPath%>/logout.me')">로그아웃</a>
 				<div class="bar"></div>
-				<a href="${pageContext.request.contextPath}/views/board/notice.jsp"
+				<a
 					class="board">고객센터</a>
 				<%
 					}
@@ -138,6 +144,10 @@
 						location.href = '<%=contextPath%>/cartpage.me?memId=<%=loginUser.getMemId()%>';
 					<% } %>
 				})
+				
+				$(".board").click(function(){
+					location.href = '<%=contextPath%>/boardPage.b';
+				})
 			})
 		</script>
 		
@@ -154,7 +164,7 @@
 						<ul class="rank-ul">
 						</ul>
 					</div>
-					<span class="downButton"> <img
+					<span class="downButton" style="margin-left:10px"> <img
 						src="${pageContext.request.contextPath}/resources/image/downButton.png"
 						style="width: 15px;">
 					</span>
@@ -221,6 +231,53 @@
 	
 	<script>
 		$(function(){
+			$(document).on('click', '.mini_like', function () {
+				let chk = 0;
+				let memId = ""
+				let pId = $(this).parents(".productbox").find(".pid").html();
+				<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
+					memId = '<%= loginUser.getMemId() %>';
+				<% } %>
+				
+				<%if (loginUser == null) {%>
+						console.log("null임");
+						alert("로그인이 필요한 기능입니다.");
+				<%} else {%>
+						if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
+						    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
+						    chk = 1;
+						} else {
+							$(this).attr("src", "<%=contextPath%>/resources/image/icon/like.png")
+							chk = 0;
+						}
+						
+						 $.ajax({
+     		                    // 요청보내기
+     		                    url : "updateWishList.m", // 어느 url로 보낼 건지
+     		                    type : "post", // 요청방식 지정
+     		                    traditional :true,	
+     		                    //dataType : "json",
+     		                    data : {memId:memId, pId:pId, check:chk}, 
+     		                    success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+     		                        if (result > 0){
+     		                        	alert("찜콩~");
+     		                        } else {
+     		                        	alert("안찜콩~");
+     		                        }
+     		                    },
+
+     		                    error : function(){
+     		                        console.log("ajax 통신 실패");
+     		                    },
+
+     		                    complete : function(){
+     		                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+     		                    }
+     		                    
+     		               }); 
+   			    <%}%>
+			})
+			
 			<% if (loginUser != null) {%>
 				$.ajax({
 			         url: '<%=contextPath%>/cartCount.p',
@@ -239,9 +296,9 @@
 			<% } %>
 			
 			
-			let memId = "";
+			let mId = "";
 			<% if (loginUser != null && !loginUser.getMemId().equals("")){ %>
-				memId = "<%=loginUser.getMemId()%>";
+				mId = "<%=loginUser.getMemId()%>";
 			<% } %>
 			
 		    
@@ -252,7 +309,7 @@
 	                 type : "post", // 요청방식 지정
 	                 traditional :true,	
 	                 //dataType : "json",
-	                 data : {memId:memId, keyword:$(".main-input").val()}, 
+	                 data : {memId:mId, keyword:$(".main-input").val()}, 
 	                 success : function(result) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
 	                 },
 
@@ -288,8 +345,11 @@
 	                	 })
 	                	 
 	                	 for (let i in list){
-	                		 realUl.append("<li><a class=\"keyword\"><span class=\"number\">" + (Number(i)+1) + "</span><span class=\"search-li\"></span><span class=\"keywords\">"+ list[i].keyWord +"</span></a></li>");
-	                		 rankUl.append("<li><a class=\"keywords\"><span>" + (Number(i)+1) + "</span>" + list[i].keyWord + "</a></li>");
+		                	  console.log("과연 : " + list[i].keyWord);
+	                		 if (list[i].keyWord != null){
+		                		 realUl.append("<li><a class=\"keyword\"><span class=\"number\">" + (Number(i)+1) + "</span><span class=\"search-li\"></span><span class=\"keywords\">"+ list[i].keyWord +"</span></a></li>");
+		                		 rankUl.append("<li><a class=\"keywords\"><span>" + (Number(i)+1) + "</span>" + list[i].keyWord + "</a></li>");
+	                		 }
 	                	 }
 	                	 
 	                 },
@@ -306,7 +366,8 @@
  		    
  		   	 realTimeSearh();   
  		    
- 	   		 setInterval(realTimeSearh, 30000);
+ 		   	 // 실시간
+ 	   		 //setInterval(realTimeSearh, 30000);
 		    
 		  });
 		
@@ -318,6 +379,44 @@
 		    
 			
 		})
+		
+						$(document).ready(function(){
+							updateLike();
+						})
+					
+						function updateLike(){
+								<% if (loginUser != null && !loginUser.getMemId().equals("")) { %>
+									let memberId = "";
+									memberId = '<%= loginUser.getMemId()%>';
+										$.ajax({
+						                    url : "updateLike.p", // 어느 url로 보낼 건지
+						                    type : "post", // 요청방식 지정
+						                    traditional :true,	
+						                    data : {memId:memberId}, 
+						                    success : function(list) { // 성공시 응답 데이터가 자동으로 매개변수로 넘어옴
+						                    	console.log("성공입니다~");
+						                    	$(".hPid").each(function(){
+						                    		console.log($(this).val());
+							                    	for (let i in list){
+							                    		if (list[i].pId == Number($(this).val())){
+							                    			console.log("같다~");
+							                    			$(this).parents(".productbox").find("#mini-like").attr("src", "${pageContext.request.contextPath}/resources/image/icon/love_full.png");
+							                    		}
+							                    	}		
+						                    	})
+						                    },
+						
+						                    error : function(){
+						                        console.log("ajax 통신 실패");
+						                    },
+						
+						                    complete : function(){
+						                        console.log("ajax 통신 성공 여부와 상관없이 무조건 호출!")
+						                    }
+						                    
+						               });  
+								<% } %> 
+						 }
 	</script>
 	
 	<script

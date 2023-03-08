@@ -52,19 +52,7 @@ h5 {
 
 		<script>
 			$(function () {
-					$(document).on('click', '.mini_like', function () {
-						<%if (loginUser == null) {%>
-								console.log("null임");
-								alert("로그인이 필요한 기능입니다.");
-						<%} else {%>
-								console.log("로그인한거임");
-								if ($(this).attr("src") == "<%=contextPath%>/resources/image/icon/like.png") {
-								    $(this).attr("src", "<%=contextPath%>/resources/image/icon/love_full.png")
-								} else {
-									$(this).attr("src", "<%=contextPath%>/resources/image/icon/like.png")
-								}
-		   			    <%}%>
-					})
+
 			})
 		</script>
 
@@ -94,8 +82,8 @@ h5 {
             					</div>
 							<%} %>
 							<!-- Product image-->
+							<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
-
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"
 								alt="..." />
@@ -132,7 +120,7 @@ h5 {
 										<div class="col">
 
 											<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-											<img class="mini_like"
+											<img class="mini_like" id="mini-like"
 												src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 												alt="">
 
@@ -230,7 +218,9 @@ h5 {
 
 					
 					
+					
 					<script>
+					
 						$(function(){
 							// 상품 이미지 클릭시 상품 상세 페이지로 이동
 							$('.card-img-top').click(function(){

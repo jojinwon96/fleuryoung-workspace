@@ -337,6 +337,35 @@
 		LEFT JOIN TB_MEMBER M ON (M.MEM_ID = O.MEM_ID)
 		WHERE M.MEM_ID = ?
 	</entry>
+	
+	<entry key="reviewSortAsc">
+		SELECT R.P_ID AS "P_ID"
+		     , REVIEW_ID
+		     , REVIEW_RATING
+		     , REVIEW_DETAIL AS "CONTENT"
+		     , (SELECT MEM_ID FROM TB_MEM_ORDER_DETAIL M WHERE R.OD_ID = M.OD_ID) AS "MEM_ID"
+		     , TO_CHAR(REVIEW_ADD_DATE, 'YYYY-MM-DD') AS "DATE"
+		     , OD_ID
+		FROM TB_REVIEW R
+		JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
+		WHERE R.P_ID = ?
+        ORDER BY REVIEW_RATING ASC
+	</entry>
+	
+	<entry key="reviewSortDesc">
+		SELECT R.P_ID AS "P_ID"
+		     , REVIEW_ID
+		     , REVIEW_RATING
+		     , REVIEW_DETAIL AS "CONTENT"
+		     , (SELECT MEM_ID FROM TB_MEM_ORDER_DETAIL M WHERE R.OD_ID = M.OD_ID) AS "MEM_ID"
+		     , TO_CHAR(REVIEW_ADD_DATE, 'YYYY-MM-DD') AS "DATE"
+		     , OD_ID
+		FROM TB_REVIEW R
+		JOIN TB_PRODUCT P ON (R.P_ID = P.P_ID)
+		WHERE R.P_ID = ?
+        ORDER BY REVIEW_RATING DESC
+	</entry>
+	
 </properties>
 
 
