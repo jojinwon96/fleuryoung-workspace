@@ -33,13 +33,12 @@ public class ProductDeleteController extends HttpServlet {
 		int result = new ProductService().deleteProduct(pno);
 		
 		if(result > 0) {
-			request.setAttribute("alertMsg", "삭제완료");
+			request.getSession().setAttribute("alertMsg", "삭제완료");
 			response.sendRedirect(request.getContextPath() + "/productList.pr");
 		}else {
-			request.setAttribute("alertMsg", "삭제실패");
+			request.getSession().setAttribute("alertMsg", "삭제실패");
 			response.sendRedirect(request.getContextPath() + "/productList.pr");
 		}
-		
 	}
 
 	/**

@@ -138,8 +138,6 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
             }).fail(function (e) {
                 console.log(e);
             });
-
-
             document.getElementById("btnSubmit").addEventListener("click", function () {
                 let verification_number = $("#num").val()
                 console.log(verification_number)
@@ -162,15 +160,12 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                 }
             }).done(function (result) {
                 if (result > 0) {
-
                     alert("비밀번호가 수정되었습니다.");
                     location.href = "<%=contextPath%>/login.se";
                 } else {
                     alert("수정 실패");
                     console.log($("#selId").val());
                     console.log($("#password").val());
-
-
                 }
             })
         })

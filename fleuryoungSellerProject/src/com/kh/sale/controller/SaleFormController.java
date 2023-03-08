@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.product.model.service.ProductService;
-import com.kh.product.model.vo.Product;
+import com.kh.sale.model.service.SaleService;
+import com.kh.sale.model.vo.Sale;
 import com.kh.seller.model.vo.Seller;
 
 /**
  * Servlet implementation class SaleFormController
  */
-@WebServlet("/SaleFormController")
+@WebServlet("/invoice.in")
 public class SaleFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,16 +32,14 @@ public class SaleFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("menuNo", "2");
+		request.setAttribute("menuNo", "3");
 		Seller sel = (Seller)(request.getSession().getAttribute("loginSeller"));
 		int selNo = sel.getSelNo();
-//		if(request.getSession().getAttribute("list") != null) {
-//			request.getSession().removeAttribute("list");
-//		}
-		ArrayList<Product> list = new ProductService().selectProductList(selNo);
+		
+		ArrayList<Sale> list = new SaleService().selectPayment(selNo);
 		
 		request.setAttribute("list",  list);
-		request.getRequestDispatcher("views/product/productList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/sale/invoiceList.jsp").forward(request, response);
 		
 	}
 

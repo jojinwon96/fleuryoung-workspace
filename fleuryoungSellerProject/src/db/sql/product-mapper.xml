@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+
 <entry key="selectProductList">
 SELECT
 		  P_ID
@@ -59,7 +60,6 @@ VALUES(SEQ_PRODUCT.NEXTVAL
 </entry>
 
 <entry key="insertProductImg">
-
 INSERT
   INTO TB_PRODUCT_IMG
         ( 
@@ -89,7 +89,6 @@ VALUES
         , ?
         , ?
         )
-
 </entry>
 
 <entry key="insertOptionOne">
@@ -106,7 +105,6 @@ VALUES
         , ?
         , (select Last_number-1 PRODUCT from user_sequences where sequence_name='SEQ_PRODUCT')
         )
-        
 </entry>
 
 <entry key="insertOptionTwo">
@@ -193,7 +191,8 @@ SELECT
     	, OPTION_1ND_NO
   FROM TB_2ND_OPTION
  WHERE OPTION_1ND_NO = ?
- </entry>
+</entry>
+ 
 <entry key="selectDiscount">
 SELECT DISCOUNT_RATE
   FROM TB_DISCOUNT
@@ -201,11 +200,9 @@ SELECT DISCOUNT_RATE
 </entry>
 
 <entry key="deleteProduct">
-UPDATE 
-  FROM TB_PRODUCT
-   SET 
+UPDATE TB_PRODUCT
+   SET P_TAG_YN = 'N'
  WHERE P_ID = ?
-   AND P_TAG_YN = 'Y'
-
 </entry>
+
 </properties>

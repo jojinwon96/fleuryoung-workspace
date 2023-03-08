@@ -34,11 +34,13 @@ public class ProductListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("menuNo", "2");
 		Seller sel = (Seller)(request.getSession().getAttribute("loginSeller"));
-		int selNo = sel.getSelNo();
+		System.out.println(sel.getSelNo());
+		
 //		if(request.getSession().getAttribute("list") != null) {
 //			request.getSession().removeAttribute("list");
 //		}
-		ArrayList<Product> list = new ProductService().selectProductList(selNo);
+		
+		ArrayList<Product> list = new ProductService().selectProductList(sel.getSelNo());
 		
 		request.setAttribute("list",  list);
 		request.getRequestDispatcher("views/product/productList.jsp").forward(request, response);
@@ -48,7 +50,6 @@ public class ProductListController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

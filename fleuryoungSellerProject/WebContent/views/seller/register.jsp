@@ -12,7 +12,7 @@
     // 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메세지 문구
     %>
 <!DOCTYPE html>
-    // 로그인 시도 후 menubar.jsp 로딩시 : 로그인한 회원의 객체 생성
+    <!-- 로그인 시도 후 menubar.jsp 로딩시 : 로그인한 회원의 객체 생성 -->
 <html lang="en">
 
 <head>
@@ -120,19 +120,15 @@
                                         <input type="phone" class="form-control" id="faxInput" placeholder="-를 제외한 숫자만 입력해주세요"name="fax">
                                     </div>
                     
-                    
                                     <div id="storeNameArea">
                                         <label for="id"> 업체명</label>
                                         <input type="text" class="form-control" id="storeNameInput" name="storeName">
                                     </div>
                     
-                    
-                    
                                     <div id="registerNoArea">
                                         <label for="id">대표자명</label>
                                         <input type="text" class="form-control" id="registerNoInput" name="selName">
                                     </div>
-                    
                     
                                     <div id="registerNoArea2">
                                         <label for="id"><small>*</small>사업자등록번호</label>

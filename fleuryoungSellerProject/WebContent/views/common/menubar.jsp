@@ -57,14 +57,8 @@
 	    active4_2 = "active ";
 	    break;
     case 9:
-	    active4 = "active ";
-	    active4_3 = "active ";
-	    break;
-    case 10:
 	    active5 = "active ";
 	    break;
-    
-		
 	}
 %>
 <!DOCTYPE html>
@@ -94,6 +88,13 @@
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
+	
+<% if(alertMsg != null){%>
+    <script type="text/javascript">
+        alert("<%=alertMsg%>");
+    </script>
+<%} %>
+<% session.setAttribute("alertMsg", null); //removeAttribute("alertMsg") %>
 
  <%if(loginSeller == null){%>	
     <script> location.href = "<%=contextPath%>"</script>
@@ -187,13 +188,13 @@
                                 <a href="<%= contextPath %>"><i data-feather="home"></i> <span>대시보드</span></a>
                             </li>
                             <li class="<%=active2%>">
-                                <a href="<%=contextPath%>/productList.pr?selNo=<%= loginSeller.getSelNo() %>"><i data-feather="clipboard"></i> <span> 상품관리</span></a>
+                                <a href="<%=contextPath%>/productList.pr"><i data-feather="clipboard"></i> <span> 상품관리</span></a>
                             </li>
                             <li class="<%=active3%>submenu">
                                 <a href="#"><i data-feather="airplay"></i> <span>판매관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="#"class="<%=active3_1%>">송장관리</a></li>
+                                    <li><a href="<%=contextPath%>/invoice.in" class="<%=active3_1%>">송장관리</a></li>
                                     <li><a href="#"class="<%=active3_2%>">취소관리 </a></li>
                                     <li><a href="#"class="<%=active3_3%>">반품관리 </a></li>
                                     <li><a href="#"class="<%=active3_4%>">교환관리 </a></li>
@@ -205,7 +206,6 @@
                                 <a href="#"><i data-feather="clipboard"></i> <span>Q&A관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="#" class="<%=active4_1%>">문의 관리</a></li>
                                     <li><a href="#" class="<%=active4_2%>">리뷰 관리</a></li>
                                     <li><a href="#" class="<%=active4_3%>">관리자 문의</a></li>
                                 </ul>
