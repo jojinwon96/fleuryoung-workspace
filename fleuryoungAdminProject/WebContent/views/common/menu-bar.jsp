@@ -86,6 +86,8 @@
     <link rel="stylesheet" href="<%= contextPath %>/assets/css/style.css">
     <link rel="stylesheet" href="<%= contextPath %>/assets/plugins/datatables/datatables.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 	
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
