@@ -65,11 +65,11 @@ public Member findId(String userName, String userEmail) {
 	}
 
 
-public Member findPw(String member_id, String member_email ) {
+public Member findPw(String member_id) {
 	
 			Connection conn = getConnection();
 			
-			Member member = new MemberDao().findPw(conn, member_id, member_email);
+			Member member = new MemberDao().findPw(conn, member_id);
 			close(conn);
 			return member;
 	

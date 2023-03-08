@@ -68,9 +68,9 @@
 	</entry>
 	
 	<entry key="findPw">
-	SELECT MEM_PW
+	SELECT MEM_EMAIL
 	FROM TB_MEMBER
-	WHERE MEM_ID = ? AND MEM_EMAIL = ?
+	WHERE MEM_ID = ?
 	</entry>
 	
 	<entry key="findOrderNo">

@@ -95,6 +95,8 @@ public class Member {
 		super();
 		this.memId = memId;
 	}
+	
+	
 
 
 

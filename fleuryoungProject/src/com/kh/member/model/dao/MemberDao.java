@@ -146,7 +146,7 @@ public class MemberDao {
 
 	}
 	
-	public Member findPw(Connection conn, String member_id, String member_email) {
+	public Member findPw(Connection conn, String member_id) {
 		Member member = null;
 		
 		PreparedStatement pstmt = null;
@@ -157,13 +157,13 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, member_id);
-			pstmt.setString(2, member_email);
+			
 			System.out.println(sql);
 			
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				
-				member = new Member(rs.getString("MEM_PW"));
+				member = new Member(rs.getString("MEM_EMAIL"));
 			}
 			
 		} catch (SQLException e) {

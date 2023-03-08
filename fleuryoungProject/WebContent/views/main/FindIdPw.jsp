@@ -238,7 +238,7 @@ span {
             <div class="wrapper">
                 <div class="container" style="max-width: 850px; margin-bottom:200px; margin-right:50px">
                   <div class="sign-up-container">
-                    <form id="findPwForm" action="/fleuryoungProject/CheckEmailController" name="pwfindscreen" method="post" >
+                    <form id="findPwForm" action="/fleuryoungProject/FindPwController" name="pwfindscreen" method="post" >
                       <h3 id="h3Pwd"><b>비밀번호 찾기</b>  </h3>
                        <input type="text" id="idInputPwd" placeholder="아이디를 입력해주세요" name="member_id">
                        <input type="email" id="emailInputPwd" placeholder="가입시 사용하신 이메일을 입력해주세요" name="member_email">

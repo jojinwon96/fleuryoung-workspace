@@ -24,7 +24,7 @@ import com.kh.member.model.vo.Member;
 /**
  * Servlet implementation class FindPwController
  */
-@WebServlet("/FindPwController1")
+@WebServlet("/FindPwController")
 public class FindPwController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +44,7 @@ public class FindPwController extends HttpServlet {
 		String member_id = request.getParameter("member_id");
 		String member_email = request.getParameter("member_email");
 		
-		Member findPw  = new MemberService().findPw(member_id, member_email);
+		Member findPw  = new MemberService().findPw(member_id);
 		System.out.println(member_id);
 		System.out.println(member_email);
 		//System.out.println(findPw.getMemPw());
@@ -68,6 +68,7 @@ public class FindPwController extends HttpServlet {
         props.put("mail.smtp.port", 465);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.ssl.trust", host);
         
         StringBuffer temp =new StringBuffer();
         Random rnd = new Random();
@@ -99,7 +100,7 @@ public class FindPwController extends HttpServlet {
         });
         try {
             MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(user, "KH Books"));
+            msg.setFrom(new InternetAddress(user, "Flieuryoung"));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
             
             //메일 제목
