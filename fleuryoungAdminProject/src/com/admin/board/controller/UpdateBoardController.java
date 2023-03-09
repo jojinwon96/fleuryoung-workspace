@@ -1,29 +1,26 @@
-package com.admin.banner.controller;
+package com.admin.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.banner.model.service.BannerService;
-import com.admin.banner.model.vo.Banner;
-import com.admin.coupon.model.vo.Coupon;
+import com.admin.board.model.service.BoardService;
+import com.admin.board.model.vo.Board;
 
 /**
- * Servlet implementation class BannerListController
+ * Servlet implementation class UpdateBoardController
  */
-@WebServlet("/list.ba")
-public class BannerListController extends HttpServlet {
+@WebServlet("/update.bo")
+public class UpdateBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BannerListController() {
+    public UpdateBoardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +31,24 @@ public class BannerListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		ArrayList<Banner> bList = new BannerService().selectAllBanner();
-		ArrayList<Coupon> cList = new BannerService().selectAvailCoupon();
-		request.setAttribute("bList", bList);
-		request.setAttribute("cList", cList);
+		String boardNumber = request.getParameter("no");
+		String boardTitle = request.getParameter("title");
+		String boardDetail = request.getParameter("content");
 		
-		request.setAttribute("menuNo", "9");
-		request.getRequestDispatcher("views/banner/bannerList.jsp").forward(request, response);
+		Board b = new Board();
+		b.setBoardTitle(boardTitle);
+		b.setBoardDetail(boardDetail);
+		b.setBoardNumber(Integer.parseInt(boardNumber));
+		
+		int result = new BoardService().update(b);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "공지 수정 성공");
+			response.sendRedirect(request.getContextPath()+"/list.bo");
+		}else {
+			request.getSession().setAttribute("alertMsg", "공지 수정 실패");
+			response.sendRedirect(request.getContextPath()+"/list.bo");
+		}
 	}
 
 	/**

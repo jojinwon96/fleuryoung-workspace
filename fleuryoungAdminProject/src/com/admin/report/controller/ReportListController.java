@@ -31,6 +31,8 @@ public class ReportListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		ArrayList<Report> rList = new ReportService().selectAllReport();
 		request.setAttribute("rList", rList);
 		request.setAttribute("menuNo", "8");

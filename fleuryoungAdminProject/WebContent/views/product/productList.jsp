@@ -62,7 +62,7 @@
 	                                                        class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal"
                                                             data-bs-target="#bs-example-modal-lg<%= p.getpId() %>"><i
 	                                                            class="far fa-edit me-1"></i> 수정</a>
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/delete.pr?no=<%= p.getpId() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
 	                                                </td>
@@ -245,7 +245,7 @@
                                                                                                         <br>
                                                                                                         별점 : <%= r.getReviewRating() %>
                                                                                                     </p>
-	                                                                                                <a class="btn btn-primary" href="#">삭제</a>
+	                                                                                                <a class="btn btn-primary" href="<%= contextPath %>/delete.re?no=<%= r.getReviewId() %>">삭제</a>
 	                                                                                            </div>
 	                                                                                        </div>
 	                                                                                    </div>

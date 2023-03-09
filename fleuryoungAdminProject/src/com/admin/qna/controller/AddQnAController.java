@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.admin.qna.model.service.QnAService;
+import com.admin.qna.model.vo.QnA;
+
 /**
  * Servlet implementation class AddQnAController
  */
@@ -26,8 +29,26 @@ public class AddQnAController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		
+		String qnaTitle = request.getParameter("title");
+		String qnaType = request.getParameter("category");
+		String qnaDetail = request.getParameter("content");
+		
+		QnA q = new QnA();
+		q.setQnaTitle(qnaTitle);
+		q.setQnaType(qnaType);
+		q.setQnaDetail(qnaDetail);
+		
+		int result = new QnAService().add(q);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "QnA 추가 성공");
+			response.sendRedirect(request.getContextPath()+"/list.qn");
+		}else {
+			request.getSession().setAttribute("alertMsg", "QnA 추가 실패");
+			response.sendRedirect(request.getContextPath()+"/list.qn");
+		}
 	}
 
 	/**

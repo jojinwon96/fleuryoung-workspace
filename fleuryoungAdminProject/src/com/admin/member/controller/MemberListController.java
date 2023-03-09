@@ -31,7 +31,8 @@ public class MemberListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+
 		ArrayList<Member> mList = new MemberService().selectAllMember();
 		request.setAttribute("mList", mList);
 		request.setAttribute("menuNo", "2");

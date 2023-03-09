@@ -62,5 +62,44 @@ public class BoardService {
 		close(conn);
 		return bList;
 	}
+
+	public int add(Board b) {
+		Connection conn = getConnection();
+		int result = new BoardDao().add(conn, b);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int update(Board b) {
+		Connection conn = getConnection();
+		int result = new BoardDao().update(conn, b);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int delete(int parseInt) {
+		Connection conn = getConnection();
+		int result = new BoardDao().delete(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

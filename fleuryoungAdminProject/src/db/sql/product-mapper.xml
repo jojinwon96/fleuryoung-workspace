@@ -49,6 +49,7 @@ SELECT
 	JOIN TB_CATEGORY USING (CATEGORY_NO)
 	JOIN TB_PRODUCT_IMG USING (P_ID)
 	LEFT JOIN TB_DISCOUNT D USING(P_ID)
+	WHERE P_TAG_YN = 'Y'
 </entry>
 
 <entry key="selectAllReview">
@@ -64,6 +65,17 @@ SELECT
 	FROM TB_REVIEW R
 	LEFT JOIN TB_MEM_ORDER_DETAIL O USING(OD_ID)
 	ORDER BY REVIEW_ADD_DATE DESC
+</entry>
+
+<entry key="deleteProduct">
+	UPDATE TB_PRODUCT
+		SET P_TAG_YN = 'N'
+	WHERE P_ID = ?
+</entry>
+
+<entry key="deleteReview">
+	DELETE FROM TB_REVIEW
+	WHERE REVIEW_ID = ?
 </entry>
 
 </properties>

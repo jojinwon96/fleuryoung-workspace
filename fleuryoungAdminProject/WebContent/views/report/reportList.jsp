@@ -40,7 +40,6 @@
                                     <table class="table table-center table-hover datatable">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>신고 아이디</th>
                                                 <th>신고자</th>
                                                 <th>내용</th>
                                                 <th>문의종류</th>
@@ -52,7 +51,6 @@
                                         <tbody>
                                         	<% for(Report r : rList){%>
                                         		<tr>
-	                                                <td><%= r.getRepId() %></td>
                                                     <td><%= r.getmId() %></td>                                                    
 	                                                <% if(r.getRepContent() == null) {%>
 	                                                	<td>내용 없음</td>

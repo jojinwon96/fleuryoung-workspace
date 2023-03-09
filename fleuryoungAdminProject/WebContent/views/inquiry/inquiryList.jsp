@@ -25,7 +25,6 @@
                                 <li class="breadcrumb-item active">판매자요청</li>
                             </ul>
                         </div>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -49,14 +48,11 @@
                                         		<tr>
 	                                                <td>
 	                                                    <h2 class="table-avatar">
-	                                                        <a href="profile.html" class="avatar avatar-sm me-2"><img
-	                                                                class="avatar-img rounded-circle"
-	                                                                src="assets/img/profiles/usermain.jpg"
-	                                                                alt="User Image"></a>
-                                                            <a href="profile.html"><%= i.getSelId() %><span><%= i.getSelName() %> </span></a>
+                                                            <a href=""><%= i.getSelId() %><span><%= i.getSelName() %> </span></a>
 	                                                    </h2>
 	                                                </td>
-	                                                <td><%= i.getInqTitle() %></td>
+	                                                <td><a href="" data-bs-toggle="modal"
+                                                        data-bs-target="#bs-example-modal-lg<%= i.getInqNumber() %>"><%= i.getInqTitle() %></a></td>
                                                     <% 
 	                                                    String inqType = null;
 	                                                    switch(i.getInqType()) { 
@@ -77,16 +73,15 @@
 	                                                	<td><span class="badge badge-pill bg-danger-light">미해결</span></td>  
 	                                                	<td class="text-end">
 	                                                    <a href="javascript:void(0);"
-	                                                        class="btn btn-sm btn-white text-danger me-2" data-bs-toggle="modal"
-                                                            data-bs-target="#bs-example-modal-lg<%= i.getInqNumber() %>"><i
-	                                                            class="far fa-edit me-1"></i>답변하기</a>
+	                                                        class="btn btn-sm btn-white text-danger me-2" ><i
+	                                                            class="far fa-edit me-1"></i>해결하기</a>
 	                                                </td>   
 	                                                <%}else if((i.getInqStatus()).contains("N")){%>
 	                                                	<td><span class="badge badge-pill bg-success-light">해결</span></td>
 	                                                	<td class="text-end">
-	                                                    <a href="edit-customer.html"
+	                                                    <a href=""
 	                                                        class="btn btn-sm btn-white text-success me-2"><i
-	                                                            class="far fa-check-circle me-1"></i> 답변완료</a>
+	                                                            class="far fa-check-circle me-1"></i> 해결완료</a>
 	                                                </td>
 	                                                <%} %>
 	                                            </tr>
@@ -95,7 +90,7 @@
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title" id="myLargeModalLabel">판매자 요청 답변</h4>
+                                                                <h4 class="modal-title" id="myLargeModalLabel">상세 내용</h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
@@ -137,16 +132,7 @@
                                                                         </div>
                                                                     </div>
                                                                     
-                                                                    <div class="form-group row">
-                                                                        <label class="col-form-label col-md-2">답변</label>
-                                                                        <div class="col-md-10">
-                                                                            <textarea rows="15" cols="5" class="form-control"
-                                                                                placeholder="내용을 입력하세요" name="reply"></textarea>
-                                                                        </div>
-                                                                    </div>
-
                                                                     <div class="text-end">
-                                                                        <button type="submit" class="btn btn-primary">저장</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

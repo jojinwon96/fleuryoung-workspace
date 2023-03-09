@@ -86,4 +86,30 @@ public class ProductService {
 		return rList;
 	}
 
+	public int deleteProduct(int parseInt) {
+		Connection conn = getConnection();
+		int result = new ProductDao().deleteProduct(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteReview(int parseInt) {
+		Connection conn = getConnection();
+		int result = new ProductDao().deleteReview(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
 }

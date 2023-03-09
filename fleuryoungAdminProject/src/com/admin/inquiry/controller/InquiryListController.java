@@ -32,6 +32,8 @@ public class InquiryListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		ArrayList<Inquiry> iList = new InquiryService().selectAllInquiry();
 		request.setAttribute("iList", iList);
 		request.setAttribute("menuNo", "7");

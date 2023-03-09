@@ -72,5 +72,44 @@ public class QnAService {
 		close(conn);
 		return qList;
 	}
+
+	public int add(QnA q) {
+		Connection conn = getConnection();
+		int result = new QnADao().add(conn, q);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int update(QnA q) {
+		Connection conn = getConnection();
+		int result = new QnADao().update(conn, q);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int delete(int parseInt) {
+		Connection conn = getConnection();
+		int result = new QnADao().delete(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

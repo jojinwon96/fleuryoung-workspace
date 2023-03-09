@@ -32,6 +32,8 @@ public class ProductListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		ArrayList<Product> pList = new ProductService().selectAllProduct();
 		ArrayList<Review> rList = new ProductService().selectAllReview();
 		request.setAttribute("pList", pList);

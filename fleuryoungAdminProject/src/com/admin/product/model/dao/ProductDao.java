@@ -261,6 +261,44 @@ public class ProductDao {
 		return rList;
 	}
 
+	public int deleteProduct(Connection conn, int parseInt) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteProduct");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, parseInt);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteReview(Connection conn, int parseInt) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteReview");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, parseInt);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }
 
 

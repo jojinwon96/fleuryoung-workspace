@@ -31,6 +31,8 @@ public class BoardListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		ArrayList<Board> bList = new BoardService().selectAllBoard();
 		request.setAttribute("bList", bList);
 		request.setAttribute("menuNo", "5");

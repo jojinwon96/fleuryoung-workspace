@@ -41,7 +41,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#">
+                                        <form action="<%= contextPath %>/add.qn" method="post">
                                             <div class="form-group row">
                                                 <label class="col-form-label col-md-2">제목</label>
                                                 <div class="col-md-10">
@@ -107,7 +107,7 @@
 	                                                        class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal"
                                                             data-bs-target="#bs-example-modal-lg<%= q.getQnaNumber() %>"><i
 	                                                            class="far fa-edit me-1"></i> 수정</a>
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/delete.qn?no=<%= q.getQnaNumber() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
 	                                                </td>
@@ -123,7 +123,7 @@
                                                                     aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="#">
+                                                                <form action="<%= contextPath%>/update.qn" method="post">
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-2">제목</label>
                                                                         <div class="col-md-10">
@@ -172,7 +172,7 @@
                                                                                 placeholder="내용을 입력하세요" name="content"><%= q.getQnaDetail() %></textarea>
                                                                         </div>
                                                                     </div>
-
+                                                                    <input type="hidden" value="<%= q.getQnaNumber() %>" name="no">
                                                                     <div class="text-end">
                                                                         <button type="submit" class="btn btn-primary">저장</button>
                                                                     </div>

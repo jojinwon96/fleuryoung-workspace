@@ -217,4 +217,60 @@ public class QnADao {
 		}
 		return qList;
 	}
+
+	public int add(Connection conn, QnA q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("add");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, q.getQnaType());
+			pstmt.setString(2, q.getQnaTitle());
+			pstmt.setString(3, q.getQnaDetail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int update(Connection conn, QnA q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("update");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, q.getQnaType());
+			pstmt.setString(2, q.getQnaTitle());
+			pstmt.setString(3, q.getQnaDetail());
+			pstmt.setInt(4, q.getQnaNumber());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int delete(Connection conn, int parseInt) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("delete");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, parseInt);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
