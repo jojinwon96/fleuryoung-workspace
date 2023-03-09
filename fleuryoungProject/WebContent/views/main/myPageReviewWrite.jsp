@@ -1,9 +1,9 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.kh.product.model.vo.ProductReview"%>
+<%@page import="com.kh.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<ProductReview> list = (ArrayList<ProductReview>)request.getAttribute("list");
+	ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,6 @@
 	                    
 	                    <li>관심리스트<br>
 	                            <li><a href="<%= contextPath %>/myPageFavoriteList.my">찜한 상품</a></li>
-	                            <li><a href="<%= contextPath %>/myPageFavoriteStore.my">찜한 가게</a></li> <br>
 	                    </li>
 	                    <li>후기<br>
 	                            <li><a href="<%= contextPath %>/myPageReviewWrite.my">내가 쓴 리뷰 보기</a></li>
@@ -59,15 +58,15 @@
 		        		<li style="font-weight: bold; font-size: 30px; margin-bottom: 20px;">내가 쓴 리뷰</li> <br>
 		        		<li style="height: 500px;">
 			        		<div class="row" style="border: 1px solid lightgray; padding: 10px; box-sizing: border-box; width: 95%;">
-                                <% for (ProductReview p : list) {%>
+                                <% for (Product p : list) {%>
                                 <div class="orderInfo" style="width:80%;">
                                     <p>상품명 : <%= p.getpName() %></p>
                                     <p>주문번호 : <%= p.getOrdId() %></p> 
-                                    <p>내가 쓴 리뷰 : <%= p.getReviewDetail() %></p>
+                                    <p>내가 쓴 리뷰 : <%= p.getMemOrderDetail() %></p>
                                 </div>
-                                <br>
-                                <br>
                                 <hr>
+                                <br>
+                                <br>
                                 <% } %>
 			        		</div>
                            
@@ -142,12 +141,6 @@
             })
             
         });
-        
-        $(function(){
-			$(".orderInfo").click(function(){
-				location.href='<%= contextPath %>/
-				});
-			});
     </script> 
 </body>
 </html>

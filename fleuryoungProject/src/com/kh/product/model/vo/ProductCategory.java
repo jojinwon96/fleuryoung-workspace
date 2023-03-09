@@ -1,5 +1,5 @@
 package com.kh.product.model.vo;
 
-public class ProductReview {
-	
+public class ProductCategory {
+
 }

@@ -9,10 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.vo.Member;
-import com.kh.product.model.service.ProductReviewService;
-import com.kh.product.model.vo.ProductReview;
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
 
 /**
  * Servlet implementation class MyPageReviewChangeController
@@ -35,7 +36,7 @@ public class MyPageReviewChangeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		
-		ArrayList<ProductReview> list = new ProductReviewService().myPageReview(m.getMemId());
+		ArrayList<Product> list = new ProductService().myPageReview(m.getMemId());
 		
 		request.setAttribute("list", list);
 		
