@@ -214,6 +214,8 @@ public class ProductDao {
 									,rset.getString("SEL_IMG")
 									,rset.getString("P_IMG1")
 									,rset.getString("CATEGORY_NAME")
+									,rset.getInt("DISCOUNT_RATE")
+
 									)
 						 );
 			}

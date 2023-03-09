@@ -62,5 +62,44 @@ public class MemberService {
 		close(conn);
 		return mList;
 	}
+
+	public int deactivate(String mId) {
+		Connection conn = getConnection();
+		int result = new MemberDao().deactivate(mId, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int update(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDao().update(m, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int add(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDao().add(m, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

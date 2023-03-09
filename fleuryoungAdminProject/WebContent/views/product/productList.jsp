@@ -89,6 +89,14 @@
                                                                         <div class="tab-pane show active" id="solid-justified-tab1<%= p.getpId() %>">
                                                                             <form action="<%=contextPath %>/insert.pr" method="post"
                                                                                 enctype="multipart/form-data"> <!-- 입력 폼 -->
+                                                                                
+                                                                                <div class="">
+                                                                                    <label for="file" class="col-form-label col-md-2">대표
+                                                                                        이미지 </label>
+                                                                                    <img id="titleImg" width="150" height="150" src="${pageContext.request.contextPath}<%= p.getMainImg() %>"
+                                                                                        onerror="this.style.display='none'">
+                                                                                </div>
+                                                                                <br>
                                                                                 <div class="form-group row">
                                                                                     <label class="col-form-label col-md-2">카테고리</label>
                                                                                     <div class="col-md-10">
@@ -112,13 +120,6 @@
                                                                                             placeholder="가격을 입력하세요." name="price" value="<%= p.getpNetPrice() %>" readonly="readonly">
                                                                                     </div>
                                                                                 </div><!-- 가격 -->
-                                                                                <div class="">
-                                                                                    <label for="file" class="col-form-label col-md-2">상세 설명 
-                                                                                        이미지 </label>
-                                                                                    <img id="titleImg" width="350" height="150" src="<%= p.getpDetail() %>"
-                                                                                        onerror="this.style.display='none'">
-                                                                                <br>
-                                                                                </div><!-- 상세설명 -->
                                                                                 <div class="form-group row">
                                                                                     <label class="col-form-label col-md-2">상품 총수량</label>
                                                                                     <div class="col-md-10">
@@ -127,12 +128,6 @@
                                                                                             readonly="readonly">
                                                                                     </div>
                                                                                 </div><!-- 상품 총수량 -->
-                                                                                <div class="">
-                                                                                    <label for="file" class="col-form-label col-md-2">대표
-                                                                                        이미지 </label>
-                                                                                    <img id="titleImg" width="150" height="150" src="<%= contextPath %>/<%= p.getMainImg() %>"
-                                                                                        onerror="this.style.display='none'">
-                                                                                </div>
                                                                                 <br>
                                                                                 <br>
                                             
@@ -140,27 +135,27 @@
                                                                                     <label class="col-form-label col-md-2">할인율</label>
                                                                                     <div class="col-md-10">
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="discount" value="0" readonly="readonly">
+                                                                                            <label> <input type="radio" name="discount" value="0" <%= (p.getDiscountRate() == 0) ? "checked" : "" %> disabled="disabled">
                                                                                                 없음 
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="discount" value="10" readonly="readonly">
+                                                                                            <label> <input type="radio" name="discount" value="10" <%= (p.getDiscountRate() == 10)  ? "checked" : "" %> disabled="disabled">
                                                                                                 10% 
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="discount" value="20" readonly="readonly">
+                                                                                            <label> <input type="radio" name="discount" value="20" <%= (p.getDiscountRate() == 20)  ? "checked" : "" %> disabled="disabled">
                                                                                                 20% 
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="discount" value="30" readonly="readonly">
+                                                                                            <label> <input type="radio" name="discount" value="30" <%= (p.getDiscountRate() == 30)  ? "checked" : "" %> disabled="disabled">
                                                                                                 30% 
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="discount" value="40" readonly="readonly">
+                                                                                            <label> <input type="radio" name="discount" value="40" <%= (p.getDiscountRate() == 40)  ? "checked" : "" %> disabled="disabled">
                                                                                                 40% 
                                                                                             </label>
                                                                                         </span>
@@ -171,12 +166,12 @@
                                                                                     <label class="col-form-label col-md-2">배송속성</label>
                                                                                     <div class="col-md-10">
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="delivery" value="Y" <%= (p.getpDayDelivery().equals("Y")) ? "checked" : "" %> >
+                                                                                            <label> <input type="radio" name="delivery" value="Y" <%= (p.getpDayDelivery().contains("Y")) ? "checked" : "" %> disabled="disabled">
                                                                                                 당일배송
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="delivery" value="N" <%= (p.getpDayDelivery().equals("N")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="delivery" value="N" <%= (p.getpDayDelivery().contains("N")) ? "checked" : "" %> disabled="disabled">
                                                                                                 일반배송
                                                                                             </label>
                                                                                         </span>
@@ -188,12 +183,12 @@
                                                                                     <label class="col-form-label col-md-2">카드여부</label>
                                                                                     <div class="col-md-10">
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="card" value="Y" <%= (p.getpTagYN().equals("Y")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="card" value="Y" <%= (p.getpTagYN().contains("Y")) ? "checked" : "" %> disabled="disabled">
                                                                                                 카드쓰기 승인
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="card" value="N" <%= (p.getpTagYN().equals("N")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="card" value="N" <%= (p.getpTagYN().contains("N")) ? "checked" : "" %> disabled="disabled">
                                                                                                 카드쓰기 거부
                                                                                             </label>
                                                                                         </span>
@@ -203,12 +198,12 @@
                                                                                     <label class="col-form-label col-md-2">상품환불여부</label>
                                                                                     <div class="col-md-10">
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="return" value="Y" <%= (p.getReturnYN().equals("Y")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="return" value="Y" <%= (p.getReturnYN().contains("Y")) ? "checked" : "" %> disabled="disabled">
                                                                                                 상품환불 승인
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="return" value="N" <%= (p.getReturnYN().equals("N")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="return" value="N" <%= (p.getReturnYN().contains("N")) ? "checked" : "" %> disabled="disabled">
                                                                                                 상품환불 거부
                                                                                             </label>
                                                                                         </span>
@@ -218,12 +213,12 @@
                                                                                     <label class="col-form-label col-md-2">선물 여부</label>
                                                                                     <div class="col-md-10">
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="gift" value="Y" <%= (p.getpGift().equals("Y")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="gift" value="Y" <%= (p.getpGift().contains("Y")) ? "checked" : "" %> disabled="disabled">
                                                                                                 O
                                                                                             </label>
                                                                                         </span>
                                                                                         <span class="radio">
-                                                                                            <label> <input type="radio" name="gift" value="N" <%= (p.getpGift().equals("N")) ? "checked" : "" %>>
+                                                                                            <label> <input type="radio" name="gift" value="N" <%= (p.getpGift().contains("N")) ? "checked" : "" %> disabled="disabled">
                                                                                                 X
                                                                                             </label>
                                                                                         </span>
@@ -236,14 +231,15 @@
 																				<% for(Review r : rList) {%>
 																					<% if(r.getpId() == p.getpId()){ %>
 																					
-	                                                                                    <div class="col-12 col-md-6 col-lg-4 d-flex">
+	                                                                                    <div class="col-12 col-md-6 col-lg-4 d-flex" style="border: 3px solid rgb(248, 178, 188); border-radius: 10px;">
 	                                                                                        <div class="card flex-fill bg-white">
-	                                                                                            <img alt="Card Image" src="assets/img/img-01.jpg" class="card-img-top">
-	                                                                                            <div class="card-header">
+	                                                                                            <img alt="Card Image" src="${pageContext.request.contextPath}<%= r.getReviewImg() %>" class="card-img-top" onerror="this.style.display='none'">
+	                                                                                            <div class="card-header" style="border-radius: 10px;">
 	                                                                                                <h5 class="card-title mb-0">작성자 : <%= r.getMemId() %> <br>작성일 : <%= r.getDate() %></h5>
 	                                                                                            </div>
 	                                                                                            <div class="card-body">
 	                                                                                                <p class="card-text">
+                                                                                                        <br>
                                                                                                         <%= r.getContent() %> 
                                                                                                         <br>
                                                                                                         <br>

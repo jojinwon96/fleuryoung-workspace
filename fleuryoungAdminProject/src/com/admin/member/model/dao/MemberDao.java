@@ -181,7 +181,6 @@ public class MemberDao {
 									,rset.getString("MEM_STATUS")
 									)
 						 );
-				System.out.println(rset.getString("MEM_STATUS"));
 			}
 			
 		} catch (SQLException e) {
@@ -191,5 +190,86 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return mList;
+	}
+
+	public int deactivate(String mId, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deactivate");
+		System.out.println("여기 ");
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int update(Member m, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("update");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPw());
+			pstmt.setString(3, m.getMemEmail());
+			pstmt.setString(4, m.getMemName());
+			pstmt.setString(5, m.getMemPhone());
+			pstmt.setInt(6, m.getMemPostal());
+			pstmt.setString(7, m.getMemStreet());
+			pstmt.setString(8, m.getMemAddress());
+			pstmt.setString(9, m.getMemImg());
+			pstmt.setDate(10, m.getMemBirthDate());
+			pstmt.setInt(11, m.getMemGender());
+			pstmt.setString(12, m.getMemId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int add(Member m, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("add");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPw());
+			pstmt.setString(3, m.getMemEmail());
+			pstmt.setString(4, m.getMemName());
+			pstmt.setString(5, m.getMemPhone());
+			pstmt.setInt(6, m.getMemPostal());
+			pstmt.setString(7, m.getMemStreet());
+			pstmt.setString(8, m.getMemAddress());
+			pstmt.setString(9, m.getMemImg());
+			pstmt.setDate(10, m.getMemBirthDate());
+			pstmt.setInt(11, m.getMemGender());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

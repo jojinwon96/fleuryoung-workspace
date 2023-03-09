@@ -24,6 +24,7 @@ public class Product {
 	private String storeName;
 	private String selImg;
 	private String categoryName;
+	private int discountRate;
 
 	public Product() {}
 
@@ -77,7 +78,7 @@ public class Product {
 
 	public Product(int pId, String pName, int pNetPrice, String pDetail, int pStock, Date enrollDate, String returnYN,
 			String pTagYN, int saleCount, String pDayDelivery, String pGift, int selNo, int categoryNO,
-			String storeName, String selImg, String mainImg, String categoryName) {
+			String storeName, String selImg, String mainImg, String categoryName, int discountRate) {
 		super();
 		this.pId = pId;
 		this.pName = pName;
@@ -96,10 +97,21 @@ public class Product {
 		this.selImg = selImg;
 		this.mainImg = mainImg;
 		this.categoryName = categoryName;
+		this.discountRate = discountRate;
 	}
 	
 	
 	
+	public int getDiscountRate() {
+		return discountRate;
+	}
+
+
+	public void setDiscountRate(int discountRate) {
+		this.discountRate = discountRate;
+	}
+
+
 	public String getCategoryName() {
 		return categoryName;
 	}

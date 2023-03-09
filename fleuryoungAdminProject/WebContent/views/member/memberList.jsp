@@ -41,7 +41,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form action="<%= contextPath %>/add.me" method="post" enctype="multipart/form-data">
                                             <div class="row form-group">
                                                 <label for="name" class="col-sm-3 col-form-label input-label">프로필</label>
                                                 <div class="col-sm-9">
@@ -49,8 +49,8 @@
                                                         <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                                             for="edit_img">
                                                             <img id="avatarImg" class="avatar-img"
-                                                                src="assets/img/profiles/usermain.jpg" alt="Profile Image">
-                                                            <input type="file" id="edit_img" onchange="loadImg(this);">
+                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image">
+                                                            <input type="file" id="edit_img" name="file" onchange="loadImg(this);">
                                                             <span class="avatar-edit">
                                                                 <i data-feather="edit-2"
                                                                     class="avatar-uploader-icon shadow-soft"></i>
@@ -77,27 +77,19 @@
                                                     <input type="password" class="form-control" id="pwdInput" required name = "memPw" value="" placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
                                                 </div>
                                             </div>
-                    
-                    
-                                            <div id="pwdArea2" class="row form-group">
-                                                <label for="password" class="col-sm-3 col-form-label input-label">비밀번호 확인</label> 
-                                                <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="pwdInputCheck" value="" placeholder="비밀번호를 다시 입력해주세요" required>
-                                                </div>
-                                            </div>
                                             
                                             <div class="row form-group">
                                                 <label for="name" class="col-sm-3 col-form-label input-label">이름</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                                        value="">
+                                                    <input type="text" class="form-control" id="name" placeholder="Your Name" name="name"
+                                                        value="" required>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
                                                 <label for="email" class="col-sm-3 col-form-label input-label">이메일</label>
                                                 <div class="col-sm-9">
                                                     <input type="email" class="form-control" id="email" placeholder="Email"
-                                                        value="">
+                                                        value="" name="email" required>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -105,7 +97,7 @@
                                                         class="text-muted">(Optional)</span></label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id="phone"
-                                                        placeholder="-는 빼고 숫자만 입력해주세요" value="">
+                                                        placeholder="-는 빼고 숫자만 입력해주세요" value="" name="phone">
                                                 </div>
                                             </div>
                                             <div id="birthDateArea" class="row form-group">
@@ -143,7 +135,7 @@
                                             
                                             
                                             <div class="text-end">
-                                                <button type="submit" class="btn btn-primary" onclick="return userEnroll();">변경사항 저장</button>
+                                                <button type="submit" class="btn btn-primary">변경사항 저장</button>
                                             </div>
                                             <script>
                                                 function loadImg(inputFile){
@@ -221,42 +213,6 @@
                                                         }
                                                     }).open();
                                                 }
-                                                
-                                                function userEnroll() {
-                                                    
-                                                    const pwdInputf = document.getElementById("pwdInput");
-                                                    const pwdInputCheckf = document.querySelector("#pwdInputCheck");
-                                                    const idInputf = document.getElementById("idInput");
-                                                    
-                                                    // id : 소문자,숫자로 5~12글자
-                                                    let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-                                            
-                                                    if (!regExp.test(idInputf.value)) {
-                                                        alert('유효하지 않은 id를 입력하셨습니다.');
-                                                        idInput.select();
-                                                        return false;
-                                                    }
-                                            
-                                                    // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
-                                                    let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
-                                            
-                                                    if (!regExp1.test(pwdInput.value)) {
-                                                        alert('유효하지 않은 비밀번호를 입력하셨습니다');
-                                                        pwdInput.value = "";
-                                                        pwdInput.focus();
-                                                        return false;
-                                                    }
-                                            
-                                                    // 비밀번호 확인
-                                                    if (pwdInput.value != pwdInputCheck.value) {
-                                                        alert("비밀번호 확인이 일치하지 않습니다.");
-                                                        pwdInputCheck.value = "";
-                                                        pwdInputCheck.focus();
-                                                        return false;
-                                            
-                                                    }
-                                                }
-                                                
                                             </script>
                                         </form>
                                     </div>
@@ -285,13 +241,24 @@
                                         	<% for(Member m : mList){%>
                                         		<tr>
 	                                                <td>
-	                                                    <h2 class="table-avatar">
+                                                    <% if(m.getMemImg() != null) {%>
+                                                        <h2 class="table-avatar">
 	                                                        <a href="profile.html" class="avatar avatar-sm me-2"><img
 	                                                                class="avatar-img rounded-circle"
-	                                                                src="assets/img/profiles/usermain.jpg"
+	                                                                src="${pageContext.request.contextPath}<%= m.getMemImg() %>"
+	                                                                alt="User Image"></a>
+                                                            <a href="profile.html"><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
+	                                                    </h2>    
+                                                    <%}else {%>
+                                                        <h2 class="table-avatar">
+	                                                        <a href="profile.html" class="avatar avatar-sm me-2"><img
+	                                                                class="avatar-img rounded-circle"
+	                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png"
 	                                                                alt="User Image"></a>
                                                             <a href="profile.html"><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
 	                                                    </h2>
+                                                    <%} %>
+	                                                    
 	                                                </td>
 	                                                <td><a href="#"><%= m.getMemEmail() %></a>
 	                                                </td>
@@ -306,7 +273,7 @@
 	                                                    <a href=""
 	                                                        class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg<%= m.getMemId() %>"><i
 	                                                            class="far fa-edit me-1"></i> 수정</a>
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/deactivate.me?mId=<%= m.getMemId() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
 	                                                </td>
@@ -321,16 +288,22 @@
                                                                     aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form>
+                                                                <form  action="<%= contextPath %>/update.me" method="post" enctype="multipart/form-data">
                                                                     <div class="row form-group">
                                                                         <label for="name" class="col-sm-3 col-form-label input-label">프로필</label>
                                                                         <div class="col-sm-9">
                                                                             <div class="d-flex align-items-center">
                                                                                 <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                                                                     for="edit_img<%= m.getMemId() %>">
-                                                                                    <img id="avatarImg<%= m.getMemId() %>" class="avatar-img"
-                                                                                        src="assets/img/profiles/usermain.jpg" alt="Profile Image">
-                                                                                    <input type="file" id="edit_img<%= m.getMemId() %>" onchange="loadImg<%= m.getMemId() %>(this);">
+                                                                                    <% if(m.getMemImg() != null) {%>
+                                                                                        <img id="avatarImg<%= m.getMemId() %>" class="avatar-img"
+                                                                                        src="${pageContext.request.contextPath}<%= m.getMemImg() %>" alt="Profile Image" onerror="this.src='${pageContext.request.contextPath}<%= m.getMemImg() %>'">
+                                                                                    <%}else {%>
+                                                                                        <img id="avatarImg<%= m.getMemId() %>" class="avatar-img"
+                                                                                        src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image" onerror="this.src='${pageContext.request.contextPath}/resources/image/profile/default.png'">
+                                                                                    <%} %>
+                                                                                    
+                                                                                    <input type="file" id="edit_img<%= m.getMemId() %>" name="file" onchange="loadImg<%= m.getMemId() %>(this);">
                                                                                     <span class="avatar-edit">
                                                                                         <i data-feather="edit-2"
                                                                                             class="avatar-uploader-icon shadow-soft"></i>
@@ -357,27 +330,19 @@
 																			<input type="password" class="form-control" id="pwdInput<%= m.getMemId() %>" required name = "memPw" value="<%= m.getMemPw() %>" placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
 																		</div>
 																	</div>
-											
-											
-																	<div id="pwdArea2" class="row form-group">
-																		<label for="password" class="col-sm-3 col-form-label input-label">비밀번호 확인</label> 
-																		<div class="col-sm-9">
-																			<input type="password" class="form-control" id="pwdInputCheck<%= m.getMemId() %>" value="<%= m.getMemPw() %>" placeholder="비밀번호를 다시 입력해주세요" required>
-																		</div>
-																	</div>
                                                                     
                                                                     <div class="row form-group">
                                                                         <label for="name" class="col-sm-3 col-form-label input-label">이름</label>
                                                                         <div class="col-sm-9">
                                                                             <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                                                                value="<%= m.getMemName() %>">
+                                                                                value="<%= m.getMemName() %>" name="name">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row form-group">
                                                                         <label for="email" class="col-sm-3 col-form-label input-label">이메일</label>
                                                                         <div class="col-sm-9">
                                                                             <input type="email" class="form-control" id="email" placeholder="Email"
-                                                                                value="<%= m.getMemEmail() %>">
+                                                                                value="<%= m.getMemEmail() %>" name="email">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row form-group">
@@ -385,7 +350,7 @@
                                                                                 class="text-muted">(Optional)</span></label>
                                                                         <div class="col-sm-9">
                                                                             <input type="text" class="form-control" id="phone"
-                                                                                placeholder="-는 빼고 숫자만 입력해주세요" value="<%= m.getMemPhone()%>">
+                                                                                placeholder="-는 빼고 숫자만 입력해주세요" value="<%= m.getMemPhone()%>" name="phone">
                                                                         </div>
                                                                     </div>
                                                                     <div id="birthDateArea" class="row form-group">
@@ -433,7 +398,7 @@
                                                                     
                                                                     
                                                                     <div class="text-end">
-                                                                        <button type="submit" class="btn btn-primary" onclick="return userEnroll<%= m.getMemId() %>();">변경사항 저장</button>
+                                                                        <button type="submit" class="btn btn-primary">변경사항 저장</button>
                                                                     </div>
                                                                     
                                                                     <script>
@@ -514,42 +479,6 @@
 																				}
 																			}).open();
 																		}
-																		
-																		function userEnroll<%= m.getMemId() %>() {
-																			
-																			const pwdInputf = document.getElementById("pwdInput<%= m.getMemId() %>");
-																			const pwdInputCheckf = document.querySelector("#pwdInputCheck<%= m.getMemId() %>");
-																			const idInputf = document.getElementById("idInput<%= m.getMemId() %>");
-																			
-																			// id : 소문자,숫자로 5~12글자
-																			let regExp = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,12}$/;
-																	
-																			if (!regExp.test(idInputf.value)) {
-																				alert('유효하지 않은 id를 입력하셨습니다.');
-																				idInput.select();
-																				return false;
-																			}
-																	
-																			// 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
-																			let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
-																	
-																			if (!regExp1.test(pwdInput.value)) {
-																				alert('유효하지 않은 비밀번호를 입력하셨습니다');
-																				pwdInput.value = "";
-																				pwdInput.focus();
-																				return false;
-																			}
-																	
-																			// 비밀번호 확인
-																			if (pwdInput.value != pwdInputCheck.value) {
-																				alert("비밀번호 확인이 일치하지 않습니다.");
-																				pwdInputCheck.value = "";
-																				pwdInputCheck.focus();
-																				return false;
-																	
-																			}
-																		}
-																			
 														            </script>
                                                                 </form>
                                                             </div>
