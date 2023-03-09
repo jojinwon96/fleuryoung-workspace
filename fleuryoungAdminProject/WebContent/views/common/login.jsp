@@ -37,7 +37,7 @@
 	  <div class="main-wrapper login-body">
 	        <div class="login-wrapper">
 	            <div class="container">
-	                <img class="img-fluid logo-dark mb-2" src="resources/img/Fleuryoung.png" alt="Logo">
+	                <img class="img-fluid logo-dark mb-2" src="resources/image/Fleuryoung.png" alt="Logo">
 	                <div class="loginbox" style="width: 450px">
 	                    <div class="login-right"style="width: 450px">
 	                        <div class="login-right-wrap"style="width: 450px">

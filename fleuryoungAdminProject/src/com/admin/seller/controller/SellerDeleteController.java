@@ -1,4 +1,4 @@
-package com.admin.member.controller;
+package com.admin.seller.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.member.model.service.MemberService;
+import com.admin.seller.model.service.SellerService;
 
 /**
- * Servlet implementation class MemberDeleteController
+ * Servlet implementation class SellerDeleteController
  */
-@WebServlet("/deactivate.me")
-public class MemberDeleteController extends HttpServlet {
+@WebServlet("/deactivate.se")
+public class SellerDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberDeleteController() {
+    public SellerDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +29,15 @@ public class MemberDeleteController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String mId = request.getParameter("mId");
-		int result = new MemberService().deactivate(mId);
+		String selNo = request.getParameter("selNo");
+		int result = new SellerService().deactivate(selNo);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "계정이 비활성화 되었습니다");
-			response.sendRedirect(request.getContextPath()+"/list.me");
+			response.sendRedirect(request.getContextPath()+"/list.se");
 		}else {
 			request.getSession().setAttribute("alertMsg", "비활성화 실패했습니다");
-			response.sendRedirect(request.getContextPath()+"/list.me");
+			response.sendRedirect(request.getContextPath()+"/list.se");
 		}
 	}
 

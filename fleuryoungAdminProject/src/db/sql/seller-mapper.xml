@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key="loginUser">
 
-	SELECT
-			SEL_NO
-			,SEL_ID
-			, SEL_PW
-			, SEL_BUSINESS_NO
-			, SEL_STORE_NAME
-			, SEL_NAME
-			, SEL_EMAIL
-			, SEL_PHONE
-			, SEL_TEL
-			, SEL_FAX
-			, SEL_POSTAL
-			, SEL_STREET
-			, SEL_ADDRESS
-			, SEL_IMG
-			, SEL_STATUS
-			, SEL_ENROLL_DATE
-	  FROM  TB_SELLER
-	 WHERE  SEL_ID = ?
-	   AND  SEL_PW = ?
-	   AND  SEL_STATUS = 'Y'
-</entry>
-
-<entry key="insertUser">
+<entry key="add">
 INSERT INTO TB_SELLER 
            (
-                SEL_NO
+               SEL_NO
               ,SEL_ID 
               ,SEL_PW
               ,SEL_BUSINESS_NO
@@ -66,9 +42,12 @@ INSERT INTO TB_SELLER
            ,SYSDATE
            )
 </entry>
-<entry key="updateUser">
+
+<entry key="update">
 UPDATE    TB_SELLER
-   SET    SEL_BUSINESS_NO = ?
+   SET    SEL_ID = ?
+        , SEL_PW = ?
+        , SEL_BUSINESS_NO = ?
         , SEL_STORE_NAME = ?
         , SEL_NAME = ?
         , SEL_EMAIL = ?
@@ -79,31 +58,28 @@ UPDATE    TB_SELLER
         , SEL_STREET = ?
         , SEL_ADDRESS = ?
         , SEL_IMG = ?
+        , SEL_STATUS = 'Y'
  WHERE    SEL_NO = ?
 
 </entry>
 
-<entry key="selectUser">
-	SELECT
-			SEL_NO
-			, SEL_ID
-			, SEL_PW
-			, SEL_BUSINESS_NO
-			, SEL_STORE_NAME
-			, SEL_NAME
-			, SEL_EMAIL
-			, SEL_PHONE
-			, SEL_TEL
-			, SEL_FAX
-			, SEL_POSTAL
-			, SEL_STREET
-			, SEL_ADDRESS
-			, SEL_IMG
-			, SEL_STATUS
-			, SEL_ENROLL_DATE
-	  FROM  TB_SELLER
-	 WHERE  SEL_NO = ?
-	   AND  SEL_STATUS = 'Y'
+<entry key="updateNoImg">
+UPDATE    TB_SELLER
+   SET    SEL_ID = ?
+        , SEL_PW = ?
+        , SEL_BUSINESS_NO = ?
+        , SEL_STORE_NAME = ?
+        , SEL_NAME = ?
+        , SEL_EMAIL = ?
+        , SEL_PHONE = ?
+        , SEL_TEL = ?
+        , SEL_FAX = ?
+        , SEL_POSTAL = ?
+        , SEL_STREET = ?
+        , SEL_ADDRESS = ?
+        , SEL_STATUS = 'Y'
+ WHERE    SEL_NO = ?
+
 </entry>
 
 <entry key="selectAllSeller">
@@ -126,4 +102,11 @@ UPDATE    TB_SELLER
 			, SEL_ENROLL_DATE
 	 FROM  TB_SELLER
 </entry>
+
+<entry key="deactivate">
+	UPDATE TB_SELLER
+	    SET SEL_STATUS = 'N'
+	WHERE SEL_NO = ?
+</entry>
+
 </properties>

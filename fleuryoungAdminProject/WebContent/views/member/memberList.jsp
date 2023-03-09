@@ -49,7 +49,8 @@
                                                         <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                                             for="edit_img">
                                                             <img id="avatarImg" class="avatar-img"
-                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image">
+                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image"
+                                                                onerror="this.src='${pageContext.request.contextPath}/resources/image/profile/default.png'">
                                                             <input type="file" id="edit_img" name="file" onchange="loadImg(this);">
                                                             <span class="avatar-edit">
                                                                 <i data-feather="edit-2"
@@ -115,10 +116,6 @@
                                                 </div>
                                             </div>
                                             
-                                            <script>
-                                                var gender = $('input[name=gender]:checked').val();
-                                            </script>
-                                            
                                             <div id="addressArea" class="row form-groups">
                                                 <label for="address" id="addressLabel" class="col-sm-3 col-form-label input-label">주소</label>
                             
@@ -135,7 +132,7 @@
                                             
                                             
                                             <div class="text-end">
-                                                <button type="submit" class="btn btn-primary">변경사항 저장</button>
+                                                <button type="submit" class="btn btn-primary">저장</button>
                                             </div>
                                             <script>
                                                 function loadImg(inputFile){
@@ -243,19 +240,19 @@
 	                                                <td>
                                                     <% if(m.getMemImg() != null) {%>
                                                         <h2 class="table-avatar">
-	                                                        <a href="profile.html" class="avatar avatar-sm me-2"><img
+	                                                        <a href="" class="avatar avatar-sm me-2"><img
 	                                                                class="avatar-img rounded-circle"
 	                                                                src="${pageContext.request.contextPath}<%= m.getMemImg() %>"
 	                                                                alt="User Image"></a>
-                                                            <a href="profile.html"><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
+                                                            <a><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
 	                                                    </h2>    
                                                     <%}else {%>
                                                         <h2 class="table-avatar">
-	                                                        <a href="profile.html" class="avatar avatar-sm me-2"><img
+	                                                        <a href="" class="avatar avatar-sm me-2"><img
 	                                                                class="avatar-img rounded-circle"
 	                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png"
 	                                                                alt="User Image"></a>
-                                                            <a href="profile.html"><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
+                                                            <a href=""><%= m.getMemId() %><span><%= m.getMemName() %> </span></a>
 	                                                    </h2>
                                                     <%} %>
 	                                                    
@@ -297,10 +294,12 @@
                                                                                     for="edit_img<%= m.getMemId() %>">
                                                                                     <% if(m.getMemImg() != null) {%>
                                                                                         <img id="avatarImg<%= m.getMemId() %>" class="avatar-img"
-                                                                                        src="${pageContext.request.contextPath}<%= m.getMemImg() %>" alt="Profile Image" onerror="this.src='${pageContext.request.contextPath}<%= m.getMemImg() %>'">
+                                                                                        src="${pageContext.request.contextPath}<%= m.getMemImg() %>" alt="Profile Image" 
+                                                                                        onerror="this.src='${pageContext.request.contextPath}<%= m.getMemImg() %>'">
                                                                                     <%}else {%>
                                                                                         <img id="avatarImg<%= m.getMemId() %>" class="avatar-img"
-                                                                                        src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image" onerror="this.src='${pageContext.request.contextPath}/resources/image/profile/default.png'">
+                                                                                        src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Profile Image" 
+                                                                                        onerror="this.src='${pageContext.request.contextPath}/resources/image/profile/default.png'">
                                                                                     <%} %>
                                                                                     
                                                                                     <input type="file" id="edit_img<%= m.getMemId() %>" name="file" onchange="loadImg<%= m.getMemId() %>(this);">
@@ -327,7 +326,8 @@
 																	<div id="pwdArea1" class="row form-group">
 																		<label for="password" class="col-sm-3 col-form-label input-label"> 비밀번호</label> 
 																		<div class="col-sm-9">
-																			<input type="password" class="form-control" id="pwdInput<%= m.getMemId() %>" required name = "memPw" value="<%= m.getMemPw() %>" placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
+																			<input type="password" class="form-control" id="pwdInput<%= m.getMemId() %>" required name = "memPw" value="<%= m.getMemPw() %>" 
+                                                                            placeholder="공백없이 소/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
 																		</div>
 																	</div>
                                                                     
@@ -378,10 +378,6 @@
 																		</div>
 																	</div>
 																	
-																	<script>
-																		var gender = $('input[name=gender]:checked').val();
-																	</script>
-                                                                    
                                                                     <div id="addressArea" class="row form-groups">
 																		<label for="address" id="addressLabel" class="col-sm-3 col-form-label input-label">주소</label>
 													
