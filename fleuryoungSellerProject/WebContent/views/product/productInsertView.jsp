@@ -33,11 +33,6 @@
 	<%@ include file="../common/menubar.jsp" %>
 
 
-
-
-
-
-
 		<div class="page-wrapper">
 			<div class="content container-fluid">
 				<div class="page-header">
@@ -48,7 +43,7 @@
 								<li class="breadcrumb-item"><a
 										href="<%=contextPath%>/dashboard.da">대시보드</a></li>
 								<li class="breadcrumb-item"><a
-										href="<%=contextPath%>/productList.pr?sno=<%=loginSeller.getSelNo()%>">상품관리</a>
+										href="<%=contextPath%>/productList.pr">상품관리</a>
 								</li>
 								<li class="breadcrumb-item active">상품등록</li>
 							</ul>

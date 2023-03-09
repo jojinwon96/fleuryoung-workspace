@@ -41,14 +41,13 @@ public class CheckEmailController extends HttpServlet {
 		
         String user_email = request.getParameter("email");
         Seller sel = new SellerService().selectByEmail(user_email);
-        
         // 이메일 인증 매핑
 		if(cmd.equals("idSelect")) {
 			// 수신 확인
 			System.out.println("user_email : " + user_email);
 			try {
 				if(sel == null) {
-					out.write("false");
+					out.print("false");
 				} else {
 					//인증 번호 생성기
 					String title = "아이디 찾기";
@@ -103,8 +102,28 @@ public class CheckEmailController extends HttpServlet {
 				e.printStackTrace();
 			}
 		
-		} else if (cmd.equals("sendEmailProc.mem")) {
-			System.out.println("test");
+		} else if (cmd.equals("SelectId")) {
+			System.out.println("user_email : " + user_email);
+			try {
+				if(sel != null) {
+					out.print("false");
+				}else {
+					String title = "회원가입";
+					
+					StringBuffer temp =new RanNumUtils().ranNum();
+			        String AuthenticationKey = temp.toString();
+			        System.out.println(AuthenticationKey);
+					String ranNum =  new EmailService().sendEmail(request, response, title, user_email, AuthenticationKey); // 이메일을 조회 하는 로직 후에 MemberDTO형 dto 변수에 담는 객체
+				    
+					JSONObject jObj = new JSONObject();
+				    jObj.put("email", user_email);
+				    jObj.put("ranNum", ranNum);
+				    response.setContentType("application/json; charset=utf-8");
+				    response.getWriter().print(jObj);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

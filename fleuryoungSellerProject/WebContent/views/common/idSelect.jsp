@@ -108,8 +108,6 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
         console.log(ranNum)
         if (ranNum == verification_number) {
             alert("당신의 아이디는 " + user_id + " 입니다.");
-   
-            
             location.href="<%=contextPath%>/login.se";
         } else {
             alert("인증번호를 잘못 입력하셨습니다.");

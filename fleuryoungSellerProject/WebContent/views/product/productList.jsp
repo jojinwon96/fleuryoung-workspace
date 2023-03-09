@@ -175,7 +175,7 @@
 	                                            <td>
 	                                                <h2 class="table-avatar">
 	                                                    <img class="avatar avatar-xl me-2 avatar-img rounded-circle"
-	                                                            src="<%= p.getpPicture()%>">
+	                                                            src="${pageContext.request.contextPath}<%= p.getpPicture()%>">
 	                                                </h2>
 	                                                
 	                                            </td>

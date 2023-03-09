@@ -68,8 +68,6 @@ public class MyPageController extends HttpServlet {
 				
 				if(multipartRequest.getOriginalFileName("upfile")!= null) {
 					sel.setSelImg("resources/img/seller_img/"+ multipartRequest.getFilesystemName("upfile"));
-				} else if(selImg != null){
-					sel.setSelImg(selImg);
 				} else {
 					sel.setSelImg("resources/img/seller_img/userImg.png");				
 				}

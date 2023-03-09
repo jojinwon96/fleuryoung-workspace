@@ -29,8 +29,8 @@
                         <div class="col-sm-9">
                             <div class="d-flex align-items-center">
                                 <label class="avatar avatar-xxl profile-cover-avatar m-0" for="fileInput"
-                                    onclick="chooseFile();">
-                                    <img id="file1" class="avatar-img"
+                                    onclick="myChooseFile();">
+                                    <img id="myFile1" class="avatar-img"
                                         src="<%=contextPath %>/<%=loginSeller.getSelImg() %>"
                                         name="selImg">
                                 </label>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="file" name="upfile" id="fileInput" style="display: none;" onchange="loadImg(this);">
+                    <input type="file" name="upfile" id="myFileInput" style="display: none;" onchange="myLoadImg(this);">
                     <div class="row form-group">
                         <label for="name" class="col-sm-3 col-form-label input-label">이름</label>
                         <div class="col-sm-9">
@@ -133,10 +133,6 @@
                         </div>
                     </div>
 
-
-
-
-
                     <div class="text-end">
                         <button type="button" onclick="history.back()"
                         class="btn btn-primary">뒤로가기</button>
@@ -146,11 +142,11 @@
                             
                             
                                 
-                                chooseFile = function() {
-                                    $("#fileInput").click();
+                                myChooseFile = function() {
+                                    $("#myFileInput").click();
                                 }
                                 
-                                function loadImg(inputFile) {
+                                function myLoadImg(inputFile) {
                                     console.log("inputFile");
                                     if (inputFile.files.length == 1) { // 파일 선택된 경우 => 파일 읽어들임
                                 
@@ -163,18 +159,15 @@
                                 
                                         //파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
                                         reader.onload = function (e) {
-                                            // e.target.result => 읽어들인 파일의 고유한 url
-                                
-                                            
+                                            // e.target.result => 읽어들인 파일의 고유한 url                                            
                                         console.log(e.target.result);
-                                        $("#file1").removeAttr("src");
-                                        $("#file1").attr("src", e.target.result); 
+                                        $("#myFile1").removeAttr("src");
+                                        $("#myFile1").attr("src", e.target.result); 
                                         }
-                                
+
                                     } else { //선택된 파일이 취소된 경우 => 미리보기 본것도 사라지게
-                                        
-                                                $("#file1").attr("src", "resources/img/seller_img/userImg.png");
-                                        
+                                        $("#myFile1").removeAttr("src");
+                                        $("#myFile1").attr("src", "resources/img/seller_img/userImg.png");
                                     }
                                 } //loadImg end
                                 

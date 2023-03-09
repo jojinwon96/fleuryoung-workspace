@@ -127,7 +127,7 @@ public class ProductInsertController extends HttpServlet {
 				
 				//상품 상세설명 값 세팅
 				if(multipartRequest.getOriginalFileName("pDetailFile")!= null) {
-					p.setDetail("resources/img/product/detail/"+ multipartRequest.getFilesystemName("pDetailFile"));
+					p.setDetail("/resources/img/product/detail/"+ multipartRequest.getFilesystemName("pDetailFile"));
 					System.out.println(p.getDetail());
 				}else {
 					request.getSession().setAttribute("alertMsg", "상품에 상세 설명이 없습니다!");
@@ -159,7 +159,7 @@ public class ProductInsertController extends HttpServlet {
 					String key = "file" + i; 
 					
 					if (multipartRequest.getOriginalFileName(key) != null) {
-						piList.add("resources/img/product/view/" + multipartRequest.getFilesystemName(key));
+						piList.add("/resources/img/product/view/" + multipartRequest.getFilesystemName(key));
 						
 					}else{
 						piList.add("");

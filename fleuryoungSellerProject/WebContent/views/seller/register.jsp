@@ -100,7 +100,14 @@
                                     <div id="emailArea">
                                         <label for="email">이메일</label>
                                         <input type="email" class="form-control" id="emailInput" name="email"> <br>
-                                        <a href=""><button type="button" class="btn btn-outline-success" id="emailButton" >이메일 인증하기</button></a>
+                                        <div id="sendNum_Wrapper" style="display: none;">
+                                            <div class="pass-group">
+                                                <input type="text" class="form-control-sm" name="chack" id="num" required>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    id="btnSubmit" onclick="sendNumberByEmail();">인증확인</button>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success" id="emailButton" onclick="selectByEmail();">이메일 인증하기</button>
                                     </div>
                     
                     
@@ -133,16 +140,16 @@
                                     <div id="registerNoArea2">
                                         <label for="id"><small>*</small>사업자등록번호</label>
                                         <input type="text" class="form-control" id="registerNoInput2" placeholder="-를 제외한 숫자만 입력해주세요" name="selBusinessNo" required>
-                                        <button>중복확인</button>
+                                        <button class="btn btn-primary btn-sm">중복확인</button>
                                     </div>
 
 									<div id="registerNoArea3">
                                         <label for="file">프로필 사진</label>
-                                        <img id="file1" width="150" height="150" onclick="chooseFile();" onerror="this.style.display='none'">
+                                        <img id="file1" width="150" height="150" onclick="reChooseFile();" onerror="this.style.display='none'">
                                         <small>왼쪽 박스 클릭시 이미지 삽입(미등록 기본이미지)</small>
                                         
                                     </div>
-                                        <input type="file" name="upfile" id="fileInput" style="display: none;" onchange="loadImg(this,1);">
+                                        <input type="file" name="upfile" id="fileInput" style="display: none;" onchange="reLoadImg(this,1);">
 								
 								<br><br><br><br>
                                     <div id="addressArea">
@@ -214,7 +221,7 @@
                                         </ul>
                                         <ul class="footBtwrap clearfix" >
                                             <li><button type="button" class="fpmgBt1">비동의</button></li>
-                                            <li><button  type="submit" class="fpmgBt2 btn-primary" id="sellerEnrollButton">회원가입</button></li>
+                                            <li><button  type="submit" class="fpmgBt2 btn-primary" id="sellerEnrollButton" disabled="true">회원가입</button></li>
                                         </ul>
                     
                     					
@@ -243,38 +250,61 @@
 
 <script>
 
-$(function(){
-    // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
-    let user_id = ""; 
-        document.getElementById("emailButton").addEventListener("click", function () {
-            $.ajax({
-                type: "post",
-                url: "${pageContext.request.contextPath}/findIdByEmailProc.mem",
-                data: {
-                    email: document.getElementById("email").value
-                }
-            }).done(function (data) {
-                if (data == "false") {
-                    alert("존재하지 않는 이메일입니다.");
-                } else {
-                    user_id = data;
-                    alert("인증번호를 입력해주세요");
-                    document.getElementById("sendNum_Wrapper").style.display = "flex"; 
-                    sendNumberByEmail(); 
-                    document.getElementById("btnSendEmail").disabled = "disabled";
-                }
-            }).fail(function (e) {
-                console.log(e);
-            });
+// 이메일 찾기
+let ranNum = ""; 
+     
+        function selectByEmail() {
+
+            if($("#emailInput").val()==""){
+                alert("이메일을 입력하세요.");
+                return false;
+            }
+        var url = "idSelect.eml";
+    
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {
+                email: $("#emailInput").val()
+                 , chack: "SelectId"
+            }
+        }).done(function (data) {
+            if (data == "false") {
+                alert("이미 존재하는 아이디입니다.");
+            } else {
+                alert(data.email + " 로 인증메일 을 보냈습니다.");
+                document.getElementById("sendNum_Wrapper").style.display = "block";
+                document.getElementById("emailButton").disabled = "disabled";
+                document.getElementById("emailInput").disabled = "disabled";
+                ranNum = data.ranNum;
+            }
+        }).fail(function (e) {
+            console.log(e);
         });
-})
+    }
+    // 인증번호 발송 (아이디 찾기 - 이메일 인증)
+    let verification_number = 0;
+  
+    // 인증번호 확인 버튼 (아이디 찾기 - 이메일 인증)
+
+    document.getElementById("btnSubmit").addEventListener("click", function () {
+        verification_number =   $("#num").val()
+        console.log(verification_number)
+        console.log(ranNum)
+        if (ranNum == verification_number) {
+            alert("인증 완료");
+            $("#sellerEnrollButton").attr("disabled",false);
+        } else {
+            alert("인증번호를 잘못 입력하셨습니다.");
+        }
+    })
 
 
-function chooseFile(){
+function reChooseFile(){
     $("#fileInput").click();
 }
 
-function loadImg(inputFile ,num){
+function reLoadImg(inputFile ,num){
 
     if(inputFile.files.length ==1){ // 파일 선택된 경우 => 파일 읽어들임
         

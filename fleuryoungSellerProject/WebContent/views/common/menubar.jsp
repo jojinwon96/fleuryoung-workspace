@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     <% 
     String contextPath = request.getContextPath(); 
-    Seller  loginSeller = (Seller)session.getAttribute("loginSeller");
+    Seller loginSeller = (Seller)session.getAttribute("loginSeller");
     
     String alertMsg = (String)session.getAttribute("alertMsg");
     int a = 0;
@@ -123,42 +123,7 @@
                 </a>
                 <ul class="nav nav-tabs user-menu">
     
-                    <li class="nav-item dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <i data-feather="bell"></i> <span class="badge rounded-pill">5</span>
-                        </a>
-                        <div class="dropdown-menu notifications">
-                            <div class="topnav-dropdown-header">
-                                <span class="notification-title">알림창</span>
-                                <!-- 알림 전체 삭제 -->
-                                <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-                            </div>
-                            <div class="noti-content">
-                                <ul class="notification-list">
-                                    <li class="notification-message">
-                                        <a href="activities.html"> 
-                                            <!-- 알림 클릭 -->
-                                            <div class="media d-flex">
-                                                <span class="avatar avatar-sm">
-                                                    <img class="avatar-img rounded-circle" alt=""
-                                                        src="assets/img/profiles/usermain.jpg">
-                                                </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">판매완료</span>
-                                                        paid the invoice <span class="noti-title"></span></p>
-                                                    <p class="noti-time"><span class="notification-time">알림 시간(4 mins ago)</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="topnav-dropdown-footer">
-                                <a href="activities.html">View all Notifications</a>
-                            </div>
-                        </div>
-                    </li>
+                 
                     <!-- session을 이용해 채워 져야함 -->
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
