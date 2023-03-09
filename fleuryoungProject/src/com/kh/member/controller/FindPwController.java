@@ -125,12 +125,16 @@ public class FindPwController extends HttpServlet {
 			}
 			System.out.println(temp);
 			request.setAttribute("AuthenticationKey", AuthenticationKey);
-			request.setAttribute("id", member_id);
+			//request.setAttribute("member_id", member_id);
+			
+			HttpSession session1 = request.getSession();    //세션 객체 만들기
+			session1.setAttribute("member_id",member_id);    //세션 생성
+		
+			
 			//response.sendRedirect(request.getContextPath() + "/views/main/FindPwInput.jsp");
 			
 			
-			 request.getRequestDispatcher("/views/main/FindPwInput.jsp").forward
-			 (request, response);
+			 request.getRequestDispatcher("/views/main/FindPwInput.jsp").forward(request, response);
 			
 			
 			

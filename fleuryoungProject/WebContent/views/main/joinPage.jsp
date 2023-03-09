@@ -573,7 +573,7 @@ button {
 								const check02_checked = check02.checked;
 
 								//아이디 중복확인했나 확인
-								if($("input[name='checked_id']").val()==''){
+								if($("input[name='checked_id']").val()==''){A
 									alert('아이디중복 확인을 해주세요.');
 									$("input[name='checked_id']").eq(0).focus();
 									return false;
@@ -599,84 +599,94 @@ button {
 									return false;
 						
 								}
+								//핸드폰번호 양식 확인(010, 017, 011 셋 중 하나로 시작하는 11자리 숫자만)
+								let regExp2 = /^(010|017|011)[0-9]{8}$/;
+								
+								if (!regExp2.test(phoneInput.value)) {
+									alert('유효하지 않은 핸드폰번호를 입력하셨습니다');
+									phoneInput.value = "";
+									phoneInput.focus();
+									return false;
+								}
+								
+								
 
 								//이용약관 동의 여부 체크
 								if ((check01.checked && check02.checked) != true ) {
 									alert("이용약관에 동의하지 않으셧습니다.");
 									return false;
 								}
+								
+								  // 생일 유효성 검사
+						    	var birthJ = false;
+						    	
+						    	// 생년월일	birthJ 유효성 검사
+						    		var dateStr = $('#birthDateInput').val();		
+						    	    var year = Number(dateStr.substr(0,4)); // 입력한 값의 0~4자리까지 (연)
+						    	    var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
+						    	    var day = Number(dateStr.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
+						    	    var today = new Date(); // 날짜 변수 선언
+						    	    var yearNow = today.getFullYear(); // 올해 연도 가져옴
+						    		
+						    	    if (dateStr.length <=8) {
+						    			// 1900년~올해
+						    		    if (1900 > year || year > yearNow){
+						    		    	
+						    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
+						                    birthDateInput.value="";
+						                    return false;
+						    		    	
+						    		    }else if (month < 1 || month > 12) {
+						    		    		
+						                    alert('유효하지 않은 생년월일을 입력하셨습니다');
+						                    birthDateInput.value="";
+						                    return false;
+						    		    
+						    		    }else if (day < 1 || day > 31) {
+						    		    	
+						    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
+						                    birthDateInput.value="";
+						                    return false;
+						    		    	
+						    		    }else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+						    		    	 
+						                    alert('유효하지 않은 생년월일을 입력하셨습니다');
+						                    birthDateInput.value="";
+						                    return false;
+						    		    	 
+						    		    }else if (month == 2) {
+						    		    	 
+						    		       	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+						    		       	
+						    		     	if (day>29 || (day==29 && !isleap)) {
+						    		     		
+						                        alert('유효하지 않은 생년월일을 입력하셨습니다');
+						                        birthDateInput.value="";
+						                        return false;
+						    		    	
+						    				}else{
+						    					$('#birth_check').text('');
+						    					birthJ = true;
+						    				}//end of if (day>29 || (day==29 && !isleap))
+						    		     	
+						    		    }else{
+						    		    	
+						    		    	$('#birth_check').text(''); 
+						    				birthJ = true;
+						    			}
+						    			
+						    			}else{
+						    				//1.입력된 생년월일이 8자 초과할때 :  auth:false
+						    				alert('유효하지 않은 생년월일을 입력하셨습니다');
+						    			}
+						    	    
+						    
+						    		;
 
 							}
 						</script>
 
-<script>
-        
-        // 생일 유효성 검사
-    	var birthJ = false;
-    	
-    	// 생년월일	birthJ 유효성 검사
-    		var dateStr = $('#birthDateInput').val();		
-    	    var year = Number(dateStr.substr(0,4)); // 입력한 값의 0~4자리까지 (연)
-    	    var month = Number(dateStr.substr(4,2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
-    	    var day = Number(dateStr.substr(6,2)); // 입력한 값 6번째 자리부터 2자리 숫자 (일)
-    	    var today = new Date(); // 날짜 변수 선언
-    	    var yearNow = today.getFullYear(); // 올해 연도 가져옴
-    		
-    	    if (dateStr.length <=8) {
-    			// 1900년~올해
-    		    if (1900 > year || year > yearNow){
-    		    	
-    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
-                    birthDateInput.value="";
-                    return false;
-    		    	
-    		    }else if (month < 1 || month > 12) {
-    		    		
-                    alert('유효하지 않은 생년월일을 입력하셨습니다');
-                    birthDateInput.value="";
-                    return false;
-    		    
-    		    }else if (day < 1 || day > 31) {
-    		    	
-    		    	alert('유효하지 않은 생년월일을 입력하셨습니다');
-                    birthDateInput.value="";
-                    return false;
-    		    	
-    		    }else if ((month==4 || month==6 || month==9 || month==11) && day==31) {
-    		    	 
-                    alert('유효하지 않은 생년월일을 입력하셨습니다');
-                    birthDateInput.value="";
-                    return false;
-    		    	 
-    		    }else if (month == 2) {
-    		    	 
-    		       	var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-    		       	
-    		     	if (day>29 || (day==29 && !isleap)) {
-    		     		
-                        alert('유효하지 않은 생년월일을 입력하셨습니다');
-                        birthDateInput.value="";
-                        return false;
-    		    	
-    				}else{
-    					$('#birth_check').text('');
-    					birthJ = true;
-    				}//end of if (day>29 || (day==29 && !isleap))
-    		     	
-    		    }else{
-    		    	
-    		    	$('#birth_check').text(''); 
-    				birthJ = true;
-    			}
-    			
-    			}else{
-    				//1.입력된 생년월일이 8자 초과할때 :  auth:false
-    				alert('유효하지 않은 생년월일을 입력하셨습니다');
-    			}
-    	    
-    
-    		;
-    </script>
+
     
     <!-- ------------------------------------------------------------------------------------------------- -->
     

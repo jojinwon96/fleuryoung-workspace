@@ -7,6 +7,7 @@
 	String alertMsg = (String)request.getAttribute("alertMsg");	
 	
 	String AuthenticationKey = (String)request.getAttribute("AuthenticationKey");
+	String member_id = (String)request.getAttribute("member_id");
 	
 %>
 <!DOCTYPE html>
@@ -88,6 +89,50 @@ a{
 #message{
     text-align: center;
 }
+
+#content{
+  height: 500px;
+  width: 100%;
+  margin: auto;
+}
+#verifyCodeBtn{
+	border: 1px solid green;
+    display: inline-block;
+    height: 40px;
+    width : 70px
+
+ }
+ #verifyCodeBtn:hover{
+ 	color:lightgreen;
+ }
+ #pwChangeBtn{
+ border: 1px solid lightgray;
+    display: inline-block;
+    height: 37px;
+    width : 120px
+ }
+  #pwChangeBtn:hover{
+  color: lightblue;
+  }
+ button:disabled{
+  border: 1px solid black;
+  background-color: lightgray;
+   height: 37px;
+    width : 120px
+ }
+ button:disabled:hover{
+  pointer-events: none;
+ }
+ #contentDiv{
+ 	width:100%;
+ 	margin:auto;
+ }
+ #ptag{
+ 	color:red;
+ 	display: inline-block;
+ }
+ 
+
 /* ----------------------------------------------------------------------------------------------------- */
 
 
@@ -106,33 +151,39 @@ a{
 
         <div id="body">
             <div id="header" >
-                <h1 align="center"><b>인증번호 입력</b>  </h1>
-                <hr class="separator separator--line"  align="center">
+                <h3 align="center"><b>인증번호 입력 & 비밀번호 변경</b>  </h3> <br>
+                <h6 align="center" style="font-size:15px;"><p id="ptag">*</p>이메일 인증을 완료 하셔야 비밀번호 변경이 가능합니다</h6>
+                <hr class="separator separator--line"  align="center" style="margin-top:0px;">
             </div>
 
            
             
            
            
-           
+           <div id="content"style="width:30%; margin: auto;">
+            <form action="/fleuryoungProject/PwFindUpdateController" id="fromId" name="pwFindInput">
+               <div id="contentDiv">
+               <input type="text"  name="verifyCode"   id="verifyCode" placeholder="인증번호를 입력해주세요" style="width: 350px; height: 40px;"> 
+              <button type="button"  id="verifyCodeBtn" onclick="return verifyCodeBtn1()">확인</button> <br><br>
+              <input type="password" id="password1" name="password1" placeholder="변경할 비밀번호를 입력해주세요" style="width: 350px; height: 40px;"> <br><br>
+              <input type="password" id="password2"  name="password2" placeholder="비밀번호를 다시 입력해주세요" style="width: 350px; height: 40px;"> 
+              <button type="submit"  id="pwChangeBtn"   disabled='disabled'  onclick="return pw_modify()" >비밀번호 변경</button>
+              <br>
+              </div>
+              
+              
+          </form>
+           </div>
                 
             
-            <form action="/fleuryoungProject/PwFindUpdateController" name="pwFindInput">
-                <div id="contentBody" >
-                <input type="text" name="verifyCode" id="verifyCode" placeholder="인증번호를 입력해주세요"> <br>
-                <button type="button" id="verifyCodeBtn" onclick="return verifyCodeBtn1()">확인</button> <br>
-                <input type="password" name="password1" placeholder="변경할 비밀번호를 입력해주세요"> <br>
-                <input type="password"  name="password2" placeholder="비밀번호를 다시 입력해주세요"> <br>
-                <button type="submit" onclick="return pw_modify()">비밀번호 변경</button>
-                <br>
-                <div id="message">
-                    
-                </div>
-            </form>
+            
             
             
 
             <script>
+            
+            
+            
                 function verifyCodeBtn1(){ 
                 var frm = document.pwFindInput;
                 var verifyCode = document.getElementById("verifyCode");
@@ -142,6 +193,7 @@ a{
                 if (frm.verifyCode.value.length < 1) {
                   alert("인증번호를 입력해주세요");
                   console.log(AuthenticationKey);
+                  console.log(member_id);
                   
                   return false;
                 }
@@ -151,32 +203,47 @@ a{
                   return false;
                 }else{
                   alert("인증이 확인되었습니다.");
+                  const btn = document.getElementById('pwChangeBtn');
+                  btn.disabled  = false;
                 	
                 }
                 }
                 
                 function pw_modify(){
                 var frm = document.pwFindInput;
+                const pwdInputf = document.getElementById("#password1");
+                const pwdInputCheckf = document.querySelector("#password2");
                     
                 if (frm.password1.value.length < 1) {
                   alert("변경하실 비밀번호를  입력해주세요");
                   return false;
                 }
+                
+                // 비밀번호 : 영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이
+				let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
+		
+				if (!regExp1.test(password1.value)) {
+					alert('유효하지 않은 비밀번호를 입력하셨습니다');
+					password1.value = "";
+					password1.focus();
+					return false;
+				}
+				
                 if (frm.password2.value.length < 1) {
                     alert("비밀번호 확인을 입력해주세요");
                     return false;
                   }
-                const pwdInputf = document.getElementById("password1");
-                const pwdInputCheckf = document.querySelector("#password2");
             
-                // 비밀번호 일치  확인
-                  if (password1.value != password2.value) {
+                
+                  if(password1.value != password2.value) {
                   alert("비밀번호 확인이 일치하지 않습니다.");
                   password1.value = "";
                   password2.value = "";
-                  pasowordInput.focus();
+                  password2.focus();
                   return false;
               }
+                  
+              
                 }
                 </script>
            

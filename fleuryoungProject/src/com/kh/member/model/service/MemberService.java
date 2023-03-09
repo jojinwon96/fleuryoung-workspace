@@ -97,6 +97,25 @@ public int idCheck(String checkId) {
 
 }
 
+public Member updatePwd(String password1, String member_id) {
+	Connection conn = getConnection();
+	int result = new MemberDao().updatePwd(conn, password1, member_id);
+	Member updateMem  = null;
+	
+	if(result > 0) { // 성공
+		commit(conn);
+		// 갱신된 회원 객체 다시 조회해오기
+		updateMem = new MemberDao().selectMember(conn, member_id);
+	}else { //실패
+		rollback(conn);
+	}
+	close(conn);
+	return updateMem;
+	
+}
+
+
+
 
 
 

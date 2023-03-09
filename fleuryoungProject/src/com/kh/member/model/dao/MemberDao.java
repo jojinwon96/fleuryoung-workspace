@@ -213,6 +213,71 @@ public class MemberDao {
 		
 	}
 	
+	public Member selectMember(Connection conn, String member_id) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = prop.getProperty("selectMember");
+		try {
+			pstmt = conn.prepareStatement(sql); //아직은 미완성
+			
+			pstmt.setString(1, member_id);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				m = new Member(rs.getString("MEM_ID")
+						          , rs.getString("MEM_PW")
+						          , rs.getString("MEM_EMAIL")
+						          , rs.getString("MEM_NAME")
+						          , rs.getString("MEM_PHONE")
+						          , rs.getInt("MEM_POSTAL")
+						          , rs.getString("MEM_STREET")
+						          , rs.getString("MEM_ADDRESS")
+						          , rs.getDate("MEM_ENROLL_DATE")
+						          , rs.getInt("MEM_MILEAGE")
+						          , rs.getString("MEM_IMG")
+						          , rs.getString("MEM_GET_PHONE")
+						          , rs.getString("MEM_BIRTHDATE")
+						          , rs.getInt("MEM_GENDER")
+						          , rs.getString("MEM_STATUS"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	
+	public int updatePwd(Connection conn, String password1, String member_id) {
+		// update문 => 처리된 행수 => 트랜젝션 처리
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); //미완성된 sql문
+			pstmt.setString(1, password1);
+			pstmt.setString(2, member_id);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}  finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	
 	
 	
