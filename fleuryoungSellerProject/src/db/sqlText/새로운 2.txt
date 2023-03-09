@@ -1,0 +1,181 @@
+2023년 2월 22일 수요일
+[최민수] [오전 9:17] 상품 조회, 상세조회, 상품등록 수정
+[최민수] [오후 3:16] 파일: admin14.zip
+2023년 2월 23일 목요일
+[최민수] [오후 11:40] -- 판매자 로그인 조회
+SELECT
+        SEL_NO
+        ,SEL_ID
+        , SEL_PW
+        , SEL_BUSINESS_NO
+        , SEL_STORE_NAME
+        , SEL_NAME
+        , SEL_EMAIL
+        , SEL_PHONE
+        , SEL_TEL
+        , SEL_FAX
+        , SEL_POSTAL
+        , SEL_STREET
+        , SEL_ADDRESS
+        , SEL_IMG
+        , SEL_STATUS
+        , SEL_ENROLL_DATE
+  FROM  TB_SELLER
+ WHERE  SEL_ID = ?
+   AND  SEL_PW = ?
+   AND  SEL_STATUS = 'Y'
+;
+
+-- 판매자 회원가입
+INSERT 
+  INTO  TB_SELLER 
+       (
+            SEL_NO
+          ,SEL_ID 
+          ,SEL_PW
+          ,SEL_BUSINESS_NO
+          ,SEL_STORE_NAME
+          ,SEL_NAME
+          ,SEL_EMAIL
+          ,SEL_PHONE
+          ,SEL_TEL
+          ,SEL_FAX
+          ,SEL_POSTAL
+          ,SEL_STREET
+          ,SEL_ADDRESS
+          ,SEL_IMG
+          ,SEL_STATUS
+          ,SEL_ENROLL_DATE
+       )
+   VALUES
+       (
+       SEQ_SELLER.NEXTVAL
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,?
+       ,'Y'
+       ,SYSDATE
+       )
+;
+-- 판매자 마이페이지 수정
+UPDATE    TB_SELLER
+   SET    SEL_BUSINESS_NO = ?
+        , SEL_STORE_NAME = ?
+        , SEL_NAME = ?
+        , SEL_EMAIL = ?
+        , SEL_PHONE = ?
+        , SEL_TEL = ?
+        , SEL_FAX = ?
+        , SEL_POSTAL = ?
+        , SEL_STREET = ?
+        , SEL_ADDRESS = ?
+        , SEL_IMG = ?
+ WHERE    SEL_NO = ?
+;
+
+-- 판매자 마이페이지 조회
+SELECT
+        SEL_NO
+        , SEL_ID
+        , SEL_PW
+        , SEL_BUSINESS_NO
+        , SEL_STORE_NAME
+        , SEL_NAME
+        , SEL_EMAIL
+        , SEL_PHONE
+        , SEL_TEL
+        , SEL_FAX
+        , SEL_POSTAL
+        , SEL_STREET
+        , SEL_ADDRESS
+        , SEL_IMG
+        , SEL_STATUS
+        , SEL_ENROLL_DATE
+  FROM  TB_SELLER
+ WHERE  SEL_NO = ?
+   AND  SEL_STATUS = 'Y';
+   SELECT * FROM TB_PRODUCT;
+
+SELECT
+      (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
+    , P_NAME
+    , P_NETPRICE
+    , P_STOCK
+    , TO_CHAR(P_ENROLL_DATE, 'YY/MM/dd') "P_ENROLL_DATE"
+    , P_SALES
+    , (SELECT CATEGORY_NAME FROM TB_CATEGORY WHERE CATEGORY_NO = P.P_ID) "CATEGORY_NAME"
+  FROM TB_PRODUCT P
+ WHERE SEL_NO = 4;
+   
+2023년 2월 24일 금요일
+[최민수] [오후 2:41] 1. 이클립스 다이나믹 웹프로젝트를 만든다. = testProject(contextPath => /test)
+- web.xml 추가해서 Webcontent/WEB-INF/classes
+
+2. 우리가 맨날 쓰는 SERVER(SERVER DB계정)에 테이블을 하나 만든다.
+   테이블명 : WATER
+   컬럼 : 
+   - WATER_NO => PK : 생수번호 (NUMBER)
+   - BRAND : 브랜드 (VARCHAR2 40)
+   - PRICE : 가격 (NUMBER)
+   
+   데이터 추가
+   1, 삼다수, 1000
+   2, 백산수, 2000
+   3, 에비앙, 3000
+
+3. src 아래 com.kh.water 만들고 vo, service, dao, db .... 패키지 만든다
+
+4. Water.java, WaterService.java, WaterDao.java, water-mapper.xml
+
+5. index.jsp => form>태그 내에 생수명과 가격을 입력받아...
+[최민수] [오후 2:44] 상품이름
+가격
+상세정보
+등록일##
+2023년 2월 26일 일요일
+[최민수] [오후 10:19] 3333-12-2787408
+2023년 3월 7일 화요일
+[최민수] [오전 2:32]  currval
+[최민수] [오전 2:50] https://youtube.com/shorts/GMpkL6wJ3r0?feature=share
+[최민수] [오후 11:34] function selectByEmail() {
+                        var url = "idSelect.eml";
+                        var param = {
+                            email: $("#email").val()
+                            , name: "최민수"
+                            , title: "인증메일"
+                        }
+                        $.ajax({
+                            type: "post",
+                            url: url,
+                            data: param
+                        }).done(function (data) {
+                 ...
+2023년 3월 10일 금요일
+[최민수] [오전 6:12] 특별할 것 없는 밤이어도🔥: imase - NIGHT DANCER (2022) [가사해석/번역]
+[최민수] [오전 7:26] 
+UPDATE TB_MEM_ORDER_DETAIL D
+   SET OD_STATUS = 1
+ WHERE OD_ID BETWEEN 10 AND 24 ;
+                   
+DROP SEQUENCE SEQ_MEM_INVOICE;
+CREATE SEQUENCE SEQ_MEM_INVOICE
+NOCACHE START WITH 230000;
+
+SELECT * FROM tb_discount;
+SELECT * FROM TB_PRODUCT;
+SELECT * FROM TB_MEM_INVOICE;
+SELECT * FROM TB_MEM_ORDER_DETAIL;
+SELECT * FROM TB_MEM_PAYMENT;
+
+INSERT INTO TB_MEM_ORDER_DETAIL VALUES(SEQ_MEM_ORDER_DETAIL.NEXTVAL,10,1,1,1,1,1,12000,'색',100,2,'파란색');
+INSERT INTO TB_MEM_ORDER_DETAIL VALUES(SEQ_MEM_ORDE...

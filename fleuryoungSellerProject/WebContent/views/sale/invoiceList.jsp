@@ -30,7 +30,7 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">송장관리</h3>
+                        <h3 class="page-title">판매관리</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"></a>
                             </li>
@@ -84,18 +84,15 @@
                                                     <%}%>
 
 	                                            <td><%= s.getPayDate()%></td>
-                                                <% if(s.getOdStatus() > 0) {%>
-                                                    <td><span class="badge badge-pill bg-success-light"><%=s.getOdStatus()%></span></td>     
+                                                <% if(s.getInvoiceId() > 0) {%>
+                                                    <td><span class="badge badge-pill bg-success-light">등록</span></td>     
                                                 <%}else {%>
                                                     <td><span class="badge badge-pill bg-danger-light">미등록</span></td>
                                                 <%} %>
 	                                            <td class="text-end">
-	                                                <a href="edit-customer.html"
-	                                                        class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg><i
-	                                                            class="far fa-edit me-1"></i> 수정</a>
-	                                                    <a href="javascript:void(0);"
-	                                                        class="btn btn-sm btn-white text-danger me-2"><i
-	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
+	                                                <button type="button"
+	                                                        class="btn btn-sm btn-white text-success me-2" onclick="invoiceInsert('<%=s.getPayId()%>', '<%= s.getOdId()%>');">
+                                                            <i class="far fa-edit me-1"></i>송장등록</button>
 	                                            </td>
 	                                        </tr>
                                         <% } %>
@@ -110,16 +107,45 @@
         </div>
     </div>
 </div>
+<script src="resources/js/jquery-3.6.0.min.js"></script>
+<script src="resources/js/bootstrap.bundle.min.js"></script>
+<script src="resources/js/feather.min.js"></script>
+<script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="resources/plugins/apexchart/apexcharts.min.js"></script>
+<script src="resources/plugins/apexchart/chart-data.js"></script>
+<script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="resources/plugins/datatables/datatables.min.js"></script>
+<script src="resources/js/script.js"></script>
 
-    <script src="resources/js/jquery-3.6.0.min.js"></script>
-    <script src="resources/js/bootstrap.bundle.min.js"></script>
-    <script src="resources/js/feather.min.js"></script>
-    <script src="resources/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="resources/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="resources/plugins/apexchart/chart-data.js"></script>
-    <script src="resources/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="resources/plugins/datatables/datatables.min.js"></script>
-    <script src="resources/js/script.js"></script>
+<script>
+    
+    function invoiceInsert(pay, od){
+        $.ajaxSettings.traditional = true;
+        let $pay = pay;
+        let $od = od
+        console.log(pay);
+        console.log(od);
+        $.ajax({
+           
+            type: "post",
+            url: "invoiceInsert.in",
+            data:{
+                payId: $pay,
+                odId: $od 
+            }
+        }).done(function(result){
+            if(result > 0){
+                alert("송장등록완료");
+            } else{
+                alert("송장등록실패");
+            }
+        }).fail(function (e) {
+                console.log(e);
+        });
+    }
+
+</script>
+
 
 
 

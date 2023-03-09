@@ -50,6 +50,7 @@ private Properties prop = new Properties();
 								, rset.getString("PAY_DATE")
 								, rset.getInt("INVOICE_ID")));
 			}	
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -59,6 +60,43 @@ private Properties prop = new Properties();
 		return list;
 	}
 	
+	public int invoiceInsert(Connection conn, int pay, int od) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("invoiceInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pay);			
+			pstmt.setInt(2, od);			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+public int paymentUpdate(Connection conn,int od) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("paymentUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, od);			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }

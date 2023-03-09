@@ -47,11 +47,10 @@ public class CheckEmailController extends HttpServlet {
 			System.out.println("user_email : " + user_email);
 			try {
 				if(sel == null) {
-					out.print("false");
+					out.write("false");
 				} else {
 					//인증 번호 생성기
 					String title = "아이디 찾기";
-					String email = sel.getSelEmail(); 
 					
 					StringBuffer temp =new RanNumUtils().ranNum();
 			        String AuthenticationKey = temp.toString();
@@ -59,7 +58,7 @@ public class CheckEmailController extends HttpServlet {
 					String ranNum =  new EmailService().sendEmail(request, response, title, user_email, AuthenticationKey); // 이메일을 조회 하는 로직 후에 MemberDTO형 dto 변수에 담는 객체
 				    
 					JSONObject jObj = new JSONObject();
-				    jObj.put("email", email);
+				    jObj.put("email", user_email);
 				    jObj.put("ranNum", ranNum);
 				    jObj.put("userId", sel.getSelId());
 				    response.setContentType("application/json; charset=utf-8");

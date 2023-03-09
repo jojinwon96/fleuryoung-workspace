@@ -50,14 +50,6 @@
 	    break;
 	case 7:
 	    active4 = "active ";
-	    active4_1 = "active ";
-	    break;
-    case 8:
-	    active4 = "active ";
-	    active4_2 = "active ";
-	    break;
-    case 9:
-	    active5 = "active ";
 	    break;
 	}
 %>
@@ -159,10 +151,10 @@
                                 <a href="#"><i data-feather="airplay"></i> <span>판매관리</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="<%=contextPath%>/invoice.in" class="<%=active3_1%>">송장관리</a></li>
-                                    <li><a href="#"class="<%=active3_2%>">취소관리 </a></li>
-                                    <li><a href="#"class="<%=active3_3%>">반품관리 </a></li>
-                                    <li><a href="#"class="<%=active3_4%>">교환관리 </a></li>
+                                    <li><a href="<%=contextPath%>/invoice.in?sno=<%=loginSeller.getSelNo()%>" class="<%=active3_1%>">송장관리</a></li>
+                                    <li><a href="<%=contextPath%>/refundForm.re?no=1"class="<%=active3_2%>">교환관리 </a></li>
+                                    <li><a href="<%=contextPath%>/refundForm.re?no=2"class="<%=active3_3%>">환불관리 </a></li>
+                                    <li><a href="<%=contextPath%>/refundForm.re?no=3"class="<%=active3_4%>">반품관리 </a></li>
                                 </ul>
                             </li>
     

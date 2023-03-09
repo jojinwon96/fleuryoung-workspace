@@ -13,6 +13,8 @@ import com.kh.product.model.vo.Category;
 import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
+import com.kh.product.model.vo.Refund;
+import com.kh.product.model.vo.Review;
 
 public class ProductService {
 	
@@ -144,5 +146,43 @@ public class ProductService {
 		}
 		close(conn);
 		return result;
+	}	
+	
+	public ArrayList<Review> selectReviewList(int selNo){
+		Connection conn = getConnection();
+		ArrayList<Review> list = new ProductDao().selectReviewList(conn, selNo);
+		close(conn);
+		return list;
 	}
+	
+	public ArrayList<Refund> refundList(int no, int selNo){
+		Connection conn = getConnection();
+		ArrayList<Refund> list = new ProductDao().refundList(conn, no, selNo);
+		close(conn);
+		return list;
+		
+		
+	}	
+	public int updateRefund(int odId) {
+		Connection conn = getConnection();
+		int result = new ProductDao().updateRefund(conn, odId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}	
+	public int suRefund(int odId) {
+		Connection conn = getConnection();
+		int result = new ProductDao().updateRefund(conn, odId);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}	
 }

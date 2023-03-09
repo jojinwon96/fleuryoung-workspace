@@ -85,16 +85,16 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                     <div class="mb-3">
                         <label for="emailaddress" class="form-label">새 비밀번호</label>
                         <input class="form-control" type="password" id="password" required
-                            placeholder="john@deo.com">
+                            placeholder="영문 소문자/대문자,숫자 각각 한개 이상 포함하는 6~15자 길이">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">새 비밀번호 확인</label>
                         <input class="form-control" type="password" required id="checkpwd"
-                            placeholder="Enter your password">
+                            placeholder="새로운 비밀번호 확인">
                     </div>
 
                     <div class="mb-3 text-center">
-                        <button class="btn btn-primary" id="checked" type="button" >확인</button>
+                        <button class="btn btn-primary" id="checked" type="button" ons>확인</button>
                     </div>
                 </form>
             </div>
@@ -113,6 +113,9 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
 
 <script>
     $(function () {
+
+
+        
         // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
         let user_id = "";
         let ranNum = "";
@@ -138,6 +141,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
             }).fail(function (e) {
                 console.log(e);
             });
+            let count = 1;
             document.getElementById("btnSubmit").addEventListener("click", function () {
                 let verification_number = $("#num").val()
                 console.log(verification_number)
@@ -146,11 +150,33 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                     alert("새 비밀번호를 입력하세요.");
                     $("#modals").trigger('click');
                 } else {
-                    alert("인증번호를 잘못 입력하셨습니다.");
+                        alert("인증번호를 잘못 입력하셨습니다. (" +count+"회)\n3회 잘못입력 시 로그인 페이지로 이동됩니다.");
+                        count++;
+                    if(count == 4){
+                        alert("3회 이상 잘못 입력하여 로그인 화면으로 돌아갑니다.");
+                        location.href = "${pageContext.request.contextPath}"
+                    }
                 }
             })
         })
         document.getElementById("checked").addEventListener("click", function () {
+
+            let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
+
+            if (!regExp1.test(pwdInput.value)) {
+                alert('유효하지 않은 비밀번호를 입력하셨습니다');
+                pwdInput.value = "";
+                pwdInput.focus();
+                return false;
+            }
+
+            // 비밀번호 확인
+            if (pwdInput.value != pwdInputCheck.value) {
+                alert("비밀번호 확인이 일치하지 않습니다.");
+                pwdInputCheck.value = "";
+                pwdInputCheck.focus();
+                return false;
+            }
             $.ajax({
                 type: "post",
                 url: "newPwd.eml",
@@ -162,7 +188,9 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                 if (result > 0) {
                     alert("비밀번호가 수정되었습니다.");
                     location.href = "<%=contextPath%>/login.se";
-                } else {
+                } else if(result == -1){
+                    alert("이전 비밀번호와 동일합니다.");
+                }else{
                     alert("수정 실패");
                     console.log($("#selId").val());
                     console.log($("#password").val());

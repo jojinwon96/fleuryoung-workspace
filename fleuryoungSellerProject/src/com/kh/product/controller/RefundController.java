@@ -1,4 +1,4 @@
-package com.kh.seller.controller;
+package com.kh.product.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.seller.model.service.SellerService;
+import com.kh.product.model.service.ProductService;
 
 /**
- * Servlet implementation class NewPwdController
+ * Servlet implementation class RefundController
  */
-@WebServlet("/newPwd.eml")
-public class NewPwdController extends HttpServlet {
+@WebServlet("/refund.re")
+public class RefundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewPwdController() {
+    public RefundController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +30,35 @@ public class NewPwdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("selId");
-		String pwd = request.getParameter("pass");
+		int odId = Integer.parseInt(request.getParameter("odId"));
+		int num = Integer.parseInt(request.getParameter("num"));
 		PrintWriter out = response.getWriter();
-		
-		System.out.println(id);
-		System.out.println(pwd);
-		
-		int result = new SellerService().updateSellerByPwd(id,pwd);
-		System.out.println(result);
-		out.print(result);
-		
+		int result = 0;
+		if(num == 1 || num == 3 || num == 5) {
+			result = new ProductService().updateRefund(odId);
+			if(result > 0) {
+				out.write("승인거절");
+			}else {		
+				out.write("false");
+			}
+
+		} else if(num == 2 || num == 4 || num == 6) {
+			result = new ProductService().suRefund(odId);
+			if(result > 0) {
+				out.write("승인완료");
+			}else {
+				out.write("false");
+			}
+		}else {
+			out.write("false");			
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("qwejh");
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

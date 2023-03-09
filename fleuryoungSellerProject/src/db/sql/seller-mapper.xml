@@ -83,6 +83,18 @@ UPDATE    TB_SELLER
 
 </entry>
 
+<entry key="selectSel">
+SELECT  SEL_ID 
+  FROM  TB_SELLER
+ WHERE  SEL_ID = ?
+</entry>
+
+<entry key="selectReg">
+SELECT  SEL_BUSINESS_NO
+  FROM  TB_SELLER
+ WHERE  SEL_BUSINESS_NO = ?
+</entry>
+
 <entry key="selectSeller">
 	SELECT
 			SEL_NO
@@ -145,6 +157,11 @@ SELECT
   		TB_SELLER
  WHERE  SEL_EMAIL = ?
 </entry>
-
+<entry key="selectPw">
+SELECT 
+		SEL_PW
+  FROM  TB_SELLER
+ WHERE  SEL_ID
+</entry>
 
 </properties>

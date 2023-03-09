@@ -36,6 +36,32 @@ public class Product {
 
 
 
+
+
+
+
+
+	public Product(String pPicture, int pId, String pName, int netPrice, int stock, String pEnrollDate, String pReturn,
+			int pSales, String pDayDelivery, String pGift, String categoryNo, int discountRate) {
+		super();
+		this.pPicture = pPicture;
+		this.pId = pId;
+		this.pName = pName;
+		this.netPrice = netPrice;
+		this.stock = stock;
+		this.pEnrollDate = pEnrollDate;
+		this.pReturn = pReturn;
+		this.pSales = pSales;
+		this.pDayDelivery = pDayDelivery;
+		this.pGift = pGift;
+		this.categoryNo = categoryNo;
+		this.discountRate = discountRate;
+	}
+
+
+
+
+
 	public Product(int pId, String pName, int netPrice, String detail, int stock, String pEnrollDate, String pReturn,
 			String pTag, int pSales, String pDayDelivery, String pGift, int sellerNo, String categoryNo) {
 		super();

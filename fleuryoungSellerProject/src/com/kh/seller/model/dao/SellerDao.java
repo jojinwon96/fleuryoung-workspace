@@ -113,6 +113,31 @@ public class SellerDao {
 		return result;
 	}
 	
+	public String selectReg(Connection conn, String reg){
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String check = "";
+		String sql = prop.getProperty("selectReg");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reg);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				check = "NNNNN";
+			}else {
+				check = "NNNNY";
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return check;
+	}
+	
 	/**
 	 * 마이페이지 수정 메소드
 	 * @param sel
@@ -186,6 +211,32 @@ public class SellerDao {
 			close(pstmt);
 		}
 		return sel;
+	}
+	
+	public String selectSeller(Connection conn, String id) {
+		String check = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String checkId = "";
+		String sql = prop.getProperty("selectSel");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				checkId = "NNNNN";
+			}else {
+				checkId = "NNNNY";
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return checkId;
 	}
 	
 	public Seller selectByEmail(Connection conn, String email) {
@@ -289,6 +340,32 @@ public class SellerDao {
 			pstmt.setString(2, id);
 			
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectPw(Connection conn, String id, String pwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPw");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, id);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = -1;
+			}else {
+				result = 1;
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

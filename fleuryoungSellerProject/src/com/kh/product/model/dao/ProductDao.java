@@ -15,6 +15,8 @@ import com.kh.product.model.vo.Category;
 import com.kh.product.model.vo.OptionOne;
 import com.kh.product.model.vo.OptionTwo;
 import com.kh.product.model.vo.Product;
+import com.kh.product.model.vo.Refund;
+import com.kh.product.model.vo.Review;
 import com.kh.seller.model.dao.SellerDao;
 
 public class ProductDao {
@@ -45,18 +47,27 @@ private Properties prop = new Properties();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, selNo);
 			rset = pstmt.executeQuery();
+			
 			while(rset.next()) {
-				list.add(new Product(rset.getInt("P_ID")
-									,rset.getString("P_PICTURE")
+				list.add(new Product(rset.getString("P_PICTURE")
+									,rset.getInt("P_ID")
 									,rset.getString("P_NAME")
 									,rset.getInt("P_NETPRICE")
 									,rset.getInt("P_STOCK")
 									,rset.getString("P_ENROLL_DATE")
+									,rset.getString("P_RETURN_YN")
 									,rset.getInt("P_SALES")
-									,rset.getString("CATEGORY_NAME")));
+									,rset.getString("P_DAY_DELIVERY")
+									,rset.getString("P_GIFT")
+									,rset.getString("CATEGORY_NAME")
+									,rset.getInt("DISCOUNT_RATE")				
+						));
+										
+				
+				
+				
+				
 			}
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -373,6 +384,109 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+	public ArrayList<Review> selectReviewList(Connection conn, int selNo){
+		ArrayList<Review> list = new ArrayList<Review>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectReviewList");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, selNo);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Review(rset.getInt("REVIEW_ID")
+										, rset.getInt("P_ID")
+										, rset.getInt("REVIEW_RATING")
+										, rset.getString("REVIEW_DETAIL")
+										, rset.getString("REVIEW_IMG")
+										, rset.getString("REVIEW_REPLY")
+										, rset.getString("REVIEW_ADD_DATE")
+										, rset.getInt("MEM_ID")
+							));
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Refund> refundList(Connection conn, int no, int selNo){
+		ArrayList<Refund> list = new ArrayList<Refund>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("refundList");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, selNo);
+				pstmt.setInt(2, no);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Refund(rset.getInt("OD_ID")
+										, rset.getInt("REFUND_TYPE")
+										, rset.getString("REFUND_TITLE")
+										, rset.getString("REFUND_COMMENT")
+										, rset.getString("REFUND_IMG")
+										, rset.getInt("REFUND_APPROVAL_STATUS")
+										, rset.getInt("REFUND_STATUS")
+										, rset.getString("P_NAME")
+							));
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int updateRefund(Connection conn ,int odId) {
+		int result= 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateRefund");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, odId);
+				result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int suRefund(Connection conn ,int odId) {
+		int result= 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("suRefund");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, odId);
+				result = pstmt.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }
 	
 

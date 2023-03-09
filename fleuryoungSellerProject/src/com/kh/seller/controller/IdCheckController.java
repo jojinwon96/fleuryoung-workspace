@@ -12,42 +12,33 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.seller.model.service.SellerService;
 
 /**
- * Servlet implementation class NewPwdController
+ * Servlet implementation class IdCheckController
  */
-@WebServlet("/newPwd.eml")
-public class NewPwdController extends HttpServlet {
+@WebServlet("/idCheck.se")
+public class IdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewPwdController() {
-        super();
-        // TODO Auto-generated constructor stub
+    public IdCheckController() {
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("selId");
-		String pwd = request.getParameter("pass");
-		PrintWriter out = response.getWriter();
+		String result = new SellerService().selectSeller(request.getParameter("checkId"));
+		PrintWriter out =  response.getWriter();
 		
-		System.out.println(id);
-		System.out.println(pwd);
-		
-		int result = new SellerService().updateSellerByPwd(id,pwd);
-		System.out.println(result);
-		out.print(result);
-		
+		out.write(result);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("qwejh");
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

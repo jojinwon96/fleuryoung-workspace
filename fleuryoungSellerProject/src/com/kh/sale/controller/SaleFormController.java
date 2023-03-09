@@ -33,11 +33,9 @@ public class SaleFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("menuNo", "3");
-		Seller sel = (Seller)(request.getSession().getAttribute("loginSeller"));
-		int selNo = sel.getSelNo();
-		
-		ArrayList<Sale> list = new SaleService().selectPayment(selNo);
-		
+		int sno = Integer.parseInt(request.getParameter("sno"));
+		ArrayList<Sale> list = new SaleService().selectPayment(sno);
+		System.out.println(list);
 		request.setAttribute("list",  list);
 		request.getRequestDispatcher("views/sale/invoiceList.jsp").forward(request, response);
 		

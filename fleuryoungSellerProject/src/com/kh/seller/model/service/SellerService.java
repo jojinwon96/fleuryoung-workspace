@@ -46,6 +46,16 @@ public class SellerService {
 		
 		return result;
 	}
+	
+	public String selectReg(String reg) {
+		Connection conn = getConnection();
+		String check = new SellerDao().selectReg(conn, reg);
+
+		close(conn);
+		
+		return check;
+	}
+	
 	public Seller selectSeller(int selNo) {
 		Connection conn = getConnection();
 		Seller sel = new SellerDao().selectSeller(conn, selNo);
@@ -54,7 +64,14 @@ public class SellerService {
 		
 		return sel;
 	}
-	
+	public String selectSeller(String selId) {
+		Connection conn = getConnection();
+		String check = new SellerDao().selectSeller(conn, selId);
+
+		close(conn);
+		
+		return check;
+	}
 	
 	
 	public Seller selectByEmail(String email) {
@@ -88,14 +105,19 @@ public class SellerService {
 	}
 	public int updateSellerByPwd(String id, String pwd) {
 		Connection conn = getConnection();
-		int result = new SellerDao().updateSellerByPwd(conn, id, pwd);
-		if(result >0) {
-			commit(conn);
-		}else {
-			rollback(conn);
+		int result = 0;
+		int result1 = new SellerDao().selectPw(conn, id, pwd);
+		if(!(result1 == -1)) {
+			result = new SellerDao().updateSellerByPwd(conn, id, pwd);			
+			if(result > 0) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+			close(conn);
+			return result;
 		}
-		close(conn);
 		
-		return result;
+		return result1;
 	}
 }

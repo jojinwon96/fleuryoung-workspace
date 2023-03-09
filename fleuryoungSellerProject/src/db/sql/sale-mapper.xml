@@ -4,23 +4,49 @@
 
 <entry key="selectPayment">
 SELECT
-        M.PAY_ID
-        , M.OD_ID
+        M.PAY_ID PAY_ID
+        , M.OD_ID OD_ID
         , (SELECT P_NAME FROM TB_PRODUCT P WHERE D.P_ID = P.P_ID) P_NAME
         , OD_COUNT
         , TOTAL_PAY
         , OD_STATUS
         , TO_CHAR(PAY_DATE,'YY/MM/DD') PAY_DATE
-        , NVL(INVOICE_ID, 0) INVOICE_ID
+        , NVL((SELECT INVOICE_ID FROM TB_MEM_INVOICE I WHERE M.PAY_ID = I.PAY_ID), 0) INVOICE_ID
   FROM 
         TB_MEM_PAYMENT M
   JOIN  TB_MEM_ORDER_DETAIL D ON(M.OD_ID = D.OD_ID)
-  JOIN  TB_MEM_INVOICE I ON(M.PAY_ID = I.PAY_ID)
- WHERE  D.P_ID = (SELECT P_ID 
+ WHERE  D.P_ID IN (SELECT P_ID 
                     FROM TB_PRODUCT 
                     JOIN TB_SELLER 
                    USING (SEL_NO) 
                    WHERE SEL_NO = ?)
 </entry>												
+
+<entry key="invoiceInsert">
+INSERT 
+  INTO TB_MEM_INVOICE
+	 	(
+		  INVOICE_ID
+		, PAY_STATUS
+		, INVOICE_REGDATE
+		, PAY_ID
+		, OD_ID
+		)
+VALUES
+		(
+		   SEQ_MEM_INVOICE.NEXTVAL
+		 , 'Y'
+		 , SYSDATE
+		 , ?
+		 , ?
+		)
+
+</entry>
+
+<entry key="paymentUpdate">
+UPDATE TB_MEM_ORDER_DETAIL
+   SET OD_STATUS = 2
+ WHERE OD_ID = ?
+</entry>
 
 </properties>

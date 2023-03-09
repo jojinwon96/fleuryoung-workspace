@@ -84,7 +84,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
             url: url,
             data: param
         }).done(function (data) {
-            if (data.email == "false") {
+            if (data == "false") {
                 alert("존재하지 않는 이메일입니다.");
             } else {
                 alert(data.email + " 로 인증메일 을 보냈습니다.");
@@ -101,6 +101,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
     let verification_number = 0;
   
     // 인증번호 확인 버튼 (아이디 찾기 - 이메일 인증)
+    let count = 1;
 
     document.getElementById("btnSubmit").addEventListener("click", function () {
         verification_number =   $("#num").val()
@@ -110,7 +111,12 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
             alert("당신의 아이디는 " + user_id + " 입니다.");
             location.href="<%=contextPath%>/login.se";
         } else {
-            alert("인증번호를 잘못 입력하셨습니다.");
+            alert("인증번호를 잘못 입력하셨습니다. (" +count+"회)\n3회 잘못입력 시 로그인 페이지로 이동됩니다.");
+            count++;
+            if(count == 4){
+                alert("3회 이상 잘못 입력하여 로그인 화면으로 돌아갑니다.");
+                location.href = "${pageContext.request.contextPath}"
+            }
         }
     })
 </script>

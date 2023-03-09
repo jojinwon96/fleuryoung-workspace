@@ -1,4 +1,4 @@
-package com.kh.seller.controller;
+package com.kh.sale.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.seller.model.service.SellerService;
+import com.kh.sale.model.service.SaleService;
 
 /**
- * Servlet implementation class NewPwdController
+ * Servlet implementation class InvoiceInsertController
  */
-@WebServlet("/newPwd.eml")
-public class NewPwdController extends HttpServlet {
+@WebServlet("/invoiceInsert.in")
+public class InvoiceInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewPwdController() {
+    public InvoiceInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,17 @@ public class NewPwdController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("selId");
-		String pwd = request.getParameter("pass");
+		int pay = Integer.parseInt(request.getParameter("payId"));
+		int od = Integer.parseInt(request.getParameter("odId"));
 		PrintWriter out = response.getWriter();
 		
-		System.out.println(id);
-		System.out.println(pwd);
-		
-		int result = new SellerService().updateSellerByPwd(id,pwd);
-		System.out.println(result);
-		out.print(result);
+		int result = new SaleService().invoiceInsert(pay, od);
+		if(result > 0) {
+			out.write("1");
+		} else {
+			
+			out.write("0");
+		}
 		
 	}
 
@@ -47,7 +48,7 @@ public class NewPwdController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("qwejh");
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
