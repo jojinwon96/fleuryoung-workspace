@@ -84,7 +84,7 @@ label {
 
 #emailArea {
 	width: 100%;
-	height: 120px;
+	height: 80px;
 	padding-top: 30px;
 }
 
@@ -365,9 +365,8 @@ button {
 							<label for="email">이메일</label> <input type="email"
 							name="email"
 							class="form-control" id="emailInput" required> <br> <a
-							href=""><button type="button"
-							class="btn btn-outline-success" id="emailButton">이메일
-							인증하기</button></a>
+							href="">
+							</a>
 						</div>
 
 						

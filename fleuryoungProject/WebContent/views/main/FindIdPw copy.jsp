@@ -323,7 +323,6 @@ span {
                   <!-- ============ -->
                   
                   </div>
-                  
                   <div class="overlay-container">
                     <div class="overlay-left">
                       <h4>아이디를 잊어버리셨나요?</h4>
@@ -385,6 +384,7 @@ span {
 
 
         </div>
+        
         <!-- <script>
     $(function () {
         // 인증번호 받기 버튼  (아이디 찾기 - 이메일 인증)
@@ -458,8 +458,8 @@ span {
 
  
   -->
-  <!-- 아이디/비번 왔다갔다 -->
-<script> 
+  
+  <script>
 const signUpBtn = document.getElementById("signUp");
 const signInBtn = document.getElementById("signIn");
 const container = document.querySelector(".container");
@@ -470,7 +470,7 @@ signUpBtn.addEventListener("click", () => {
 signInBtn.addEventListener("click", () => {
   container.classList.remove("right-panel-active");
 });
-</script>
+ </script>
 
       
 

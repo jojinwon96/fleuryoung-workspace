@@ -56,20 +56,21 @@ public Member findId(String userName, String userEmail) {
 		Connection conn = getConnection();
 		
 		Member member = new MemberDao().findId(conn, userName, userEmail);
-		 System.out.println(userName);
+		 
 		
 		close(conn);
 		
-		System.out.println(member);
+		
 		return member;
 	}
 
 
-public Member findPw(String member_id) {
+public Member findPw(String member_id, String member_email) {
 	
 			Connection conn = getConnection();
 			
-			Member member = new MemberDao().findPw(conn, member_id);
+			Member member = new MemberDao().findPw(conn, member_id, member_email);
+			System.out.println(member);
 			close(conn);
 			return member;
 	
