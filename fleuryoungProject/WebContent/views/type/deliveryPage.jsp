@@ -1,71 +1,31 @@
-<%@page import="com.kh.product.model.vo.Product"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%
-	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-	
-	ArrayList<Product> updateList = (ArrayList<Product>) request.getAttribute("updateList"); 	
+    pageEncoding="UTF-8"%>
+     <%@page import="com.kh.product.model.vo.Product"%>
+    <%@page import="java.util.ArrayList"%>
+    <%
 
-	String title = (String)request.getAttribute("title");
-	
-	response.setHeader("cache-control","no-store");
-	response.setHeader("expires","0");
-	response.setHeader("pragma","no-cache");
-%>
+    ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+    
+    %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="${pageContext.request.contextPath}/resources/css/main_product_mini.css"
-	rel="stylesheet" />
-
-<!-- 이게 있어야지 별이 나온다 -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-<!-- 업버튼 -->
-
-
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<style>
-.mini_like {
-	cursor: pointer;
-	
-}
-
-h5 {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-}
-
-.productbox{
-	cursor: pointer;
-}
-</style>
 </head>
-
 <body>
-
-	<div class="wrap">
-
-		<%@ include file="../../views/common/header.jsp"%>
-
-		<script>
-
-		</script>
-
-
-		<!-- 배너 시작 -->
+ <%@ include file = "../common/header.jsp" %>   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- 배너 시작 -->
 		<div id="carouselExampleAutoplaying" class="carousel slide b"
 			data-bs-ride="carousel" style="z-index: 1;">
 			<div class="carousel-inner">
@@ -97,47 +57,82 @@ h5 {
 			</button>
 		</div>
 		<!-- 배너 끝 -->
-		<!-- 드롭다운 -->
+    
+    
+    
+    
+    
+    
+    
+  <br><br><br>
 
-		<div class="container text-center">
-		  <div class="row">
-		    
-		    <div class="col">
-		      <div align="right" class="container px-4 px-lg-5 mt-5">
-				<select style="width: 200px" class="form-select" 
-				        id="orderSelect" name= orderSelect
-					aria-label="Default select example">
-					<option selected disabled><%=title%></option>
-					<option value="1">최신순</option>
-					<option value="2">판매순</option>
-					<option value="3">리뷰순</option>
-				</select>
-				</div>
-		    </div>
-		  </div>
-		</div>
-		
-		
-		<script>
-			$(function(){
-				$("#orderSelect").on("change", function(){
-					let setNum = $("#orderSelect option:selected").val();
-					location.href = '<%=contextPath%>/startPage.p?num=' + setNum;
-				})
-				
-				
-			})
-		</script>
-		<!--  업버튼 -->
+ 
 
-		<div id="wrap">
-			<a id="back-to-top" style="text-decoration: none;"></a>
-		</div>
+  <div align="center" class="butes">
 
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="전체">
+      전체
+    </button>
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="꽃">
+      꽃다발
+    </button>
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="화환">
+      화환
+    </button>
+    <!-- 
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button">
+      축하화환
+    </button>
+     -->
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="란">
+      승진/개업
+    </button>
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="식물">
+	식물
+    </button>
+ <button class="w-btn w-btn-gra1 w-btn-gra-anim side delivery" type="button" value="소품">
+      소품
+    </button>
 
+  </div>
+    
+    
+    <script >
+    
+    
+    $(function() {
+    	  // 카테고리 버튼 클릭 이벤트
+    	  $('.delivery').click(function() {
+    	    var categoryName = $(this).val().trim(); // 클릭한 버튼의 value를 가져옴
 
-		
-		<!-- Section-->
+    	    console.log(categoryName);
+    	    
+    	    $.ajax({
+    	      url: '<%=contextPath%>/delivery.de',
+    	      type: 'POST',
+    	      data: {
+    	        categoryName: categoryName
+    	      },
+    	      success: function(html) {
+    	        $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
+    	      },
+    	      error: function() {
+    	        alert('에러 발생!');
+    	      }
+    	    });
+    	  });
+    	});
+
+    
+    
+    </script>
+    
+    
+    
+    
+    
+      
+  	<!-- Section-->
 		<section class="py-5">
 			<div class="container px-4 px-lg-5 mt-5">
 				<div
@@ -155,7 +150,6 @@ h5 {
             					</div>
 							<%} %>
 							<!-- Product image-->
-							<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 							<img class="card-img-top"
@@ -194,7 +188,7 @@ h5 {
 										<div class="col">
 
 											<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-											<img class="mini_like" id="mini-like"
+											<img class="mini_like"
 												src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 												alt="">
 
@@ -211,42 +205,53 @@ h5 {
 					<%
 						}
 					%>
-					
-					
-	
-	
-					
-					
-					<script>
-						$(function(){
-							// 상품 이미지 클릭시 상품 상세 페이지로 이동
-							$('.card-img-top').click(function(){
-								let memId = "";
-								
-								<% if (loginUser != null && !loginUser.getMemId().equals("")) {%>
-									memId = '<%= loginUser.getMemId()%>';
-								<% }%>
-								
-								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html() + "&memId=" + memId;
+  	
+						<script>
+							$(function () {
+								// 상품 이미지 클릭시 상품 상세 페이지로 이동
+								$('.card-img-top').click(function () {
+									location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
+								})
 							})
-							
-							
-							
+						</script>
+						
+						
+						
+						
+						</div>
+						</div>
+						</section>
+						</div>
 
-						})
-					</script>
-
-
-
-
-				</div>
-			</div>
-		</section>
+    
+    
+    
+    
+    
+    
+    
+	<!-- 업버튼튼 -->
+	<div id="upBtn" class="up-btn">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
+			viewBox="0 0 16 16">
+			<path fill-rule="evenodd"
+				d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+		</svg>
 	</div>
-	
-	
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </body>
-
-
 </html>

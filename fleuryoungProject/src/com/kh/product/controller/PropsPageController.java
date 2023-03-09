@@ -1,33 +1,28 @@
-package com.kh.member.controller;
+package com.kh.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.vo.Member;
-import com.kh.product.model.service.ProductReviewService;
 import com.kh.product.model.service.ProductService;
 import com.kh.product.model.vo.Product;
-import com.kh.product.model.vo.ProductReview;
 
 /**
- * Servlet implementation class MyPageReviewWriteController
+ * Servlet implementation class PropsPageController
  */
-@WebServlet("/myPageReviewWrite.my")
-public class MyPageReviewWriteController extends HttpServlet {
+@WebServlet("/props.pr")
+public class PropsPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageReviewWriteController() {
+    public PropsPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +31,53 @@ public class MyPageReviewWriteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member m = (Member)request.getSession().getAttribute("loginUser");
+	
 		
-		ArrayList<ProductReview> list = new ProductReviewService().myPageReview(m.getMemId());
 		
-		request.setAttribute("list", list);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageReviewWrite.jsp");
-		view.forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		
+		ArrayList<Product> list;
+		
+		ProductService pService = new ProductService();
+		
+		
+		 String value = request.getParameter("value");
+		 // 베스트, 리뷰수 버튼의 value
+	
+		 
+		 
+		 if(value == null) {
+			 // 첫 화면이 로드되면 
+			 
+			list = pService.selectProductPropsAll();
+			
+		 }else {
+			 
+			 if(value.equals("1")) {
+				 list = pService.selectReviewOrderProductProps();
+				 
+			 } else {
+				 list = pService.selectSaleOrderProductProps();
+			 }
+			 
+		 }
+		
+		
+		 
+		 request.setAttribute("list", list);
+	
+		 request.getRequestDispatcher("views/type/propsPage.jsp").forward(request, response);
+			
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	/**

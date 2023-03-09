@@ -510,19 +510,19 @@ public class MemberDao {
 	public ArrayList<Product> selectLikeArr(Connection conn, String memId) {
 
 		ArrayList<Product> list = new ArrayList<Product>();
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = prop.getProperty("selectLikeArr");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
 
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				list.add(new Product(rs.getInt("P_ID")));
 			}
 		} catch (SQLException e) {
@@ -531,26 +531,26 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return list;
 	}
 
 	public int selectLikeCount(Connection conn, String memId) {
 
 		int size = 0;
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		String sql = prop.getProperty("selectLikeCount");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memId);
 
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				size = rs.getInt("COUNT");
 			}
 		} catch (SQLException e) {
@@ -559,28 +559,137 @@ public class MemberDao {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return size;
 	}
-	
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	// 회원가입 찾기 등등
+	public int insertMember(Connection conn, Member m) {
+
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMember");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			System.out.println();
+
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPw());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setString(4, m.getMemName());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setInt(6, m.getPostal());
+			pstmt.setString(7, m.getStreet());
+			pstmt.setString(8, m.getAddress());
+			pstmt.setString(9, m.getMemBirthDate2());
+			pstmt.setInt(10, m.getGender());
+
+			result = pstmt.executeUpdate();
+
+			System.out.println(result);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	public Member findId(Connection conn, String userName, String userEmail) {
+
+		Member member = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("findId");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userEmail);
+
+			rs = pstmt.executeQuery();
+			System.out.println(rs);
+
+			if (rs.next()) {
+
+				member = new Member(rs.getString("MEM_ID"));
+				System.out.println(member);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return member;
+
+	}
+
+	public Member findPw(Connection conn, String member_id, String member_email) {
+		Member member = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = prop.getProperty("findPw");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			pstmt.setString(2, member_email);
+
+			System.out.println(sql);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+
+				member = new Member(rs.getString("MEM_PW"));
+//				System.out.println(member);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return member;
+	}
+
+	public int idCheck(Connection conn, String checkId) {
+		// select문 => rset필요, int리턴
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("idCheck");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, checkId);
+
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				count = rset.getInt("count");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return count;
+
+	}
+}

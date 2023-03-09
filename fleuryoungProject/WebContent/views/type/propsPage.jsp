@@ -1,70 +1,72 @@
-<%@page import="com.kh.product.model.vo.Product"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-%>
+       <%@page import="com.kh.product.model.vo.Product"%>
+    <%@page import="java.util.ArrayList"%>
+    <%
+   
+    ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="${pageContext.request.contextPath}/resources/css/main_product_mini.css"
-	rel="stylesheet" />
-
-<!-- 이게 있어야지 별이 나온다 -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-<!-- 업버튼 -->
-
-
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<style>
-.mini_like {
-	cursor: pointer;
-	
-}
-
-h5 {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-}
-
-.productbox{
-	cursor: pointer;
-}
-</style>
 </head>
 <body>
+ <%@ include file = "../common/header.jsp" %>   
+ 
+ 
+ 
+	<br>
+	<br>
+	<br>
+    
+ <div class="bestReviewBtn">
 
-	<div class="wrap">
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side bestBtn" name="saleBestBtn" value="1" type="button">
+      판매 베스트
+    </button>
+    <button class="w-btn w-btn-gra1 w-btn-gra-anim side bestBtn" name="reviewBestBtn" value="2" type="button">
+      리뷰수 베스트
+    </button>
 
-		<%@ include file="../../views/common/header.jsp"%>
+  </div>
+    
+    
+<script >
 
-		<script>
-			$(function () {
+$(function(){
+    $(".bestBtn").click(function(){
+    	
+      let setNum = $(this).val();
+      
+    
+      
+      $.ajax({
+	      url: '<%=contextPath%>/props.pr',
+	      type: 'POST',
+	      data: {
+	        value: setNum
+	      },
+	      success: function(html) {
+	        $('body').html(html); // 받은 HTML 코드로 현재 페이지를 새로 그림
+	      },
+	      error: function() {
+	        alert('에러 발생!');
+	      }
+	    });
+      
+    });
+  });
 
-			})
-		</script>
 
-		<!-- 드롭다운 -->
 
-		<!--  업버튼 -->
-
-		<div id="wrap">
-			<a id="back-to-top" style="text-decoration: none;"></a>
-		</div>
-		
-		<!-- Section-->
+</script>
+    
+  
+  
+  	<!-- Section-->
 		<section class="py-5">
 			<div class="container px-4 px-lg-5 mt-5">
 				<div
@@ -82,8 +84,8 @@ h5 {
             					</div>
 							<%} %>
 							<!-- Product image-->
-							<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
+
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"
 								alt="..." />
@@ -120,7 +122,7 @@ h5 {
 										<div class="col">
 
 											<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-											<img class="mini_like" id="mini-like"
+											<img class="mini_like"
 												src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 												alt="">
 
@@ -137,27 +139,13 @@ h5 {
 					<%
 						}
 					%>
-					
-					
-	
-
-					
-					
-					
+  	
 					<script>
-					
 						$(function(){
 							// 상품 이미지 클릭시 상품 상세 페이지로 이동
 							$('.card-img-top').click(function(){
-								let memId = "";
-								
-								<% if (loginUser != null && !loginUser.getMemId().equals("")) {%>
-									memId = '<%= loginUser.getMemId()%>';
-								<% }%>
-								
-								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html() + "&memId=" + memId;
+								location.href = '<%=contextPath%>/pdetail.p?pid=' + $(this).prev().html();
 							})
-							
 						})
 					</script>
 
@@ -168,8 +156,18 @@ h5 {
 			</div>
 		</section>
 	</div>
-	
-	
+    
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+<!-- 업버튼튼 -->
+<div id="upBtn" class="up-btn">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
+		viewBox="0 0 16 16">
+		<path fill-rule="evenodd"
+			d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+	</svg>
+</div>
+
+ 
 </body>
 </html>

@@ -1,30 +1,28 @@
-package com.kh.member.controller;
+package com.kh.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.member.model.vo.Member;
-import com.kh.product.model.service.ProductReviewService;
-import com.kh.product.model.vo.ProductReview;
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
 
 /**
- * Servlet implementation class MyPageReviewChangeController
+ * Servlet implementation class DeliveryPageController
  */
-@WebServlet("/myPageReviewChange.my")
-public class MyPageReviewChangeController extends HttpServlet {
+@WebServlet("/delivery.de")
+public class DeliveryPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageReviewChangeController() {
+    public DeliveryPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +31,34 @@ public class MyPageReviewChangeController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Member m = (Member)request.getSession().getAttribute("loginUser");
+
+		request.setCharacterEncoding("utf-8");
 		
-		ArrayList<ProductReview> list = new ProductReviewService().myPageReview(m.getMemId());
 		
-		request.setAttribute("list", list);
+		ArrayList<Product> list;
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/main/myPageReviewChange.jsp");
-		view.forward(request, response);
+		ProductService pService = new ProductService();
+		
+		String categoryName = request.getParameter("categoryName");
+		
+
+		
+		if(categoryName == null || categoryName.equals("전체")) {
+			list = pService.selectDeliveryAll();
+		}else{
+			list = pService.selectDeliveryCategory(categoryName);
+			
+		}
+		
+		
+		 
+		 request.setAttribute("list", list);
+	
+		 request.getRequestDispatcher("views/type/deliveryPage.jsp").forward(request, response);
+			
+			
+		
+		
 	}
 
 	/**

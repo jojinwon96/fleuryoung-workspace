@@ -16,7 +16,8 @@ public class Member {
 	private int mileage;
 	private String memImg;
 	private String getPhone;
-	private Date memBirthDate;
+	private Date memBirthDate1;
+	private String memBirthDate2;
 	private int gender;
 	private String status;
 	
@@ -38,7 +39,7 @@ public class Member {
 		this.mileage = mileage;
 		this.memImg = memImg;
 		this.getPhone = getPhone;
-		this.memBirthDate = memBirthDate;
+		this.memBirthDate1 = memBirthDate;
 		this.gender = gender;
 		this.status = status;
 	}
@@ -68,6 +69,57 @@ public class Member {
 		this.phone = phone;
 		this.street = street;
 		this.address = address;
+	}
+
+	
+	public Member(String memId, String memPw, String email, String memName, String phone, int postal, String street,
+			String address, String memBirthDate2, int gender) {
+		super();
+		this.memId = memId;
+		this.memPw = memPw;
+		this.email = email;
+		this.memName = memName;
+		this.phone = phone;
+		this.postal = postal;
+		this.street = street;
+		this.address = address;
+		this.memBirthDate2 = memBirthDate2;
+		this.gender = gender;
+		
+	}
+	
+	public Member(String email, String memName) {
+		super();
+		this.email = email;
+		this.memName = memName;
+	}
+	
+	
+
+
+
+	public Member(String memId, String email, String memName) {
+		super();
+		this.memId = memId;
+		this.email = email;
+		this.memName = memName;
+	}
+	
+	
+
+
+
+	public Member(String memId) {
+		super();
+		this.memId = memId;
+	}
+	
+	public String getMemBirthDate2() {
+		return memBirthDate2;
+	}
+
+	public void setMemBirthDate2(String memBirthDate2) {
+		this.memBirthDate2 = memBirthDate2;
 	}
 
 	public String getMemId() {
@@ -167,11 +219,11 @@ public class Member {
 	}
 
 	public Date getMemBirthDate() {
-		return memBirthDate;
+		return memBirthDate1;
 	}
 
 	public void setMemBirthDate(Date memBirthDate) {
-		this.memBirthDate = memBirthDate;
+		this.memBirthDate1 = memBirthDate;
 	}
 
 	public int getGender() {
@@ -195,7 +247,7 @@ public class Member {
 		return "Member [memId=" + memId + ", memPw=" + memPw + ", email=" + email + ", memName=" + memName + ", phone="
 				+ phone + ", postal=" + postal + ", street=" + street + ", address=" + address + ", enrollDate="
 				+ enrollDate + ", mileage=" + mileage + ", memImg=" + memImg + ", getPhone=" + getPhone
-				+ ", memBirthDate=" + memBirthDate + ", gender=" + gender + ", status=" + status + "]";
+				+ ", memBirthDate=" + memBirthDate1 + ", gender=" + gender + ", status=" + status + "]";
 	} 
 	
 	

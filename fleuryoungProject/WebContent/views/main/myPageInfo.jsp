@@ -136,18 +136,18 @@
       <div class="modal-body" align="center">
 		<form action="<%= contextPath %>/myPagePwdUpdate.my" method="post">
 		<input type="hidden" name="userId" value="<%= loginUser.getMemId() %>">
-            <table>
+ 			<table>
                 <tr>
                     <td>현재 비밀번호</td>
                     <td><input type="password" name="userPwd" required></td>
                 </tr>
                 <tr>
                     <td>변경할 비밀번호</td>
-                    <td><input type="password" name="updatePwd" required></td>
+                    <td><input type="password" name="updatePwd" id="pwdInput" required></td>
                 </tr>
                 <tr>
                     <td>변경할 비밀번호 확인</td>
-                    <td><input type="password" name="checkPwd" required></td>
+                    <td><input type="password" name="checkPwd" id="pwdInputCheck" required></td>
                 </tr>
             </table>
             
