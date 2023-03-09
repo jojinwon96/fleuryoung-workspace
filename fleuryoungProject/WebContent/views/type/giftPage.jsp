@@ -155,6 +155,7 @@ $(".gift").click(function () {
 							style="top: 0.5rem; left: 0.5rem">당일배송</div>
 						<%} %>
 						<!-- Product image-->
+						<input class="hPid" type="hidden" name="pid" value="<%=p.getpId()%>">
 						<h1 class="pid" hidden><%= p.getpId() %></h1>
 
 						<img class="card-img-top"
@@ -193,7 +194,7 @@ $(".gift").click(function () {
 									<div class="col">
 
 										<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-										<img class="mini_like"
+										<img class="mini_like" id="mini-like"
 											src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 											alt="">
 

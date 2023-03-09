@@ -144,7 +144,7 @@ $(function(){
 										<div class="col">
 
 											<!-- 클릭될때 찜하기 목록 추가(db에 담겨야함) + 아이콘 변화 -->
-											<img class="mini_like"
+											<img class="mini_like" id="mini-like"
 												src="${pageContext.request.contextPath}/resources/image/icon/like.png"
 												alt="">
 
