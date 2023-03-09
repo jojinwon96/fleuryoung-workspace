@@ -32,9 +32,7 @@ public class PwFindUpdateController extends HttpServlet {
 		String verifyCode =  request.getParameter("verifyCode");
 		String password1 = request.getParameter("password1");
 		
-		if(verifyCode.equals()) {
-			
-		}
+		
 		
 		
 		
