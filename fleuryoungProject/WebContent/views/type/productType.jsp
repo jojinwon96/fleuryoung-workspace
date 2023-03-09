@@ -4,7 +4,8 @@
     <%@page import="com.kh.product.model.vo.Product"%>
     <%@page import="java.util.ArrayList"%>
    <%
-    String title = (String)request.getAttribute("title");
+    String categoryName = (String)request.getAttribute("categoryName");
+	String title = (String)request.getAttribute("title");
     ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
     int orderNum = (int)request.getAttribute("orderSelect");
     int value = (int)request.getAttribute("value");
@@ -27,7 +28,10 @@
     
     
     <br><br><br>
-    
+        <button class="w-btn w-btn-gra1 w-btn-gra-anim side minibtn" type="button" align="center">
+	<%=categoryName %>
+    </button>
+       <br><br><br>
     
 	<div class="container text-center">
 		<div class="row">
@@ -35,6 +39,7 @@
 				<div align="right" class="container px-4 px-lg-5 mt-5">
 					<form action="<%=contextPath%>/typePage.mi" method="get">
 						<input type="hidden" id="valueInput" name="value"  value="<%= Integer.toString(value) %>">
+						<input type="hidden" id="categoryInput" name="categoryName" value="<%= categoryName %>">
 						<input type="hidden" id="orderSelectInput" name="orderSelect" value="1">
 						<select style="width: 200px" class="form-select" id="orderSelect"
 							name="orderSelect" aria-label="Default select example">
@@ -53,25 +58,24 @@
     
     <script>
     $(document).ready(function() {
-    	  // hidden input의 값을 초기화
-    	 // $("#valueInput").val("<%=value%>");
-    	  
+    	
     
     	  
     	  // select 변경 시 hidden input의 값을 해당 select의 value로 변경하고 form을 submit
     	  $("#orderSelect").change(function () {
     	    var value = $("#valueInput").val();
+			var categoryName = $("#categoryInput").val();
     	    var orderSelect = $(this).val();
     	    
-    	    updateHiddenInputs(value, orderSelect);
+    	    updateHiddenInputs(value, orderSelect, categoryName);
     	    $("form").submit();
     	  });
     	});
 
-    	function updateHiddenInputs(value, orderSelect) {
+    	function updateHiddenInputs(value, orderSelect, categoryName) {
     	  $("#valueInput").val(value);
     	  $("#orderSelectInput").val(orderSelect);
-    	  
+    	   $("#categoryInput").val(categoryName);
     
     	}
 
@@ -175,7 +179,7 @@
 	</div>
 
 
- 
+ <!-- 업버튼 -->
 <div id="upBtn" class="up-btn">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
 	viewBox="0 0 16 16">
@@ -210,12 +214,6 @@ upBtn.addEventListener("click", () => {
 
 </script>
 
-
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-  <div id="wrap">
-    <a id="back-to-top" style="text-decoration: none;"></a>
-  </div>
 
 </body>
 </html>

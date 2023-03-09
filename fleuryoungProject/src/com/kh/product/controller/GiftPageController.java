@@ -53,7 +53,7 @@ request.setCharacterEncoding("utf-8");
 			
 			list = pService.selectGiftAll(orderSelect);
 			 
-			System.out.println("버튼x  최신순 -------- 최소 로드");
+			System.out.println("버튼x  최신순 -------- 최초 로드");
 			
 			
 				
@@ -82,17 +82,13 @@ request.setCharacterEncoding("utf-8");
 			 
 			 
 			 
-		 } else if(giftName != null && request.getParameter("orderSelect") == null){
+		 } else if(!(giftName.equals("전체")) && request.getParameter("orderSelect") == null){
 			 // 버튼 선택 && 최신순,판매순,리뷰순은 선택x
 			 
 			 
 			 System.out.println("버튼선택 oo " + giftName + " select는 xx   " + orderSelect);
 			 
-			 
-			 if(giftName.equals("전체")) {
-				 list = pService.selectGiftAll(orderSelect);
-			 }
-			 
+			
 			 list = pService.selectGiftType(giftName);
 			
 		 }else{
@@ -128,7 +124,7 @@ request.setCharacterEncoding("utf-8");
 		 }
 		 
 		 
-
+		 request.setAttribute("giftName", giftName);
 		 request.setAttribute("orderSelect", orderSelect);
 		 	request.setAttribute("title", title);
 			request.setAttribute("list", list);

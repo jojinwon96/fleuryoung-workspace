@@ -27,88 +27,18 @@
     <%@ include file = "../common/header.jsp" %>   
     
       <!-- 체크박스 -->
-     <br><br><br><br>
+     <br><br><br>
 
- <div class="container_check">
-    <table class="ck_table_op">
-        <tr>
-            <th>금액대별</th>
-            <td>
-            
-                <input type="radio" name="amount" class="total" id="amount_total" value="0" checked>
-                <label for="amount_total">전체</label>
-          
-            </td>
-            <td>
-                <input type="radio" name="amount" id="amount_3less" value="30000">
-                <label for="amount_3less">3만원 이하</label>
-            </td>
-            <td>
-                <input type="radio" name="amount" id="amount_5less" value="50000">
-                <label for="amount_5less">5만원 이하 </label>
-            </td>
-            <td>
-                <input type="radio" name="amount" id="amount_8less" value="80000">
-                <label for="amount_8less">8만원 이하 </label>
-            </td>
-            <td>
-                <input type="radio" name="amount" id="amount_8over" value="80001">
-                <label for="amount_8over">8만원 이상</label>
-            </td>
-        </tr>
-        <tr>
-            <th>할인율</th>
-            <td>
-                <input type="radio" name="discount" class="total" id="discount_total" value="ck_discount_total" checked>
-                <label for="discount_total">전체</label>
-            </td>
-            <td>
-                <input type="radio" name="discount" id="discount_10" value="ck_discount_10">
-                <label for="discount_10">10%</label>
-            </td>
-            <td>
-                <input type="radio" name="discount" id="discount_20" value="ck_discount_20">
-                <label for="discount_20">20%</label>
-            </td>
-            <td>
-                <input type="radio" name="discount" id="discount_30" value="ck_discount_30">
-                <label for="discount_30">30%</label>
-            </td>
-            <td>
-                <input type="radio" name="discount" id="discount_50" value="ck_discount_50">
-                <label for="discount_50">40% 이상</label>
-            </td>
-        </tr>
-        <tr>
-            <th>당일배송</th>
-            <td>
-                <input type="radio" name="rocket_delivery" class="total" id="rocket_delivery_total"
-                    value="ck_rk_deliverty_total" checked>
-                <label for="rocket_delivery_total">전체</label>
-            </td>
-            <td>
-                <input type="radio" name="rocket_delivery" id="rocket_delivery_yes" value="ck_rk_delivery_y">
-                <label for="rocket_delivery_yes">당일 배송만</label>
-            </td>
-            <td>
-             
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-        </tr>
-   </table>
-   </div>
- 
+
     
-    <script>
-    
-  
-    
-    
-    
-    </script>
+	<!-- 업버튼튼 -->
+	<div id="upBtn" class="up-btn">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
+			viewBox="0 0 16 16">
+			<path fill-rule="evenodd"
+				d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+		</svg>
+	</div>
     
     
     
@@ -175,10 +105,12 @@ $(function(){
 							<%} %>
 							<!-- Product image-->
 							<h1 class="pid" hidden><%= p.getpId() %></h1>
-
+								
+								
 							<img class="card-img-top"
 								src="${pageContext.request.contextPath}<%=p.getMainImg() %>"
 								alt="..." />
+								
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">
@@ -249,9 +181,27 @@ $(function(){
     
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<div id="wrap">
-    <a id="back-to-top" style="text-decoration: none;"></a>
-</div>
+
+
+<script>
+
+    const upBtn = document.getElementById("upBtn");
+
+    window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+            upBtn.classList.add("show");
+        } else {
+            upBtn.classList.remove("show");
+        }
+    });
+
+    upBtn.addEventListener("click", () => {
+        window.scrollTo(0, 0);
+    });
+
+
+
+</script>
 
 
 </body>

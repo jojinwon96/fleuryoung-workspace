@@ -955,21 +955,44 @@ $(document).ready(function () {
 // });
 
 
+
+
 $('a.type-link').on('click', function (event) {
     event.preventDefault();
     var form = $('#myForm');
     var value = $(this).find('input[name="value"]').val();
+    var categoryName = $(this).find('input[name="categoryName"]').val();
     form.find('input[name="value"]').val(value);
+    form.find('input[name="categoryName"]').val(categoryName);
     form.submit();
 });
 
 
 
 
+// 업버튼 속성
+$(document).ready(function () {
+const upBtn = document.getElementById("upBtn");
 
+window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+        upBtn.classList.add("show");
+        console.log('와오아ㅗ아오아ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅗ앙');
 
+    } else {
+        upBtn.classList.remove("show");
+        console.log('와오아ㅗ아ㅁㅁㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅ오아ㅗ앙');
+    }
 
+    console.log('와오아ㅗ아오아ㅗ앙');
 
+});
+
+upBtn.addEventListener("click", () => {
+    window.scrollTo(0, 0);
+});
+
+});
 
 
 

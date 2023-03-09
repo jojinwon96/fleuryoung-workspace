@@ -3,6 +3,7 @@
 <%@page import="com.kh.product.model.vo.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%
+String giftName = (String)request.getAttribute("giftName");
     String title = (String)request.getAttribute("title");
     ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
     int orderNum = (int)request.getAttribute("orderSelect");
@@ -15,11 +16,12 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp"%>
+	
+	
+	
+	  <br><br><br>
 
-	<br>
-	<br>
-	<br>
-
+<form action="<%=contextPath%>/gift.gi" id="typeForm">
 	<div align="center" class="butes">
 
 		<button class="w-btn w-btn-gra1 w-btn-gra-anim side gift"
@@ -36,14 +38,14 @@
 
 	</div>
 
-
+</form>
 
 	<div class="container text-center">
 		<div class="row">
 			<div class="col">
 				<div align="right" class="container px-4 px-lg-5 mt-5">
 					<form action="<%=contextPath%>/gift.gi" method="get">
-						<input type="hidden" id="giftNameInput" name="giftName" value="전체">
+						<input type="hidden" id="giftNameInput" name="giftName" value="<%= giftName %>">
 						<input type="hidden" id="orderSelectInput" name="orderSelect" value="1">
 						<select style="width: 200px" class="form-select" id="orderSelect"
 							name="orderSelect" aria-label="Default select example">
@@ -101,7 +103,7 @@ $(".gift").click(function () {
 	        }
 	    });
 	});
-	
+
 	// 바로 select할때 사용
 	function updateHiddenInputs(giftName, orderSelect) {
 	    $("#giftNameInput").val(giftName);
@@ -116,6 +118,11 @@ $(".gift").click(function () {
 	 
 	    var giftName = $("#giftNameInput").val();
 	    var orderSelect = $(this).val();
+	    
+	    
+	    console.log(giftName);
+	    console.log(orderSelect);
+	    
 	    updateHiddenInputs(giftName, orderSelect);
 	    $("form").submit();
 	  });
@@ -224,8 +231,13 @@ $(".gift").click(function () {
 	<link rel="stylesheet"
 		href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-	<div id="wrap">
-		<a id="back-to-top" style="text-decoration: none;"></a>
+	<!-- 업버튼튼 -->
+	<div id="upBtn" class="up-btn">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle"
+			viewBox="0 0 16 16">
+			<path fill-rule="evenodd"
+				d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+		</svg>
 	</div>
 
 

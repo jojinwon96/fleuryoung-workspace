@@ -132,6 +132,7 @@
 		</script>
 		
 		<header>
+			<!-- <div class="header-nav-panel"> -->
 			<div class="header-nav-panel">
 				<ul class="header-nav-ul">
 					<li class="best-li"><a href="<%=contextPath%>/bestPage.mi"><span class="best-span">베스트</span></a></li>
@@ -139,7 +140,7 @@
 					<li class="present-li"><a href="<%=contextPath%>/gift.gi"><span class="present-span">선물</span></a></li>
 					<li class="delivery-li"><a href="<%=contextPath%>/delivery.de"><span class="delivery-span">당일배송</span></a>
 					</li>
-					<li class="props-li"><span class="props-span">소품</span></li>
+					<li class="props-li"><a href="<%=contextPath%>/props.pr"><span class="props-span">소품</span></a></li>
 					<div class="rank-panel">
 						<ul class="rank-ul">
 							<!-- 자바에서 -->
@@ -164,66 +165,75 @@
 			</div>
 			
 			<div class="header-nav-hidden-panel"  style="display: none;">
+			<!-- <div  > -->
 			
 			<form id="myForm" action="<%=contextPath%>/typePage.mi" method="post" >
 			
 				<div class="header-type-panel">
-					<ul>
+					<ul class="mini-header">
 					
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower1.jpg" alt="">
     <span>꽃바구니</span>
     <input type="hidden" name="value" value="1">
+     <input type="hidden" name="categoryName" value="꽃바구니">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower2.jpg" alt="">
     <span>꽃다발</span>
      <input type="hidden" name="value" value="2">
+      <input type="hidden" name="categoryName" value="꽃다발">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower3.jpg" alt="">
     <span>축하화환</span>
      <input type="hidden" name="value" value="3">
+       <input type="hidden" name="categoryName" value="축하화환">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower4.jpg" alt="">
     <span>근조화환</span>
      <input type="hidden" name="value" value="4">
+       <input type="hidden" name="categoryName" value="근조화환">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower5.jpg" alt="">
     <span>동양란</span>
      <input type="hidden" name="value" value="7">
+       <input type="hidden" name="categoryName" value="동양란">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower6.jpg" alt="">
     <span>서양란</span>
      <input type="hidden" name="value" value="8">
+       <input type="hidden" name="categoryName" value="서양란">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower7.jpg" alt="">
     <span>수경식물</span>
      <input type="hidden" name="value" value="9">
+       <input type="hidden" name="categoryName" value="수경식물">
   </a>
 </li>
 <li>
   <a href="<%=contextPath%>/typePage.mi" class="type-link">
-    <img src="${pageContext.request.contextPath}/resources/image/flower-bouquet.png" alt="">
+    <img src="${pageContext.request.contextPath}/resources/image/flower8.jpg" alt="">
     <span>조화</span>
      <input type="hidden" name="value" value="12">
+       <input type="hidden" name="categoryName" value="조화">
   </a>
 </li>
 					

@@ -1,11 +1,16 @@
 package com.kh.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.product.model.service.ProductService;
+import com.kh.product.model.vo.Product;
 
 /**
  * Servlet implementation class PropsPageController
@@ -30,7 +35,41 @@ public class PropsPageController extends HttpServlet {
 		
 		
 		
+		request.setCharacterEncoding("utf-8");
 		
+		
+		ArrayList<Product> list;
+		
+		ProductService pService = new ProductService();
+		
+		
+		 String value = request.getParameter("value");
+		 // 베스트, 리뷰수 버튼의 value
+	
+		 
+		 
+		 if(value == null) {
+			 // 첫 화면이 로드되면 
+			 
+			list = pService.selectProductPropsAll();
+			
+		 }else {
+			 
+			 if(value.equals("1")) {
+				 list = pService.selectReviewOrderProductProps();
+				 
+			 } else {
+				 list = pService.selectSaleOrderProductProps();
+			 }
+			 
+		 }
+		
+		
+		 
+		 request.setAttribute("list", list);
+	
+		 request.getRequestDispatcher("views/type/propsPage.jsp").forward(request, response);
+			
 		
 		
 		

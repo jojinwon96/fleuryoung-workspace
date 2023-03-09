@@ -356,7 +356,9 @@ header{
 
 .header-type-panel>ul{
     margin-top: 5px;
-    margin-left: -20px;
+    margin-left: 100px;
+    margin-right: 120px;
+    /* padding-left: 0px; */
     display: flex;
     justify-content: space-between;
 }

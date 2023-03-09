@@ -283,6 +283,37 @@ Connection conn = getConnection();
 		return list;
 	}
 
+	public ArrayList<Product> selectProductPropsAll() {
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectProductPropsAll(conn);
+		
+		close(conn);
+		
+		return list;	
+	}
+
+	public ArrayList<Product> selectReviewOrderProductProps() {
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectReviewOrderProductProps(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectSaleOrderProductProps() {
+		
+Connection conn = getConnection();
+		
+		ArrayList<Product> list = new ProductDao().selectSaleOrderProductProps(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+
 
 
 

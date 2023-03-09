@@ -47,6 +47,8 @@ public class ProductTypeController extends HttpServlet {
 		
 	
 		int value = Integer.parseInt(request.getParameter("value"));
+		String categoryName = request.getParameter("categoryName");
+		
 		int orderSelect  = 1;
 		
 		
@@ -85,7 +87,7 @@ public class ProductTypeController extends HttpServlet {
 	    
 	    
 	    
-	    
+	    request.setAttribute("categoryName", categoryName);
 	    request.setAttribute("orderSelect", orderSelect);
 	 	request.setAttribute("title", title);
 	 	 request.setAttribute("value", value);
