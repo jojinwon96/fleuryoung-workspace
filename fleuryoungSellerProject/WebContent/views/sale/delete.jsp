@@ -38,11 +38,7 @@
                             <li class="breadcrumb-item active">취소관리</li>
                         </ul>
                     </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-primary me-1">
-                            
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
             <div class="row">

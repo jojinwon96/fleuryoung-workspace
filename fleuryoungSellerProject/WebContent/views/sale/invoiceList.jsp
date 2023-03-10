@@ -37,11 +37,7 @@
                             <li class="breadcrumb-item active">대시보드</li>
                         </ul>
                     </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-primary me-1">
-                            송장관리
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
             <div class="row">

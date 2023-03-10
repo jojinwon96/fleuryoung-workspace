@@ -158,18 +158,7 @@
                                 </ul>
                             </li>
     
-                            
-                            <li class="<%=active4%>submenu">
-                                <a href="#"><i data-feather="clipboard"></i> <span>Q&A관리</span> <span
-                                        class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="#" class="<%=active4_2%>">리뷰 관리</a></li>
-                                    <li><a href="#" class="<%=active4_3%>">관리자 문의</a></li>
-                                </ul>
-                            </li>
-                            <%-- <li class="<%=active5%>">
-                                <a href="#"><i data-feather="clipboard"></i> <span>통계</span></a>
-                            </li> --%>
+                        
                         </ul>
                     </div>
                 </div>

@@ -94,7 +94,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                     </div>
 
                     <div class="mb-3 text-center">
-                        <button class="btn btn-primary" id="checked" type="button" ons>확인</button>
+                        <button class="btn btn-primary" id="checked" type="button" >확인</button>
                     </div>
                 </form>
             </div>
@@ -159,11 +159,13 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
                 }
             })
         })
+        let $pwdInput = $("#password");
+        let $checkpwd = $("#checkpwd");
         document.getElementById("checked").addEventListener("click", function () {
 
             let regExp1 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,15}$/;
 
-            if (!regExp1.test(pwdInput.value)) {
+            if (!(regExp1.test($pwdInput.val()))) {
                 alert('유효하지 않은 비밀번호를 입력하셨습니다');
                 pwdInput.value = "";
                 pwdInput.focus();
@@ -171,7 +173,7 @@ String alertMsg=(String)session.getAttribute("alertMsg"); %>
             }
 
             // 비밀번호 확인
-            if (pwdInput.value != pwdInputCheck.value) {
+            if ($pwdInput.val() != $checkpwd.val()) {
                 alert("비밀번호 확인이 일치하지 않습니다.");
                 pwdInputCheck.value = "";
                 pwdInputCheck.focus();

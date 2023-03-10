@@ -161,7 +161,8 @@ SELECT
 SELECT 
 		SEL_PW
   FROM  TB_SELLER
- WHERE  SEL_ID
+ WHERE SEL_PW =? 
+   AND SEL_ID  = ?
 </entry>
 
 </properties>

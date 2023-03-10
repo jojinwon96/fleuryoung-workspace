@@ -35,14 +35,10 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"></a>
                             </li>
-                            <li class="breadcrumb-item active">취소관리</li>
+                            <li class="breadcrumb-item active">반품관리</li>
                         </ul>
                     </div>
-                    <div class="col-auto">
-                        <a href="#" class="btn btn-primary me-1">
-                            
-                        </a>
-                    </div>
+        
                 </div>
             </div>
             <div class="row">
