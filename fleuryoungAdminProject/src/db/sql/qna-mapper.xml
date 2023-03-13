@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectAllQnA">
+	SELECT 
+	    FAQ_ID
+	    ,FAQ_CATEGORY
+	    ,FAQ_TITLE
+	    ,FAQ_COMMENT
+	    ,FAQ_REGDATE
+	    ,FAQ_UPDATE
+	FROM TB_FAQ
+</entry>
+
+<entry key="add">
+	INSERT INTO TB_FAQ
+		(
+		FAQ_ID
+		,FAQ_CATEGORY
+		,FAQ_TITLE
+		,FAQ_COMMENT
+		,FAQ_REGDATE
+		,FAQ_UPDATE
+		)
+	VALUES
+		(
+		SEQ_FAQ.NEXTVAL
+		,?
+		,?
+		,?
+		,SYSDATE
+		,SYSDATE
+		)
+</entry>
+
+<entry key="update">
+	UPDATE TB_FAQ 
+	    SET FAQ_CATEGORY = ?
+	        ,FAQ_TITLE = ?
+	        ,FAQ_COMMENT = ?
+	        ,FAQ_UPDATE = SYSDATE
+	    WHERE FAQ_ID = ?
+</entry>
+
+<entry key="delete">
+	DELETE FROM TB_FAQ
+		WHERE FAQ_ID = ?
+
+</entry>
+
+</properties>

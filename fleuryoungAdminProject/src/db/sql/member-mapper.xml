@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectAllMember">
+	SELECT
+	    MEM_ID
+	    ,MEM_PW
+	    ,MEM_EMAIL
+	    ,MEM_NAME
+	    ,MEM_PHONE
+	    ,MEM_POSTAL
+	    ,MEM_STREET
+	    ,MEM_ADDRESS
+	    ,MEM_ENROLL_DATE
+	    ,MEM_MILEAGE
+	    ,MEM_IMG
+	    ,MEM_GET_PHONE
+	    ,MEM_BIRTHDATE
+	    ,MEM_GENDER
+	    ,MEM_STATUS
+	FROM  TB_MEMBER
+</entry>
+
+<entry key="deactivate">
+	UPDATE TB_MEMBER
+	    SET MEM_STATUS = 'N'
+	WHERE MEM_ID = ?
+</entry>
+
+<entry key="update">
+	UPDATE TB_MEMBER
+	    SET MEM_ID =?
+	        ,MEM_PW = ?
+	        ,MEM_EMAIL = ?
+	        ,MEM_NAME = ?
+	        ,MEM_PHONE = ? 
+	        ,MEM_POSTAL = ?
+	        ,MEM_STREET = ?
+	        ,MEM_ADDRESS = ? 
+	        ,MEM_IMG = ?
+	        ,MEM_BIRTHDATE = ?
+	        ,MEM_GENDER = ? 
+	        ,MEM_STATUS = 'Y'
+	WHERE MEM_ID = ?
+</entry>
+
+<entry key="add">
+	INSERT 
+		INTO TB_MEMBER 
+		    (
+		    MEM_ID
+		    ,MEM_PW
+		    ,MEM_EMAIL
+		    ,MEM_NAME
+		    ,MEM_PHONE
+		    ,MEM_POSTAL
+		    ,MEM_STREET
+		    ,MEM_ADDRESS
+		    ,MEM_ENROLL_DATE
+		    ,MEM_MILEAGE
+		    ,MEM_IMG
+		    ,MEM_GET_PHONE
+		    ,MEM_BIRTHDATE
+		    ,MEM_GENDER
+		    ,MEM_STATUS)
+		VALUES
+		    (
+		    ?
+		    ,?
+		    ,?
+		    ,?
+		    ,?
+		    ,?
+		    ,?
+		    ,?
+		    ,SYSDATE
+		    ,0
+		    ,?
+		    ,'Y'
+		    ,?
+		    ,?
+		    ,'Y'
+		    )   
+</entry>
+
+<entry key="updateNoImg">
+	UPDATE TB_MEMBER
+	    SET MEM_ID =?
+	        ,MEM_PW = ?
+	        ,MEM_EMAIL = ?
+	        ,MEM_NAME = ?
+	        ,MEM_PHONE = ? 
+	        ,MEM_POSTAL = ?
+	        ,MEM_STREET = ?
+	        ,MEM_ADDRESS = ?
+	        ,MEM_BIRTHDATE = ?
+	        ,MEM_GENDER = ? 
+	        ,MEM_STATUS = 'Y'
+	WHERE MEM_ID = ?
+</entry>
+
+</properties>

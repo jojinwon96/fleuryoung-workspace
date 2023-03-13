@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectProductList">
+SELECT
+      	  (SELECT P_IMG1 FROM TB_PRODUCT_IMG I WHERE I.P_ID = P.P_ID) "P_PICTURE"
+    	, P_NAME
+    	, P_NETPRICE
+    	, P_STOCK
+    	, TO_CHAR(P_ENROLL_DATE, 'YY/MM/dd') "P_ENROLL_DATE"
+    	, P_SALES
+    	, (SELECT CATEGORY_NAME FROM TB_CATEGORY C WHERE C.CATEGORY_NO = P.CATEGORY_NO) "CATEGORY_NAME"
+  FROM 	TB_PRODUCT P
+ WHERE 	SEL_NO = ?
+</entry>
+
+<entry key="selectCategoryList">
+SELECT
+		CATEGORY_NO
+	  , CATEGORY_DETAIL
+	  , CATEGORY_NAME
+  FROM 
+  		TB_CATEGORY
+</entry>
+
+<entry key="selectAllProduct">
+	SELECT 
+	    P_ID
+	    ,P_NAME
+	    ,P_NETPRICE
+	    ,P_DETAIL
+	    ,P_STOCK
+	    ,P_ENROLL_DATE
+	    ,P_RETURN_YN
+	    ,P_TAG_YN
+	    ,P_SALES
+	    ,P_DAY_DELIVERY
+	    ,P_GIFT
+	    ,SEL_NO
+	    ,CATEGORY_NO
+	    ,SEL_STORE_NAME
+	    ,NVL(DISCOUNT_RATE,0) DISCOUNT_RATE
+	    ,P_IMG1
+	    ,SEL_IMG
+	    ,CATEGORY_NAME
+	FROM TB_PRODUCT P
+	JOIN TB_SELLER S USING(SEL_NO)
+	JOIN TB_CATEGORY USING (CATEGORY_NO)
+	JOIN TB_PRODUCT_IMG USING (P_ID)
+	LEFT JOIN TB_DISCOUNT D USING(P_ID)
+	WHERE P_TAG_YN = 'Y'
+</entry>
+
+<entry key="selectAllReview">
+	SELECT 
+	    REVIEW_ID
+	    ,R.P_ID "P_ID"
+	    ,REVIEW_RATING
+	    ,REVIEW_DETAIL
+	    ,REVIEW_IMG
+	    ,REVIEW_REPLY
+	    ,REVIEW_ADD_DATE
+	    ,MEM_ID
+	FROM TB_REVIEW R
+	LEFT JOIN TB_MEM_ORDER_DETAIL O USING(OD_ID)
+	ORDER BY REVIEW_ADD_DATE DESC
+</entry>
+
+<entry key="deleteProduct">
+	UPDATE TB_PRODUCT
+		SET P_TAG_YN = 'N'
+	WHERE P_ID = ?
+</entry>
+
+<entry key="deleteReview">
+	DELETE FROM TB_REVIEW
+	WHERE REVIEW_ID = ?
+</entry>
+
+</properties>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectAllBoard">
+	SELECT 
+	    NOTICE_ID
+	    ,NOTICE_TITLE
+	    ,NOTICE_COMMENT
+	    ,NOTICE_REGDATE
+	FROM TB_NOTICE
+</entry>
+
+<entry key="add">
+	INSERT INTO TB_NOTICE
+	    (
+	    NOTICE_ID
+	    ,NOTICE_TITLE
+	    ,NOTICE_COMMENT
+	    ,NOTICE_REGDATE
+	    )
+	VALUES
+	    (
+	    SEQ_NOTICE.NEXTVAL
+	    ,?
+	    ,?
+	    ,SYSDATE
+	    )
+</entry>
+
+<entry key="update">
+	UPDATE TB_NOTICE
+	SET NOTICE_TITLE = ?
+	    ,NOTICE_COMMENT = ? 
+	    ,NOTICE_REGDATE = SYSDATE
+	WHERE NOTICE_ID = ?
+</entry>
+
+<entry key="delete">
+	DELETE FROM TB_NOTICE
+	WHERE NOTICE_ID = ?
+</entry>
+</properties>
