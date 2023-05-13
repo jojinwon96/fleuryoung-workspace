@@ -120,4 +120,10 @@ UPDATE    TB_SELLER
 	FROM TB_ADM_INQ
 	LEFT JOIN TB_SELLER USING(SEL_NO)
 </entry>
+
+<entry key="solve">
+	UPDATE TB_ADM_INQ
+	    SET ADM_INQ_STATUS_YN = 'Y'
+	WHERE ADM_INQ_NUMBER = ?
+</entry>
 </properties>

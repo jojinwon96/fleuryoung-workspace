@@ -308,7 +308,7 @@
 
 		                <!-- <li class="menu-title"><span>메인</span></li> -->
 		                <li class="<%= active1 %>">
-		                    <a href="<%= contextPath %>/dashboard.da"><i data-feather="home"></i> <span>대시보드</span></a>
+		                    <a href="<%= contextPath %>/dashboard.da"><i data-feather="home"></i> <span>대시보드 (커밍 순)</span></a>
 		                </li>
 		                
 		                <!-- <li class="menu-title"><span>유저</span></li> -->
@@ -342,7 +342,7 @@
 						
 						<!-- <li class="menu-title"><span>사이트</span></li> -->
 		                <li class="<%= active5 %>submenu">
-		                    <a href="#"><i data-feather="monitor"></i> <span>사이트운영</span> <span
+		                    <a href="#"><i data-feather="monitor"></i> <span>사이트운영 (커밍 순)</span> <span
 		                            class="menu-arrow"></span></a>
 		                    <ul>
 		                        <li><a href="<%= contextPath %>/list.ba" class="<%= active5_1 %>">배너관리</a></li>

@@ -113,6 +113,13 @@ UPDATE    TB_SELLER
 	    ,REPORT_COMMENT
 	    ,P_ID
 	    ,MEM_ID
+	    ,NVL(SOLVED, 'N') SOLVED
 	FROM TB_PRODUCT_REPORT
+</entry>
+
+<entry key="solve">
+	UPDATE TB_PRODUCT_REPORT
+	    SET SOLVED = 'Y'
+	WHERE REPORT_ID = ?
 </entry>
 </properties>

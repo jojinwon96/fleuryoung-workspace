@@ -71,5 +71,57 @@ public class BannerService {
 		close(conn);
 		return cList;
 	}
+
+	public int add(Banner b) {
+		Connection conn = getConnection();
+		int result = new BannerDao().add(b, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int update(Banner b) {
+		Connection conn = getConnection();
+		int result = new BannerDao().update(b, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateNoImg(Banner b) {
+		Connection conn = getConnection();
+		int result = new BannerDao().updateNoImg(b, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int delete(String banId) {
+		Connection conn = getConnection();
+		int result = new BannerDao().delete(banId, conn);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

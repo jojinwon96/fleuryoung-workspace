@@ -11,6 +11,7 @@ public class Banner {
 	private String banLink;
 	private Date banAddDate;
 	private Date banEditDate;
+	private int couId;
 	
 	public Banner() {
 		super();
@@ -26,6 +27,14 @@ public class Banner {
 		this.banLink = banLink;
 		this.banAddDate = banAddDate;
 		this.banEditDate = banEditDate;
+	}
+	
+	public int getCouId() {
+		return couId;
+	}
+
+	public void setCouId(int couId) {
+		this.couId = couId;
 	}
 
 	public int getBanId() {

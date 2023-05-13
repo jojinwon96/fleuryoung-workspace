@@ -69,17 +69,17 @@
                                                     %>
                                                     <td><%= inqType %></td>
 	                                                <td><%= i.getInqDate() %></td>
-	                                                <% if((i.getInqStatus()).contains("Y")) {%>
+	                                                <% if((i.getInqStatus()).contains("N")) {%>
 	                                                	<td><span class="badge badge-pill bg-danger-light">미해결</span></td>  
 	                                                	<td class="text-end">
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/solve.in?no=<%= i.getInqNumber() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2" ><i
 	                                                            class="far fa-edit me-1"></i>해결하기</a>
 	                                                </td>   
-	                                                <%}else if((i.getInqStatus()).contains("N")){%>
+	                                                <%}else if((i.getInqStatus()).contains("Y")){%>
 	                                                	<td><span class="badge badge-pill bg-success-light">해결</span></td>
 	                                                	<td class="text-end">
-	                                                    <a href=""
+	                                                    <a
 	                                                        class="btn btn-sm btn-white text-success me-2"><i
 	                                                            class="far fa-check-circle me-1"></i> 해결완료</a>
 	                                                </td>

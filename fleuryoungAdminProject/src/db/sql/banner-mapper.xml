@@ -133,4 +133,53 @@ UPDATE    TB_SELLER
 	    ,COU_DISCOUNT
 	FROM TB_COUPON
 </entry>
+
+<entry key="add">
+INSERT INTO TB_BANNER
+	(
+	BANNER_ID
+	,BANNER_NAME
+	,BANNER_ATTACHEDFILE
+	,BANNER_DETAIL
+	,BANNER_SHORTCUT
+	,BANNER_REGDATE
+	,BANNER_UPDATE
+	,COU_ID
+	)
+VALUES
+	(
+	SEQ_BANNER.NEXTVAL
+	,?
+	,?
+	,?
+	,'Y'
+	,SYSDATE
+	,SYSDATE
+	,?
+	)
+</entry>
+
+<entry key="update">
+UPDATE TB_BANNER 
+	SET  BANNER_NAME = ?
+	    ,BANNER_ATTACHEDFILE = ?
+	    ,BANNER_DETAIL = ?
+	    ,BANNER_UPDATE = SYSDATE
+	    ,COU_ID = ?
+	WHERE BANNER_ID = ?
+</entry>
+
+<entry key="updateNoImg">
+UPDATE TB_BANNER 
+	SET  BANNER_NAME = ?
+	    ,BANNER_DETAIL = ?
+	    ,BANNER_UPDATE = SYSDATE
+	    ,COU_ID = ?
+	WHERE BANNER_ID = ?
+</entry>
+
+<entry key="delete">
+	DELETE FROM TB_BANNER 
+	WHERE BANNER_ID = ?
+</entry>
 </properties>

@@ -62,5 +62,18 @@ public class InquiryService {
 		close(conn);
 		return iList;
 	}
+
+	public int solve(int parseInt) {
+		Connection conn = getConnection();
+		int result = new InquiryDao().solve(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

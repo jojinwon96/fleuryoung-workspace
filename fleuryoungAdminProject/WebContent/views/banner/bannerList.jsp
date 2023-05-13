@@ -43,11 +43,11 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#">
+                                        <form action="<%= contextPath %>/add.ba" method="post" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label class="col-form-label col-md-2">배너제목</label>
                                                 <div class="col-md-10">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="title">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -57,8 +57,8 @@
                                                         <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                                             for="edit_img" style="height:8rem; width: fit-content;">
                                                             <img id="avatarImg" class=".rounded"
-                                                                src="assets/img/profiles/usermain.jpg" alt="Banner Image">
-                                                            <input type="file" id="edit_img" onchange="loadImg(this);">
+                                                                src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Banner Image">
+                                                            <input type="file" id="edit_img" onchange="loadImg(this);" name="file">
                                                             <span class="avatar-edit">
                                                                 <i data-feather="edit-2"
                                                                     class="avatar-uploader-icon shadow-soft"></i>
@@ -70,7 +70,7 @@
                                             <div class="form-group row">
                                                 <label class="col-form-label col-md-2">등록 쿠폰</label>
                                                 <div class="col-md-10">
-                                                    <select class="form-select">
+                                                    <select class="form-select" name="coupon">
                                                     	<option value="" selected>--없음--</option>
                                                         <% for(Coupon c : cList) {%>
                                                         	<option value="<%= c.getCouId() %>"><%= c.getCouName() %></option>
@@ -83,7 +83,7 @@
                                                 <label class="col-form-label col-md-2">배너 설명</label>
                                                 <div class="col-md-10">
                                                     <textarea rows="5" cols="5" class="form-control"
-                                                        placeholder="내용을 입력하시오"></textarea>
+                                                        placeholder="내용을 입력하시오" name="spec"></textarea>
                                                 </div>
                                             </div>
 
@@ -148,7 +148,7 @@
 	                                                    <a href="edit-customer.html"
 	                                                        class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal" data-bs-target="#bs-example-modal-lg<%= b.getBanId() %>"><i
 	                                                            class="far fa-edit me-1"></i> 수정</a>
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/delete.ba?id=<%= b.getBanId() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-trash-alt me-1"></i>삭제</a>
 	                                                </td>
@@ -163,11 +163,11 @@
                                                                     aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="#">
+                                                                <form action="<%= contextPath %>/update.ba" method="post" enctype="multipart/form-data">
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-2">배너제목</label>
                                                                         <div class="col-md-10">
-                                                                            <input type="text" class="form-control" <%= b.getBanName() %>>
+                                                                            <input type="text" class="form-control" value="<%= b.getBanName() %>">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row form-group">
@@ -176,8 +176,16 @@
                                                                             <div class="d-flex align-items-center">
                                                                                 <label class="avatar avatar-xxl profile-cover-avatar m-0"
                                                                                     for="edit_img<%= b.getBanId() %>" style="height:8rem; width: fit-content;">
-                                                                                    <img id="avatarImg<%= b.getBanId() %>" class=".rounded"
-                                                                                        src="assets/img/profiles/usermain.jpg" alt="Banner Image">
+                                                                                    <% if(b.getBanAtt() != null) {%>
+                                                                                        <img id="avatarImg<%= b.getBanId() %>" class=".rounded"
+                                                                                        src="${pageContext.request.contextPath}<%= b.getBanAtt() %>" alt="Banner Image"
+                                                                                        onerror="this.src='${pageContext.request.contextPath}<%= b.getBanAtt() %>'">
+                                                                                    <%}else {%>
+                                                                                        <img id="avatarImg<%= b.getBanId() %>" class=".rounded"
+                                                                                        src="${pageContext.request.contextPath}/resources/image/profile/default.png" alt="Banner Image"
+                                                                                        onerror="this.src='${pageContext.request.contextPath}/resources/image/profile/default.png'">
+                                                                                    <%} %>
+                                                                                    
                                                                                     <input type="file" id="edit_img<%= b.getBanId() %>" onchange="loadImg<%= b.getBanId() %>(this);">
                                                                                     <span class="avatar-edit">
                                                                                         <i data-feather="edit-2"
@@ -190,8 +198,8 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-2">등록 쿠폰</label>
                                                                         <div class="col-md-10">
-                                                                            <select class="form-select">
-                                                                            	<option value="<%= b.getBanLink() %>"><%= b.getBanLink() %></option>
+                                                                            <select class="form-select" name="coupon">
+                                                                            	<option value="<%= b.getCouId() %>"><%= b.getBanLink() %></option>
                                                                                 <% for(Coupon c : cList) {%>
                                                                                     <option value="<%= c.getCouId() %>"><%= c.getCouName() %></option>
                                                                                 <%} %>
@@ -204,10 +212,10 @@
                                                                         <label class="col-form-label col-md-2">배너 설명</label>
                                                                         <div class="col-md-10">
                                                                             <textarea rows="5" cols="5" class="form-control"
-                                                                                placeholder="배너 내용"></textarea>
+                                                                                placeholder="배너 내용"><%= b.getBanDetail()%></textarea>
                                                                         </div>
                                                                     </div>
-
+																	<input type="hidden" name="id" value="<%= b.getBanId() %>">
                                                                     <div class="text-end">
                                                                         <button type="submit" class="btn btn-primary">저장</button>
                                                                     </div>

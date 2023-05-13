@@ -94,17 +94,17 @@
                                                     %>
                                                     <td><%= repType %></td>
 	                                                <td><%= r.getpId() %></td>
-	                                                <% if((r.getResolved()).contains("Y")) {%>
+	                                                <% if((r.getResolved()).contains("N")) {%>
 	                                                	<td><span class="badge badge-pill bg-danger-light">미해결</span></td>  
 	                                                	<td class="text-end">
-	                                                    <a href="javascript:void(0);"
+	                                                    <a href="<%= contextPath %>/solve.re?no=<%= r.getRepId() %>"
 	                                                        class="btn btn-sm btn-white text-danger me-2"><i
 	                                                            class="far fa-edit me-1"></i>해결하기</a>
 	                                                </td>   
-	                                                <%}else if((r.getResolved()).contains("N")){%>
+	                                                <%}else if((r.getResolved()).contains("Y")){%>
 	                                                	<td><span class="badge badge-pill bg-success-light">해결</span></td>
 	                                                	<td class="text-end">
-	                                                    <a href="edit-customer.html"
+	                                                    <a
 	                                                        class="btn btn-sm btn-white text-success me-2"><i
 	                                                            class="far fa-check-circle me-1"></i>해결완료</a>
 	                                                </td>

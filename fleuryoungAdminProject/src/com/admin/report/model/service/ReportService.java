@@ -62,5 +62,18 @@ public class ReportService {
 		close(conn);
 		return rList;
 	}
+
+	public int solve(int parseInt) {
+		Connection conn = getConnection();
+		int result = new ReportDao().solve(conn, parseInt);
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 }

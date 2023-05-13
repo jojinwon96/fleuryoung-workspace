@@ -220,4 +220,94 @@ public class BannerDao {
 		}
 		return cList;
 	}
+
+	public int add(Banner b, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("add");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBanName());
+			pstmt.setString(2, b.getBanAtt());
+			pstmt.setString(3, b.getBanDetail());
+			pstmt.setInt(4, b.getCouId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int update(Banner b, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("update");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBanName());
+			pstmt.setString(2, b.getBanAtt());
+			pstmt.setString(3, b.getBanDetail());
+			pstmt.setInt(4, b.getCouId());
+			pstmt.setInt(5, b.getBanId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNoImg(Banner b, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateNoImg");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBanName());
+			pstmt.setString(2, b.getBanDetail());
+			pstmt.setInt(3, b.getCouId());
+			pstmt.setInt(4, b.getBanId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int delete(String banId, Connection conn) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("delete");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, banId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

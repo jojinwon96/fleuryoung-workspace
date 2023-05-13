@@ -185,4 +185,23 @@ public class InquiryDao {
 		}
 		return iList;
 	}
+
+	public int solve(Connection conn, int parseInt) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("solve");
+		
+		try {	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, parseInt);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
